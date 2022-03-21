@@ -27,12 +27,11 @@ For further funcionality implementations, you need to change the design and impl
 
 ---
 ## SE team 6
+
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjhttps%3A%2F%2Fgithub.com%2FHiGeuni%2FSE_Project_Tetris_Swingbae1212%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 <img src="https://img.shields.io/github/issues-pr/HiGeuni/SE_Project_Tetris_Swing"/>
 <img src="https://img.shields.io/github/issues/HiGeuni/SE_Project_Tetris_Swing"/>
 <img src="https://img.shields.io/github/contributors/HiGeuni/SE_Project_Tetris_Swing"/>
-<br/>
-
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fgjhttps%3A%2F%2Fgithub.com%2FHiGeuni%2FSE_Project_Tetris_Swingbae1212%2Fhit-counter&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 <img src="https://img.shields.io/github/license/HiGeuni/SE_Project_Tetris_Swing"/>
 <img src="https://img.shields.io/github/v/release/HiGeuni/SE_Project_Tetris_Swing"/>
 > hello world!
