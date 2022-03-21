@@ -1,6 +1,6 @@
 package seoultech.se.tetris.blocks;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class OBlock extends Block {
 
