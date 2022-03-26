@@ -26,14 +26,18 @@ import seoultech.se.tetris.blocks.SBlock;
 import seoultech.se.tetris.blocks.TBlock;
 import seoultech.se.tetris.blocks.ZBlock;
 
+import static seoultech.se.tetris.Menu.Start_Menu.Height;
+import static seoultech.se.tetris.Menu.Start_Menu.Width;
+
 public class Board extends JFrame {
 
 	private static final long serialVersionUID = 2434035659171694595L;
-	
+
+	public static int Keyset=1;
 	public static final int HEIGHT = 20;
 	public static final int WIDTH = 10;
 	public static final char BORDER_CHAR = 'X';
-	
+
 	private JTextPane pane;
 	private int[][] board;
 	private KeyListener playerKeyListener;
@@ -42,13 +46,17 @@ public class Board extends JFrame {
 	private Block curr;
 	int x = 3; //Default Position.
 	int y = 0;
-	
+
 	private static final int initInterval = 1000;
-	
+
 	public Board() {
 		super("SeoulTech SE Tetris");
+		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		setSize(Width,Height);
+		setResizable(false); // 한번 만들어진 게임창은 사용자가 임의적으로 못바꿈
+		setLocationRelativeTo(null); // 게임창이 컴퓨터 정중앙에 뜨도록
+
 		//Board display setting.
 		pane = new JTextPane();
 		pane.setEditable(false);
@@ -58,31 +66,31 @@ public class Board extends JFrame {
 				BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
 		pane.setBorder(border);
 		this.getContentPane().add(pane, BorderLayout.CENTER);
-		
-		//Document default style.
+
+		//Document default style
 		styleSet = new SimpleAttributeSet();
 		StyleConstants.setFontSize(styleSet, 18);
 		StyleConstants.setFontFamily(styleSet, "Courier");
 		StyleConstants.setBold(styleSet, true);
 		StyleConstants.setForeground(styleSet, Color.WHITE);
 		StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
-		
+
 		//Set timer for block drops.
-		timer = new Timer(initInterval, new ActionListener() {			
+		timer = new Timer(initInterval, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				moveDown();
 				drawBoard();
 			}
 		});
-		
+
 		//Initialize board for the game.
 		board = new int[HEIGHT][WIDTH];
 		playerKeyListener = new PlayerKeyListener();
 		addKeyListener(playerKeyListener);
 		setFocusable(true);
 		requestFocus();
-		
+
 		//Create the first block and draw.
 		curr = getRandomBlock();
 		placeBlock();
@@ -94,24 +102,24 @@ public class Board extends JFrame {
 		Random rnd = new Random(System.currentTimeMillis());
 		int block = rnd.nextInt(6);
 		switch(block) {
-		case 0:
-			return new IBlock();
-		case 1:
-			return new JBlock();
-		case 2:
-			return new LBlock();
-		case 3:
-			return new ZBlock();
-		case 4:
-			return new SBlock();
-		case 5:
-			return new TBlock();
-		case 6:
-			return new OBlock();			
+			case 0:
+				return new IBlock();
+			case 1:
+				return new JBlock();
+			case 2:
+				return new LBlock();
+			case 3:
+				return new ZBlock();
+			case 4:
+				return new SBlock();
+			case 5:
+				return new TBlock();
+			case 6:
+				return new OBlock();
 		}
 		return new LBlock();
 	}
-	
+
 	private void placeBlock() {
 		StyledDocument doc = pane.getStyledDocument();
 		SimpleAttributeSet styles = new SimpleAttributeSet();
@@ -125,7 +133,7 @@ public class Board extends JFrame {
 			}
 		}
 	}
-	
+
 	private void eraseCurr() {
 		for(int i=x; i<x+curr.width(); i++) {
 			for(int j=y; j<y+curr.height(); j++) {
@@ -145,7 +153,7 @@ public class Board extends JFrame {
 		}
 		placeBlock();
 	}
-	
+
 	protected void moveRight() {
 		eraseCurr();
 		if(x < WIDTH - curr.width()) x++;
@@ -182,7 +190,7 @@ public class Board extends JFrame {
 		doc.setParagraphAttributes(0, doc.getLength(), styleSet, false);
 		pane.setStyledDocument(doc);
 	}
-	
+
 	public void reset() {
 		this.board = new int[20][10];
 	}
@@ -190,36 +198,82 @@ public class Board extends JFrame {
 	public class PlayerKeyListener implements KeyListener {
 		@Override
 		public void keyTyped(KeyEvent e) {
-				
+
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			switch(e.getKeyCode()) {
-			case KeyEvent.VK_DOWN:
-				moveDown();
-				drawBoard();
-				break;
-			case KeyEvent.VK_RIGHT:
-				moveRight();
-				drawBoard();
-				break;
-			case KeyEvent.VK_LEFT:
-				moveLeft();
-				drawBoard();
-				break;
-			case KeyEvent.VK_UP:
-				eraseCurr();
-				curr.rotate();
-				drawBoard();
-				break;
+			switch (Keyset){
+				case 1:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_DOWN:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_RIGHT:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_LEFT:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_UP:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
+				case 2:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_S:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_D:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_A:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_W:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
+				case 3:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_K:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_L:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_J:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_I:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
 			}
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			
+
 		}
 	}
-	
+
 }
