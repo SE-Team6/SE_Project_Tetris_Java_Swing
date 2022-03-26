@@ -1,6 +1,5 @@
 package seoultech.se.tetris.Menu;
 
-import seoultech.se.tetris.component.Board;
 import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
@@ -157,20 +156,20 @@ public class Setting_Menu_Keyset extends JFrame{
 
     //버튼
     public void Setting_Menu_Keyset_btn(){
-        key_Set1_btn.setBounds(start_button_x,start_button_y,145,45);
+        key_Set1_btn.setBounds(startbuttonx,start_button_y,145,45);
         key_Set1_btn.setBorderPainted(false);
         key_Set1_btn.setContentAreaFilled(false);
         key_Set1_btn.setFocusPainted(false);
         possionPoint_1();
         add(key_Set1_btn);
 
-        key_Set2_btn.setBounds(start_button_x,start_button_y+70,145,45);
+        key_Set2_btn.setBounds(startbuttonx,start_button_y+70,145,45);
         key_Set2_btn.setBorderPainted(false);
         key_Set2_btn.setContentAreaFilled(false);
         key_Set2_btn.setFocusPainted(false);
         add(key_Set2_btn);
 
-        key_Set3_btn.setBounds(start_button_x,start_button_y+140,145,45);
+        key_Set3_btn.setBounds(startbuttonx,start_button_y+140,145,45);
         key_Set3_btn.setBorderPainted(false);
         key_Set3_btn.setContentAreaFilled(false);
         key_Set3_btn.setFocusPainted(false);

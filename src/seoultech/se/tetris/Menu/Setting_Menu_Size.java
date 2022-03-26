@@ -50,7 +50,7 @@ public class Setting_Menu_Size extends JFrame {
         basic_set();
         settingScreen_Size_btn();
         back_Menu();
-        addKeyListener(new menuKeyListner());
+        addKeyListener(new menuKeyListener());
     }
 
     public void basic_set(){
@@ -160,7 +160,7 @@ public class Setting_Menu_Size extends JFrame {
         first_screensize_btn.setBorderPainted(false);
         first_screensize_btn.setContentAreaFilled(false);
         first_screensize_btn.setFocusPainted(false);
-        possionPoint1();
+        positionPoint1();
         add(first_screensize_btn);
 
         second_screensize_btn.setBounds(setting_Button_x,180,100,40);
@@ -176,22 +176,22 @@ public class Setting_Menu_Size extends JFrame {
         add(third_screensize_btn);
 
     }
-    public class menuKeyListner extends KeyAdapter {
+    public class menuKeyListener extends KeyAdapter {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()){
                 case KeyEvent.VK_DOWN:
                     possionPoint+=1;
                     if(possionPoint==4) possionPoint=1;
-                    possionPoint1();
-                    possionPoint2();
-                    possionPoint3();
+                    positionPoint1();
+                    positionPoint2();
+                    positionPoint3();
                     break;
                 case  KeyEvent.VK_UP:
                     possionPoint-=1;
                     if(possionPoint==0) possionPoint=3;
-                    possionPoint1();
-                    possionPoint2();
-                    possionPoint3();
+                    positionPoint1();
+                    positionPoint2();
+                    positionPoint3();
                     break;
                 case KeyEvent.VK_ENTER:
                     switch (possionPoint){
@@ -217,15 +217,15 @@ public class Setting_Menu_Size extends JFrame {
         }
     }
 
-    public void possionPoint1(){
+    public void positionPoint1(){
         if(possionPoint==1) first_screensize_btn.setIcon(first_screensize_E_Image);
         else first_screensize_btn.setIcon(first_screensize_Image);
     }
-    public void possionPoint2(){
+    public void positionPoint2(){
         if(possionPoint==2) second_screensize_btn.setIcon(second_screensize_E_Image);
         else second_screensize_btn.setIcon(second_screensize_Image);
     }
-    public void possionPoint3(){
+    public void positionPoint3(){
         if(possionPoint==3) third_screensize_btn.setIcon(third_screensize_E_Image);
         else third_screensize_btn.setIcon(third_screensize_Image);
     }

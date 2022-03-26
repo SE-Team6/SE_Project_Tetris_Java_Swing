@@ -6,8 +6,6 @@ import seoultech.se.tetris.main.Tetris;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileReader;
-import java.io.IOException;
 
 
 public class Start_Menu  extends JFrame {
@@ -16,7 +14,7 @@ public class Start_Menu  extends JFrame {
     public static int menubar_Width=400, menubar_Height=20;
     public static int menubar_Exit_btn_Width=380, menubar_Exit_btn_Height=0;
     public static int gametitle_x=50, gametitle_y=30;
-    public static int start_button_x=125,start_button_y=130;
+    public static int startbuttonx =125,start_button_y=130;
     public static int setting_Button_x=140,setting_Button_y=120;
     public static char Version_char=1;
     private Image screenImage;
@@ -36,7 +34,6 @@ public class Start_Menu  extends JFrame {
     private ImageIcon game_setting_btn_Image= new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Setting_Basic.jpg"));
     private ImageIcon score_board_btn_Image= new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/ScoreBoard_Basic.jpg"));
     private ImageIcon Exit_btn_Image= new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Exit_Basic.jpg"));
-
 
     // 선택된 시작 메뉴 버튼 이미지
     private ImageIcon game_start_btn_Enter_Image = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Start_Enter.jpg"));
@@ -59,7 +56,7 @@ public class Start_Menu  extends JFrame {
 //        Setting_Menu_version_Read();
         call_set();
         basic_set();
-        addKeyListener(new menuKeyListner());
+        addKeyListener(new menuListener());
         start_Menu_Screen_btn();
     }
 
@@ -134,27 +131,26 @@ public class Start_Menu  extends JFrame {
         });
         add(menuBar);
     }
-
-    public class menuKeyListner extends KeyAdapter {
+    public class menuListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             int key= e.getKeyCode();
             if (key == KeyEvent.VK_DOWN){
                 possionPoint+=1;
                 if(possionPoint==5) possionPoint=1;
-                possionPoint_1();
-                possionPoint_2();
-                possionPoint_3();
-                possionPoint_4();
+                positionPoint_1();
+                positionPoint_2();
+                positionPoint_3();
+                positionPoint_4();
 
             }
             else if(key == KeyEvent.VK_UP){
                 possionPoint-=1;
                 if(possionPoint==0) possionPoint=4;
-                possionPoint_1();
-                possionPoint_2();
-                possionPoint_3();
-                possionPoint_4();
+                positionPoint_1();
+                positionPoint_2();
+                positionPoint_3();
+                positionPoint_4();
             }
             else if(key == KeyEvent.VK_ENTER){
                 switch (possionPoint) {
@@ -178,19 +174,19 @@ public class Start_Menu  extends JFrame {
         }
     }
 
-    public void possionPoint_1(){
+    public void positionPoint_1(){
         if(possionPoint==1) game_start_btn.setIcon(game_start_btn_Enter_Image);
         else game_start_btn.setIcon(game_start_btn_Image);
     }
-    public void possionPoint_2(){
+    public void positionPoint_2(){
         if(possionPoint==2) game_setting_btn.setIcon(game_setting_btn_Enter_Image);
         else game_setting_btn.setIcon(game_setting_btn_Image);
     }
-    public void possionPoint_3(){
+    public void positionPoint_3(){
         if(possionPoint==3) score_board_btn.setIcon(score_board_btn_Enter_Image);
         else score_board_btn.setIcon(score_board_btn_Image);
     }
-    public void possionPoint_4(){
+    public void positionPoint_4(){
         if(possionPoint==4) Exit_btn.setIcon(Exit_btn_Enter_Image);
         else Exit_btn.setIcon(Exit_btn_Image);
     }
@@ -202,21 +198,21 @@ public class Start_Menu  extends JFrame {
     }
     public void start_Menu_Screen_btn(){
         //시작 메뉴 버튼 4가지 설정
-        game_start_btn.setBounds(start_button_x,start_button_y,145,45);
+        game_start_btn.setBounds(startbuttonx,start_button_y,145,45);
         game_start_btn.setBorderPainted(false);
         game_start_btn.setContentAreaFilled(false);
         game_start_btn.setFocusPainted(false);
-        possionPoint_1();
+        positionPoint_1();
         add(game_start_btn);
 
-        game_setting_btn.setBounds(start_button_x,start_button_y+70,145,45);
+        game_setting_btn.setBounds(startbuttonx,start_button_y+70,145,45);
         game_setting_btn.setBorderPainted(false);
         game_setting_btn.setContentAreaFilled(false);
         game_setting_btn.setFocusPainted(false);
 
         add(game_setting_btn);
 
-        score_board_btn.setBounds(start_button_x,start_button_y+140,145,45);
+        score_board_btn.setBounds(startbuttonx,start_button_y+140,145,45);
         score_board_btn.setBorderPainted(false);
         score_board_btn.setContentAreaFilled(false);
         score_board_btn.setFocusPainted(false);
@@ -224,7 +220,7 @@ public class Start_Menu  extends JFrame {
 
         add(score_board_btn);
 
-        Exit_btn.setBounds(start_button_x,start_button_y+210,145,45);
+        Exit_btn.setBounds(startbuttonx,start_button_y+210,145,45);
         Exit_btn.setBorderPainted(false);
         Exit_btn.setContentAreaFilled(false);
         Exit_btn.setFocusPainted(false);

@@ -1,12 +1,10 @@
 package seoultech.se.tetris.Menu;
 
-import seoultech.se.tetris.component.Board;
 import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.HashMap;
 
 import static seoultech.se.tetris.Menu.Start_Menu.*;
 
@@ -55,7 +53,7 @@ public class Setting_Menu extends JFrame {
         basic_set();
         settingScreen_btn();
         back_Menu();
-        addKeyListener(new menuKeyListner());
+        addKeyListener(new menuKeyListener());
     }
 
     //기본 세팅
@@ -160,7 +158,7 @@ public class Setting_Menu extends JFrame {
     }
     //
 
-    public class menuKeyListner extends KeyAdapter {
+    public class menuKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
 
@@ -169,20 +167,20 @@ public class Setting_Menu extends JFrame {
                 case KeyEvent.VK_DOWN:
                     possionPoint+=1;
                     if(possionPoint==6) possionPoint=1;
-                    possionPoint1();
-                    possionPoint2();
-                    possionPoint3();
-                    possionPoint4();
-                    possionPoint5();
+                    positionPoint1();
+                    positionPoint2();
+                    positionPoint3();
+                    positionPoint4();
+                    positionPoint5();
                     break;
                 case  KeyEvent.VK_UP:
                     possionPoint-=1;
                     if(possionPoint==0) possionPoint=5;
-                    possionPoint1();
-                    possionPoint2();
-                    possionPoint3();
-                    possionPoint4();
-                    possionPoint5();
+                    positionPoint1();
+                    positionPoint2();
+                    positionPoint3();
+                    positionPoint4();
+                    positionPoint5();
                     break;
                 case KeyEvent.VK_ENTER:
                     switch (possionPoint){
@@ -217,23 +215,23 @@ public class Setting_Menu extends JFrame {
         }
     }
 
-    public void possionPoint1(){
+    public void positionPoint1(){
         if(possionPoint==1) screen_Size_btn.setIcon(screen_Size_E_Image);
         else screen_Size_btn.setIcon(screen_Size_Image);
     }
-    public void possionPoint2(){
+    public void positionPoint2(){
         if(possionPoint==2) key_Setting_btn.setIcon(key_Setting_E_Image);
         else key_Setting_btn.setIcon(key_Setting_Image);
     }
-    public void possionPoint3(){
+    public void positionPoint3(){
         if(possionPoint==3) score_Reset_btn.setIcon(score_Reset_E_Image);
         else score_Reset_btn.setIcon(score_Reset_Image);
     }
-    public void possionPoint4(){
+    public void positionPoint4(){
         if(possionPoint==4) color_blindness_btn.setIcon(color_blindness_E_Image);
         else color_blindness_btn.setIcon(color_blindness_Image);
     }
-    public void possionPoint5(){
+    public void positionPoint5(){
         if(possionPoint==5) all_Reset_btn.setIcon(all_Reset_E_Image);
         else all_Reset_btn.setIcon(all_Reset_Image);
     }
@@ -242,7 +240,7 @@ public class Setting_Menu extends JFrame {
         screen_Size_btn.setBorderPainted(false);
         screen_Size_btn.setContentAreaFilled(false);
         screen_Size_btn.setFocusPainted(false);
-        possionPoint1();
+        positionPoint1();
         add(screen_Size_btn);
 
         key_Setting_btn.setBounds(setting_Button_x,180,100,40);
