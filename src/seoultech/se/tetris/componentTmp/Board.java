@@ -1,7 +1,6 @@
 package seoultech.se.tetris.componentTmp;
 
 import seoultech.se.tetris.blockTmp.Block;
-import seoultech.se.tetris.blockTmp.IBlock;
 import seoultech.se.tetris.blockTmp.JBlock;
 import seoultech.se.tetris.blockTmp.ParentBlock;
 
@@ -13,7 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Random;
 
 public class Board extends JFrame {
     private static final long serialVersionUID = 2434035659171694595L;
@@ -92,8 +90,9 @@ public class Board extends JFrame {
         board = new Block[HEIGHT][WIDTH];
         playerKeyListener = new PlayerKeyListener();
         addKeyListener(playerKeyListener);
-        setFocusable(true);
         requestFocus();
+        setFocusable(true);
+
 
         //Create the first block and draw.
         focus = getRandomBlock();
@@ -109,21 +108,38 @@ public class Board extends JFrame {
 
     private ParentBlock getRandomBlock() {
 
-        Random random = new Random(System.currentTimeMillis());
-        int block = random.nextInt(2);
-        switch(block) {
-            case 0:
-                return new IBlock();
-            case 1:
-                return new JBlock();
+//        Random random = new Random(System.currentTimeMillis());
+//        int block = random.nextInt(2);
+//        switch(block) {
+//            case 0:
+//                return new IBlock();
+//            case 1:
+//                return new JBlock();
+//        }
+        return new JBlock();
+    }
+
+    private void printBoard() {
+        System.out.print("    ");
+        for(int i=0;i<WIDTH;i++){
+            System.out.printf("%2d", i);
         }
-        return new IBlock();
+        System.out.println();
+
+        for(int i=0;i<HEIGHT;i++){
+            System.out.printf("%d  ", i);
+            for(int j=0;j<WIDTH;j++){
+                System.out.print(board[i][j] != null ? " 0" : "  ");
+            }
+            System.out.println();
+        }
     }
 
     // 만약 블럭이 내려가면 똑같이 유지가 될까 아마 안될 것 같음.
     // draw에서 color를 주면 안되나?
     // 아마 여기서 color를 주는 것 같아요
     private void placeBlock() {
+        printBoard();
 //        StyledDocument doc = pane.getStyledDocument();
 //        SimpleAttributeSet styles = new SimpleAttributeSet();
 //        StyleConstants.setForeground(styles, focus.getColor());
@@ -132,7 +148,11 @@ public class Board extends JFrame {
 //            int offset = rows * (WIDTH+3) + x + 1;
 //            doc.setCharacterAttributes(offset, focus.width(), styles, true);
             for(int i=0; i<focus.width(); i++) {
-                board[y+j][x+i] = focus.getShape(i, j);
+//                board[y+j][x+i] = focus.getShape(i, j);
+
+                if (board[y+j][x+i] == null && focus.getShape(i, j) != null) {
+                    board[y+j][x+i] = focus.getShape(i, j);
+                }
             }
         }
     }
@@ -140,7 +160,10 @@ public class Board extends JFrame {
     private void eraseCurr() {
         for(int i=x; i<x+focus.width(); i++) {
             for(int j=y; j<y+focus.height(); j++) {
-                board[j][i] = null;
+//                board[j][i] = null;
+                if (focus.getShape(i-x, j-y) != null) {
+                    board[j][i] = null;
+                }
             }
         }
     }
@@ -159,20 +182,23 @@ public class Board extends JFrame {
             }
             if (tmp == WIDTH) {
                 for(int j=0;j<WIDTH;j++){
-                    if (i != 0) {
-                        board[i][j] = board[i-1][j];
-                        board[i-1][j] = null;
+                    for(int k=i;k>=1;k--){
+                        board[k][j] = board[k-1][j];
                     }
+                    board[0][j] = null;
                 }
             }
-        }
+         }
     }
 
     // add overlap check
     private boolean isOverlap() {
         for(int i=x; i<x+focus.width(); i++) {
             for(int j=y; j<y+focus.height(); j++) {
-                if (board[j][i] != null) {
+                if (
+                        (board[j][i] != null) &&
+                        (focus.getShape(i-x, j-y) != null))
+                {
                     return true;
                 }
             }
@@ -204,13 +230,19 @@ public class Board extends JFrame {
 
     protected void moveDown() {
         eraseCurr();
+//        System.out.println('1');
+//        printBoard();
         if(!isBottomTouch()) {
             y++;
+//            System.out.println('2');
+//            printBoard();
             if (isOverlap()) {
                 y--;
                 generateNewBlock();
             }
         } else {
+            System.out.println('3');
+            printBoard();
             generateNewBlock();
         }
         placeBlock();
@@ -284,6 +316,12 @@ public class Board extends JFrame {
 
         }
 
+        // @TODO
+        // check
+        // 1. 이동 시 block과 겹칠 때
+        // 2. 이동 시 벽을 넘을 때
+        // 3. 회전 시 block과 겹칠 때
+        // 4. 회전 시 벽을 넘을 때
         @Override
         public void keyPressed(KeyEvent e) {
             switch(e.getKeyCode()) {

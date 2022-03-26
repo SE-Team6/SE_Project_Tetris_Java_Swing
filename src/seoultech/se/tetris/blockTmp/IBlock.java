@@ -31,7 +31,18 @@ public class IBlock extends ParentBlock{
                     {new Block(color), new Block(color), new Block(color), new Block(color)}
                 },
                 {
-
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        }
                 },
         };
         shape = shapes[type];
