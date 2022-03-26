@@ -148,13 +148,14 @@ public class Board extends JFrame {
     // draw에서 color를 주면 안되나?
     // 아마 여기서 color를 주는 것 같아요
     private void placeBlock() {
-//        StyledDocument doc = pane.getStyledDocument();
-//        SimpleAttributeSet styles = new SimpleAttributeSet();
-//        StyleConstants.setForeground(styles, focus.getColor());
+        StyledDocument doc = pane.getStyledDocument();
+        SimpleAttributeSet styles = new SimpleAttributeSet();
+        StyleConstants.setForeground(styles, focus.getColor());
+        System.out.println(focus.getColor().toString());
         for(int j=0; j<focus.height(); j++) {
-//            int rows = y+j == 0 ? 0 : y+j-1;
-//            int offset = rows * (WIDTH+3) + x + 1;
-//            doc.setCharacterAttributes(offset, focus.width(), styles, true);
+            int rows = y+j == 0 ? 0 : y+j-1;
+            int offset = rows * (WIDTH+3) + x + 1;
+            doc.setCharacterAttributes(offset, focus.width(), styles, true);
             for(int i=0; i<focus.width(); i++) {
 //                board[y+j][x+i] = focus.getShape(i, j);
 
@@ -195,6 +196,7 @@ public class Board extends JFrame {
                     }
                     board[0][j] = null;
                 }
+                i++;
             }
          }
     }
