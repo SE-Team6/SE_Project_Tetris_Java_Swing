@@ -37,6 +37,11 @@ public abstract class ParentBlock {
         shape = shapes[type];
     }
 
+    public void rotateBack() {
+        type = (type - 1 + 4) % 4;
+        shape = shapes[type];
+    }
+
     public int height() {
         return shape.length;
     }

@@ -150,11 +150,12 @@ public class Board extends JFrame {
     private void placeBlock() {
         StyledDocument doc = pane.getStyledDocument();
         SimpleAttributeSet styles = new SimpleAttributeSet();
-        StyleConstants.setForeground(styles, focus.getColor());
-        System.out.println(focus.getColor().toString());
+//        StyleConstants.setForeground(styles, focus.getColor());
+//        System.out.println(focus.getColor().toString());
         for(int j=0; j<focus.height(); j++) {
             int rows = y+j == 0 ? 0 : y+j-1;
             int offset = rows * (WIDTH+3) + x + 1;
+            StyleConstants.setForeground(styles, focus.getColor());
             doc.setCharacterAttributes(offset, focus.width(), styles, true);
             for(int i=0; i<focus.width(); i++) {
 //                board[y+j][x+i] = focus.getShape(i, j);
@@ -255,6 +256,9 @@ public class Board extends JFrame {
     protected void moveRight() {
         eraseCurr();
         if(x < WIDTH - focus.width()) x++;
+        if(isOverlap()) {
+            x--;
+        }
         placeBlock();
     }
 
@@ -262,6 +266,20 @@ public class Board extends JFrame {
         eraseCurr();
         if(x > 0) {
             x--;
+        }
+        if(isOverlap()) {
+            x++;
+        }
+        placeBlock();
+    }
+
+    // @TODO
+    // error !!!!!
+    protected void moveRotate() {
+        eraseCurr();
+        focus.rotate();
+        if (x<=0||x>=WIDTH-focus.width()||isOverlap()) {
+            focus.rotateBack();
         }
         placeBlock();
     }
@@ -342,8 +360,7 @@ public class Board extends JFrame {
                     drawBoard();
                     break;
                 case KeyEvent.VK_UP:
-                    eraseCurr();
-                    focus.rotate();
+                    moveRotate();
                     drawBoard();
                     break;
             }
