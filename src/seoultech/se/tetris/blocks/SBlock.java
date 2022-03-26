@@ -1,14 +1,67 @@
 package seoultech.se.tetris.blocks;
 
-import java.awt.Color;
+import java.awt.*;
 
-public class SBlock extends Block {
+public class SBlock extends ParentBlock {
 
-	public SBlock() {
-		shape = new int[][] { 
-			{0, 1, 1},
-			{1, 1, 0}
-		};
-		color = Color.GREEN;
-	}
+    public SBlock() {
+        color = Color.GREEN;
+
+        shapes = new Block[][][]{
+                {
+                        {
+                                null,
+                                new Block(color),
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                                new Block(color),
+                                null,
+                        },
+                },
+                {
+                        {
+                                new Block(color),
+                                null,
+                        },
+                        {
+                                new Block(color),
+                                new Block(color),
+                        },
+                        {
+                                null,
+                                new Block(color),
+                        },
+                },
+                {
+                        {
+                                null,
+                                new Block(color),
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                                new Block(color),
+                                null,
+                        },
+                },
+                {
+                        {
+                                new Block(color),
+                                null,
+                        },
+                        {
+                                new Block(color),
+                                new Block(color),
+                        },
+                        {
+                                null,
+                                new Block(color),
+                        },
+                },
+        };
+
+        shape = shapes[type];
+    }
 }

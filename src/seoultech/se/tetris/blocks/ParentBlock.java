@@ -1,4 +1,4 @@
-package seoultech.se.tetris.blockTmp;
+package seoultech.se.tetris.blocks;
 
 import java.awt.*;
 

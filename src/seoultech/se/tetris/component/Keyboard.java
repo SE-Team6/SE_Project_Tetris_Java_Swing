@@ -1,4 +1,4 @@
-package seoultech.se.tetris.componentTmp;
+package seoultech.se.tetris.component;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
