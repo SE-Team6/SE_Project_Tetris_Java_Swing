@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
+import static seoultech.se.tetris.Menu.Start_Menu.Height;
+import static seoultech.se.tetris.Menu.Start_Menu.Width;
+
 public class Board extends JFrame {
     private static final long serialVersionUID = 2434035659171694595L;
 
@@ -380,7 +383,87 @@ public class Board extends JFrame {
 
         @Override
         public void mouseExited(MouseEvent e) {
-
         }
     }
+  
+	public class PlayerKeyListener1 implements KeyListener {
+		@Override
+		public void keyTyped(KeyEvent e) {
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			switch (Keyset){
+				case 1:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_DOWN:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_RIGHT:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_LEFT:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_UP:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
+				case 2:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_S:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_D:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_A:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_W:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
+				case 3:
+					switch(e.getKeyCode()) {
+						case KeyEvent.VK_K:
+							moveDown();
+							drawBoard();
+							break;
+						case KeyEvent.VK_L:
+							moveRight();
+							drawBoard();
+							break;
+						case KeyEvent.VK_J:
+							moveLeft();
+							drawBoard();
+							break;
+						case KeyEvent.VK_I:
+							eraseCurr();
+							curr.rotate();
+							drawBoard();
+							break;
+					}
+					break;
+			}
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+
+		}
+	}
 }
