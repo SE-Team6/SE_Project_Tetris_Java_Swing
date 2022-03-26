@@ -1,13 +1,50 @@
 package seoultech.se.tetris.blocks;
 
-import java.awt.Color;
+import java.awt.*;
 
-public class IBlock extends Block {
-	
-	public IBlock() {
-		shape = new int[][] { 
-			{1, 1, 1, 1}
-		};
-		color = Color.CYAN;
-	}
+public class IBlock extends ParentBlock {
+
+    public IBlock() {
+        color = Color.CYAN;
+//        shape = new Block[][] {
+//                {new Block(color), new Block(color), new Block(color), new Block(color)}
+//        };
+        shapes = new Block[][][]{
+                {
+                        {new Block(color), new Block(color), new Block(color), new Block(color)}
+                },
+                {
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        }
+                },
+                {
+                        {new Block(color), new Block(color), new Block(color), new Block(color)}
+                },
+                {
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        },
+                        {
+                                new Block(color),
+                        }
+                },
+        };
+        shape = shapes[type];
+    }
 }
