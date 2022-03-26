@@ -1,39 +1,31 @@
 package seoultech.se.tetris.blocks;
 
-import java.awt.Color;
+import java.awt.*;
 
-public abstract class Block {
-		
-	protected int[][] shape;
-	protected Color color;
-	
-	public Block() {
-		shape = new int[][]{ 
-				{1, 1}, 
-				{1, 1}
-		};
-		color = Color.YELLOW;
-	}
-	
-	public int getShape(int x, int y) {
-		return shape[y][x];
-	}
-	
-	public Color getColor() {
-		return color;
-	}
-	
-	public void rotate() {
-		//Rotate the block 90 deg. clockwise.
-	}
-	
-	public int height() {
-		return shape.length;
-	}
-	
-	public int width() {
-		if(shape.length > 0)
-			return shape[0].length;
-		return 0;
-	}
+// 블락 쪼개기
+public class Block {
+    private Color color;
+    private int x;
+    private int y;
+
+    public Block(Color color) {
+        color = color;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setPos(int x, int y) {
+        x = x;
+        y = y;
+    }
+
+    public void down() {
+        y += 1;
+    }
+
+    public int[] getPos() {
+        return new int[]{x, y};
+    }
 }
