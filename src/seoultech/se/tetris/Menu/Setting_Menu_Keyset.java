@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 import static seoultech.se.tetris.Menu.Start_Menu.*;
 import static seoultech.se.tetris.Menu.Start_Menu.menubar_Height;
-import static seoultech.se.tetris.component.Board.Keyset;
+//import static seoultech.se.tetris.component.Board.Keyset;
 
 public class Setting_Menu_Keyset extends JFrame{
     private Image screenImage;
@@ -196,23 +196,23 @@ public class Setting_Menu_Keyset extends JFrame{
                 possionPoint_3();
 
             }
-            else if(key == KeyEvent.VK_ENTER){
-                switch (possionPoint) {
-                    case 1:
-                        Keyset=1;
-                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
-                        break;
-                    case 2:
-                        Keyset=2;
-                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
-                        break;
-                    case 3:
-                        Keyset=3;
-                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
-                        break;
-                }
-
-            }
+//            else if(key == KeyEvent.VK_ENTER){
+//                switch (possionPoint) {
+//                    case 1:
+//                        Keyset=1;
+//                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
+//                        break;
+//                    case 2:
+//                        Keyset=2;
+//                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
+//                        break;
+//                    case 3:
+//                        Keyset=3;
+//                        JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
+//                        break;
+//                }
+//
+//            }
         }
     }
 
