@@ -14,7 +14,12 @@ public class Score extends JLabel {
                 BorderFactory.createLineBorder(Color.GRAY, 10),
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         this.setBorder(border);
-        this.setSize(300, 200);
+        this.setForeground(Color.BLACK);
+        this.setBackground(Color.WHITE);
+        this.setOpaque(true);
+        this.setFont(new Font("Courier", Font.PLAIN, 14));
+        this.setHorizontalAlignment(SwingConstants.CENTER);
+        this.setVerticalAlignment(SwingConstants.CENTER);
         updateScore();
     }
 

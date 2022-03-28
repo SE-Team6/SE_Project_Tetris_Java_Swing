@@ -34,4 +34,7 @@ For further funcionality implementations, you need to change the design and impl
 <img src="https://img.shields.io/github/contributors/HiGeuni/SE_Project_Tetris_Swing"/>
 <img src="https://img.shields.io/github/license/HiGeuni/SE_Project_Tetris_Swing"/>
 <img src="https://img.shields.io/github/v/release/HiGeuni/SE_Project_Tetris_Swing"/>
+
 > hello world!
+
+![prototype](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/909b833c-85ce-4594-903c-f4f1bcb22b2e/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220328%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220328T105308Z&X-Amz-Expires=86400&X-Amz-Signature=6379c6578d271d00e076f39a35193c73069c1d801b45d8a13334f6c1a7a274e9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)

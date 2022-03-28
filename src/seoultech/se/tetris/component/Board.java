@@ -27,7 +27,7 @@ public class Board extends JFrame {
     public static String BORDER_CHAR;
     public static String BLOCK_CHAR;
     public static String NON_BLOCK_CHAR;
-    private static final int initInterval = 1000;
+    private static float initInterval = 1000;
 
     private JTextPane pane;
     private JPanel rightPanel;
@@ -45,6 +45,8 @@ public class Board extends JFrame {
     private Timer timer;
     private ParentBlock focus;
     private ParentBlock next;
+
+    private float rateInterval = 0.50F;
 
     int x = 3; //Default Position.
     int y = 0;
@@ -79,7 +81,10 @@ public class Board extends JFrame {
 
         // right items
         rightPanel = new JPanel();
-        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+//        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new GridLayout(7, 1));
+        rightPanel.setBackground(Color.GRAY);
+
         score = new Score();
         rightPanel.add(score);
 
@@ -118,7 +123,7 @@ public class Board extends JFrame {
         StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
 
         //Set timer for block drops.
-        timer = new Timer(initInterval, new ActionListener() {
+        timer = new Timer(Math.round(initInterval), new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 moveDown();
@@ -246,7 +251,19 @@ public class Board extends JFrame {
                 combo++;
             }
          }
-        score.addScore(combo);
+        if (combo > 0) {
+            timer.stop();
+            initInterval *= rateInterval;
+            timer = new Timer(Math.round(initInterval), new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    moveDown();
+                    drawBoard();
+                }
+            });
+            timer.start();
+            score.addScore(combo);
+        }
     }
 
     // add overlap check
