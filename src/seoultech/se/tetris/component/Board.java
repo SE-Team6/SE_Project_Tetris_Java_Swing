@@ -14,9 +14,16 @@ public class Board extends JFrame {
 
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
-    public static final String BORDER_CHAR = "□";
-    public static final String BLOCK_CHAR = "■";
-    public static final String NON_BLOCK_CHAR = "    ";
+    public static final String BORDER_CHAR_WIN = "□";
+    public static final String BLOCK_CHAR_WIN = "■";
+    public static final String NON_BLOCK_CHAR_WIN = "    ";
+    public static final String BORDER_CHAR_MAC = "□";
+    public static final String BLOCK_CHAR_MAC = "■";
+    public static final String NON_BLOCK_CHAR_MAC = "  ";
+
+    public static String BORDER_CHAR;
+    public static String BLOCK_CHAR;
+    public static String NON_BLOCK_CHAR;
     private static final int initInterval = 1000;
 
     private JTextPane pane;
@@ -43,6 +50,16 @@ public class Board extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("win")) {
+            BORDER_CHAR = BORDER_CHAR_WIN;
+            BLOCK_CHAR = BLOCK_CHAR_WIN;
+            NON_BLOCK_CHAR = NON_BLOCK_CHAR_WIN;
+        } else {
+            BORDER_CHAR = BORDER_CHAR_MAC;
+            BLOCK_CHAR = BLOCK_CHAR_MAC;
+            NON_BLOCK_CHAR = NON_BLOCK_CHAR_MAC;
+        }
 
         //Board display setting.
         pane = new JTextPane();
