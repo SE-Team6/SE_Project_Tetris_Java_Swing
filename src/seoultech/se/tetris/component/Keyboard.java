@@ -6,8 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
+import org.json.simple.JSONObject;
+import seoultech.se.tetris.component.JSONLoader;
+
 public class Keyboard {
-    private static HashMap<String, Integer>KeyMap = new HashMap<String, Integer>();
+    public static int LEFT, RIGHT, UP, DOWN, ESC, SPACE;
 
     private Keyboard(){}
 
@@ -18,33 +21,13 @@ public class Keyboard {
     }
 
     //Set Key For Control Using TextFile and return keymap
-    public static HashMap<String, Integer> loadKey(){
-        try (
-                FileReader fr = new FileReader("key.txt");
-                BufferedReader br = new BufferedReader(fr);
-        ) {
-            String readLine = null;
-            while ((readLine = br.readLine()) != null) {
-                String[] curLine = readLine.split(" ");
-                if (curLine[0].equals("left")) {
-                    KeyMap.put("left", Integer.parseInt(curLine[2]));
-                } else if (curLine[0].equals("right")) {
-                    KeyMap.put("right", Integer.parseInt(curLine[2]));
-                } else if (curLine[0].equals("down")) {
-                    KeyMap.put("down", Integer.parseInt(curLine[2]));
-                } else if (curLine[0].equals("fall")) {
-                    KeyMap.put("fall", Integer.parseInt(curLine[2]));
-                } else if (curLine[0].equals("rotate")) {
-                    KeyMap.put("rotate", Integer.parseInt(curLine[2]));
-                } else if (curLine[0].equals("pause")) {
-                    KeyMap.put("pause", Integer.parseInt(curLine[2]));
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        } catch (IOException e){
-            System.out.println(e);
-        }
-        return KeyMap;
+    public static void setKey(){
+        JSONObject obj = JSONLoader.loaderKey();
+        LEFT = Integer.parseInt(obj.get("LEFT").toString());
+        RIGHT = Integer.parseInt(obj.get("RIGHT").toString());
+        UP = Integer.parseInt(obj.get("UP").toString());
+        DOWN = Integer.parseInt(obj.get("DOWN").toString());
+        ESC = Integer.parseInt(obj.get("ESC").toString());
+        SPACE = Integer.parseInt(obj.get("SPACE").toString());
     }
 }

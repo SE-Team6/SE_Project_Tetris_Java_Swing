@@ -1,0 +1,18 @@
+{
+  "colorBlindMode": {
+    "mode": 0
+  },
+  "resolution": {
+    "width": 600,
+    "font-size": 18,
+    "height": 800
+  },
+  "key": {
+    "SPACE": 114,
+    "DOWN": 40,
+    "LEFT": 37,
+    "ESC": 112,
+    "RIGHT": 39,
+    "UP": 38
+  }
+}

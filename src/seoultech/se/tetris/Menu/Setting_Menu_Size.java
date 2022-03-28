@@ -7,6 +7,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 import static seoultech.se.tetris.Menu.Start_Menu.*;
+import static seoultech.se.tetris.component.JSONLoader.*;
+import static seoultech.se.tetris.component.JSONWriter.*;
 
 
 public class Setting_Menu_Size extends JFrame {
@@ -196,10 +198,12 @@ public class Setting_Menu_Size extends JFrame {
                 case KeyEvent.VK_ENTER:
                     switch (possionPoint){
                         case 1:
+                            writeResolution(400, 500, 18);
                             ver.first_Screensize_Set();
                             screensize_set();
                             break;
                         case 2:
+                            writeResolution(600, 800, 18);
                             ver.second_Screensize_Set();
                             screensize_set();
                             break;

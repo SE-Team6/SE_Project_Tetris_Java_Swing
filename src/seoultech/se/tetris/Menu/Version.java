@@ -1,6 +1,10 @@
 package seoultech.se.tetris.Menu;
 
+import java.util.HashMap;
+
 import static seoultech.se.tetris.Menu.Start_Menu.*;
+import static seoultech.se.tetris.component.JSONLoader.*;
+import static seoultech.se.tetris.component.JSONWriter.*;
 
 public class Version {
     public void first_Screensize_Set(){
@@ -13,8 +17,10 @@ public class Version {
         setting_Button_x=140;
     }
     public void second_Screensize_Set(){
-        Width = 600;
-        Height = 800;
+        HashMap<String, Integer>map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
         menubar_Width=600;
         menubar_Exit_btn_Width=580;
         gametitle_x=130;
