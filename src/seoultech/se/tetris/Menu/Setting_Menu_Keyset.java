@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 import static seoultech.se.tetris.Menu.Start_Menu.*;
 import static seoultech.se.tetris.Menu.Start_Menu.menubar_Height;
-//import static seoultech.se.tetris.component.Board.Keyset;
+//import static seoultech.se.tetris.component.board.Board.Keyset;
 
 public class Setting_Menu_Keyset extends JFrame{
     private Image screenImage;

@@ -8,22 +8,22 @@ public class JBlock extends ParentBlock {
         color = Color.BLUE;
         shapes = new Block[][][] {
                 {
-                    {new Block(color), new Block(color), new Block(color)},
-                    {null, null, new Block(color)}
+                    {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)},
+                    {null, null, new Block(color, config.BLOCK_CHAR)}
                 },
                 {
-                    {null, new Block(color)},
-                    {null, new Block(color)},
-                    {new Block(color), new Block(color)}
+                    {null, new Block(color, config.BLOCK_CHAR)},
+                    {null, new Block(color, config.BLOCK_CHAR)},
+                    {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)}
                 },
                 {
-                    { new Block(color), null, null,},
-                    {new Block(color), new Block(color), new Block(color)},
+                    { new Block(color, config.BLOCK_CHAR), null, null,},
+                    {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)},
                 },
                 {
-                    {new Block(color), new Block(color)},
-                    {new Block(color), null},
-                    {new Block(color), null},
+                    {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)},
+                    {new Block(color, config.BLOCK_CHAR), null},
+                    {new Block(color, config.BLOCK_CHAR), null},
                 },
         };
         shape = shapes[type];

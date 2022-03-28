@@ -28,7 +28,7 @@ public class Score extends JLabel {
     }
 
     public void addScore(int combo) {
-        this.score += combo;
+        this.score += combo * combo;
         updateScore();
     }
 

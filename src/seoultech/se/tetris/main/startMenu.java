@@ -1,6 +1,6 @@
 package seoultech.se.tetris.main;
 
-import seoultech.se.tetris.component.Board;
+import seoultech.se.tetris.component.board.NormalBoard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,7 +67,7 @@ public class startMenu extends JFrame{
                     if(b1.getY()==arrow.getY())
                     {
                         //게임 시작
-                        Board main = new Board();
+                        NormalBoard main = new NormalBoard();
                         main.setSize(400, 500);
                         main.setVisible(true);
                         main.setLocation(new Point(700, 350));

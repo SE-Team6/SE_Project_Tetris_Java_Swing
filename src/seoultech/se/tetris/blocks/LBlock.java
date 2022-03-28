@@ -9,22 +9,22 @@ public class LBlock extends ParentBlock {
 
         shapes = new Block[][][]{
                 {
-                        {new Block(color), new Block(color), new Block(color),},
-                        {new Block(color), null, null},
+                        {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR),},
+                        {new Block(color, config.BLOCK_CHAR), null, null},
                 },
                 {
-                        {new Block(color), new Block(color)},
-                        {null, new Block(color),},
-                        {null, new Block(color),},
+                        {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)},
+                        {null, new Block(color, config.BLOCK_CHAR),},
+                        {null, new Block(color, config.BLOCK_CHAR),},
                 },
                 {
-                        {null, null, new Block(color),},
-                        {new Block(color), new Block(color), new Block(color),},
+                        {null, null, new Block(color, config.BLOCK_CHAR),},
+                        {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR),},
                 },
                 {
-                        {new Block(color), null,},
-                        {new Block(color), null,},
-                        {new Block(color), new Block(color)},
+                        {new Block(color, config.BLOCK_CHAR), null,},
+                        {new Block(color, config.BLOCK_CHAR), null,},
+                        {new Block(color, config.BLOCK_CHAR), new Block(color, config.BLOCK_CHAR)},
                 },
         };
         shape = shapes[type];

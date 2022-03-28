@@ -10,53 +10,53 @@ public class ZBlock extends ParentBlock {
         shapes = new Block[][][]{
                 {
                         {
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                                 null,
                         },
                         {
                                 null,
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                 },
                 {
                         {
                                 null,
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                         {
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                         {
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
                                 null,
                         },
                 },
                 {
                         {
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                                 null,
                         },
                         {
                                 null,
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                 },
                 {
                         {
                                 null,
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                         {
-                                new Block(color),
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
+                                new Block(color, config.BLOCK_CHAR),
                         },
                         {
-                                new Block(color),
+                                new Block(color, config.BLOCK_CHAR),
                                 null,
                         },
                 },

@@ -1,6 +1,9 @@
-package seoultech.se.tetris.component;
+package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.*;
+import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
+import seoultech.se.tetris.blocks.item.random.*;
+import seoultech.se.tetris.component.Score;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -12,22 +15,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class Board extends JFrame {
-    private static final long serialVersionUID = 2434035659171694595L;
-
-    public static final int HEIGHT = 20;
-    public static final int WIDTH = 10;
-    public static final String BORDER_CHAR_WIN = "■";
-    public static final String BLOCK_CHAR_WIN = "■";
-    public static final String NON_BLOCK_CHAR_WIN = "    ";
-    public static final String BORDER_CHAR_MAC = "■";
-    public static final String BLOCK_CHAR_MAC = "■";
-    public static final String NON_BLOCK_CHAR_MAC = " ";
-
-    public static String BORDER_CHAR;
-    public static String BLOCK_CHAR;
-    public static String NON_BLOCK_CHAR;
-    private static float initInterval = 1000;
+public class ItemBoard extends JFrame implements Board {
+    private int cnt;
+    public static float initInterval = 1000;
 
     private JTextPane pane;
     private JPanel rightPanel;
@@ -46,7 +36,9 @@ public class Board extends JFrame {
     private ParentBlock focus;
     private ParentBlock next;
 
-    private float rateInterval = 0.50F;
+
+
+    private float rateInterval = 0.95F;
 
     int x = 3; //Default Position.
     int y = 0;
@@ -54,21 +46,11 @@ public class Board extends JFrame {
     // add new board
     private Block[][] board;
 
-    public Board() {
-        super("SE Team 6");
+    public ItemBoard() {
+        super("SE Team 6 Item");
+        this.cnt = 0;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        String os = System.getProperty("os.name").toLowerCase();
-        if (os.contains("win")) {
-            BORDER_CHAR = BORDER_CHAR_WIN;
-            BLOCK_CHAR = BLOCK_CHAR_WIN;
-            NON_BLOCK_CHAR = NON_BLOCK_CHAR_WIN;
-        } else {
-            BORDER_CHAR = BORDER_CHAR_MAC;
-            BLOCK_CHAR = BLOCK_CHAR_MAC;
-            NON_BLOCK_CHAR = NON_BLOCK_CHAR_MAC;
-        }
 
         //Board display setting.
         pane = new JTextPane();
@@ -82,6 +64,7 @@ public class Board extends JFrame {
         // right items
         rightPanel = new JPanel();
 //        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+        rightPanel.setLayout(new GridLayout(7, 1));
         rightPanel.setLayout(new GridLayout(7, 1));
         rightPanel.setBackground(Color.GRAY);
 
@@ -132,7 +115,7 @@ public class Board extends JFrame {
         });
 
         //Initialize board for the game.
-        board = new Block[HEIGHT][WIDTH];
+        board = new Block[Board.HEIGHT][Board.WIDTH];
         playerKeyListener = new PlayerKeyListener();
         addKeyListener(playerKeyListener);
         playerMouseListener = new PlayerMouseListener();
@@ -152,21 +135,23 @@ public class Board extends JFrame {
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
         //Create the first block and draw.
-        focus = getRandomBlock();
-        next = getRandomBlock();
-        drawNextBlock();
+        focus = getRandomItemBlock();
         placeBlock();
         drawBoard();
         timer.start();
+        next = getRandomItemBlock();
+        drawNextBlock();
+
     }
 
+    @Override
     public void focusFrame() {
         requestFocus();
         setFocusable(true);
     }
 
-    private ParentBlock getRandomBlock() {
-
+    @Override
+    public ParentBlock getRandomBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(7);
         switch(block) {
@@ -188,16 +173,40 @@ public class Board extends JFrame {
         return new LBlock();
     }
 
-    private void printBoard() {
+    public ParentBlock getRandomItemBlock() {
+        Random random = new Random(System.currentTimeMillis());
+        int block = random.nextInt(14);
+        switch(block) {
+            case 0:
+                return new RandomIBlock();
+            case 1:
+                return new RandomJBlock();
+            case 2:
+                return new RandomLBlock();
+            case 3:
+                return new RandomZBlock();
+            case 4:
+                return new RandomSBlock();
+            case 5:
+                return new RandomTBlock();
+            case 6:
+                return new RandomOBlock();
+            default:
+                return new PendulumBlock();
+        }
+    }
+
+    @Override
+    public void printBoard() {
         System.out.print("    ");
-        for(int i=0;i<WIDTH;i++){
+        for(int i=0;i<Board.WIDTH;i++){
             System.out.printf("%2d", i);
         }
         System.out.println();
 
-        for(int i=0;i<HEIGHT;i++){
+        for(int i=0;i<Board.HEIGHT;i++){
             System.out.printf("%d  ", i);
-            for(int j=0;j<WIDTH;j++){
+            for(int j=0;j<Board.WIDTH;j++){
                 System.out.print(board[i][j] != null ? " 0" : "  ");
             }
             System.out.println();
@@ -207,7 +216,8 @@ public class Board extends JFrame {
     // 만약 블럭이 내려가면 똑같이 유지가 될까 아마 안될 것 같음.
     // draw에서 color를 주면 안되나?
     // 아마 여기서 color를 주는 것 같아요
-    private void placeBlock() {
+    @Override
+    public void placeBlock() {
         for(int j=0; j<focus.height(); j++) {
             for(int i=0; i<focus.width(); i++) {
                 if (board[y+j][x+i] == null && focus.getShape(i, j) != null) {
@@ -217,7 +227,8 @@ public class Board extends JFrame {
         }
     }
 
-    private void eraseCurr() {
+    @Override
+    public void eraseCurr() {
         for(int i=x; i<x+focus.width(); i++) {
             for(int j=y; j<y+focus.height(); j++) {
                 if (focus.getShape(i-x, j-y) != null) {
@@ -227,21 +238,18 @@ public class Board extends JFrame {
         }
     }
 
-    // TODO
-    // erase line
-    // at focus down bottom;
-    // i, j = j, i
-    private void eraseLines() {
+    @Override
+    public void eraseLines() {
         int combo = 0;
-        for(int i=HEIGHT-1;i>=0;i--){
+        for(int i=Board.HEIGHT-1;i>=0;i--){
             int tmp = 0;
-            for(int j=0;j<WIDTH;j++){
+            for(int j=0;j<Board.WIDTH;j++){
                 if (board[i][j] != null) {
                     tmp++;
                 }
             }
-            if (tmp == WIDTH) {
-                for(int j=0;j<WIDTH;j++){
+            if (tmp == Board.WIDTH) {
+                for(int j=0;j<Board.WIDTH;j++){
                     for(int k=i;k>=1;k--){
                         board[k][j] = board[k-1][j];
                     }
@@ -249,21 +257,26 @@ public class Board extends JFrame {
                 }
                 i++;
                 combo++;
+                this.cnt++;
             }
-         }
-        if (combo > 0) {
-            timer.stop();
-            initInterval *= rateInterval;
-            timer = new Timer(Math.round(initInterval), new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    moveDown();
-                    drawBoard();
-                }
-            });
-            timer.start();
-            score.addScore(combo);
         }
+        if (combo > 0) {
+            timerSet(combo);
+        }
+    }
+
+    protected void timerSet(int combo) {
+        timer.stop();
+        initInterval *= rateInterval;
+        timer = new Timer(Math.round(initInterval), new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                moveDown();
+                drawBoard();
+            }
+        });
+        timer.start();
+        score.addScore(combo);
     }
 
     // add overlap check
@@ -272,7 +285,7 @@ public class Board extends JFrame {
             for(int j=y; j<y+focus.height(); j++) {
                 if (
                         (board[j][i] != null) &&
-                        (focus.getShape(i-x, j-y) != null))
+                                (focus.getShape(i-x, j-y) != null))
                 {
                     return true;
                 }
@@ -283,7 +296,7 @@ public class Board extends JFrame {
 
     // add bottom check
     private boolean isBottomTouch() {
-        if(y < HEIGHT - focus.height()) {
+        if(y < Board.HEIGHT - focus.height()) {
             return false;
         }
         return true;
@@ -294,7 +307,7 @@ public class Board extends JFrame {
         placeBlock();
         eraseLines();
         focus = next;
-        next = getRandomBlock();
+        next = getRandomItemBlock();
         drawNextBlock();
         x = 3;
         y = 0;
@@ -321,7 +334,7 @@ public class Board extends JFrame {
 
     protected void moveFall() {
         eraseCurr();
-        for (int i=y;i<HEIGHT;i++){
+        for (int i=y;i<Board.HEIGHT;i++){
             if (!isBottomTouch()) {
                 y++;
                 if (isOverlap()) {
@@ -339,7 +352,7 @@ public class Board extends JFrame {
 
     protected void moveRight() {
         eraseCurr();
-        if(x < WIDTH - focus.width()) x++;
+        if(x < Board.WIDTH - focus.width()) x++;
         if(isOverlap()) {
             x--;
         }
@@ -357,12 +370,10 @@ public class Board extends JFrame {
         placeBlock();
     }
 
-    // @TODO
-    // error !!!!!
     protected void moveRotate() {
         eraseCurr();
         focus.rotate();
-        if (x<=0||x>=WIDTH-focus.width()||y+focus.height()-1>=HEIGHT||isOverlap()) {
+        if (x<0||x>=Board.WIDTH-focus.width()+1||y+focus.height()-1>=Board.HEIGHT||isOverlap()) {
             focus.rotateBack();
         }
         placeBlock();
@@ -372,55 +383,54 @@ public class Board extends JFrame {
         StyledDocument doc = pane.getStyledDocument();
         pane.setText("");
         try {
-            for(int t=0; t<WIDTH+2; t++) {
-                doc.insertString(doc.getLength(), BORDER_CHAR, defaultStyle);
+            for(int t=0; t<Board.WIDTH+2; t++) {
+                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
             }
             doc.insertString(doc.getLength(), "\n", defaultStyle);
 
             for(int i=0; i < board.length; i++) {
-                doc.insertString(doc.getLength(), BORDER_CHAR, defaultStyle);
+                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
 
                 for(int j=0; j < board[i].length; j++) {
                     if(board[i][j] != null) {
                         StyleConstants.setForeground(blockStyle, board[i][j].getColor() == null ? Color.GRAY : board[i][j].getColor());
-                        doc.insertString(doc.getLength(), BLOCK_CHAR, blockStyle);
+                        doc.insertString(doc.getLength(), board[i][j].getCharacter(), blockStyle);
                     } else {
-                        doc.insertString(doc.getLength(), NON_BLOCK_CHAR, defaultStyle);
+                        doc.insertString(doc.getLength(), config.NON_BLOCK_CHAR, defaultStyle);
                     }
                 }
-                doc.insertString(doc.getLength(), BORDER_CHAR, defaultStyle);
+                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
                 doc.insertString(doc.getLength(), "\n", defaultStyle);
 
             }
-            for(int t=0; t<WIDTH+2; t++) {
-                doc.insertString(doc.getLength(), BORDER_CHAR, defaultStyle);
+            for(int t=0; t<Board.WIDTH+2; t++) {
+                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
             }
         } catch (Exception ignored){}
     }
 
     // draw next block
     public void drawNextBlock() {
-        StringBuffer sb = new StringBuffer();
-        SimpleAttributeSet styles = new SimpleAttributeSet();
-        StyleConstants.setForeground(styles, next.getColor());
+        StyledDocument doc = nextPanel.getStyledDocument();
+        nextPanel.setText("");
 
         int nW = next.width(); int nH = next.height();
-        for (int i=0;i<4;i++){
-            for (int j=0;j<4;j++){
-                if (i < nH && j < nW && next.getShape(j, i) != null) {
-                    sb.append(BLOCK_CHAR);
-                }else {
-                    sb.append(NON_BLOCK_CHAR);
+        try {
+            for (int i=0;i<4;i++){
+                for (int j=0;j<4;j++){
+                    if (i < nH && j < nW && next.getShape(j, i) != null) {
+                        StyleConstants.setForeground(blockStyle, next.getShape(j, i).getColor());
+                        doc.insertString(doc.getLength(), next.getShape(j, i).getCharacter(), blockStyle);
+                    }else {
+                        doc.insertString(doc.getLength(), config.NON_BLOCK_CHAR, defaultStyle);
+                    }
                 }
+                doc.insertString(doc.getLength(), "\n", defaultStyle);
             }
-            sb.append("\n");
-        }
-        nextPanel.setText(sb.toString());
-        StyledDocument doc = nextPanel.getStyledDocument();
-        doc.setParagraphAttributes(0, doc.getLength(), styles, true);
-        nextPanel.setStyledDocument(doc);
+        } catch (Exception ignored) {}
     }
 
+    @Override
     public void reset() {
         this.board = new Block[20][10];
     }
@@ -431,12 +441,6 @@ public class Board extends JFrame {
 
         }
 
-        // @TODO
-        // check
-        // 1. 이동 시 block과 겹칠 때
-        // 2. 이동 시 벽을 넘을 때
-        // 3. 회전 시 block과 겹칠 때
-        // 4. 회전 시 벽을 넘을 때
         @Override
         public void keyPressed(KeyEvent e) {
             switch(e.getKeyCode()) {
@@ -498,85 +502,4 @@ public class Board extends JFrame {
         public void mouseExited(MouseEvent e) {
         }
     }
-  
-//	public class PlayerKeyListener1 implements KeyListener {
-//		@Override
-//		public void keyTyped(KeyEvent e) {
-//
-//		}
-//
-//		@Override
-//		public void keyPressed(KeyEvent e) {
-//			switch (Keyset){
-//				case 1:
-//					switch(e.getKeyCode()) {
-//						case KeyEvent.VK_DOWN:
-//							moveDown();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_RIGHT:
-//							moveRight();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_LEFT:
-//							moveLeft();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_UP:
-//							eraseCurr();
-//							curr.rotate();
-//							drawBoard();
-//							break;
-//					}
-//					break;
-//				case 2:
-//					switch(e.getKeyCode()) {
-//						case KeyEvent.VK_S:
-//							moveDown();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_D:
-//							moveRight();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_A:
-//							moveLeft();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_W:
-//							eraseCurr();
-//							curr.rotate();
-//							drawBoard();
-//							break;
-//					}
-//					break;
-//				case 3:
-//					switch(e.getKeyCode()) {
-//						case KeyEvent.VK_K:
-//							moveDown();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_L:
-//							moveRight();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_J:
-//							moveLeft();
-//							drawBoard();
-//							break;
-//						case KeyEvent.VK_I:
-//							eraseCurr();
-//							curr.rotate();
-//							drawBoard();
-//							break;
-//					}
-//					break;
-//			}
-//		}
-//
-//		@Override
-//		public void keyReleased(KeyEvent e) {
-//
-//		}
-//	}
 }
