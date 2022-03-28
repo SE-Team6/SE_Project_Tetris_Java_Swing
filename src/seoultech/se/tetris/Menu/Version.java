@@ -1,33 +1,41 @@
 package seoultech.se.tetris.Menu;
 
-import static seoultech.se.tetris.Menu.Start_Menu.*;
+import java.util.HashMap;
+
+import static seoultech.se.tetris.component.JSONLoader.*;
+
+import static seoultech.se.tetris.Menu.StartMenu.*;
+import static seoultech.se.tetris.Menu.BasicSet.*;
 
 public class Version {
-    public void first_Screensize_Set(){
-        Width = 400;
-        Height = 500;
-        menubar_Width=400;
-        menubar_Exit_btn_Width=380;
-        gametitle_x=50;
-        startbuttonx =125;
-        setting_Button_x=140;
+    public void firstScreenSizeSet(){
+        HashMap<String, Integer>map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
+        menuBarWidth=400;
+        menuBarExitBtnWidth=380;
+        gameTitleX =50;
+        buttonX =125;
     }
-    public void second_Screensize_Set(){
-        Width = 600;
-        Height = 800;
-        menubar_Width=600;
-        menubar_Exit_btn_Width=580;
-        gametitle_x=130;
-        startbuttonx =225;
-        setting_Button_x=220;
+    public void secondScreenSizeSet(){
+        HashMap<String, Integer>map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
+        menuBarWidth=600;
+        menuBarExitBtnWidth=580;
+        gameTitleX =130;
+        buttonX =225;
     }
-    public void third_Screensize_Set(){
-        Width = 800;
-        Height = 1000;
-        menubar_Width=800;
-        menubar_Exit_btn_Width=780;
-        gametitle_x=230;
-        startbuttonx =300;
-        setting_Button_x=320;
+    public void thirdScreenSizeSet(){
+        HashMap<String, Integer>map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
+        menuBarWidth=800;
+        menuBarExitBtnWidth=780;
+        gameTitleX =230;
+        buttonX =300;
     }
 }

@@ -6,8 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import static seoultech.se.tetris.Menu.Start_Menu.*;
-import static seoultech.se.tetris.Menu.Start_Menu.menubar_Height;
+import static seoultech.se.tetris.Menu.StartMenu.*;
 //import static seoultech.se.tetris.component.Board.Keyset;
 
 public class Setting_Menu_Keyset extends JFrame{
@@ -45,86 +44,13 @@ public class Setting_Menu_Keyset extends JFrame{
     private  JButton key_Set3_btn= new JButton(key_Set3_Image);
 
     public Setting_Menu_Keyset(){
-        possionPoint=1;
-        basic_set();
+        positionPoint =1;
         back_Menu();
         Setting_Menu_Keyset_btn();
         addKeyListener(new menuKeyListner());
     }
 
     //기본설정
-    public void paint(Graphics g){
-        screenImage = createImage(Width,Height);
-        screenGraphics = screenImage.getGraphics();
-        screenDraw((Graphics2D)screenGraphics);
-        g.drawImage(screenImage,0,0,null);
-    }
-    public void screenDraw(Graphics2D g){
-
-        g.drawImage(background,0,0,null);
-        paintComponents(g);
-
-        this.repaint();
-    }
-    public void basic_set(){
-        setUndecorated(true);
-        setVisible(true); // 우리가 만든 게임창이 정상적으로 출력되도록.
-        setTitle("Tetris Game");
-        setSize(Width,Height);
-        setResizable(false); // 한번 만들어진 게임창은 사용자가 임의적으로 못바꿈
-        setLocationRelativeTo(null); // 게임창이 컴퓨터 정중앙에 뜨도록
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 게임창 종료시 프로그램도 종료하도록
-        setBackground(new Color(0, 0, 0, 0));
-        setLayout(null);
-        setFocusable(true);
-
-        gametitle.setBounds(gametitle_x,gametitle_y,300,50);
-        add(gametitle);
-
-        //상단메뉴바 종료 설정
-        menubar_Exit_btn.setBounds(menubar_Exit_btn_Width,menubar_Exit_btn_Height,20,20);
-        menubar_Exit_btn.setBorderPainted(false);
-        menubar_Exit_btn.setContentAreaFilled(false);
-        menubar_Exit_btn.setFocusPainted(false);
-        menubar_Exit_btn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                System.exit(0);
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                menubar_Exit_btn.setIcon(menubar_Exit_Enter_Image);
-                menubar_Exit_btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                menubar_Exit_btn.setIcon(menubar_Exit_Basic_Image);
-            }
-        });
-        add(menubar_Exit_btn);
-
-        //상단메뉴바 설정
-        menuBar.setBounds(0, 0, menubar_Width, menubar_Height);
-        menuBar.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                mouseX = e.getX();
-                mouseY = e.getY();
-            }
-        });
-        menuBar.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                int x = e.getXOnScreen();
-                int y = e.getYOnScreen();
-
-                setLocation(x - mouseX, y - mouseY); // 메뉴바 이동가능하게
-            }
-        });
-        add(menuBar);
-    }
     public void back_Menu(){
         back_Menu_btn.setBounds(10,50,50,50);
         back_Menu_btn.setBorderPainted(false);
@@ -156,20 +82,20 @@ public class Setting_Menu_Keyset extends JFrame{
 
     //버튼
     public void Setting_Menu_Keyset_btn(){
-        key_Set1_btn.setBounds(startbuttonx,start_button_y,145,45);
+        key_Set1_btn.setBounds(buttonX, buttonY,145,45);
         key_Set1_btn.setBorderPainted(false);
         key_Set1_btn.setContentAreaFilled(false);
         key_Set1_btn.setFocusPainted(false);
         possionPoint_1();
         add(key_Set1_btn);
 
-        key_Set2_btn.setBounds(startbuttonx,start_button_y+70,145,45);
+        key_Set2_btn.setBounds(buttonX, buttonY +70,145,45);
         key_Set2_btn.setBorderPainted(false);
         key_Set2_btn.setContentAreaFilled(false);
         key_Set2_btn.setFocusPainted(false);
         add(key_Set2_btn);
 
-        key_Set3_btn.setBounds(startbuttonx,start_button_y+140,145,45);
+        key_Set3_btn.setBounds(buttonX, buttonY +140,145,45);
         key_Set3_btn.setBorderPainted(false);
         key_Set3_btn.setContentAreaFilled(false);
         key_Set3_btn.setFocusPainted(false);
@@ -182,15 +108,15 @@ public class Setting_Menu_Keyset extends JFrame{
         public void keyPressed(KeyEvent e) {
             int key= e.getKeyCode();
             if (key == KeyEvent.VK_DOWN){
-                possionPoint+=1;
-                if(possionPoint==4) possionPoint=1;
+                positionPoint +=1;
+                if(positionPoint ==4) positionPoint =1;
                 possionPoint_1();
                 possionPoint_2();
                 possionPoint_3();
             }
             else if(key == KeyEvent.VK_UP){
-                possionPoint-=1;
-                if(possionPoint==0) possionPoint=3;
+                positionPoint -=1;
+                if(positionPoint ==0) positionPoint =3;
                 possionPoint_1();
                 possionPoint_2();
                 possionPoint_3();
@@ -217,15 +143,15 @@ public class Setting_Menu_Keyset extends JFrame{
     }
 
     public void possionPoint_1(){
-        if(possionPoint==1) key_Set1_btn.setIcon(key_Set1_E_Image);
+        if(positionPoint ==1) key_Set1_btn.setIcon(key_Set1_E_Image);
         else key_Set1_btn.setIcon(key_Set1_Image);
     }
     public void possionPoint_2(){
-        if(possionPoint==2) key_Set2_btn.setIcon(key_Set2_E_Image);
+        if(positionPoint ==2) key_Set2_btn.setIcon(key_Set2_E_Image);
         else key_Set2_btn.setIcon(key_Set2_Image);
     }
     public void possionPoint_3(){
-        if(possionPoint==3) key_Set3_btn.setIcon(key_Set3_E_Image);
+        if(positionPoint ==3) key_Set3_btn.setIcon(key_Set3_E_Image);
         else key_Set3_btn.setIcon(key_Set3_Image);
     }
 }
