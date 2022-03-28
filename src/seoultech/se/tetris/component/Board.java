@@ -14,17 +14,23 @@ public class Board extends JFrame {
 
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
-    public static final String BORDER_CHAR = "X";
+    public static final String BORDER_CHAR = "□";
+    public static final String BLOCK_CHAR = "■";
+    public static final String NON_BLOCK_CHAR = "    ";
     private static final int initInterval = 1000;
 
     private JTextPane pane;
-    private JLabel score;
     private JPanel rightPanel;
+    private JLabel score;
+    private JTextPane nextPanel;
+
     private KeyListener playerKeyListener;
     private MouseListener playerMouseListener;
     private SimpleAttributeSet styleSet;
+    private SimpleAttributeSet nextStyleSet;
     private Timer timer;
     private ParentBlock focus;
+    private ParentBlock next;
 
     int x = 3; //Default Position.
     int y = 0;
@@ -47,7 +53,9 @@ public class Board extends JFrame {
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         pane.setBorder(border);
 
+        // right items
         rightPanel = new JPanel();
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
 //        rightPanel.setSize(400, 100);
         rightPanel.setBackground(Color.WHITE);
         score = new JLabel();
@@ -56,12 +64,22 @@ public class Board extends JFrame {
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         score.setBorder(scoreBorder);
         score.setText("init");
-
         rightPanel.add(score);
+
+        nextPanel = new JTextPane();
+        nextPanel.setEditable(false);
+        nextPanel.setBackground(Color.BLACK);
+        CompoundBorder nextBorder = BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(Color.GRAY, 10),
+                BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
+        nextPanel.setBorder(nextBorder);
+        rightPanel.add(nextPanel);
+
         CompoundBorder rightBorder = BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY, 10),
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         rightPanel.setBorder(rightBorder);
+
 
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
@@ -69,10 +87,18 @@ public class Board extends JFrame {
         //Document default style.
         styleSet = new SimpleAttributeSet();
         StyleConstants.setFontSize(styleSet, 18);
-        StyleConstants.setFontFamily(styleSet, "Courier");
-        StyleConstants.setBold(styleSet, true);
+//        System.out.printf("%f %f %f %f %f \n", StyleConstants.getFirstLineIndent(styleSet), StyleConstants.getLeftIndent(styleSet), StyleConstants.getRightIndent(styleSet), StyleConstants.getLineSpacing(styleSet), StyleConstants.getTabSet(styleSet));
+//        StyleConstants.setFontFamily(styleSet, "Courier");
+//        StyleConstants.setBold(styleSet, true);
         StyleConstants.setForeground(styleSet, Color.WHITE);
-        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
+//        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
+
+        nextStyleSet = new SimpleAttributeSet();
+        StyleConstants.setFontSize(nextStyleSet, 10);
+        StyleConstants.setFontFamily(nextStyleSet, "Courier");
+        StyleConstants.setBold(nextStyleSet, true);
+        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
+        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
 
         //Set timer for block drops.
         timer = new Timer(initInterval, new ActionListener() {
@@ -95,6 +121,8 @@ public class Board extends JFrame {
 
         //Create the first block and draw.
         focus = getRandomBlock();
+        next = getRandomBlock();
+        placeNextBlock();
         placeBlock();
         drawBoard();
         timer.start();
@@ -226,7 +254,9 @@ public class Board extends JFrame {
     private void generateNewBlock() {
         placeBlock();
         eraseLines();
-        focus = getRandomBlock();
+        focus = next;
+        next = getRandomBlock();
+        placeNextBlock();
         x = 3;
         y = 0;
 
@@ -246,6 +276,24 @@ public class Board extends JFrame {
             }
         } else {
             generateNewBlock();
+        }
+        placeBlock();
+    }
+
+    protected void moveFall() {
+        eraseCurr();
+        for (int i=y;i<HEIGHT;i++){
+            if (!isBottomTouch()) {
+                y++;
+                if (isOverlap()) {
+                    y--;
+                    generateNewBlock();
+                    break;
+                }
+            } else {
+                generateNewBlock();
+                break;
+            }
         }
         placeBlock();
     }
@@ -272,9 +320,9 @@ public class Board extends JFrame {
             sb.append(BORDER_CHAR);
             for(int j=0; j < board[i].length; j++) {
                 if(board[i][j] != null) {
-                    sb.append("O");
+                    sb.append(BLOCK_CHAR);
                 } else {
-                    sb.append(" ");
+                    sb.append(NON_BLOCK_CHAR);
                 }
             }
             sb.append(BORDER_CHAR);
@@ -287,25 +335,28 @@ public class Board extends JFrame {
         pane.setStyledDocument(doc);
     }
 
-    public void drawBoard1() {
-        StyledDocument doc = pane.getStyledDocument();
-        Style root = StyleContext.getDefaultStyleContext().getStyle(StyleContext.DEFAULT_STYLE);
-        Style blue = doc.addStyle("blue", root);
-        Style s = doc.addStyle("blue", blue);
-        StyleConstants.setForeground(s, Color.blue);
-        Style red = doc.addStyle("red", root);
-        doc.addStyle("red", red);
-        StyleConstants.setForeground(s, Color.red);
 
-        for(int t=0; t<WIDTH+2; t++) {
-            System.out.println(t);
-            try {
-                doc.insertString(doc.getLength(), BORDER_CHAR, doc.getStyle("red"));
-            } catch (Exception e) {
-                System.out.println("insertString" + e);
+    // draw next block
+    public void placeNextBlock() {
+        StringBuffer sb = new StringBuffer();
+        SimpleAttributeSet styles = new SimpleAttributeSet();
+        StyleConstants.setForeground(styles, next.getColor());
+
+        int nW = next.width(); int nH = next.height();
+        for (int i=0;i<4;i++){
+            for (int j=0;j<4;j++){
+                if (i < nH && j < nW && next.getShape(j, i) != null) {
+                    sb.append(BLOCK_CHAR);
+                }else {
+                    sb.append(NON_BLOCK_CHAR);
+                }
             }
+            sb.append("\n");
         }
-        pane.setStyledDocument(doc);
+        nextPanel.setText(sb.toString());
+        StyledDocument doc = nextPanel.getStyledDocument();
+        doc.setParagraphAttributes(0, doc.getLength(), styles, true);
+        nextPanel.setStyledDocument(doc);
     }
 
     public void reset() {
@@ -342,6 +393,10 @@ public class Board extends JFrame {
                 case KeyEvent.VK_UP:
                     eraseCurr();
                     focus.rotate();
+                    drawBoard();
+                    break;
+                case KeyEvent.VK_SPACE:
+                    moveFall();
                     drawBoard();
                     break;
             }
