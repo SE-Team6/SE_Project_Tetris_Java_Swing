@@ -26,8 +26,8 @@ public class NormalBoard extends Board {
         // right items
         rightPanel = new JPanel();
 //        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setLayout(new GridLayout(7, 1));
-        rightPanel.setLayout(new GridLayout(7, 1));
+        rightPanel.setLayout(new GridLayout(4, 1));
+        rightPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setBackground(Color.GRAY);
 
         score = new Score();

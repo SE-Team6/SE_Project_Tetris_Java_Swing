@@ -1,11 +1,13 @@
 package seoultech.se.tetris.blocks;
 
+import seoultech.se.tetris.config.ConfigBlock;
+
 import java.awt.*;
 
 public class ZBlock extends ParentBlock {
 
     public ZBlock() {
-        color = Color.RED;
+        color = Color.decode(ConfigBlock.BlOCK_COLOR[colorType][0]);
 
         shapes = new Block[][][]{
                 {

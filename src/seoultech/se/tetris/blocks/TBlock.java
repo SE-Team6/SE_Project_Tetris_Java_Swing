@@ -1,11 +1,13 @@
 package seoultech.se.tetris.blocks;
 
+import seoultech.se.tetris.config.ConfigBlock;
+
 import java.awt.*;
 
 public class TBlock extends ParentBlock{
 
     public TBlock() {
-        color = Color.MAGENTA;
+        color = Color.decode(ConfigBlock.BlOCK_COLOR[colorType][1]);
 
         shapes = new Block[][][]{
                 {

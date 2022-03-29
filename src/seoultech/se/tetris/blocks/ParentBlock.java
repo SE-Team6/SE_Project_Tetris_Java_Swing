@@ -13,6 +13,8 @@ public abstract class ParentBlock {
     protected int type = 0;
     protected int blockType = BlockType.NONE;
     protected ConfigBlock config = ConfigBlock.getInstance();
+    protected static int colorType = 1;
+
     public ParentBlock() {
         color = Color.GRAY;
     }
