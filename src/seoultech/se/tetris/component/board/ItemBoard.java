@@ -90,6 +90,7 @@ public class ItemBoard extends Board {
         addKeyListener(playerKeyListener);
         playerMouseListener = new PlayerMouseListener();
         addMouseListener(playerMouseListener);
+        pane.addMouseListener(playerMouseListener);
         requestFocus();
         setFocusable(true);
 
@@ -114,33 +115,19 @@ public class ItemBoard extends Board {
 
     }
 
-
-
-
-
-    @Override
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(14);
-        System.out.println(block);
-        switch(block) {
-            case 0:
-                return new RandomIBlock();
-            case 1:
-                return new RandomJBlock();
-            case 2:
-                return new RandomLBlock();
-            case 3:
-                return new RandomZBlock();
-            case 4:
-                return new RandomSBlock();
-            case 5:
-                return new RandomTBlock();
-            case 6:
-                return new RandomOBlock();
-            default:
-                return new PendulumBlock();
-        }
+        return switch (block) {
+            case 0 -> new RandomIBlock();
+            case 1 -> new RandomJBlock();
+            case 2 -> new RandomLBlock();
+            case 3 -> new RandomZBlock();
+            case 4 -> new RandomSBlock();
+            case 5 -> new RandomTBlock();
+            case 6 -> new RandomOBlock();
+            default -> new PendulumBlock();
+        };
     }
 
     @Override
@@ -170,8 +157,6 @@ public class ItemBoard extends Board {
         }
     }
 
-
-
     // generate new block
     @Override
     protected void generateNewBlock() {
@@ -186,74 +171,9 @@ public class ItemBoard extends Board {
         // GAME OVER
         if (isOverlap()) {
 //            score.setText("GAMEOVER");
-        }
-    }
-
-    public class PlayerKeyListener implements KeyListener {
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            switch(e.getKeyCode()) {
-                case KeyEvent.VK_DOWN:
-                    moveDown();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    moveRight();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    moveLeft();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_UP:
-                    moveRotate();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_SPACE:
-                    moveFall();
-                    drawBoard();
-                    break;
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
+            reset();
         }
     }
 
 
-    // @TODO
-    // 일단 불편해서 추가함
-    // Mouse 객체도 관리해야할 듯
-    public class PlayerMouseListener implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            focusFrame();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
-    }
 }

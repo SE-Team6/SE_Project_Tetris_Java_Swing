@@ -83,6 +83,7 @@ public class NormalBoard extends Board {
         addKeyListener(playerKeyListener);
         playerMouseListener = new PlayerMouseListener();
         addMouseListener(playerMouseListener);
+        pane.addMouseListener(playerMouseListener);
         requestFocus();
         setFocusable(true);
 
@@ -106,74 +107,5 @@ public class NormalBoard extends Board {
         next = getRandomBlock();
         drawNextBlock();
 
-    }
-
-
-    public class PlayerKeyListener implements KeyListener {
-        @Override
-        public void keyTyped(KeyEvent e) {
-
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            switch(e.getKeyCode()) {
-                case KeyEvent.VK_DOWN:
-                    moveDown();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_RIGHT:
-                    moveRight();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_LEFT:
-                    moveLeft();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_UP:
-                    moveRotate();
-                    drawBoard();
-                    break;
-                case KeyEvent.VK_SPACE:
-                    moveFall();
-                    drawBoard();
-                    break;
-            }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
-        }
-    }
-
-
-    // @TODO
-    // 일단 불편해서 추가함
-    // Mouse 객체도 관리해야할 듯
-    public class PlayerMouseListener implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            focusFrame();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
     }
 }

@@ -1,6 +1,7 @@
 package seoultech.se.tetris.blocks;
 
 import seoultech.se.tetris.config.ConfigBlock;
+import seoultech.se.tetris.config.block.BlockType;
 
 import java.awt.*;
 
@@ -10,15 +11,12 @@ public abstract class ParentBlock {
     protected Color color;
     // rotate type
     protected int type = 0;
-    protected boolean isItemType = false;
+    protected int blockType = BlockType.NONE;
     protected ConfigBlock config = ConfigBlock.getInstance();
     public ParentBlock() {
         color = Color.GRAY;
     }
 
-    public Color getParentColor() {
-        return color;
-    }
 
     public void rotate() {
         type = (type + 1) % 4;
@@ -46,7 +44,7 @@ public abstract class ParentBlock {
         return shape[y][x];
     }
 
-    public boolean isItem() {
-        return isItemType;
+    public int getBlockType() {
+        return blockType;
     }
 }

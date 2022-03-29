@@ -1,8 +1,6 @@
 package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.*;
-import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
-import seoultech.se.tetris.blocks.item.random.*;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.config.ConfigBlock;
 
@@ -11,10 +9,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.Random;
 
 
@@ -166,6 +161,7 @@ public abstract class Board extends JFrame {
         // GAME OVER
         if (isOverlap()) {
 //            score.setText("GAMEOVER");
+            reset();
         }
     }
 
@@ -289,52 +285,95 @@ public abstract class Board extends JFrame {
 
     // draw next block
     protected void drawNextBlock() {
-        StringBuffer sb = new StringBuffer();
-        SimpleAttributeSet styles = new SimpleAttributeSet();
-        StyleConstants.setForeground(styles, next.getColor());
+        StyledDocument doc = nextPanel.getStyledDocument();
+        nextPanel.setText("");
 
         int nW = next.width();
         int nH = next.height();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (i < nH && j < nW && next.getShape(j, i) != null) {
-                    sb.append(config.BLOCK_CHAR);
-                } else {
-                    sb.append(config.NON_BLOCK_CHAR);
+        try {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (i < nH && j < nW && next.getShape(j, i) != null) {
+                        StyleConstants.setForeground(blockStyle, next.getShape(j, i).getColor());
+                        doc.insertString(doc.getLength(), next.getShape(j, i).getCharacter(), blockStyle);
+                    } else {
+                        doc.insertString(doc.getLength(), config.NON_BLOCK_CHAR, defaultStyle);
+                    }
                 }
+                doc.insertString(doc.getLength(), "\n", defaultStyle);
             }
-            sb.append("\n");
-        }
-        nextPanel.setText(sb.toString());
-        StyledDocument doc = nextPanel.getStyledDocument();
-        doc.setParagraphAttributes(0, doc.getLength(), styles, true);
-        nextPanel.setStyledDocument(doc);
-    }
-
-    protected ParentBlock getRandomItemBlock() {
-        Random random = new Random(System.currentTimeMillis());
-        int block = random.nextInt(14);
-        switch (block) {
-            case 0:
-                return new RandomIBlock();
-            case 1:
-                return new RandomJBlock();
-            case 2:
-                return new RandomLBlock();
-            case 3:
-                return new RandomZBlock();
-            case 4:
-                return new RandomSBlock();
-            case 5:
-                return new RandomTBlock();
-            case 6:
-                return new RandomOBlock();
-            default:
-                return new PendulumBlock();
-        }
+        } catch(Exception ignored) {}
     }
 
     protected void reset() {
         this.board = new Block[20][10];
+    }
+
+    public class PlayerKeyListener implements KeyListener {
+        @Override
+        public void keyTyped(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            switch(e.getKeyCode()) {
+                case KeyEvent.VK_DOWN:
+                    moveDown();
+                    drawBoard();
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    moveRight();
+                    drawBoard();
+                    break;
+                case KeyEvent.VK_LEFT:
+                    moveLeft();
+                    drawBoard();
+                    break;
+                case KeyEvent.VK_UP:
+                    moveRotate();
+                    drawBoard();
+                    break;
+                case KeyEvent.VK_SPACE:
+                    moveFall();
+                    drawBoard();
+                    break;
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
+    }
+
+
+    // @TODO
+    // 일단 불편해서 추가함
+    // Mouse 객체도 관리해야할 듯
+    public class PlayerMouseListener implements MouseListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            focusFrame();
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+        }
     }
 }

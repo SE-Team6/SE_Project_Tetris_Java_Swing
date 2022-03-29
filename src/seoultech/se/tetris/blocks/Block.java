@@ -6,9 +6,10 @@ import java.awt.*;
 public class Block {
     private Color color;
     private String character;
+    private int blockType;
 
-    public Block(Color color, String character) {
-        this.color = color;this.character = character;
+    public Block(Color color, String character, int blockType) {
+        this.color = color;this.character = character;this.blockType = blockType;
     }
 
     public Color getColor() {
@@ -16,4 +17,6 @@ public class Block {
     }
 
     public String getCharacter() {return this.character;}
+
+    public int getBlockType() {return this.blockType;}
 }
