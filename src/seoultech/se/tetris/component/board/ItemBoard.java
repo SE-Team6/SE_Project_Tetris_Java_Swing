@@ -11,7 +11,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.awt.event.*;
 import java.util.Random;
 
 public class ItemBoard extends Board {
@@ -59,29 +58,25 @@ public class ItemBoard extends Board {
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
 
-        //Document default style.
-        styleSet = new SimpleAttributeSet();
-        StyleConstants.setFontSize(styleSet, 18);
-        StyleConstants.setFontFamily(styleSet, "Courier");
-        StyleConstants.setBold(styleSet, true);
-        StyleConstants.setForeground(styleSet, Color.WHITE);
-        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
-
-        nextStyleSet = new SimpleAttributeSet();
-
-        StyleConstants.setFontSize(nextStyleSet, 10);
-        StyleConstants.setFontFamily(nextStyleSet, "Courier");
-        StyleConstants.setBold(nextStyleSet, true);
-        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
-        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
+//        //Document default style.
+//        styleSet = new SimpleAttributeSet();
+//        StyleConstants.setFontSize(styleSet, 18);
+//        StyleConstants.setFontFamily(styleSet, "Courier");
+//        StyleConstants.setBold(styleSet, true);
+//        StyleConstants.setForeground(styleSet, Color.WHITE);
+//        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
+//
+//        nextStyleSet = new SimpleAttributeSet();
+//
+//        StyleConstants.setFontFamily(nextStyleSet, "Courier");
+//        StyleConstants.setBold(nextStyleSet, true);
+//        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
+//        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
 
         //Set timer for block drops.
-        timer = new Timer(Math.round(initInterval), new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveDown();
-                drawBoard();
-            }
+        timer = new Timer(Math.round(initInterval), e -> {
+            moveDown();
+            drawBoard();
         });
 
         //Initialize board for the game.
@@ -94,9 +89,16 @@ public class ItemBoard extends Board {
         requestFocus();
         setFocusable(true);
 
+        // line height
+        SimpleAttributeSet tmp = new SimpleAttributeSet();
+        StyleConstants.setLineSpacing(tmp, -0.5F);
+        StyleConstants.setAlignment(tmp, StyleConstants.ALIGN_CENTER);
+        nextPanel.setParagraphAttributes(tmp, false);
+        pane.setParagraphAttributes(tmp, false);
+
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
-        StyleConstants.setFontSize(parentStyle, 18);
+        StyleConstants.setFontSize(parentStyle, 24);
         StyleConstants.setFontFamily(parentStyle, "Courier");
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
@@ -170,7 +172,6 @@ public class ItemBoard extends Board {
 
         // GAME OVER
         if (isOverlap()) {
-//            score.setText("GAMEOVER");
             reset();
         }
     }

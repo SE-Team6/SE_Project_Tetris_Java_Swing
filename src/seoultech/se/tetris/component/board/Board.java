@@ -5,11 +5,13 @@ import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
-import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Random;
 
 
@@ -30,8 +32,8 @@ public abstract class Board extends JFrame {
 
     protected KeyListener playerKeyListener;
     protected MouseListener playerMouseListener;
-    protected SimpleAttributeSet styleSet;
-    protected SimpleAttributeSet nextStyleSet;
+//    protected SimpleAttributeSet styleSet;
+//    protected SimpleAttributeSet nextStyleSet;
     protected Style parentStyle;
     protected Style defaultStyle;
     protected Style blockStyle;
@@ -46,7 +48,6 @@ public abstract class Board extends JFrame {
     protected int y = 0;
 
     protected Block[][] board;
-
 
     public Board() {
         super("SW TEAM 6");
@@ -67,30 +68,10 @@ public abstract class Board extends JFrame {
             case 3 -> new ZBlock();
             case 4 -> new SBlock();
             case 5 -> new TBlock();
-            case 6 -> new OBlock();
-            default -> new LBlock();
+            default ->  new OBlock();
         };
     }
 
-    public void printBoard() {
-        System.out.print("    ");
-        for (int i = 0; i < Board.WIDTH; i++) {
-            System.out.printf("%2d", i);
-        }
-        System.out.println();
-
-        for (int i = 0; i < Board.HEIGHT; i++) {
-            System.out.printf("%d  ", i);
-            for (int j = 0; j < Board.WIDTH; j++) {
-                System.out.print(board[i][j] != null ? " 0" : "  ");
-            }
-            System.out.println();
-        }
-    }
-
-    // 만약 블럭이 내려가면 똑같이 유지가 될까 아마 안될 것 같음.
-    // draw에서 color를 주면 안되나?
-    // 아마 여기서 color를 주는 것 같아요
     public void placeBlock() {
         for (int j = 0; j < focus.height(); j++) {
             for (int i = 0; i < focus.width(); i++) {
@@ -114,12 +95,9 @@ public abstract class Board extends JFrame {
     protected void timerSet(int combo) {
         timer.stop();
         initInterval *= rateInterval;
-        timer = new Timer(Math.round(initInterval), new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                moveDown();
-                drawBoard();
-            }
+        timer = new Timer(Math.round(initInterval), e -> {
+            moveDown();
+            drawBoard();
         });
         timer.start();
         score.addScore(combo);
@@ -140,11 +118,8 @@ public abstract class Board extends JFrame {
         return false;
     }
 
-    protected boolean isBottomTouch() {
-        if (y < Board.HEIGHT - focus.height()) {
-            return false;
-        }
-        return true;
+    protected boolean isBottomTouched() {
+        return y >= Board.HEIGHT - focus.height();
     }
 
 
@@ -160,8 +135,8 @@ public abstract class Board extends JFrame {
 
         // GAME OVER
         if (isOverlap()) {
-//            score.setText("GAMEOVER");
             reset();
+            score.resetScore();
         }
     }
 
@@ -192,7 +167,7 @@ public abstract class Board extends JFrame {
 
     protected void moveDown() {
         eraseCurr();
-        if (!isBottomTouch()) {
+        if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
                 y--;
@@ -207,7 +182,7 @@ public abstract class Board extends JFrame {
     protected void moveFall() {
         eraseCurr();
         for (int i = y; i < Board.HEIGHT; i++) {
-            if (!isBottomTouch()) {
+            if (!isBottomTouched()) {
                 y++;
                 if (isOverlap()) {
                     y--;
@@ -257,27 +232,27 @@ public abstract class Board extends JFrame {
         pane.setText("");
         try {
             for (int t = 0; t < Board.WIDTH + 2; t++) {
-                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
+                doc.insertString(doc.getLength(), ConfigBlock.BORDER_CHAR, defaultStyle);
             }
             doc.insertString(doc.getLength(), "\n", defaultStyle);
 
-            for (int i = 0; i < board.length; i++) {
-                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
+            for (Block[] blocks : board) {
+                doc.insertString(doc.getLength(), ConfigBlock.BORDER_CHAR, defaultStyle);
 
-                for (int j = 0; j < board[i].length; j++) {
-                    if (board[i][j] != null) {
-                        StyleConstants.setForeground(blockStyle, board[i][j].getColor());
-                        doc.insertString(doc.getLength(), board[i][j].getCharacter(), blockStyle);
+                for (Block block : blocks) {
+                    if (block != null) {
+                        StyleConstants.setForeground(blockStyle, block.getColor());
+                        doc.insertString(doc.getLength(), block.getCharacter(), blockStyle);
                     } else {
-                        doc.insertString(doc.getLength(), config.NON_BLOCK_CHAR, defaultStyle);
+                        doc.insertString(doc.getLength(), ConfigBlock.NON_BLOCK_CHAR, defaultStyle);
                     }
                 }
-                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
+                doc.insertString(doc.getLength(), ConfigBlock.BORDER_CHAR, defaultStyle);
                 doc.insertString(doc.getLength(), "\n", defaultStyle);
 
             }
             for (int t = 0; t < Board.WIDTH + 2; t++) {
-                doc.insertString(doc.getLength(), config.BORDER_CHAR, defaultStyle);
+                doc.insertString(doc.getLength(), ConfigBlock.BORDER_CHAR, defaultStyle);
             }
         } catch (Exception ignored) {
         }
@@ -297,7 +272,7 @@ public abstract class Board extends JFrame {
                         StyleConstants.setForeground(blockStyle, next.getShape(j, i).getColor());
                         doc.insertString(doc.getLength(), next.getShape(j, i).getCharacter(), blockStyle);
                     } else {
-                        doc.insertString(doc.getLength(), config.NON_BLOCK_CHAR, defaultStyle);
+                        doc.insertString(doc.getLength(), ConfigBlock.NON_BLOCK_CHAR, defaultStyle);
                     }
                 }
                 doc.insertString(doc.getLength(), "\n", defaultStyle);
@@ -317,27 +292,27 @@ public abstract class Board extends JFrame {
 
         @Override
         public void keyPressed(KeyEvent e) {
-            switch(e.getKeyCode()) {
-                case KeyEvent.VK_DOWN:
+            switch (e.getKeyCode()) {
+                case KeyEvent.VK_DOWN -> {
                     moveDown();
                     drawBoard();
-                    break;
-                case KeyEvent.VK_RIGHT:
+                }
+                case KeyEvent.VK_RIGHT -> {
                     moveRight();
                     drawBoard();
-                    break;
-                case KeyEvent.VK_LEFT:
+                }
+                case KeyEvent.VK_LEFT -> {
                     moveLeft();
                     drawBoard();
-                    break;
-                case KeyEvent.VK_UP:
+                }
+                case KeyEvent.VK_UP -> {
                     moveRotate();
                     drawBoard();
-                    break;
-                case KeyEvent.VK_SPACE:
+                }
+                case KeyEvent.VK_SPACE -> {
                     moveFall();
                     drawBoard();
-                    break;
+                }
             }
         }
 

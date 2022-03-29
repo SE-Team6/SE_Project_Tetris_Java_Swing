@@ -35,4 +35,8 @@ public class Score extends JLabel {
     private void updateScore() {
         this.setText(Integer.toString(this.score));
     }
+
+    public void resetScore() {
+        this.score = 0;
+    }
 }
