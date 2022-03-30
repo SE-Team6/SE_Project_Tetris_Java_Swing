@@ -23,46 +23,30 @@ public class PendulumBlock extends ParentBlock {
                 },
                 {
                         {
-                                new Block(color, config.BLOCK_CHAR, blockType), null,
+                                null, new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), null,
                         },
                         {
                                 new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
                                 new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
-                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
-                                new Block(color, config.BLOCK_CHAR, blockType), null,
-                        },
+                        }
                 },
                 {
-                        {
-                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
                         {
                                 null, new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), null,
                         },
+                        {
+                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
+                        }
                 },
                 {
                         {
-                                null, new Block(color, config.BLOCK_CHAR, blockType)
+                                null, new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), null,
                         },
                         {
                                 new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
                                 new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
-                                new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),
-                        },
-                        {
-                                null, new Block(color, config.BLOCK_CHAR, blockType)
-                        },
+                        }
                 },
         };
         shape = shapes[type];
