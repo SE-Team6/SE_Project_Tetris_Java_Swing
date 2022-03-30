@@ -7,16 +7,21 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.HashMap;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class BasicSet extends JFrame{
-    public static int Width=400, Height=500;
-    public static int menuBarWidth =400, menuBarHeight =20;
+
+    public static int buttonSizeX = 145, buttonSizeY=45;
+    public static int buttonX, buttonY =130;
+    public static int Width, Height;
+    public static int menuBarHeight =20;
     public static int menuBarExitBtnWidth =380, menuBarExitBtnHeight =0;
-    public static int gameTitleX =50, gameTitleY =30;
+    public static int gameTitleX, gameTitleY =30;
 
     private Image screenImage;
     private Graphics screenGraphics;
-
     // 기본 이미지
     private Image background = new ImageIcon(Tetris.class.getResource("../image/backGround/800x1000_BG.jpg")).getImage();
     public JLabel gameTitle = new JLabel(new ImageIcon(Tetris.class.getResource("../image/Label/title/title.png")),SwingConstants.CENTER);
@@ -30,7 +35,12 @@ public class BasicSet extends JFrame{
 
     private int mouseX, mouseY;
 
+
+
     public BasicSet(){
+        callSize();
+        buttonX =(Width-buttonSizeX)/2;
+        gameTitleX=(Width-300)/2;
         setUndecorated(true);
         setVisible(true); // 우리가 만든 게임창이 정상적으로 출력되도록.
         setTitle("Tetris Game");
@@ -43,11 +53,13 @@ public class BasicSet extends JFrame{
         setFocusable(true);
 
 
+
+
         gameTitle.setBounds(gameTitleX, gameTitleY,300,50);
         add(gameTitle);
 
         //상단메뉴바 종료 설정
-        menuBarExitBtn.setBounds(menuBarExitBtnWidth, menuBarExitBtnHeight,20,20);
+        menuBarExitBtn.setBounds(Width-20, menuBarExitBtnHeight,20,20);
         menuBarExitBtn.setBorderPainted(false);
         menuBarExitBtn.setContentAreaFilled(false);
         menuBarExitBtn.setFocusPainted(false);
@@ -71,7 +83,7 @@ public class BasicSet extends JFrame{
         add(menuBarExitBtn);
 
         //상단메뉴바 설정
-        menuBar.setBounds(0, 0, menuBarWidth, menuBarHeight);
+        menuBar.setBounds(0, 0, Width, menuBarHeight);
         menuBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -102,5 +114,11 @@ public class BasicSet extends JFrame{
         g.drawImage(background,0,0,null);
         paintComponents(g);
         this.repaint();
+    }
+    public void callSize(){
+        HashMap<String, Integer> map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
     }
 }

@@ -13,29 +13,36 @@ public class Version {
         System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
-        menuBarWidth=400;
-        menuBarExitBtnWidth=380;
-        gameTitleX =50;
-        buttonX =125;
+        menuBarExitBtnWidth=Width-20;
+        buttonX =(Width-buttonSizeX)/2;
+        gameTitleX=(Width-300)/2;
     }
     public void secondScreenSizeSet(){
         HashMap<String, Integer>map = loaderResolution();
         System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
-        menuBarWidth=600;
-        menuBarExitBtnWidth=580;
-        gameTitleX =130;
-        buttonX =225;
+        menuBarExitBtnWidth=Width-20;
+        buttonX =(Width-buttonSizeX)/2;
+        gameTitleX=(Width-300)/2;
     }
     public void thirdScreenSizeSet(){
         HashMap<String, Integer>map = loaderResolution();
         System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
-        menuBarWidth=800;
-        menuBarExitBtnWidth=780;
-        gameTitleX =230;
-        buttonX =300;
+        menuBarExitBtnWidth=Width-20;
+        buttonX =(Width-buttonSizeX)/2;
+        gameTitleX=(Width-300)/2;
     }
+    public void firstKeySetScreen(){
+
+    }
+    public void secondKeySetScreen(){
+
+    }
+    public void thirdKeySetScreen(){
+
+    }
+
 }

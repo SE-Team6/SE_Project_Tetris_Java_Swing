@@ -13,5 +13,6 @@ public class Tetris {
 //
 //		main.setVisible(true);
 		new	StartMenu();
+//		new GameOver();
 	}
 }

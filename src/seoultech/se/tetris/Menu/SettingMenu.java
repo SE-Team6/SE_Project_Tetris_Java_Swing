@@ -5,9 +5,10 @@ import seoultech.se.tetris.main.Tetris;
 import javax.swing.*;
 import java.awt.event.*;
 
+import static seoultech.se.tetris.Menu.BasicSet.*;
 import static seoultech.se.tetris.Menu.StartMenu.*;
 
-public class Setting_Menu extends JFrame {
+public class SettingMenu extends JFrame {
 
     //설정 화면 이미지
     private ImageIcon screenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/해상도_B.jpg"));
@@ -30,7 +31,7 @@ public class Setting_Menu extends JFrame {
 
     BasicSet bs = new BasicSet();
     BackMenu bm = new BackMenu();
-    public Setting_Menu (){
+    public SettingMenu(){
         positionPoint =1;
         bs.setVisible(true);
         bs.add(bm.backMenuBtn);
@@ -59,11 +60,11 @@ public class Setting_Menu extends JFrame {
                     switch (positionPoint){
                         case 1:
                             bs.setVisible(false);
-                            new Setting_Menu_Size();
+                            new SettingMenuSize();
                             break;
                         case 2:
                             bs.setVisible(false);
-                            new Setting_Menu_Keyset();
+                            new SettingMenuKeySet();
                             break;
                         case 3:
                             setVisible(false);

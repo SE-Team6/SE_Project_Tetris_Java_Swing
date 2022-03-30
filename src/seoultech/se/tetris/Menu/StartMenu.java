@@ -1,17 +1,16 @@
 package seoultech.se.tetris.Menu;
 
 import seoultech.se.tetris.component.Board;
+import seoultech.se.tetris.main.GameOver;
 import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import java.awt.event.*;
 
+import static seoultech.se.tetris.Menu.BasicSet.*;
+
 
 public class StartMenu extends JFrame {
-
-    public static int buttonSizeX = 145, buttonSizeY=45;
-    public static int buttonX =125, buttonY =130;
-    public static char versionChar =1;
 
     // 시작 메뉴 버튼 이미지
     private ImageIcon gameStartBtnImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Start_Basic.jpg"));
@@ -31,13 +30,10 @@ public class StartMenu extends JFrame {
     private JButton exitBtn = new JButton(exitBtnImage);
 
     public  static  int positionPoint = 1;
-    Version ver = new Version();
     BasicSet bs = new BasicSet();
 
     //시작 메뉴
     public StartMenu(){
-        callSet();
-        bs.setVisible(true);
         bs.addKeyListener(new menuListener());
         start_Menu_Screen_btn();
     }
@@ -59,15 +55,19 @@ public class StartMenu extends JFrame {
             else if(key == KeyEvent.VK_ENTER){
                 switch (positionPoint) {
                     case 1: // 게임 시작
-                        new Board();
+                        Board main = new Board();
+                        main.setSize(Width, Height);
+                        main.setLocation(0, 0);
+                        main.setVisible(true);
                         bs.setVisible(false);
                         break;
                     case 2: // 게임 설정
                         bs.setVisible(false);
-                        new Setting_Menu();
+                        new SettingMenu();
                         break;
                     case 3: // 스코어 보드
-                        hideButton();
+                        bs.setVisible(false);
+                        new GameOver();
                         break;
                     case 4: // 게임종료
                         System.exit(0);
@@ -124,21 +124,4 @@ public class StartMenu extends JFrame {
         exitBtn.setFocusPainted(false);
         bs.add(exitBtn);
     }
-
-    public void callSet(){
-        switch (versionChar){
-            case '1':
-                ver.firstScreenSizeSet();
-                break;
-            case '2':
-                ver.secondScreenSizeSet();
-            case '3':
-                ver.thirdScreenSizeSet();
-        }
-    }
-
-
-
-
-
 }

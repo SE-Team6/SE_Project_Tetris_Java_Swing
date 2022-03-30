@@ -10,8 +10,7 @@ import static seoultech.se.tetris.Menu.StartMenu.*;
 import static seoultech.se.tetris.component.JSONWriter.*;
 
 
-public class Setting_Menu_Size extends JFrame {
-
+public class SettingMenuSize extends JFrame {
 
     //해상도 이미지
     private  ImageIcon firstScreenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/400x500.jpg"));
@@ -29,7 +28,7 @@ public class Setting_Menu_Size extends JFrame {
     Version ver = new Version();
     BasicSet bs = new BasicSet();
     BackMenu bm = new BackMenu();
-    public Setting_Menu_Size(){
+    public SettingMenuSize(){
         positionPoint =1;
         bs.setVisible(true);
         bs.add(bm.backMenuBtn);
@@ -93,7 +92,7 @@ public class Setting_Menu_Size extends JFrame {
                     break;
                 case KeyEvent.VK_BACK_SPACE:
                     bs.setVisible(false);
-                    new Setting_Menu();
+                    new SettingMenu();
                     break;
             }
         }
@@ -111,8 +110,8 @@ public class Setting_Menu_Size extends JFrame {
         bs.setVisible(false);
         bs.setSize(Width,Height);
         bs.setVisible(true);
-        bs.menuBar.setBounds(0, 0, menuBarWidth, menuBarHeight);
-        bs.menuBarExitBtn.setBounds(menuBarExitBtnWidth,menuBarExitBtnHeight,20,20);
+        bs.menuBar.setBounds(0, 0, Width, menuBarHeight);
+        bs.menuBarExitBtn.setBounds(Width-20,menuBarExitBtnHeight,20,20);
         bs.gameTitle.setBounds(gameTitleX, gameTitleY,300,50);
         firstScreenSizeBtn.setBounds(buttonX,buttonY,buttonSizeX,buttonSizeY);
         secondScreenSizeBtn.setBounds(buttonX,buttonY+70,buttonSizeX,buttonSizeY);
@@ -123,7 +122,7 @@ public class Setting_Menu_Size extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new Setting_Menu();
+                new SettingMenu();
             }
         });
     }

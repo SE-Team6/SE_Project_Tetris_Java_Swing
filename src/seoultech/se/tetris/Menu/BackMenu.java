@@ -17,9 +17,7 @@ public class BackMenu extends JFrame{
         backMenuBtn.setBorderPainted(false);
         backMenuBtn.setContentAreaFilled(false);
         backMenuBtn.setFocusPainted(false);
-
         backMenuBtn.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mouseEntered(MouseEvent e) {
                 backMenuBtn.setIcon(backMenuEImage);
