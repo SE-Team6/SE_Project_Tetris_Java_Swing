@@ -175,6 +175,25 @@ public class ItemBoard extends Board {
             reset();
         }
     }
+    protected void itemEraseLines() {
+        for (int i = Board.HEIGHT - 1; i >= 0; i--) {
+            int  itemCount = 0;
+            for (int j = 0; j < Board.WIDTH; j++) {
 
+//                if (Arrays.asList(board[i][j]).contains(RANDOM_CHAR) ) {
+//                    itemCount++;
+//                }
+            }
+            if (itemCount==1) {
+                for (int j = 0; j < Board.WIDTH; j++) {
+                    for (int k = i; k >= 1; k--) {
+                        board[k][j] = board[k - 1][j];
+                    }
+                    board[0][j] = null;
+                }
+                i++;
+            }
+        }
+    }
 
 }
