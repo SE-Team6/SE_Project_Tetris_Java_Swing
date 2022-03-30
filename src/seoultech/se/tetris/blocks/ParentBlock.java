@@ -1,6 +1,7 @@
 package seoultech.se.tetris.blocks;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public abstract class ParentBlock {
     protected Block[][] shape;
@@ -16,12 +17,16 @@ public abstract class ParentBlock {
 //                {1, 1},
 //        };
     }
+<<<<<<< Updated upstream
 
     public Color getParentColor() {
         return color;
     }
 
     // cost가 비쌈 (4 x 4)
+=======
+    public static int itemNum = 0;
+>>>>>>> Stashed changes
     public void rotate() {
 //        // rotate block
 //        int height = this.height();
