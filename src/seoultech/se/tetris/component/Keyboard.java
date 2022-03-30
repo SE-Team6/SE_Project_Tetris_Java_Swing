@@ -1,5 +1,7 @@
 package seoultech.se.tetris.component;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -9,7 +11,7 @@ import java.util.HashMap;
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.component.JSONLoader;
 
-public class Keyboard {
+public class Keyboard implements KeyListener {
     public static int LEFT, RIGHT, UP, DOWN, ESC, SPACE;
 
     private Keyboard(){}
@@ -29,5 +31,20 @@ public class Keyboard {
         DOWN = Integer.parseInt(obj.get("DOWN").toString());
         ESC = Integer.parseInt(obj.get("ESC").toString());
         SPACE = Integer.parseInt(obj.get("SPACE").toString());
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 }
