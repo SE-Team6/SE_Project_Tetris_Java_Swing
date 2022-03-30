@@ -1,11 +1,10 @@
-package seoultech.se.tetris.Menu;
+package seoultech.se.tetris.menu;
 
 import java.util.HashMap;
 
 import static seoultech.se.tetris.component.JSONLoader.*;
 
-import static seoultech.se.tetris.Menu.StartMenu.*;
-import static seoultech.se.tetris.Menu.BasicSet.*;
+import static seoultech.se.tetris.menu.BasicSet.*;
 
 public class Version {
     public void firstScreenSizeSet(){

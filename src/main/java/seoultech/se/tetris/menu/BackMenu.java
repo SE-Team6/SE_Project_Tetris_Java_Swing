@@ -1,6 +1,4 @@
-package seoultech.se.tetris.Menu;
-
-import seoultech.se.tetris.main.Tetris;
+package seoultech.se.tetris.menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,8 +7,8 @@ import java.awt.event.MouseEvent;
 
 
 public class BackMenu extends JFrame{
-    private ImageIcon backMenuImage = new ImageIcon(Tetris.class.getResource("../image/Button/static_btn/back_B.png"));
-    private ImageIcon backMenuEImage = new ImageIcon(Tetris.class.getResource("../image/Button/static_btn/back_E.png"));
+    private ImageIcon backMenuImage = new ImageIcon("src/main/resources/image/Button/static_btn/back_B.png");
+    private ImageIcon backMenuEImage = new ImageIcon("src/main/resources/image/Button/static_btn/back_E.png");
     public JButton backMenuBtn = new JButton(backMenuImage);
     public BackMenu(){
         backMenuBtn.setBounds(10,50,50,50);

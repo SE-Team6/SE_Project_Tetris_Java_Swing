@@ -11,8 +11,8 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class JSONLoader {
-    final static String SETTINGS_FILEPATH = "config/settings.json";
-    final static String SCORE_FILEPATH = "config/score.json";
+    final static String SETTINGS_FILEPATH = "src/main/configs/settings.json";
+    final static String SCORE_FILEPATH = "src/main/configs/score.json";
     static JSONParser parser = new JSONParser();
 
     JSONLoader(){}

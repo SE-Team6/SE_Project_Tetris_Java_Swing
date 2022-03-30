@@ -1,4 +1,4 @@
-package seoultech.se.tetris.Menu;
+package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
 
@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import static seoultech.se.tetris.Menu.BasicSet.Width;
+import static seoultech.se.tetris.menu.BasicSet.Width;
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.component.JSONWriter.writeKey;
 

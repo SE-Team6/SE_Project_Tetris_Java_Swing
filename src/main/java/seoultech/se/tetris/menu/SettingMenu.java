@@ -1,27 +1,28 @@
-package seoultech.se.tetris.Menu;
-
-import seoultech.se.tetris.main.Tetris;
+package seoultech.se.tetris.menu;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.Menu.BasicSet.*;
-import static seoultech.se.tetris.Menu.StartMenu.*;
+import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.StartMenu.positionPoint;
 
 public class SettingMenu extends JFrame {
 
     //설정 화면 이미지
-    private ImageIcon screenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/해상도_B.jpg"));
-    private ImageIcon keySettingImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/조작설정_B.jpg"));
-    private ImageIcon scoreResetImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/기록초기화_B.jpg"));
-    private ImageIcon colorBlindnessImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/색맹모드_B.jpg"));
-    private ImageIcon allResetImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/설정초기화_B.jpg"));
+    private ImageIcon screenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/해상도_B.jpg");
+    private ImageIcon keySettingImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/조작설정_B.jpg");
+    private ImageIcon scoreResetImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/기록초기화_B.jpg");
+    private ImageIcon colorBlindnessImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/색맹모드_B.jpg");
+    private ImageIcon allResetImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/설정초기화_B.jpg");
 
-    private ImageIcon screenSizeEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/해상도_E.jpg"));
-    private ImageIcon keySettingEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/조작설정_E.jpg"));
-    private ImageIcon scoreResetEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/기록초기화_E.jpg"));
-    private ImageIcon colorBlindnessEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/색맹모드_E.jpg"));
-    private ImageIcon allResetEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/main_btn/설정초기화_E.jpg"));
+    private ImageIcon screenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/해상도_E.jpg");
+    private ImageIcon keySettingEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/조작설정_E.jpg");
+    private ImageIcon scoreResetEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/기록초기화_E.jpg");
+    private ImageIcon colorBlindnessEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/색맹모드_E.jpg");
+    private ImageIcon allResetEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/설정초기화_E.jpg");
 
     private  JButton screenSizeBtn = new JButton(screenSizeImage);
     private  JButton keySettingBtn = new JButton(keySettingImage);

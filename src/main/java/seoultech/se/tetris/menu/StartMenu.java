@@ -1,28 +1,29 @@
-package seoultech.se.tetris.Menu;
+package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.Board;
+import seoultech.se.tetris.component.board.Board;
+import seoultech.se.tetris.component.board.NormalBoard;
 import seoultech.se.tetris.main.GameOver;
-import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-import static seoultech.se.tetris.Menu.BasicSet.*;
+import static seoultech.se.tetris.menu.BasicSet.*;
 
 
 public class StartMenu extends JFrame {
 
     // 시작 메뉴 버튼 이미지
-    private ImageIcon gameStartBtnImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Start_Basic.jpg"));
-    private ImageIcon gameSettingBtnImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Setting_Basic.jpg"));
-    private ImageIcon scoreBoardBtnImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/ScoreBoard_Basic.jpg"));
-    private ImageIcon exitBtnImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Exit_Basic.jpg"));
+    private ImageIcon gameStartBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Start_Basic.jpg");
+    private ImageIcon gameSettingBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Setting_Basic.jpg");
+    private ImageIcon scoreBoardBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Basic.jpg");
+    private ImageIcon exitBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Basic.jpg");
 
     // 선택된 시작 메뉴 버튼 이미지
-    private ImageIcon gameStartBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Start_Enter.jpg"));
-    private ImageIcon gameSettingBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Game_Setting_Enter.jpg"));
-    private ImageIcon scoreBoardBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/ScoreBoard_Enter.jpg"));
-    private ImageIcon exitBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/start_Menu_btn/Exit_Enter.jpg"));
+    private ImageIcon gameStartBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Start_Enter.jpg");
+    private ImageIcon gameSettingBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Setting_Enter.jpg");
+    private ImageIcon scoreBoardBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Enter.jpg");
+    private ImageIcon exitBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Enter.jpg");
 
     private JButton gameStartBtn = new JButton(gameStartBtnImage);
     private JButton gameSettingBtn = new JButton(gameSettingBtnImage);
@@ -55,7 +56,7 @@ public class StartMenu extends JFrame {
             else if(key == KeyEvent.VK_ENTER){
                 switch (positionPoint) {
                     case 1: // 게임 시작
-                        Board main = new Board();
+                        Board main = new NormalBoard();
                         main.setSize(Width, Height);
                         main.setLocation(0, 0);
                         main.setVisible(true);

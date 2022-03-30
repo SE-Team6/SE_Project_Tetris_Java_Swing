@@ -1,6 +1,4 @@
-package seoultech.se.tetris.Menu;
-
-import seoultech.se.tetris.main.Tetris;
+package seoultech.se.tetris.menu;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,13 +21,13 @@ public class BasicSet extends JFrame{
     private Image screenImage;
     private Graphics screenGraphics;
     // 기본 이미지
-    private Image background = new ImageIcon(Tetris.class.getResource("../image/backGround/800x1000_BG.jpg")).getImage();
-    public JLabel gameTitle = new JLabel(new ImageIcon(Tetris.class.getResource("../image/Label/title/title.png")),SwingConstants.CENTER);
+    private Image background = new ImageIcon("src/main/resources/image/backGround/800x1000_BG.jpg").getImage();
+    public JLabel gameTitle = new JLabel(new ImageIcon("src/main/resources/image/Label/title/title.png"),SwingConstants.CENTER);
 
     //상단 메뉴바 이미지
-    public JLabel menuBar = new JLabel(new ImageIcon(Tetris.class.getResource("../image/Label/menubar/third_menubar.jpg")));
-    private ImageIcon menuBarExitBasicImage = new ImageIcon(Tetris.class.getResource("../image/Button/static_btn/ExitButton_Basic.png"));
-    private ImageIcon menuBarExitEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/static_btn/ExitButton_Enter.png"));
+    public JLabel menuBar = new JLabel(new ImageIcon("src/main/resources/image/Label/menubar/third_menubar.jpg"));
+    private ImageIcon menuBarExitBasicImage = new ImageIcon("src/main/resources/image/Button/static_btn/ExitButton_Basic.png");
+    private ImageIcon menuBarExitEnterImage = new ImageIcon("src/main/resources/image/Button/static_btn/ExitButton_Enter.png");
 
     public JButton menuBarExitBtn = new JButton(menuBarExitBasicImage);
 

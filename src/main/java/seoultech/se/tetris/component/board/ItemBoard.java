@@ -120,16 +120,16 @@ public class ItemBoard extends Board {
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(14);
-        return switch (block) {
-            case 0 -> new RandomIBlock();
-            case 1 -> new RandomJBlock();
-            case 2 -> new RandomLBlock();
-            case 3 -> new RandomZBlock();
-            case 4 -> new RandomSBlock();
-            case 5 -> new RandomTBlock();
-            case 6 -> new RandomOBlock();
-            default -> new PendulumBlock();
-        };
+        switch (block) {
+            case 0: return new RandomIBlock();
+            case 1: return new RandomJBlock();
+            case 2: return new RandomLBlock();
+            case 3: return new RandomZBlock();
+            case 4: return new RandomSBlock();
+            case 5: return new RandomTBlock();
+            case 6: return new RandomOBlock();
+            default: return new PendulumBlock();
+        }
     }
 
     @Override

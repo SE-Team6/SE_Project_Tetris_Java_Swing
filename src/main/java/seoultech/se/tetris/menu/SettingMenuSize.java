@@ -1,25 +1,26 @@
-package seoultech.se.tetris.Menu;
-
-import seoultech.se.tetris.main.Tetris;
+package seoultech.se.tetris.menu;
 
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.Menu.BasicSet.*;
-import static seoultech.se.tetris.Menu.StartMenu.*;
-import static seoultech.se.tetris.component.JSONWriter.*;
+import static seoultech.se.tetris.component.JSONWriter.writeResolution;
+import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.StartMenu.positionPoint;
 
 
 public class SettingMenuSize extends JFrame {
 
     //해상도 이미지
-    private  ImageIcon firstScreenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/400x500.jpg"));
-    private  ImageIcon secondScreenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/600x800.jpg"));
-    private  ImageIcon thirdScreenSizeImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/800x1000.jpg"));
+    private  ImageIcon firstScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x500.jpg");
+    private  ImageIcon secondScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/600x800.jpg");
+    private  ImageIcon thirdScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/800x1000.jpg");
 
-    private  ImageIcon firstScreenSizeEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/400x500_E.jpg"));
-    private  ImageIcon secondScreenSizeEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/600x800_E.jpg"));
-    private  ImageIcon thirdScreenSizeEImage = new ImageIcon(Tetris.class.getResource("../image//Button/setting_Menu_btn/size_set_btn/800x1000_E.jpg"));
+    private  ImageIcon firstScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x500_E.jpg");
+    private  ImageIcon secondScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/600x800_E.jpg");
+    private  ImageIcon thirdScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/800x1000_E.jpg");
 
     private  JButton firstScreenSizeBtn = new JButton(firstScreenSizeImage);
     private  JButton secondScreenSizeBtn = new JButton(secondScreenSizeImage);

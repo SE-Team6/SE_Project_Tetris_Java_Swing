@@ -2,7 +2,6 @@ package seoultech.se.tetris.component;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.FileOutputStream;
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 import static seoultech.se.tetris.component.JSONLoader.*;
 
 public class JSONWriter {
-    final static String SETTINGS_FILEPATH = "config/settings.json";
-    final static String SCORE_FILEPATH = "config/score.json";
+    final static String SETTINGS_FILEPATH = "src/main/configs/settings.json";
+    final static String SCORE_FILEPATH = "src/main/configs/score.json";
 
     JSONWriter(){}
 

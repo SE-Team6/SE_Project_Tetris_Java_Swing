@@ -61,15 +61,15 @@ public abstract class Board extends JFrame {
     protected ParentBlock getRandomBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(7);
-        return switch (block) {
-            case 0 -> new IBlock();
-            case 1 -> new JBlock();
-            case 2 -> new LBlock();
-            case 3 -> new ZBlock();
-            case 4 -> new SBlock();
-            case 5 -> new TBlock();
-            default ->  new OBlock();
-        };
+        switch (block) {
+            case 0: return new IBlock();
+            case 1: return new JBlock();
+            case 2: return new LBlock();
+            case 3: return new ZBlock();
+            case 4: return new SBlock();
+            case 5: return new TBlock();
+            default: return new OBlock();
+        }
     }
 
     public void placeBlock() {
@@ -293,25 +293,30 @@ public abstract class Board extends JFrame {
         @Override
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
-                case KeyEvent.VK_DOWN -> {
+                case KeyEvent.VK_DOWN: {
                     moveDown();
                     drawBoard();
+                    break;
                 }
-                case KeyEvent.VK_RIGHT -> {
+                case KeyEvent.VK_RIGHT: {
                     moveRight();
                     drawBoard();
+                    break;
                 }
-                case KeyEvent.VK_LEFT -> {
+                case KeyEvent.VK_LEFT: {
                     moveLeft();
                     drawBoard();
+                    break;
                 }
-                case KeyEvent.VK_UP -> {
+                case KeyEvent.VK_UP: {
                     moveRotate();
                     drawBoard();
+                    break;
                 }
-                case KeyEvent.VK_SPACE -> {
+                case KeyEvent.VK_SPACE: {
                     moveFall();
                     drawBoard();
+                    break;
                 }
             }
         }

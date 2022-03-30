@@ -1,15 +1,9 @@
 package seoultech.se.tetris.component;
 
+import org.json.simple.JSONObject;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.HashMap;
-
-import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.JSONLoader;
 
 public class Keyboard implements KeyListener {
     public static int LEFT, RIGHT, UP, DOWN, ESC, SPACE;

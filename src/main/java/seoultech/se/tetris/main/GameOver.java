@@ -1,8 +1,7 @@
 package seoultech.se.tetris.main;
 
-import seoultech.se.tetris.Menu.BasicSet;
-import seoultech.se.tetris.Menu.StartMenu;
-import seoultech.se.tetris.Menu.Version;
+import seoultech.se.tetris.menu.BasicSet;
+import seoultech.se.tetris.menu.StartMenu;
 
 import javax.swing.*;
 
@@ -10,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static seoultech.se.tetris.Menu.BasicSet.*;
+import static seoultech.se.tetris.menu.BasicSet.*;
 
 public class GameOver extends JFrame {
 
@@ -20,17 +19,17 @@ public class GameOver extends JFrame {
     private int labelX;
     private int textFiledX;
     private int ButtonX;
-    private ImageIcon updateBtnBasicImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/updateBtn_B.jpg"));
-    private ImageIcon updateBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/updateBtn_E.jpg"));
-    private ImageIcon StartMenuBtnBasicImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/StartMenuBtn_B.jpg"));
-    private ImageIcon StartMenuBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/StartMenuBtn_E.jpg"));
-    private ImageIcon ExitGameBtnBasicImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/ExitGameBtn_B.jpg"));
-    private ImageIcon ExitGameBtnEnterImage = new ImageIcon(Tetris.class.getResource("../image/Button/gameover_btn/ExitGameBtn_E.jpg"));
+    private ImageIcon updateBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_B.jpg");
+    private ImageIcon updateBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_E.jpg");
+    private ImageIcon StartMenuBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/StartMenuBtn_B.jpg");
+    private ImageIcon StartMenuBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/StartMenuBtn_E.jpg");
+    private ImageIcon ExitGameBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/ExitGameBtn_B.jpg");
+    private ImageIcon ExitGameBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/ExitGameBtn_E.jpg");
 
 
 
     private JPanel scoreBoardSummary = new JPanel();
-    private JLabel gameOverTitle = new JLabel(new ImageIcon(Tetris.class.getResource("../image/Label/title/GameOverTitle.png")),SwingConstants.CENTER);
+    private JLabel gameOverTitle = new JLabel(new ImageIcon("src/main/resources/image/Label/title/GameOverTitle.png"),SwingConstants.CENTER);
     private JLabel myScoreLabel = new JLabel("Score");
     private JLabel NameLabel = new JLabel("Name");
     private JTextField myName= new JTextField();
