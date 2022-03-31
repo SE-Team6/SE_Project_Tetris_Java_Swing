@@ -35,8 +35,10 @@ public class StartMenu extends JFrame {
 
     //시작 메뉴
     public StartMenu(){
-        bs.addKeyListener(new menuListener());
+        bs.setVisible(false);
+        bs.setVisible(true);
         start_Menu_Screen_btn();
+        bs.addKeyListener(new menuListener());
     }
 
     public class menuListener extends KeyAdapter {

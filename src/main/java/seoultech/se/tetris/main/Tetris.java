@@ -2,18 +2,13 @@ package seoultech.se.tetris.main;
 
 import seoultech.se.tetris.menu.StartMenu;
 
-public class Tetris {
+import javax.swing.*;
 
+public class Tetris {
+	private ImageIcon gameStartBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Start_Basic.jpg");
+	private JButton gameStartBtn = new JButton(gameStartBtnImage);
 	public static void main(String[] args) {
-//		Board main = new ItemBoard();
-////		Board main = new NormalBoard();
-//
-//		main.setSize(400, 450);
-//		main.setLocation(0, 0);
-////
-////
-//		main.setVisible(true);
-		System.out.println(System.getProperty("user.dir"));
-		StartMenu main = new StartMenu();
+		new StartMenu();
 	}
+
 }

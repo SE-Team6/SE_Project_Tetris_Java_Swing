@@ -18,10 +18,8 @@ public class BasicSet extends JFrame{
     public static int menuBarExitBtnWidth =380, menuBarExitBtnHeight =0;
     public static int gameTitleX, gameTitleY =30;
 
-    private Image screenImage;
-    private Graphics screenGraphics;
     // 기본 이미지
-    private Image background = new ImageIcon("src/main/resources/image/backGround/800x1000_BG.jpg").getImage();
+    private Image backGround = new ImageIcon("src/main/resources/image/backGround/800x1000_BG.jpg").getImage();
     public JLabel gameTitle = new JLabel(new ImageIcon("src/main/resources/image/Label/title/title.png"),SwingConstants.CENTER);
 
     //상단 메뉴바 이미지
@@ -30,16 +28,33 @@ public class BasicSet extends JFrame{
     private ImageIcon menuBarExitEnterImage = new ImageIcon("src/main/resources/image/Button/static_btn/ExitButton_Enter.png");
 
     public JButton menuBarExitBtn = new JButton(menuBarExitBasicImage);
-
     private int mouseX, mouseY;
 
-
-
     public BasicSet(){
+        JPanel bg = new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(backGround,0,0,null);
+                setOpaque(false);
+                super.paintComponent(g);
+            }
+        };
+        setContentPane(bg);
         callSize();
+        basicSet();
+        basicBtnSet();
+    }
+
+    public void callSize(){
+        HashMap<String, Integer> map = loaderResolution();
+        System.out.println(map.keySet());
+        Width = map.get("width");
+        Height = map.get("height");
+    }
+    public void basicSet(){
         buttonX =(Width-buttonSizeX)/2;
         gameTitleX=(Width-300)/2;
         setUndecorated(true);
+        setVisible(false);
         setVisible(true); // 우리가 만든 게임창이 정상적으로 출력되도록.
         setTitle("Tetris Game");
         setSize(Width,Height);
@@ -49,10 +64,8 @@ public class BasicSet extends JFrame{
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
         setFocusable(true);
-
-
-
-
+    }
+    public void basicBtnSet(){
         gameTitle.setBounds(gameTitleX, gameTitleY,300,50);
         add(gameTitle);
 
@@ -99,24 +112,5 @@ public class BasicSet extends JFrame{
             }
         });
         add(menuBar);
-    }
-
-    public void paint(Graphics g){
-        screenImage = createImage(Width,Height);
-        screenGraphics = screenImage.getGraphics();
-        screenDraw((Graphics2D)screenGraphics);
-        g.drawImage(screenImage,0,0,null);
-    }
-    public void screenDraw(Graphics2D g){
-
-        g.drawImage(background,0,0,null);
-        paintComponents(g);
-        this.repaint();
-    }
-    public void callSize(){
-        HashMap<String, Integer> map = loaderResolution();
-        System.out.println(map.keySet());
-        Width = map.get("width");
-        Height = map.get("height");
     }
 }

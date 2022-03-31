@@ -34,7 +34,6 @@ public class SettingMenu extends JFrame {
     BackMenu bm = new BackMenu();
     public SettingMenu(){
         positionPoint =1;
-        bs.setVisible(true);
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new menuKeyListener());
         settingScreenBtn();
