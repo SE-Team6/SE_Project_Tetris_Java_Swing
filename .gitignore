@@ -172,6 +172,7 @@ buildNumber.properties
 **/build/
 !src/**/build/
 
+
 # Ignore Gradle GUI config
 gradle-app.setting
 
@@ -189,3 +190,8 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,maven
+
+# add
+gradlew
+gradlew.bat
+gradle/wrapper/
