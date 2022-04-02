@@ -3,6 +3,7 @@ package seoultech.se.tetris.component.board;
 import seoultech.se.tetris.blocks.*;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.config.ConfigBlock;
+import seoultech.se.tetris.component.board.*;
 
 import javax.swing.*;
 import javax.swing.text.Style;
@@ -176,19 +177,12 @@ public abstract class Board extends JFrame {
         } else {
             generateNewBlock();
         }
+       //eraseBottom();
         placeBlock();
     }
 
-    private void eraseBottom() {
-        for (int i = x; i < x + focus.width(); i++) {
-            for (int j = y; j < y + focus.height(); j++) {
-                if(board[i][j].getBlockType()==2 && y < HEIGHT - focus.height()){
-                    board[i+1][j] = null;}
 
 
-        }
-    }
-    }
 
     protected void moveFall() {
         eraseCurr();

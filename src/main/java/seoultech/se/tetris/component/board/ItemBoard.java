@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
+    boolean pendulum = false;
     public ItemBoard() {
         this.cnt = 0;
 
@@ -119,7 +120,8 @@ public class ItemBoard extends Board {
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(14);
-        switch (block) {
+        return new PendulumBlock();
+        /*switch (block) {
             case 0: return new RandomIBlock();
             case 1: return new RandomJBlock();
             case 2: return new RandomLBlock();
@@ -128,7 +130,7 @@ public class ItemBoard extends Board {
             case 5: return new RandomTBlock();
             case 6: return new RandomOBlock();
             default: return new PendulumBlock();
-        }
+        }*/
     }
 
     @Override
@@ -164,15 +166,17 @@ public class ItemBoard extends Board {
         placeBlock();
         eraseLines();
         itemEraseLines();
+
         focus = next;
         if(cnt>=1){
             next = getRandomItemBlock();
-            cnt=0;
+           // cnt=0;
         }
        else{
             next = getRandomBlock();
         }
         drawNextBlock();
+       pendulum =false;
         x = 3;
         y = 0;
 
@@ -182,26 +186,98 @@ public class ItemBoard extends Board {
         }
     }
 
-
-    public void eraseBottom() {
+    public void eraseCurr() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
-                if(board[i][j].getBlockType() ==2 && y < HEIGHT - focus.height()){
-                    board[i+1][j] = null;}
+
+                if (focus.getShape(i - x, j - y) != null) {
+                    if(getItemNum()==2 && y < HEIGHT - focus.height())
+                    {
+                        if(j+2<HEIGHT&&board[j+2][i]!=null){
+                            pendulum=true;
+                        }
+                        board[j+1][i]=null;
+                    }
+                    board[j][i] = null;
 
 
+                }
             }
         }
     }
 
+    public int getItemNum(){
+        int item=0;
+        for (int i = y; i < y + focus.height(); i++) {
+            for (int j = x; j < x + focus.width(); j++) {
+
+                if (focus.getShape(j - x, i - y) != null && board[i][j] != null) {
+                    item = board[i][j].getBlockType();
+
+                }
+            }
+        }
+        return item;
+    }
 
 
+    protected void moveFall() {
+        eraseCurr();
+        for (int i = y; i < Board.HEIGHT; i++) {
+            if (!isBottomTouched()) {
+                y++;
+                if(getItemNum()==2){
+                    eraseCurr();
+                }
+                if (isOverlap()) {
+                    y--;
+                    generateNewBlock();
+                    break;
+                }
+            } else {
+                generateNewBlock();
+                break;
+            }
+        }
+        placeBlock();
+    }
+
+    protected void moveRight() {
+        if(pendulum){
+            return;
+        }
+        eraseCurr();
+        if (x < Board.WIDTH - focus.width()) x++;
+        if (isOverlap()) {
+            x--;
+        }
+        placeBlock();
+    }
+
+    protected void moveLeft() {
+        if(pendulum){
+            return;
+        }
+        eraseCurr();
+        if (x > 0) {
+            x--;
+        }
+        if (isOverlap()) {
+            x++;
+        }
+        placeBlock();
+    }
+
+    protected void itemQueenErase(){
+
+    }
     protected void itemEraseLines() {
         for (int i = y; i < y + focus.height(); i++) {
             int  itemCount = 0;
 
             for (int j = x; j < x + focus.width(); j++) {
                 if(board[i][j]!=null){
+
                     if ( board[i][j].getBlockType()==1) {
                         itemCount++;
                     }
@@ -219,4 +295,6 @@ public class ItemBoard extends Board {
             }
         }
     }
+
+
 }
