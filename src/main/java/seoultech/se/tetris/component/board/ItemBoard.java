@@ -15,7 +15,6 @@ import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
-
     public ItemBoard() {
         this.cnt = 0;
 
@@ -164,8 +163,15 @@ public class ItemBoard extends Board {
     protected void generateNewBlock() {
         placeBlock();
         eraseLines();
+        itemEraseLines();
         focus = next;
-        next = getRandomItemBlock();
+        if(cnt>=1){
+            next = getRandomItemBlock();
+            cnt=0;
+        }
+       else{
+            next = getRandomBlock();
+        }
         drawNextBlock();
         x = 3;
         y = 0;
@@ -175,14 +181,32 @@ public class ItemBoard extends Board {
             reset();
         }
     }
-    protected void itemEraseLines() {
-        for (int i = Board.HEIGHT - 1; i >= 0; i--) {
-            int  itemCount = 0;
-            for (int j = 0; j < Board.WIDTH; j++) {
 
-//                if (Arrays.asList(board[i][j]).contains(RANDOM_CHAR) ) {
-//                    itemCount++;
-//                }
+
+    public void eraseBottom() {
+        for (int i = x; i < x + focus.width(); i++) {
+            for (int j = y; j < y + focus.height(); j++) {
+                if(board[i][j].getBlockType() ==2 && y < HEIGHT - focus.height()){
+                    board[i+1][j] = null;}
+
+
+            }
+        }
+    }
+
+
+
+    protected void itemEraseLines() {
+        for (int i = y; i < y + focus.height(); i++) {
+            int  itemCount = 0;
+
+            for (int j = x; j < x + focus.width(); j++) {
+                if(board[i][j]!=null){
+                    if ( board[i][j].getBlockType()==1) {
+                        itemCount++;
+                    }
+                }
+
             }
             if (itemCount==1) {
                 for (int j = 0; j < Board.WIDTH; j++) {
@@ -195,5 +219,4 @@ public class ItemBoard extends Board {
             }
         }
     }
-
 }

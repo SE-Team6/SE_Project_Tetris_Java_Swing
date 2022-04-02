@@ -20,7 +20,6 @@ public abstract class Board extends JFrame {
 
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
-
     protected ConfigBlock config = ConfigBlock.getInstance();
 
     public float initInterval = 1000;
@@ -87,6 +86,7 @@ public abstract class Board extends JFrame {
             for (int j = y; j < y + focus.height(); j++) {
                 if (focus.getShape(i - x, j - y) != null) {
                     board[j][i] = null;
+
                 }
             }
         }
@@ -177,6 +177,17 @@ public abstract class Board extends JFrame {
             generateNewBlock();
         }
         placeBlock();
+    }
+
+    private void eraseBottom() {
+        for (int i = x; i < x + focus.width(); i++) {
+            for (int j = y; j < y + focus.height(); j++) {
+                if(board[i][j].getBlockType()==2 && y < HEIGHT - focus.height()){
+                    board[i+1][j] = null;}
+
+
+        }
+    }
     }
 
     protected void moveFall() {
