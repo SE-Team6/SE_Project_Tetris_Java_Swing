@@ -108,11 +108,11 @@ public class ItemBoard extends Board {
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
         //Create the first block and draw.
-        focus = getRandomItemBlock();
+        focus = getRandomBlock();
         placeBlock();
         drawBoard();
         timer.start();
-        next = getRandomItemBlock();
+        next = getRandomBlock();
         drawNextBlock();
 
     }
@@ -120,8 +120,8 @@ public class ItemBoard extends Board {
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
         int block = random.nextInt(14);
-        return new PendulumBlock();
-        /*switch (block) {
+        //return new PendulumBlock();
+        switch (block) {
             case 0: return new RandomIBlock();
             case 1: return new RandomJBlock();
             case 2: return new RandomLBlock();
@@ -130,7 +130,7 @@ public class ItemBoard extends Board {
             case 5: return new RandomTBlock();
             case 6: return new RandomOBlock();
             default: return new PendulumBlock();
-        }*/
+        }
     }
 
     @Override
@@ -168,9 +168,9 @@ public class ItemBoard extends Board {
         itemEraseLines();
 
         focus = next;
-        if(cnt>=1){
+        if(cnt>=10){
             next = getRandomItemBlock();
-           // cnt=0;
+            cnt=0;
         }
        else{
             next = getRandomBlock();
@@ -269,8 +269,23 @@ public class ItemBoard extends Board {
     }
 
     protected void itemQueenErase(){
+        for (int i = y; i < y + focus.height(); i++) {
+            int  itemCount = 0;
+
+            for (int j = x; j < x + focus.width(); j++) {
+                if(board[i][j]!=null){
+
+                    if ( board[i][j].getBlockType()==3) {
+                        itemCount++;
+                    }
+                }
+
+            }
+        }
 
     }
+
+
     protected void itemEraseLines() {
         for (int i = y; i < y + focus.height(); i++) {
             int  itemCount = 0;

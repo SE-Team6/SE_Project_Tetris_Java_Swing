@@ -14,6 +14,7 @@ public class Tetris {
 ////
 //		main.setVisible(true);
 		System.out.println(System.getProperty("user.dir"));
+
 		StartMenu main = new StartMenu();
 	}
 }
