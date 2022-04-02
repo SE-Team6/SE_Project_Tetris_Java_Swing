@@ -166,7 +166,6 @@ public class ItemBoard extends Board {
         placeBlock();
         eraseLines();
         itemEraseLines();
-
         focus = next;
         if(cnt>=10){
             next = getRandomItemBlock();
@@ -221,12 +220,14 @@ public class ItemBoard extends Board {
     }
 
 
+
     protected void moveFall() {
         eraseCurr();
         for (int i = y; i < Board.HEIGHT; i++) {
+
             if (!isBottomTouched()) {
                 y++;
-                if(getItemNum()==2){
+                if(getItemNum()==2) {
                     eraseCurr();
                 }
                 if (isOverlap()) {
@@ -241,6 +242,7 @@ public class ItemBoard extends Board {
         }
         placeBlock();
     }
+
 
     protected void moveRight() {
         if(pendulum){
@@ -268,36 +270,25 @@ public class ItemBoard extends Board {
         placeBlock();
     }
 
-    protected void itemQueenErase(){
-        for (int i = y; i < y + focus.height(); i++) {
-            int  itemCount = 0;
 
-            for (int j = x; j < x + focus.width(); j++) {
-                if(board[i][j]!=null){
-
-                    if ( board[i][j].getBlockType()==3) {
-                        itemCount++;
-                    }
-                }
-
-            }
-        }
-
-    }
-
+    //퀸 블럭일 경우
+    //대각선의 블럭을 없애야 함
+    //사라진 블럭의 빈자리를 채워야함
 
     protected void itemEraseLines() {
         for (int i = y; i < y + focus.height(); i++) {
             int  itemCount = 0;
-
             for (int j = x; j < x + focus.width(); j++) {
                 if(board[i][j]!=null){
-
-                    if ( board[i][j].getBlockType()==1) {
+                    if ( board[i][j].getBlockType()==1||board[i][j].getBlockType()==3) {
                         itemCount++;
+                        if(board[i][j].getBlockType()==3){
+                            for(int k=0; k<Board.HEIGHT; k++) {
+                                board[k][j] = null;
+                            }
+                        }
                     }
                 }
-
             }
             if (itemCount==1) {
                 for (int j = 0; j < Board.WIDTH; j++) {
@@ -310,6 +301,4 @@ public class ItemBoard extends Board {
             }
         }
     }
-
-
 }
