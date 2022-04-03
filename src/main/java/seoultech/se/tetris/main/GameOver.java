@@ -1,5 +1,6 @@
 package seoultech.se.tetris.main;
 
+import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.menu.BasicSet;
 import seoultech.se.tetris.menu.StartMenu;
 
@@ -39,42 +40,15 @@ public class GameOver extends JFrame {
     private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     BasicSet bs = new BasicSet();
-    private  int score =100;
+    Score sc = new Score();
+    private  int score;
     public GameOver(){
-
+        sc.getScore();
         setXY(Width);
         labelSet();
         buttonSet();
         scoreBoardSummary.setBounds(25,120,scoreBoardWidth,scoreBoardHeight);
         bs.add(scoreBoardSummary);
-    }
-    public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
-        switch (num){
-            case 400:
-                gameOverTitleX=0;
-                scoreBoardWidth=170;
-                scoreBoardHeight=330;
-                labelX=195;
-                textFiledX=295;
-                ButtonX=210;
-                break;
-            case 600:
-                gameOverTitleX=100;
-                scoreBoardWidth=300;
-                scoreBoardHeight=630;
-                labelX=370;
-                textFiledX=470;
-                ButtonX=385;
-                break;
-            case 800:
-                gameOverTitleX=200;
-                scoreBoardWidth=500;
-                scoreBoardHeight=800;
-                labelX=585;
-                textFiledX=685;
-                ButtonX=600;
-                break;
-        }
     }
     public void buttonSet(){
         updateButton.setBounds(ButtonX,230,185,40);
@@ -118,7 +92,6 @@ public class GameOver extends JFrame {
         });
         bs.add(ExitGameButton);
     }
-
     public void labelSet(){
         myScoreLabel.setFont(new Font("Bahnschrift",Font.BOLD,25));
         myScoreLabel.setBounds(labelX,120,100,40);
@@ -150,6 +123,35 @@ public class GameOver extends JFrame {
         bs.gameTitle.setVisible(false);
         gameOverTitle.setBounds(gameOverTitleX, 30,400,100);
         bs.add(gameOverTitle);
+    }
+
+    public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
+        switch (num){
+            case 400:
+                gameOverTitleX=0;
+                scoreBoardWidth=170;
+                scoreBoardHeight=330;
+                labelX=195;
+                textFiledX=295;
+                ButtonX=210;
+                break;
+            case 600:
+                gameOverTitleX=100;
+                scoreBoardWidth=300;
+                scoreBoardHeight=630;
+                labelX=370;
+                textFiledX=470;
+                ButtonX=385;
+                break;
+            case 800:
+                gameOverTitleX=200;
+                scoreBoardWidth=500;
+                scoreBoardHeight=800;
+                labelX=585;
+                textFiledX=685;
+                ButtonX=600;
+                break;
+        }
     }
 
 }
