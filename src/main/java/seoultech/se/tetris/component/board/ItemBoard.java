@@ -167,9 +167,9 @@ public class ItemBoard extends Board {
         eraseLines();
         itemEraseLines();
         focus = next;
-        if(cnt>=10){
+        if(cnt>=1){
             next = getRandomItemBlock();
-            cnt=0;
+            //cnt=0;
         }
        else{
             next = getRandomBlock();
@@ -188,14 +188,13 @@ public class ItemBoard extends Board {
     public void eraseCurr() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
-
                 if (focus.getShape(i - x, j - y) != null) {
                     if(getItemNum()==2 && y < HEIGHT - focus.height())
                     {
+                        board[j+1][i]=null;
                         if(j+2<HEIGHT&&board[j+2][i]!=null){
                             pendulum=true;
                         }
-                        board[j+1][i]=null;
                     }
                     board[j][i] = null;
 
@@ -220,6 +219,21 @@ public class ItemBoard extends Board {
     }
 
 
+    /*protected void pendulumErase() {
+        for (int i = y; i < y + focus.height(); i++) {
+            for (int j = x; j < x + focus.width(); j++) {
+                if(board[i][j]!=null){
+                    if ( board[i][j].getBlockType()==2) {
+                            for(int k=0; k<Board.HEIGHT; k++) {
+                                board[k][j] = null;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+*/
 
     protected void moveFall() {
         eraseCurr();
@@ -227,7 +241,7 @@ public class ItemBoard extends Board {
 
             if (!isBottomTouched()) {
                 y++;
-                if(getItemNum()==2) {
+                if(getItemNum()==2){
                     eraseCurr();
                 }
                 if (isOverlap()) {
