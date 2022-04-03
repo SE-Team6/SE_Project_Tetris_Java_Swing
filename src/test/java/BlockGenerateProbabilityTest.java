@@ -25,8 +25,8 @@ public class BlockGenerateProbabilityTest {
     private static int [][] count = new int[3][7];
 
     private static double [][] arr = {
-                                        {100,100,100,100,100,100,100},
                                         {120,100,100,100,100,100,100},
+                                        {100,100,100,100,100,100,100},
                                         {80,100,100,100,100,100,100}
                                      };
 
