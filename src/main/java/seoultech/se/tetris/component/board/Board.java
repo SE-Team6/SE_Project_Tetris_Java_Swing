@@ -284,6 +284,11 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
+    protected void gameOver() {
+        System.out.println("Game over!");
+        reset();
+    }
+
     public class PlayerKeyListener implements KeyListener {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -316,6 +321,10 @@ public abstract class Board extends JFrame {
                 case KeyEvent.VK_SPACE: {
                     moveFall();
                     drawBoard();
+                    break;
+                }
+                case KeyEvent.VK_ESCAPE: {
+                    System.out.println("pause");
                     break;
                 }
             }

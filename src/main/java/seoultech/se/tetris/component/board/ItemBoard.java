@@ -2,9 +2,12 @@ package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.blocks.ParentBlock;
+import seoultech.se.tetris.blocks.item.one.OneBlock;
 import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
 import seoultech.se.tetris.blocks.item.random.*;
+import seoultech.se.tetris.blocks.item.slime.SlimeBlock;
 import seoultech.se.tetris.component.Score;
+import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -128,6 +131,8 @@ public class ItemBoard extends Board {
             case 4: return new RandomSBlock();
             case 5: return new RandomTBlock();
             case 6: return new RandomOBlock();
+            case 7: return new OneBlock();
+            case 8: return new SlimeBlock();
             default: return new PendulumBlock();
         }
     }
@@ -154,9 +159,43 @@ public class ItemBoard extends Board {
                 this.cnt++;
             }
         }
+        if (focus.getBlockType() == 4 && combo == 0) {
+            generateNewLines(2);
+        }
         if (combo > 0) {
             timerSet(combo);
         }
+    }
+
+    private void generateNewLines(int line) {
+        Random random = new Random(System.currentTimeMillis());
+        for(int i=0;i<HEIGHT-line;i++){
+            if (i<line && !isNullLine(i)) {
+                gameOver();
+            }
+            board[i] = board[i+line];
+        }
+        for(int i=0;i<line;i++){
+            int idx = random.nextInt(WIDTH);
+            Block[] row = generateNewLine(idx);
+            board[HEIGHT-i-1] = row;
+        }
+    }
+
+    private Block[] generateNewLine(int idx) {
+        Block[] row = new Block[WIDTH];
+        for(int i=0;i<WIDTH;i++){
+            if (i==idx) continue;
+            row[i] = new Block(Color.GRAY, ConfigBlock.BLOCK_CHAR, 0);
+        }
+        return row;
+    }
+
+    protected boolean isNullLine(int row) {
+        for(int i=0;i<WIDTH;i++){
+            if (board[row][i] != null) return false;
+        }
+        return true;
     }
 
     // generate new block
@@ -172,28 +211,7 @@ public class ItemBoard extends Board {
 
         // GAME OVER
         if (isOverlap()) {
-            reset();
+            gameOver();
         }
     }
-    protected void itemEraseLines() {
-        for (int i = Board.HEIGHT - 1; i >= 0; i--) {
-            int  itemCount = 0;
-            for (int j = 0; j < Board.WIDTH; j++) {
-
-//                if (Arrays.asList(board[i][j]).contains(RANDOM_CHAR) ) {
-//                    itemCount++;
-//                }
-            }
-            if (itemCount==1) {
-                for (int j = 0; j < Board.WIDTH; j++) {
-                    for (int k = i; k >= 1; k--) {
-                        board[k][j] = board[k - 1][j];
-                    }
-                    board[0][j] = null;
-                }
-                i++;
-            }
-        }
-    }
-
 }
