@@ -32,8 +32,7 @@ public abstract class Board extends JFrame {
 
     protected KeyListener playerKeyListener;
     protected MouseListener playerMouseListener;
-//    protected SimpleAttributeSet styleSet;
-//    protected SimpleAttributeSet nextStyleSet;
+
     protected Style parentStyle;
     protected Style defaultStyle;
     protected Style blockStyle;

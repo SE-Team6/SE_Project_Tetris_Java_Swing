@@ -1,7 +1,7 @@
 package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.component.board.Board;
-import seoultech.se.tetris.component.board.NormalBoard;
+import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
@@ -56,7 +56,8 @@ public class StartMenu extends JFrame {
             else if(key == KeyEvent.VK_ENTER){
                 switch (positionPoint) {
                     case 1: // 게임 시작
-                        Board main = new NormalBoard();
+//                        Board main = new NormalBoard();
+                        Board main = new ItemBoard();
                         main.setSize(Width, Height);
                         main.setLocation(0, 0);
                         main.setVisible(true);

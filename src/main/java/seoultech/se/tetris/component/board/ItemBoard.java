@@ -4,6 +4,7 @@ import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.blocks.ParentBlock;
 import seoultech.se.tetris.blocks.item.one.OneBlock;
 import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
+import seoultech.se.tetris.blocks.item.queen.*;
 import seoultech.se.tetris.blocks.item.random.*;
 import seoultech.se.tetris.blocks.item.slime.SlimeBlock;
 import seoultech.se.tetris.component.Score;
@@ -122,7 +123,7 @@ public class ItemBoard extends Board {
 
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
-        int block = random.nextInt(14);
+        int block = random.nextInt(17);
         switch (block) {
             case 0: return new RandomIBlock();
             case 1: return new RandomJBlock();
@@ -133,6 +134,13 @@ public class ItemBoard extends Board {
             case 6: return new RandomOBlock();
             case 7: return new OneBlock();
             case 8: return new SlimeBlock();
+            case 9: return new QueenIBlock();
+            case 10: return new QueenJBlock();
+            case 11: return new QueenLBlock();
+            case 12: return new QueenZBlock();
+            case 13: return new QueenSBlock();
+            case 14: return new QueenTBlock();
+            case 15: return new QueenOBlock();
             default: return new PendulumBlock();
         }
     }
@@ -140,6 +148,12 @@ public class ItemBoard extends Board {
     @Override
     protected void eraseLines() {
         int combo = 0;
+        // itemType == 1 L block
+        if (focus.getBlockType() == 1) {
+            eraseLLine();
+            combo++;
+        }
+
         for(int i=Board.HEIGHT-1;i>=0;i--){
             int tmp = 0;
             for(int j=0;j<Board.WIDTH;j++){
@@ -159,12 +173,82 @@ public class ItemBoard extends Board {
                 this.cnt++;
             }
         }
+
+
+
+        // itemType == 2 무게추
+
+        // itemType == 3 Queen
+        if (focus.getBlockType() == 3) {
+            eraseQLine();
+        }
+
+        // itemType == 4
         if (focus.getBlockType() == 4 && combo == 0) {
             generateNewLines(2);
         }
         if (combo > 0) {
             timerSet(combo);
         }
+    }
+
+    private void eraseLLine() {
+        int[] pos = focus.getBlockRandomPos();
+        int targetX = x + pos[1];
+        int targetY = y + pos[0];
+
+        eraseHorizontalLine(targetY);
+    }
+
+    private void eraseQLine() {
+        int[] pos = focus.getBlockRandomPos();
+        int targetX = x + pos[1];
+        int targetY = y + pos[0];
+        eraseDiagonalLine(targetX, targetY);
+        eraseHorizontalLine(targetY);
+        eraseVerticalLine(targetX);
+    }
+
+    private void eraseHorizontalLine(int targetY) {
+        for(int j=0;j<Board.WIDTH;j++){
+            for(int k=targetY;k>=1;k--){
+                board[k][j] = board[k-1][j];
+            }
+            board[0][j] = null;
+        }
+    }
+
+    private void eraseVerticalLine(int targetX) {
+        for(int j=0;j<Board.HEIGHT;j++){
+            board[j][targetX] = null;
+        }
+    }
+
+    private void eraseDiagonalLine(int targetX, int targetY) {
+        int[] dx = {-1, -1, 1, 1};
+        int[] dy = {1, -1, 1, -1};
+
+        for (int i=1;i<WIDTH;i++){
+            for(int j=0;j<4;j++){
+                int cx = targetX + dx[j]*i;
+                int cy = targetY + dy[j]*i;
+                if (checkBoundary(cx, cy)) {
+                    board[cy][cx] = null;
+                }
+            }
+        }
+    }
+
+    private boolean checkBoundary(int x, int y) {
+        return checkBoundaryY(y) && checkBoundaryX(x);
+    }
+
+    private boolean checkBoundaryX(int x) {
+        return x >= 0 && x < WIDTH;
+    }
+
+    private boolean checkBoundaryY(int y) {
+        return y >= 0 && y < HEIGHT;
     }
 
     private void generateNewLines(int line) {
@@ -201,7 +285,9 @@ public class ItemBoard extends Board {
     // generate new block
     @Override
     protected void generateNewBlock() {
-        placeBlock();
+        if (focus.getBlockType() != 2) {
+            placeBlock();
+        }
         eraseLines();
         focus = next;
         next = getRandomItemBlock();
@@ -213,5 +299,107 @@ public class ItemBoard extends Board {
         if (isOverlap()) {
             gameOver();
         }
+    }
+
+    public void placePendulumBlock() {
+        for (int j = 0; j < focus.height(); j++) {
+            for (int i = 0; i < focus.width(); i++) {
+//                if (board[y + j][x + i] == null && focus.getShape(i, j) != null) {
+                board[y + j][x + i] = focus.getShape(i, j);
+            }
+        }
+    }
+
+    public void erasePendulumCurr() {
+        for (int i = x; i < x + focus.width(); i++) {
+            for (int j = y; j < y + focus.height(); j++) {
+//                if (focus.getShape(i - x, j - y) != null) {
+                board[j][i] = null;
+//                }
+            }
+        }
+    }
+
+    @Override
+    protected void moveRight() {
+        if (focus.getIsSettled()) return;
+        eraseCurr();
+        if (x < Board.WIDTH - focus.width()) x++;
+        if (isOverlap()) {
+            x--;
+        }
+        placeBlock();
+    }
+
+
+    @Override
+    protected void moveLeft() {
+        if (focus.getIsSettled()) return;
+        eraseCurr();
+        if (x > 0) {
+            x--;
+        }
+        if (isOverlap()) {
+            x++;
+        }
+        placeBlock();
+    }
+
+    @Override
+    protected void moveDown() {
+        if (focus.getBlockType() == 2 && focus.getIsSettled()) {
+            erasePendulumCurr();
+            if (!isBottomTouched()) {
+                y++;
+                placePendulumBlock();
+            } else {
+                generateNewBlock();
+            }
+
+            return;
+        }
+        eraseCurr();
+        if (!isBottomTouched()) {
+            y++;
+            if (isOverlap()) {
+                if (focus.getBlockType() == 2 && !focus.getIsSettled()) {
+                    focus.setIsSettled();
+                    placePendulumBlock();
+                    return;
+                }
+                y--;
+                generateNewBlock();
+            }
+        } else {
+            generateNewBlock();
+        }
+        placeBlock();
+    }
+
+    @Override
+    protected void moveFall() {
+        if (focus.getBlockType() == 2) {
+            erasePendulumCurr();
+            for (int i=x;i<x+focus.width();i++){
+                eraseVerticalLine(i);
+            }
+            generateNewBlock();
+            return;
+        }
+        eraseCurr();
+        for (int i = y; i < Board.HEIGHT; i++) {
+            if (!isBottomTouched()) {
+                y++;
+                if (isOverlap()) {
+                    y--;
+                    generateNewBlock();
+                    break;
+                }
+            } else {
+                generateNewBlock();
+                break;
+            }
+        }
+        placeBlock();
     }
 }
