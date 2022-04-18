@@ -7,14 +7,12 @@ import seoultech.se.tetris.menu.StartMenu;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static seoultech.se.tetris.component.JSONLoader.loaderScoreBoardPage;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.BasicSet.Width;
 import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
 import static seoultech.se.tetris.menu.GameMode.gameModeNum;
 
@@ -49,12 +47,11 @@ public class GameOver extends JFrame {
     private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     BasicSet bs = new BasicSet();
-    Score sc = new Score();
     private  int score;
     public GameOver(){
 
         bs.setVisible(true);
-        score =sc.getScore();
+        score = Score.score;
         setXY(Width);
         labelSet();
         buttonSet();

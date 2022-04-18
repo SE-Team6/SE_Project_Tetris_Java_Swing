@@ -6,11 +6,11 @@ import java.awt.*;
 
 public class Score extends JLabel {
     private final int[] combo = {0,100,300,500,800};
-    private int score;
+    public static int score;
     private CompoundBorder border;
 
     public Score() {
-        this.score = 0;
+        score = 0;
         border = BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY, 10),
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));

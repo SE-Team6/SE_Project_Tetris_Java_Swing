@@ -43,7 +43,6 @@ public class StartMenu extends JFrame {
 
     //시작 메뉴
     public StartMenu(){
-        bs.addKeyListener(new menuListener());
         start_Menu_Screen_btn();
         bs.setVisible(true);
         keyLoad();
@@ -58,7 +57,6 @@ public class StartMenu extends JFrame {
             if (keyValue == key.DOWN){
                 positionPoint +=1;
                 if(positionPoint ==4) positionPoint =0;
-                System.out.println(positionPoint);
                 allPositionPoint();
             }
             else if(keyValue == key.UP){
