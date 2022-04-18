@@ -12,14 +12,31 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Arrays;
 import java.util.Random;
 
 
 public abstract class Board extends JFrame {
     public static final long serialVersionUID = 2434035659171694595L;
 
+    //easy, normal, hard
+    protected static final double[][] blockFitness = {
+            {120,100,100,100,100,100,100},
+            {100,100,100,100,100,100,100},
+            {80,100,100,100,100,100,100}
+    };
+
+    public static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
+
+    protected static Random random = new Random(System.currentTimeMillis());
+
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
+
+    // Erased Line Count
+    protected static int lineCount = 0;
+    protected static int stage = 1;
+    protected static int seq = 0;
 
     protected ConfigBlock config = ConfigBlock.getInstance();
 
@@ -42,7 +59,7 @@ public abstract class Board extends JFrame {
     protected ParentBlock focus;
     protected ParentBlock next;
 
-    protected float rateInterval = 0.95F;
+    protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
     protected int y = 0;
@@ -58,9 +75,28 @@ public abstract class Board extends JFrame {
         setFocusable(true);
     }
 
-    protected ParentBlock getRandomBlock() {
-        Random random = new Random(System.currentTimeMillis());
-        int block = random.nextInt(7);
+    // set difficulty -> probability and interval
+    public static void setDifficulty(int difficulty){
+        double sum = Arrays.stream(blockFitness[difficulty]).sum();
+        prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
+        rateInterval -= (rateInterval * 0.2 * (difficulty));
+        System.out.println(rateInterval);
+    }
+
+    public static int getRoulette(){
+        double u = random.nextDouble();
+        for(int i=0; i<7; ++i){
+            u -= prob[i];
+            if(u<0){
+                return i;
+            }
+        }
+        return 6;
+    }
+
+    public ParentBlock getRandomBlock() {
+        int block = getRoulette();
+//        int block = random.nextInt(7);
         switch (block) {
             case 0: return new IBlock();
             case 1: return new JBlock();
@@ -92,7 +128,7 @@ public abstract class Board extends JFrame {
         }
     }
 
-    protected void timerSet(int combo) {
+    protected void timerSet() {
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
@@ -100,9 +136,7 @@ public abstract class Board extends JFrame {
             drawBoard();
         });
         timer.start();
-        score.addScore(combo);
     }
-
 
     // add overlap check
     protected boolean isOverlap() {
@@ -121,7 +155,6 @@ public abstract class Board extends JFrame {
     protected boolean isBottomTouched() {
         return y >= Board.HEIGHT - focus.height();
     }
-
 
     // generate new block
     protected void generateNewBlock() {
@@ -142,6 +175,7 @@ public abstract class Board extends JFrame {
 
     protected void eraseLines() {
         int combo = 0;
+        boolean isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
             int tmp = 0;
             for (int j = 0; j < Board.WIDTH; j++) {
@@ -156,17 +190,29 @@ public abstract class Board extends JFrame {
                     }
                     board[0][j] = null;
                 }
+                isErased = true;
                 i++;
                 combo++;
+                lineCount++;
             }
         }
-        if (combo > 0) {
-            timerSet(combo);
+        if(isErased){
+            seq += 1;
+        }else{
+            seq = 0;
+        }
+        score.addLineClearScore(combo, stage, seq);
+        if (lineCount >= 5) {
+            stage += 1;
+            System.out.println(stage);
+            lineCount -= 5;
+            timerSet();
         }
     }
 
     protected void moveDown() {
         eraseCurr();
+        score.addUnitScore(1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
@@ -181,6 +227,7 @@ public abstract class Board extends JFrame {
 
     protected void moveFall() {
         eraseCurr();
+        score.addUnitScore((Board.HEIGHT - y)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
             if (!isBottomTouched()) {
                 y++;

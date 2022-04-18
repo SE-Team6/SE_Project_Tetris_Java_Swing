@@ -5,6 +5,7 @@ import javax.swing.border.CompoundBorder;
 import java.awt.*;
 
 public class Score extends JLabel {
+    private final int[] combo = {0,100,300,500,800};
     private int score;
     private CompoundBorder border;
 
@@ -27,8 +28,14 @@ public class Score extends JLabel {
         return score;
     }
 
-    public void addScore(int combo) {
-        this.score += combo * combo;
+    // 연속으로 제거하면 원래 점수의 50% 씩 추가됨.
+    public void addLineClearScore(int num, int stage, int seq) {
+        this.score += ((this.combo[num]*stage)*(1+(seq-1)*0.5));
+        updateScore();
+    }
+
+    public void addUnitScore(int num) {
+        this.score += num;
         updateScore();
     }
 

@@ -1,14 +1,12 @@
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import seoultech.se.tetris.blocks.ParentBlock;
-import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.component.board.NormalBoard;
-import seoultech.se.tetris.blocks.*;
-import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Random;
-
-import static org.junit.Assert.assertTrue;
 
 public class BlockGenerateProbabilityTest {
 
@@ -25,17 +23,18 @@ public class BlockGenerateProbabilityTest {
     private static int [][] count = new int[3][7];
 
     private static double [][] arr = {
-                                        {100,100,100,100,100,100,100},
                                         {120,100,100,100,100,100,100},
+                                        {100,100,100,100,100,100,100},
                                         {80,100,100,100,100,100,100}
                                      };
 
     private final String[] blockTypes = {"IBlock","JBlock","LBlock","OBlock","SBlock","TBlock","ZBlock"};
 
-    @BeforeClass
+    @BeforeAll
     public static void beforeTest(){
         System.out.println("Before Test...");
         for(int i=0; i<3; ++i){
+            NormalBoard.setDifficulty(i);
             double sum = Arrays.stream(arr[i]).sum();
             double[] prob = Arrays.stream(arr[i]).map((x)->x/sum).toArray();
 
@@ -77,23 +76,23 @@ public class BlockGenerateProbabilityTest {
 
     @Test
     public void easyModeBlockGenerationTest(){
-        assertTrue("The probability of "+blockTypes[0]+" generation does not meet the condition in Easy Mode.", IBLOCK_MIN[0] <= count[0][0] && count[0][0] <= IBLOCK_MAX[0]);
+        assertTrue(IBLOCK_MIN[0] <= count[0][0] && count[0][0] <= IBLOCK_MAX[0], "The probability of "+blockTypes[0]+" generation does not meet the condition in Easy Mode.");
         for(int i=1; i<7; ++i){
-            assertTrue("The probability of "+blockTypes[i]+" generation does not meet the condition in Easy Mode.", MIN[0] <= count[0][i] && count[0][i] <= MAX[0]);
+            assertTrue(MIN[0] <= count[0][i] && count[0][i] <= MAX[0], "The probability of "+blockTypes[i]+" generation does not meet the condition in Easy Mode.");
         }
     }
     @Test
     public void NormalModeBlockGenerationTest(){
-        assertTrue("The probability of "+blockTypes[0]+" generation does not meet the condition in Normal Mode.", IBLOCK_MIN[1] <= count[1][0] && count[1][0] <= IBLOCK_MAX[1]);
+        assertTrue(IBLOCK_MIN[1] <= count[1][0] && count[1][0] <= IBLOCK_MAX[1], "The probability of "+blockTypes[0]+" generation does not meet the condition in Normal Mode.");
         for(int i=1; i<7; ++i){
-            assertTrue("The probability of "+blockTypes[i]+" generation does not meet the condition in Normal Mode.", MIN[1] <= count[1][i] && count[1][i] <= MAX[1]);
+            assertTrue(MIN[1] <= count[1][i] && count[1][i] <= MAX[1], "The probability of "+blockTypes[i]+" generation does not meet the condition in Normal Mode.");
         }
     }
     @Test
     public void HardModeBlockGenerationTest(){
-        assertTrue("The probability of "+blockTypes[0]+" generation does not meet the condition in Hard Mode.", IBLOCK_MIN[2] <= count[2][0] && count[2][0] <= IBLOCK_MAX[2]);
+        assertTrue(IBLOCK_MIN[2] <= count[2][0] && count[2][0] <= IBLOCK_MAX[2], "The probability of "+blockTypes[0]+" generation does not meet the condition in Hard Mode.");
         for(int i=1; i<7; ++i){
-            assertTrue("The probability of "+blockTypes[i]+" generation does not meet the condition in Hard Mode.", MIN[2] <= count[2][i] && count[2][i] <= MAX[2]);
+            assertTrue(MIN[2] <= count[2][i] && count[2][i] <= MAX[2], "The probability of "+blockTypes[i]+" generation does not meet the condition in Hard Mode.");
         }
     }
 

@@ -13,12 +13,16 @@ public abstract class ParentBlock {
     protected int type = 0;
     protected int blockType = BlockType.NONE;
     protected ConfigBlock config = ConfigBlock.getInstance();
-    protected static int colorType = 1;
+    protected static int colorType = 2;
 
     public ParentBlock() {
         color = Color.GRAY;
     }
 
+    // 색맹모드 설정
+    public static void setColorType(int colorType) {
+        ParentBlock.colorType = colorType;
+    }
 
     public void rotate() {
         type = (type + 1) % 4;

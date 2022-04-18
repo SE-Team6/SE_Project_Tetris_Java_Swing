@@ -57,6 +57,7 @@ public class StartMenu extends JFrame {
                 switch (positionPoint) {
                     case 1: // 게임 시작
                         Board main = new NormalBoard();
+                        main.setDifficulty(2);
                         main.setSize(Width, Height);
                         main.setLocation(0, 0);
                         main.setVisible(true);

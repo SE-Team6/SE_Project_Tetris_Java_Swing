@@ -155,7 +155,7 @@ public class ItemBoard extends Board {
             }
         }
         if (combo > 0) {
-            timerSet(combo);
+            timerSet();
         }
     }
 
