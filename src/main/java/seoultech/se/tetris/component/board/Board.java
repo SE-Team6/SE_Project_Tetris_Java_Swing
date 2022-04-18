@@ -10,6 +10,7 @@ import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.event.*;
+import java.util.Arrays;
 import java.util.Random;
 
 

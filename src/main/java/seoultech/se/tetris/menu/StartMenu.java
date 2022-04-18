@@ -58,6 +58,7 @@ public class StartMenu extends JFrame {
             if (keyValue == key.DOWN){
                 positionPoint +=1;
                 if(positionPoint ==4) positionPoint =0;
+                System.out.println(positionPoint);
                 allPositionPoint();
             }
             else if(keyValue == key.UP){
