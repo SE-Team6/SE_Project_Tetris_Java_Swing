@@ -3,9 +3,9 @@
     "mode": 0
   },
   "resolution": {
-    "width": 600,
+    "width": 400,
     "font-size": 18,
-    "height": 800
+    "height": 600
   },
   "key": {
     "SPACE": 114,

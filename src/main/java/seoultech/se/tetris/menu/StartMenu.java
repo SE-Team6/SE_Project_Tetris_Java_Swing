@@ -1,13 +1,16 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.board.Board;
-import seoultech.se.tetris.component.board.NormalBoard;
+import org.json.simple.JSONObject;
+import seoultech.se.tetris.component.ScoreBoardItemMode;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Arrays;
 
+import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.menu.BasicSet.*;
 
 
@@ -25,105 +28,137 @@ public class StartMenu extends JFrame {
     private ImageIcon scoreBoardBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Enter.jpg");
     private ImageIcon exitBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Enter.jpg");
 
-    private JButton gameStartBtn = new JButton(gameStartBtnImage);
-    private JButton gameSettingBtn = new JButton(gameSettingBtnImage);
-    private JButton scoreBoardBtn = new JButton(scoreBoardBtnImage);
-    private JButton exitBtn = new JButton(exitBtnImage);
+    private ImageIcon[] BasicImage = {gameStartBtnImage,gameSettingBtnImage,scoreBoardBtnImage,exitBtnImage};
+    private ImageIcon[] EnterImage = {gameStartBtnEnterImage,gameSettingBtnEnterImage,scoreBoardBtnEnterImage,exitBtnEnterImage};
+    private JButton[] menuButton= new JButton[4];
 
-    public  static  int positionPoint = 1;
+    //현재 사용중인 키 표시
+    private String[] textSequence = {"LEFT", "RIGHT", "UP", "DOWN", "ESC", "SPACE"};
+    private JLabel[] currentKey = new JLabel[6];
+    char[] keyLoadCharValue = new char[6];
+    String [] keyLoadStringValue = new String[6];
+
+    private int positionPoint = 0;
     BasicSet bs = new BasicSet();
-
     //시작 메뉴
     public StartMenu(){
-        bs.addKeyListener(new menuListener());
         start_Menu_Screen_btn();
+        bs.setVisible(true);
+        keyLoad();
+        setCurrentKeyLabel();
+        bs.addKeyListener(new menuListener());
     }
 
     public class menuListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-            int key= e.getKeyCode();
-            if (key == KeyEvent.VK_DOWN){
+            int keyValue= e.getKeyCode();
+            if (keyValue == key.DOWN){
                 positionPoint +=1;
-                if(positionPoint ==5) positionPoint =1;
+                if(positionPoint ==4) positionPoint =0;
                 allPositionPoint();
             }
-            else if(key == KeyEvent.VK_UP){
+            else if(keyValue == key.UP){
                 positionPoint -=1;
-                if(positionPoint ==0) positionPoint =4;
+                if(positionPoint ==-1) positionPoint =3;
                 allPositionPoint();
             }
-            else if(key == KeyEvent.VK_ENTER){
+            else if(keyValue == KeyEvent.VK_ENTER){
                 switch (positionPoint) {
-                    case 1: // 게임 시작
-                        Board main = new NormalBoard();
-                        main.setDifficulty(2);
-                        main.setSize(Width, Height);
-                        main.setLocation(0, 0);
-                        main.setVisible(true);
+                    case 0: // 게임 시작
+                        new GameMode();
                         bs.setVisible(false);
                         break;
-                    case 2: // 게임 설정
+                    case 1: // 게임 설정
                         bs.setVisible(false);
                         new SettingMenu();
                         break;
-                    case 3: // 스코어 보드
+                    case 2: // 스코어 보드
+                        new ScoreBoardItemMode();
+                        break;
+                    case 3: // 게임종료
                         bs.setVisible(false);
                         new GameOver();
                         break;
-                    case 4: // 게임종료
-                        System.exit(0);
-                        break;
                 }
-
             }
         }
     }
-
     public void allPositionPoint(){
-        if(positionPoint ==1) gameStartBtn.setIcon(gameStartBtnEnterImage);
-        else gameStartBtn.setIcon(gameStartBtnImage);
-        if(positionPoint ==2) gameSettingBtn.setIcon(gameSettingBtnEnterImage);
-        else gameSettingBtn.setIcon(gameSettingBtnImage);
-        if(positionPoint ==3) scoreBoardBtn.setIcon(scoreBoardBtnEnterImage);
-        else scoreBoardBtn.setIcon(scoreBoardBtnImage);
-        if(positionPoint ==4) exitBtn.setIcon(exitBtnEnterImage);
-        else exitBtn.setIcon(exitBtnImage);
+        for (int i=0;i<4;i++){
+            if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
+            else menuButton[i].setIcon(BasicImage[i]);
+        }
     }
-    public void hideButton(){
-        gameStartBtn.setVisible(false);
-        gameSettingBtn.setVisible(false);
-        scoreBoardBtn.setVisible(false);
-        exitBtn.setVisible(false);
-    }
-    public void start_Menu_Screen_btn(){
-        //시작 메뉴 버튼 4가지 설정
-        gameStartBtn.setBounds(buttonX, buttonY,buttonSizeX,buttonSizeY);
-        gameStartBtn.setBorderPainted(false);
-        gameStartBtn.setContentAreaFilled(false);
-        gameStartBtn.setFocusPainted(false);
+    public void start_Menu_Screen_btn(){//menuButton[] = {게임 시작버튼,게임 설정버튼, 스코어 보드버튼, 게임종료버튼}
+        int addH = 0;
+        for(int i=0;i<4;i++){
+            menuButton[i] = new JButton(BasicImage[i]);
+            menuButton[i].setBounds(buttonX, buttonY+addH,buttonSizeX,buttonSizeY);
+            menuButton[i].setBorderPainted(false);
+            menuButton[i].setContentAreaFilled(false);
+            menuButton[i].setFocusPainted(false);
+            bs.add(menuButton[i]);
+            addH+=70;
+        }
         allPositionPoint();
-        bs.add(gameStartBtn);
-
-        gameSettingBtn.setBounds(buttonX, buttonY +70,buttonSizeX,buttonSizeY);
-        gameSettingBtn.setBorderPainted(false);
-        gameSettingBtn.setContentAreaFilled(false);
-        gameSettingBtn.setFocusPainted(false);
-
-        bs.add(gameSettingBtn);
-
-        scoreBoardBtn.setBounds(buttonX, buttonY +140,buttonSizeX,buttonSizeY);
-        scoreBoardBtn.setBorderPainted(false);
-        scoreBoardBtn.setContentAreaFilled(false);
-        scoreBoardBtn.setFocusPainted(false);
-
-
-        bs.add(scoreBoardBtn);
-
-        exitBtn.setBounds(buttonX, buttonY +210,buttonSizeX,buttonSizeY);
-        exitBtn.setBorderPainted(false);
-        exitBtn.setContentAreaFilled(false);
-        exitBtn.setFocusPainted(false);
-        bs.add(exitBtn);
+    }
+    public void keyLoad() {// 기존 키 정보 불러오기
+        JSONObject obj = loaderKey();
+        Object[] var = new Object[6];
+        Arrays.fill(var, 0);
+        for (int i = 0; i < 6; i++) {
+            var[i] = obj.get(textSequence[i]);
+        }
+        for (int i = 0; i < 6; i++) {
+            int a = Integer.parseInt(var[i].toString());
+            //json에서 받아온 아스키코드를 그대로 받으면 시각적으로 방향키와 esc 및 space가 원하는 대로 안보임 그래서 원하는대로 보기위한 처리과정
+            switch (a) {
+                case 37://left
+                    a = 8592;
+                    break;
+                case 39://right
+                    a = 8594;
+                    break;
+                case 38://up
+                    a = 8593;
+                    break;
+                case 40://down
+                    a = 8595;
+                    break;
+                case 27://esc
+                    a = 9099;
+                    break;
+                case 32://space
+                    a = 9251;
+                    break;
+                default:
+            }
+            char b = (char) a;
+            keyLoadCharValue[i] = b;
+            keyLoadStringValue[i]= String.valueOf(keyLoadCharValue[i]);
+        }
+    }
+    public void setCurrentKeyLabel() {
+        int addH = 0;
+        for (int i = 0; i < 3; i++) {
+            currentKey[i] = new JLabel();
+            currentKey[i].setBounds(10, (Height - 100) + addH, 100, 30);
+            currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
+            currentKey[i].setForeground(Color.RED);
+            currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            bs.add(currentKey[i]);
+            addH += 30;
+        }
+        addH = 0;
+        for (int i = 3; i < 6; i++) {
+            currentKey[i] = new JLabel();
+            currentKey[i].setBounds(110, (Height - 100) + addH, 100, 30);
+            currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
+            currentKey[i].setForeground(Color.RED);
+            currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            bs.add(currentKey[i]);
+            addH += 30;
+        }
     }
 }

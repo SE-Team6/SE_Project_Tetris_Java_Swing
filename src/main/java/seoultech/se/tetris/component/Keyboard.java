@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener {
     public static int LEFT, RIGHT, UP, DOWN, ESC, SPACE;
 
-    private Keyboard(){}
+    public Keyboard(){}
 
     private static final Keyboard key = new Keyboard();
 

@@ -9,7 +9,6 @@ import static seoultech.se.tetris.menu.BasicSet.*;
 public class Version {
     public void firstScreenSizeSet(){
         HashMap<String, Integer>map = loaderResolution();
-        System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
         menuBarExitBtnWidth=Width-20;
@@ -18,7 +17,6 @@ public class Version {
     }
     public void secondScreenSizeSet(){
         HashMap<String, Integer>map = loaderResolution();
-        System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
         menuBarExitBtnWidth=Width-20;
@@ -27,7 +25,6 @@ public class Version {
     }
     public void thirdScreenSizeSet(){
         HashMap<String, Integer>map = loaderResolution();
-        System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
         menuBarExitBtnWidth=Width-20;

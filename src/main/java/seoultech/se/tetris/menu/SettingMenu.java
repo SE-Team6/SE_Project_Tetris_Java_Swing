@@ -1,13 +1,12 @@
 package seoultech.se.tetris.menu;
 
-import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import seoultech.se.tetris.component.Keyboard;
 
+import javax.swing.*;
+import java.awt.event.*;
+
+import static seoultech.se.tetris.component.JSONWriter.*;
 import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.StartMenu.positionPoint;
 
 public class SettingMenu extends JFrame {
 
@@ -24,19 +23,19 @@ public class SettingMenu extends JFrame {
     private ImageIcon colorBlindnessEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/색맹모드_E.jpg");
     private ImageIcon allResetEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/설정초기화_E.jpg");
 
-    private  JButton screenSizeBtn = new JButton(screenSizeImage);
-    private  JButton keySettingBtn = new JButton(keySettingImage);
-    private  JButton scoreResetBtn = new JButton(scoreResetImage);
-    private  JButton colorBlindnessBtn = new JButton(colorBlindnessImage);
-    private  JButton allResetBtn = new JButton(allResetImage);
+    private ImageIcon[] BasicImage = {screenSizeImage,keySettingImage,scoreResetImage,colorBlindnessImage,allResetImage};
+    private ImageIcon[] EnterImage = {screenSizeEImage,keySettingEImage,scoreResetEImage,colorBlindnessEImage,allResetEImage};
+    private JButton[] menuButton= new JButton[5];
+
+    private int positionPoint;
 
     BasicSet bs = new BasicSet();
     BackMenu bm = new BackMenu();
     public SettingMenu(){
-        positionPoint =1;
-        bs.setVisible(true);
+        positionPoint =0;
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new menuKeyListener());
+        bs.setVisible(true);
         settingScreenBtn();
         backToMenu();
     }
@@ -44,92 +43,75 @@ public class SettingMenu extends JFrame {
     public class menuKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
-
-
-            switch (e.getKeyCode()){
-                case KeyEvent.VK_DOWN:
-                    positionPoint +=1;
-                    if(positionPoint ==6) positionPoint =1;
-                    allPositionPoint();
-                    break;
-                case  KeyEvent.VK_UP:
-                    positionPoint -=1;
-                    if(positionPoint ==0) positionPoint =5;
-                    allPositionPoint();
-                    break;
-                case KeyEvent.VK_ENTER:
-                    switch (positionPoint){
-                        case 1:
-                            bs.setVisible(false);
-                            new SettingMenuSize();
-                            break;
-                        case 2:
-                            bs.setVisible(false);
-                            new SettingMenuKeySet();
-                            break;
-                        case 3:
-                            setVisible(false);
-                            break;
-                        case 4:
-                            setVisible(false);
-                            break;
-                        case 5:
-                            setVisible(false);
-                            break;
-                    }
-                    break;
-                case KeyEvent.VK_BACK_SPACE:
-                    bs.setVisible(false);
-                    new StartMenu();
-                    break;
-
+            int keyValue= e.getKeyCode();
+            if(keyValue==key.DOWN){
+                positionPoint +=1;
+                if(positionPoint ==5) positionPoint =0;
+                allPositionPoint();
+            }
+            else if(keyValue==key.UP){
+                positionPoint -=1;
+                if(positionPoint ==-1) positionPoint =4;
+                allPositionPoint();
+            }
+            else if(keyValue==KeyEvent.VK_ENTER){
+                switch (positionPoint){
+                    case 0://해상도 설정
+                        bs.setVisible(false);
+                        new SettingMenuSize();
+                        break;
+                    case 1://키 설정
+                        bs.setVisible(false);
+                        new SettingMenuKeySet();
+                        break;
+                    case 2://스코어 보드 초기화
+                        new ScoreReset();
+                        break;
+                    case 3://색맹 모드.
+                        new ColorMode();
+                        break;
+                    case 4://설정 초기화.
+                        int [] keyValueArr = {37,39,38,40,27,32};
+                        AllReset ar = new AllReset();
+                        ar.yesReset.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                bs.setVisible(false);
+                                writeResolution(400,600,18);
+                                writeKey(keyValueArr);
+                                writeColorMode(0);
+                                JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
+                                bs.setVisible(true);
+                            }
+                        });
+                        break;
+                }
+            }
+            else if(keyValue==KeyEvent.VK_BACK_SPACE){
+                bs.setVisible(false);
+                new StartMenu();
             }
         }
-    }
-
+        }
     public void allPositionPoint(){
-        if(positionPoint ==1) screenSizeBtn.setIcon(screenSizeEImage);
-        else screenSizeBtn.setIcon(screenSizeImage);
-        if(positionPoint ==2) keySettingBtn.setIcon(keySettingEImage);
-        else keySettingBtn.setIcon(keySettingImage);
-        if(positionPoint ==3) scoreResetBtn.setIcon(scoreResetEImage);
-        else scoreResetBtn.setIcon(scoreResetImage);
-        if(positionPoint ==4) colorBlindnessBtn.setIcon(colorBlindnessEImage);
-        else colorBlindnessBtn.setIcon(colorBlindnessImage);
-        if(positionPoint ==5) allResetBtn.setIcon(allResetEImage);
-        else allResetBtn.setIcon(allResetImage);
+
+        for(int i=0;i<5;i++){
+            if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
+            else menuButton[i].setIcon(BasicImage[i]);
+        }
     }
-    public void settingScreenBtn(){
-        screenSizeBtn.setBounds(buttonX,buttonY,buttonSizeX,buttonSizeY);
-        screenSizeBtn.setBorderPainted(false);
-        screenSizeBtn.setContentAreaFilled(false);
-        screenSizeBtn.setFocusPainted(false);
+    public void settingScreenBtn(){//menuButton[] = {해상도 설정버튼,게임 조작설정버튼, 스코어 보드 초기화버튼,색맹모드버튼, 설정 초기화버튼}
+        int addY=0;
+        for (int i=0;i<5;i++){
+            menuButton[i]=new JButton(BasicImage[i]);
+            menuButton[i].setBounds(buttonX,buttonY+addY,buttonSizeX,buttonSizeY);
+            menuButton[i].setBorderPainted(false);
+            menuButton[i].setContentAreaFilled(false);
+            menuButton[i].setFocusPainted(false);
+            bs.add(menuButton[i]);
+            addY+=70;
+        }
         allPositionPoint();
-        bs.add(screenSizeBtn);
-
-        keySettingBtn.setBounds(buttonX,buttonY+70,buttonSizeX,buttonSizeY);
-        keySettingBtn.setBorderPainted(false);
-        keySettingBtn.setContentAreaFilled(false);
-        keySettingBtn.setFocusPainted(false);
-        bs.add(keySettingBtn);
-
-        scoreResetBtn.setBounds(buttonX,buttonY+140,buttonSizeX,buttonSizeY);
-        scoreResetBtn.setBorderPainted(false);
-        scoreResetBtn.setContentAreaFilled(false);
-        scoreResetBtn.setFocusPainted(false);
-        bs.add(scoreResetBtn);
-
-        colorBlindnessBtn.setBounds(buttonX,buttonY+210,buttonSizeX,buttonSizeY);
-        colorBlindnessBtn.setBorderPainted(false);
-        colorBlindnessBtn.setContentAreaFilled(false);
-        colorBlindnessBtn.setFocusPainted(false);
-        bs.add(colorBlindnessBtn);
-
-        allResetBtn.setBounds(buttonX,buttonY+280,buttonSizeX,buttonSizeY);
-        allResetBtn.setBorderPainted(false);
-        allResetBtn.setContentAreaFilled(false);
-        allResetBtn.setFocusPainted(false);
-        bs.add(allResetBtn);
     }
     public void backToMenu(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
@@ -139,6 +121,9 @@ public class SettingMenu extends JFrame {
                 new StartMenu();
             }
         });
+    }
+    public void allReset(){
+
     }
 
 }

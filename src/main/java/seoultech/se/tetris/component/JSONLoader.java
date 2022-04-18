@@ -73,13 +73,19 @@ public class JSONLoader {
          NAME, SCORE, TIME, difficulty, item
      */
     public static JSONArray loaderScore(){
-        return (JSONArray) getJSONObject("score", "scoreBoard");
+        JSONArray arr = (JSONArray) getJSONObject("score", "scoreBoard");
+        return  arr;
     }
 
     //return mode 번호
     //ex 적녹색맹 : 1, etc...
     public static int loaderColor(){
         JSONObject obj = (JSONObject) getJSONObject("settings","colorBlindMode");
+        return Integer.parseInt(obj.get("mode").toString());
+    }
+    //스코어 보드 페이지 불러오기
+    public static int loaderScoreBoardPage(){
+        JSONObject obj = (JSONObject) getJSONObject("settings","scoreBoardPage");
         return Integer.parseInt(obj.get("mode").toString());
     }
 }
