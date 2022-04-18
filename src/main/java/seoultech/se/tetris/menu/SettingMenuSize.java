@@ -23,10 +23,6 @@ public class SettingMenuSize extends JFrame {
     private  ImageIcon secondScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/600x800_E.jpg");
     private  ImageIcon thirdScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/800x1000_E.jpg");
 
-    private  JButton firstScreenSizeBtn = new JButton(firstScreenSizeImage);
-    private  JButton secondScreenSizeBtn = new JButton(secondScreenSizeImage);
-    private  JButton thirdScreenSizeBtn = new JButton(thirdScreenSizeImage);
-
     private ImageIcon[] BasicImage = {firstScreenSizeImage,secondScreenSizeImage,thirdScreenSizeImage};
     private ImageIcon[] EnterImage = {firstScreenSizeEImage,secondScreenSizeEImage,thirdScreenSizeEImage};
     private  JButton[] menuButton= new JButton[3];
@@ -45,7 +41,7 @@ public class SettingMenuSize extends JFrame {
         settingScreenSizeBtn();
         backToMenu();
     }
-    public void settingScreenSizeBtn(){
+    public void settingScreenSizeBtn(){//menuButton[] = {400x600,600x800,800x1000}
         int addY=0;
         for (int i=0;i<3;i++){
             menuButton[i]=new JButton(BasicImage[i]);
@@ -73,17 +69,17 @@ public class SettingMenuSize extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER) {
                 switch (positionPoint){
-                    case 1:
+                    case 0:
                         writeResolution(400,600,18);
                         ver.firstScreenSizeSet();
                         screenSizeSet();
                         break;
-                    case 2:
+                    case 1:
                         writeResolution(600,800,18);
                         ver.secondScreenSizeSet();
                         screenSizeSet();
                         break;
-                    case 3:
+                    case 2:
                         writeResolution(800,1000,18);
                         ver.thirdScreenSizeSet();
                         screenSizeSet();

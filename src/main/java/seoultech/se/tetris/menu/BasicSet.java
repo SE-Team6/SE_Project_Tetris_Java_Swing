@@ -22,6 +22,7 @@ public class BasicSet extends JFrame {
     public static int menuBarHeight = 20;
     public static int menuBarExitBtnWidth = 380, menuBarExitBtnHeight = 0;
     public static int gameTitleX, gameTitleY = 30;
+    public static int currentNum=1;
 
     // 기본 이미지
     private Image backGround = new ImageIcon("src/main/resources/image/backGround/800x1000_BG.jpg").getImage();
@@ -36,9 +37,9 @@ public class BasicSet extends JFrame {
     private int mouseX, mouseY;
 
 
-    public static Keyboard key = new Keyboard();
+    public static Keyboard key = Keyboard.getInstance();
     public BasicSet() {
-        key.getInstance();
+//        key.getInstance();
         key.setKey();
         JPanel bg = new JPanel() {
             public void paintComponent(Graphics g) {

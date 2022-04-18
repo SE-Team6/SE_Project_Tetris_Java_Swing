@@ -3,11 +3,9 @@ package seoultech.se.tetris.menu;
 import seoultech.se.tetris.component.Keyboard;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
+import static seoultech.se.tetris.component.JSONWriter.*;
 import static seoultech.se.tetris.menu.BasicSet.*;
 
 public class SettingMenu extends JFrame {
@@ -73,7 +71,19 @@ public class SettingMenu extends JFrame {
                         new ColorMode();
                         break;
                     case 4://설정 초기화.
-                        new AllReset();
+                        int [] keyValueArr = {37,39,38,40,27,32};
+                        AllReset ar = new AllReset();
+                        ar.yesReset.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                bs.setVisible(false);
+                                writeResolution(400,600,18);
+                                writeKey(keyValueArr);
+                                writeColorMode(0);
+                                JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
+                                bs.setVisible(true);
+                            }
+                        });
                         break;
                 }
             }
@@ -90,7 +100,7 @@ public class SettingMenu extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void settingScreenBtn(){
+    public void settingScreenBtn(){//menuButton[] = {해상도 설정버튼,게임 조작설정버튼, 스코어 보드 초기화버튼,색맹모드버튼, 설정 초기화버튼}
         int addY=0;
         for (int i=0;i<5;i++){
             menuButton[i]=new JButton(BasicImage[i]);
@@ -111,6 +121,9 @@ public class SettingMenu extends JFrame {
                 new StartMenu();
             }
         });
+    }
+    public void allReset(){
+
     }
 
 }

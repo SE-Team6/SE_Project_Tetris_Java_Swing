@@ -17,13 +17,15 @@ public class GameDifficulty {
     private BasicSet bs = new BasicSet();
     private BackMenu bm = new BackMenu();
     private ImageIcon easyModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/EasyMode_B.jpeg");
+    private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
     private ImageIcon hardModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/HardMode_B.jpeg");
     private ImageIcon easyModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/EasyMode_E.jpeg");
+    private ImageIcon normalModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_E.jpeg");
     private ImageIcon hardModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/HardMode_E.jpeg");
-    private ImageIcon[] BasicImage = {easyModeBtnImage, hardModeBtnImage};
-    private ImageIcon[] EnterImage = {easyModeBtnEnterImage, hardModeBtnEnterImage};
-    private JButton[] menuButton = new JButton[2];
-
+    private ImageIcon[] BasicImage = {easyModeBtnImage,normalModeBtnImage ,hardModeBtnImage};
+    private ImageIcon[] EnterImage = {easyModeBtnEnterImage, normalModeBtnEnterImage,hardModeBtnEnterImage};
+    private JButton[] menuButton = new JButton[3];
+    public static int gameDifficultyNum=1; //0:이지,1:노말,2:하드
     public GameDifficulty(){
         positionPoint=0;
         bs.setVisible(true);
@@ -38,19 +40,26 @@ public class GameDifficulty {
             int keyValue = e.getKeyCode();
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
-                if (positionPoint == 2) positionPoint = 0;
+                if (positionPoint == 3) positionPoint = 0;
                 allPositionPoint();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
-                if (positionPoint == -1) positionPoint = 1;
+                if (positionPoint == -1) positionPoint = 2;
                 allPositionPoint();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint ==0){//이지 모드
+                    gameDifficultyNum=0;
                     if (gameModeNum==0)normalMode();
                     else if(gameModeNum==1)itemMode();
                 }
-                else if(positionPoint==1){// 하드 모드
+                else if(positionPoint==1){// 노말 모드
+                    gameDifficultyNum=1;
+                    if (gameModeNum==0)normalMode();
+                    else if(gameModeNum==1)itemMode();
+                }
+                else if(positionPoint==2){// 하드 모드
+                    gameDifficultyNum=2;
                     if (gameModeNum==0)normalMode();
                     else if(gameModeNum==1)itemMode();
                 }
@@ -58,14 +67,14 @@ public class GameDifficulty {
         }
     }
     public void allPositionPoint(){
-        for (int i=0;i<2;i++){
+        for (int i=0;i<3;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
     public void setButton() {
         int addY = 0;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
             menuButton[i].setBounds(buttonX, buttonY + addY, buttonSizeX, buttonSizeY);
             menuButton[i].setBorderPainted(false);

@@ -1,9 +1,7 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.Keyboard;
-import seoultech.se.tetris.component.board.Board;
-import seoultech.se.tetris.component.board.NormalBoard;
+import seoultech.se.tetris.component.ScoreBoardItemMode;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
@@ -29,7 +27,6 @@ public class StartMenu extends JFrame {
     private ImageIcon gameSettingBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Setting_Enter.jpg");
     private ImageIcon scoreBoardBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Enter.jpg");
     private ImageIcon exitBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Enter.jpg");
-
 
     private ImageIcon[] BasicImage = {gameStartBtnImage,gameSettingBtnImage,scoreBoardBtnImage,exitBtnImage};
     private ImageIcon[] EnterImage = {gameStartBtnEnterImage,gameSettingBtnEnterImage,scoreBoardBtnEnterImage,exitBtnEnterImage};
@@ -77,9 +74,11 @@ public class StartMenu extends JFrame {
                         new SettingMenu();
                         break;
                     case 2: // 스코어 보드
+                        new ScoreBoardItemMode();
                         break;
                     case 3: // 게임종료
-                        System.exit(0);
+                        bs.setVisible(false);
+                        new GameOver();
                         break;
                 }
             }
@@ -91,7 +90,7 @@ public class StartMenu extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void start_Menu_Screen_btn(){
+    public void start_Menu_Screen_btn(){//menuButton[] = {게임 시작버튼,게임 설정버튼, 스코어 보드버튼, 게임종료버튼}
         int addH = 0;
         for(int i=0;i<4;i++){
             menuButton[i] = new JButton(BasicImage[i]);

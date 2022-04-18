@@ -54,7 +54,7 @@ public class ColorMode extends JFrame {
     public void setColorMode(){
         switch (colorNum){
             case 0:
-                currentMode="노말모드";
+                currentMode="일반모드";
                 break;
             case 1:
                 currentMode="적록색맹모드";

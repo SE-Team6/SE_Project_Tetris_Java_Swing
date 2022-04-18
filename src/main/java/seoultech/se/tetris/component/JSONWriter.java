@@ -64,6 +64,14 @@ public class JSONWriter {
         System.out.println(colorObject);
         JSONDumps("colorBlindMode", list);
     }
+    public static void writeScoreBoardPage(int val){
+        JSONObject list = new JSONObject();
+        list.put("mode", val);
+        JSONObject pageObject = new JSONObject();
+//        System.out.println(pageObject);
+        JSONDumps("scoreBoardPage", list);
+    }
+
 
     /*
         int[] inputScore = {name, score, time, difficulty, isItem};
@@ -125,6 +133,7 @@ public class JSONWriter {
         JSONObject keyObj = (JSONObject) getJSONObject("settings","key");
         JSONObject resolutionObj = (JSONObject) getJSONObject("settings", "resolution");
         JSONObject colorBlindModeObj = (JSONObject) getJSONObject("settings", "colorBlindMode");
+        JSONObject scoreBoardPageObj = (JSONObject) getJSONObject("settings", "scoreBoardPage");
 
         switch (type){
             case "key":
@@ -136,12 +145,16 @@ public class JSONWriter {
             case "colorBlindMode":
                 colorBlindModeObj = content;
                 break;
+            case "scoreBoardPage":
+                scoreBoardPageObj = content;
+                break;
         }
 
         JSONObject jsonList = new JSONObject();
         jsonList.put("key", keyObj);
         jsonList.put("resolution", resolutionObj);
         jsonList.put("colorBlindMode", colorBlindModeObj);
+        jsonList.put("scoreBoardPage",scoreBoardPageObj);
 
         try(FileWriter file = new FileWriter(SETTINGS_FILEPATH)){
             file.write(jsonList.toJSONString());

@@ -44,7 +44,6 @@ public class SettingMenuKeySet extends JFrame{
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new setKeyListener());
         backToMenu();
-        saveButton();
     }
 
     public class setKeyListener extends KeyAdapter {
@@ -53,12 +52,12 @@ public class SettingMenuKeySet extends JFrame{
             int keyVal= e.getKeyCode();
             if (keyVal==key.DOWN) {
                 positionPoint +=1;
-                if(positionPoint ==7) positionPoint =0;
+                if(positionPoint ==6) positionPoint =0;
                 allPositionPoint();
             }
             else if(keyVal == key.UP){
                 positionPoint -=1;
-                if(positionPoint == -1) positionPoint =6;
+                if(positionPoint == -1) positionPoint =5;
                 allPositionPoint();
             }
             else if(keyVal== KeyEvent.VK_ENTER){
@@ -171,11 +170,5 @@ public class SettingMenuKeySet extends JFrame{
             case 800:
                 ver.thirdScreenSizeSet();
         }
-    }
-    public void saveButton(){
-        saveButton.setBounds(50,420,250,50);
-        saveButton.setVisible(true);
-        saveButton.setOpaque(true);
-        bs.add(saveButton);
     }
 }

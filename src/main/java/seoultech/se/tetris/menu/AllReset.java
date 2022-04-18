@@ -10,7 +10,7 @@ import static seoultech.se.tetris.menu.SettingMenu.*;
 public class AllReset extends JFrame {
 
     private JLabel ask = new JLabel("정말로 설정을 초기화 하시겠습니까?");
-    private JButton yesReset = new JButton("Yes");
+    public JButton yesReset = new JButton("Yes");
     private JButton noReset = new JButton("No");
     private int [] keyValue = {37,39,38,40,27,32};
 
@@ -26,16 +26,6 @@ public class AllReset extends JFrame {
         add(ask);
         yesReset.setBounds(80,30,80,30);
         add(yesReset);
-        yesReset.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                writeResolution(400,600,18);
-                writeKey(keyValue);
-                writeColorMode(0);
-                JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다(게임을 재시작 해주세요)");
-                System.exit(0);
-            }
-        });
         noReset.setBounds(240,30,80,30);
         noReset.addActionListener(new ActionListener() {
             @Override
