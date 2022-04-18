@@ -48,41 +48,38 @@ public abstract class Board extends JFrame {
 
     protected boolean isPause = false;
 
-    protected PauseView pv = new PauseView(0, this);
+    protected PauseView pv;
 
     public Board() {
         super("SW TEAM 6");
-
         // fix 방법 확인
-        this.addComponentListener(new ComponentListener() {
-
-            @Override
-            public void componentResized(ComponentEvent e) {
-                if (isPause) {
+//        this.addComponentListener(new ComponentListener() {
+//
+//            @Override
+//            public void componentResized(ComponentEvent e) {
+//                if (!isPause) {
 //                    pv.setLocationRelativeTo(e.getComponent());
-                    pv.setVisible(true);
-                }
-
-            }
-
-            @Override
-            public void componentMoved(ComponentEvent e) {
-                if (isPause) {
+//                }
+//
+//            }
+//
+//            @Override
+//            public void componentMoved(ComponentEvent e) {
+//                if (!isPause) {
 //                    pv.setLocationRelativeTo(e.getComponent());
-                    pv.setVisible(true);
-                }
-            }
-
-            @Override
-            public void componentShown(ComponentEvent e) {
-
-            }
-
-            @Override
-            public void componentHidden(ComponentEvent e) {
-
-            }
-        });
+//                }
+//            }
+//
+//            @Override
+//            public void componentShown(ComponentEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void componentHidden(ComponentEvent e) {
+//
+//            }
+//        });
     }
 
     protected void focusFrame() {
@@ -323,11 +320,9 @@ public abstract class Board extends JFrame {
 
     protected void pause() {
         System.out.println("pause");
-        if (isPause) {
-            setIsPause();
-        } else {
+        if (!isPause) {
             timer.stop();
-//            PauseView pv = new PauseView(score.getScore(), this);
+            pv = new PauseView(score.getScore(), this);
             pv.setScore(score.getScore());
             pv.setLocationRelativeTo(this);
             int w = this.getWidth();
@@ -337,8 +332,8 @@ public abstract class Board extends JFrame {
             pv.setLocation(x + w/4, y + h/4);
             pv.setSize(w/2, h/2);
             pv.setVisible(true);
-            setIsPause();
         }
+        setIsPause();
     }
 
     public void setIsPause() {

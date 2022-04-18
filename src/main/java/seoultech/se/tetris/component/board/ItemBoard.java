@@ -8,6 +8,7 @@ import seoultech.se.tetris.blocks.item.queen.*;
 import seoultech.se.tetris.blocks.item.random.*;
 import seoultech.se.tetris.blocks.item.slime.SlimeBlock;
 import seoultech.se.tetris.component.Score;
+import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
@@ -119,6 +120,7 @@ public class ItemBoard extends Board {
         next = getRandomBlock();
         drawNextBlock();
 
+        pv = new PauseView(0, this);
     }
 
     protected ParentBlock getRandomItemBlock() {

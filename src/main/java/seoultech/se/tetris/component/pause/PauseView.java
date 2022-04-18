@@ -4,6 +4,8 @@ import seoultech.se.tetris.component.board.Board;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -23,16 +25,25 @@ public class PauseView extends JDialog {
         this.parent = parent;
 
         this.setUndecorated(true);
-        this.score = score;
+        this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+        PauseView.score = score;
         this.setLayout(new GridLayout(3, 1, 0, 0));
-//        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JLabel scorePane = new JLabel();
-        scorePane.setText(String.valueOf(this.score));
+        scorePane.setBackground(Color.WHITE);
+        scorePane.setHorizontalAlignment(SwingConstants.CENTER);
+        scorePane.setText(String.valueOf(PauseView.score));
+
+
         resumeBtn = new JButton();
         resumeBtn.setText(RESUME);
+        resumeBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                disposeComponent();
+            }
+        });
         exitBtn = new JButton();
         exitBtn.setText(EXIT);
 
@@ -59,7 +70,7 @@ public class PauseView extends JDialog {
                         disposeComponent();
                         break;
                     case KeyEvent.VK_DOWN:
-                        if (idx < IDX_LENGTH) {
+                        if (idx < IDX_LENGTH - 1) {
                             idx += 1;
                             showSelectedButton();
 
@@ -82,6 +93,7 @@ public class PauseView extends JDialog {
         });
 
         this.setFocusable(true);
+        showSelectedButton();
     }
 
     public void setScore(int score) {
@@ -90,6 +102,7 @@ public class PauseView extends JDialog {
 
     public void disposeComponent() {
         this.dispose();
+
         this.parent.startTimer();
         this.parent.setIsPause();
     }
