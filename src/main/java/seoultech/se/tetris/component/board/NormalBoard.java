@@ -2,6 +2,8 @@ package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.component.Score;
+import seoultech.se.tetris.component.pause.PauseView;
+import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -96,7 +98,7 @@ public class NormalBoard extends Board {
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
 
-        StyleConstants.setFontSize(parentStyle, 28);
+        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
         StyleConstants.setFontFamily(parentStyle, "Courier");
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
@@ -113,5 +115,6 @@ public class NormalBoard extends Board {
         next = getRandomBlock();
         drawNextBlock();
 
+        pv = new PauseView(0, this);
     }
 }

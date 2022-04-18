@@ -10,6 +10,9 @@ public class ConfigBlock {
     public static final String NON_BLOCK_CHAR_MAC = " ";
     public static final String RANDOM_CHAR = "ʟ";
     public static final String CHESS_QUEEN = "♛";
+    public static int fontSize = 48;
+
+    public static int colorType = 0;
     public static final String[][] BlOCK_COLOR = {
             {"#FF0000",
                     "#800080",

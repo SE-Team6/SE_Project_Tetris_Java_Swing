@@ -40,8 +40,10 @@ public class StartMenu extends JFrame {
 
     private int positionPoint = 0;
     BasicSet bs = new BasicSet();
+
     //시작 메뉴
     public StartMenu(){
+        bs.addKeyListener(new menuListener());
         start_Menu_Screen_btn();
         bs.setVisible(true);
         keyLoad();

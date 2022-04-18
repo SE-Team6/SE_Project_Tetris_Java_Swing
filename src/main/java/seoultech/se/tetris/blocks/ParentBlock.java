@@ -13,16 +13,14 @@ public abstract class ParentBlock {
     protected int type = 0;
     protected int blockType = BlockType.NONE;
     protected ConfigBlock config = ConfigBlock.getInstance();
-    protected static int colorType = 2;
+    protected static int colorType = ConfigBlock.colorType;
+    protected int randomIdx = 0;
+    protected boolean isSettled = false;
 
     public ParentBlock() {
         color = Color.GRAY;
     }
 
-    // 색맹모드 설정
-    public static void setColorType(int colorType) {
-        ParentBlock.colorType = colorType;
-    }
 
     public void rotate() {
         type = (type + 1) % 4;
@@ -52,5 +50,17 @@ public abstract class ParentBlock {
 
     public int getBlockType() {
         return blockType;
+    }
+
+    public int[] getBlockRandomPos() {
+        return new int[]{0,0};
+    }
+
+    public void setIsSettled() {
+        isSettled = true;
+    }
+
+    public boolean getIsSettled() {
+        return isSettled;
     }
 }

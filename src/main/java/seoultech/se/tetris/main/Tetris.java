@@ -7,6 +7,7 @@ import static seoultech.se.tetris.component.JSONWriter.appendScore;
 
 
 public class Tetris {
+
 	public static void main(String[] args) {
 		new IntroTest();
 	}
