@@ -1,5 +1,7 @@
 package seoultech.se.tetris.config;
 
+import seoultech.se.tetris.component.JSONLoader;
+
 // singleton
 public class ConfigBlock {
     public static final String BORDER_CHAR_WIN = "X";
@@ -10,6 +12,7 @@ public class ConfigBlock {
     public static final String NON_BLOCK_CHAR_MAC = " ";
     public static final String RANDOM_CHAR = "ʟ";
     public static final String CHESS_QUEEN = "♛";
+    public static final String STAR = "★";
     public static int fontSize = 24 ;
 
     public static int colorType = 0;
@@ -55,6 +58,11 @@ public class ConfigBlock {
             BLOCK_CHAR = BLOCK_CHAR_MAC;
             NON_BLOCK_CHAR = NON_BLOCK_CHAR_MAC;
         }
+        colorType = JSONLoader.loaderColor();
         return instance;
+    }
+
+    public static void setColorType(int type) {
+        colorType = type;
     }
 }

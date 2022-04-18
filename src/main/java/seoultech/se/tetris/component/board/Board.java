@@ -72,6 +72,8 @@ public abstract class Board extends JFrame {
 
     protected PauseView pv;
 
+    protected static boolean isAction = false;
+
     public Board() {
         super("SW TEAM 6");
 
@@ -181,8 +183,41 @@ public abstract class Board extends JFrame {
         }
     }
 
+    protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
+        timer.stop();
+        isAction = true;
+        String all = pane.getText();
+        String[] rows = all.split("\n");
+        StringBuilder tmp = new StringBuilder();
+        for(int i=0;i<WIDTH+2;i++){
+            tmp.append(i==0 || i==WIDTH+1 ? ConfigBlock.BORDER_CHAR : ConfigBlock.STAR);
+        }
+        for (int i=targetL;i<=targetR;i++){
+            rows[i+1] = tmp.toString();
+        }
+        String res = "";
+        for (String row: rows) {
+            res += row;
+            res += "\n";
+        }
+        String ret = res;
+        System.out.println(ret);
+        pane.setText(ret);
+        System.out.println("start");
+        try {
+            Thread.sleep(5000);
+            System.out.println("finish");
+            System.out.println(pane.getText());
+            isAction = false;
+            timer.start();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     protected void eraseLines() {
         int combo = 0;
+        int left = 0; int right = -1;
         boolean isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
             int tmp = 0;
@@ -191,7 +226,14 @@ public abstract class Board extends JFrame {
                     tmp++;
                 }
             }
+
             if (tmp == Board.WIDTH) {
+                if (right == -1) {
+                    right = i;
+                    left = i;
+                } else {
+                    left--;
+                }
                 for (int j = 0; j < Board.WIDTH; j++) {
                     for (int k = i; k >= 1; k--) {
                         board[k][j] = board[k - 1][j];
@@ -203,6 +245,9 @@ public abstract class Board extends JFrame {
                 combo++;
                 lineCount++;
             }
+        }
+        if (left <= right) {
+            replaceBlockToStarHorizontal(left, right);
         }
         if(isErased){
             seq += 1;
@@ -282,6 +327,9 @@ public abstract class Board extends JFrame {
     }
 
     protected void drawBoard() {
+        if (isAction) {
+            System.out.println("drawBoard stop");
+        }
         StyledDocument doc = pane.getStyledDocument();
         pane.setText("");
         try {
@@ -338,7 +386,7 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
-    protected void gameOver() {
+    public void gameOver() {
         System.out.println("Game over!");
         new GameOver();
 
@@ -373,53 +421,6 @@ public abstract class Board extends JFrame {
         timer.start();
     }
 
-//    public class PlayerKeyListener implements KeyListener {
-//        @Override
-//        public void keyTyped(KeyEvent e) {
-//
-//        }
-//
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            switch (e.getKeyCode()) {
-//                case KeyEvent.VK_DOWN: {
-//                    moveDown();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_RIGHT: {
-//                    moveRight();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_LEFT: {
-//                    moveLeft();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_UP: {
-//                    moveRotate();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_SPACE: {
-//                    moveFall();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_ESCAPE: {
-//                    pause();
-//                    break;
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void keyReleased(KeyEvent e) {
-//
-//        }
-//    }
-
     public class PlayerKeyListener extends Keyboard {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -440,8 +441,10 @@ public abstract class Board extends JFrame {
             } else if (keyCode == Keyboard.SPACE) {
                 moveFall();
                 drawBoard();
-            } else {
+            } else if (keyCode == Keyboard.ESC){
                 pause();
+            } else {
+//                pane.setText("asdjkfhasdjklfhklasdhfjkasdhjfklhasdjklfhasdkhfjklasdhfjklhjdkslafhjklashjkldfhklasd");
             }
         }
     }

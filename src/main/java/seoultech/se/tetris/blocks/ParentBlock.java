@@ -63,4 +63,6 @@ public abstract class ParentBlock {
     public boolean getIsSettled() {
         return isSettled;
     }
+
+    public static void setColorType(int type) {colorType=type;}
 }

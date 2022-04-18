@@ -1,7 +1,8 @@
 package seoultech.se.tetris.menu;
 
-import javax.swing.*;
+import seoultech.se.tetris.blocks.ParentBlock;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -44,6 +45,7 @@ public class ColorMode extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     writeColorMode(cn);
+                    ParentBlock.setColorType(cn);
                     JOptionPane.showMessageDialog(null,"모드가 변경되었습니다.");
                     setVisible(false);
                 }

@@ -1,6 +1,7 @@
 package seoultech.se.tetris.component.pause;
 
 import seoultech.se.tetris.component.board.Board;
+import seoultech.se.tetris.component.pause.score.ScoreBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,20 +21,19 @@ public class PauseView extends JDialog {
 
     JButton resumeBtn;
     JButton exitBtn;
+    JTextPane tp;
 
     public PauseView(int score, Board parent) {
         this.parent = parent;
 
         this.setUndecorated(true);
         this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+        this.setBackground(Color.BLACK);
         PauseView.score = score;
-        this.setLayout(new GridLayout(3, 1, 0, 0));
+        this.setLayout(new GridLayout(4, 1, 1, 1));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel scorePane = new JLabel();
-        scorePane.setBackground(Color.WHITE);
-        scorePane.setHorizontalAlignment(SwingConstants.CENTER);
-        scorePane.setText(String.valueOf(PauseView.score));
+        JPanel scorePane = new ScoreBox(score);
 
 
         resumeBtn = new JButton();
@@ -51,6 +51,10 @@ public class PauseView extends JDialog {
         this.add(resumeBtn);
         this.add(exitBtn);
 
+        tp = new JTextPane();
+        tp.setText(String.valueOf(123));
+        this.add(tp);
+
         this.addKeyListener(new KeyListener() {
 
             @Override
@@ -63,6 +67,10 @@ public class PauseView extends JDialog {
                 switch(e.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
                         if (idx == 0) {
+                            disposeComponent();
+                        } else {
+                            System.out.println(111112);
+                            parent.gameOver();
                             disposeComponent();
                         }
                         break;
@@ -83,6 +91,7 @@ public class PauseView extends JDialog {
                         }
                         break;
                     default:
+                        tp.setText(String.valueOf(idx));
                 }
             }
 
