@@ -102,7 +102,7 @@ public class ItemBoard extends Board {
 
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
-        StyleConstants.setFontSize(parentStyle, 24);
+        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
         StyleConstants.setFontFamily(parentStyle, "Courier");
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
@@ -112,11 +112,11 @@ public class ItemBoard extends Board {
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
         //Create the first block and draw.
-        focus = getRandomItemBlock();
+        focus = getRandomBlock();
         placeBlock();
         drawBoard();
         timer.start();
-        next = getRandomItemBlock();
+        next = getRandomBlock();
         drawNextBlock();
 
     }
@@ -290,7 +290,13 @@ public class ItemBoard extends Board {
         }
         eraseLines();
         focus = next;
-        next = getRandomItemBlock();
+        if (cnt > 10) {
+            cnt = 0;
+            next = getRandomItemBlock();
+        } else {
+            next = getRandomBlock();
+        }
+//        next = getRandomItemBlock();
         drawNextBlock();
         x = 3;
         y = 0;

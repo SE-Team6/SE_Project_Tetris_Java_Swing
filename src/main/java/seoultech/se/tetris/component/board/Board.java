@@ -2,16 +2,14 @@ package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.*;
 import seoultech.se.tetris.component.Score;
+import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.Random;
 
 
@@ -48,8 +46,43 @@ public abstract class Board extends JFrame {
 
     protected Block[][] board;
 
+    protected boolean isPause = false;
+
+    protected PauseView pv = new PauseView(0, this);
+
     public Board() {
         super("SW TEAM 6");
+
+        // fix 방법 확인
+        this.addComponentListener(new ComponentListener() {
+
+            @Override
+            public void componentResized(ComponentEvent e) {
+                if (isPause) {
+//                    pv.setLocationRelativeTo(e.getComponent());
+                    pv.setVisible(true);
+                }
+
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+                if (isPause) {
+//                    pv.setLocationRelativeTo(e.getComponent());
+                    pv.setVisible(true);
+                }
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+
+            }
+        });
     }
 
     protected void focusFrame() {
@@ -288,6 +321,34 @@ public abstract class Board extends JFrame {
         reset();
     }
 
+    protected void pause() {
+        System.out.println("pause");
+        if (isPause) {
+            setIsPause();
+        } else {
+            timer.stop();
+//            PauseView pv = new PauseView(score.getScore(), this);
+            pv.setScore(score.getScore());
+            pv.setLocationRelativeTo(this);
+            int w = this.getWidth();
+            int h = this.getHeight();
+            int x = this.getX();
+            int y = this.getY();
+            pv.setLocation(x + w/4, y + h/4);
+            pv.setSize(w/2, h/2);
+            pv.setVisible(true);
+            setIsPause();
+        }
+    }
+
+    public void setIsPause() {
+        this.isPause = !this.isPause;
+    }
+
+    public void startTimer() {
+        timer.start();
+    }
+
     public class PlayerKeyListener implements KeyListener {
         @Override
         public void keyTyped(KeyEvent e) {
@@ -323,7 +384,7 @@ public abstract class Board extends JFrame {
                     break;
                 }
                 case KeyEvent.VK_ESCAPE: {
-                    System.out.println("pause");
+                    pause();
                     break;
                 }
             }
