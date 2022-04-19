@@ -1,5 +1,9 @@
 package seoultech.se.tetris.main;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import seoultech.se.tetris.component.JSONLoader;
+import seoultech.se.tetris.component.JSONWriter;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.ScoreBoardItemMode;
 import seoultech.se.tetris.menu.BasicSet;
@@ -11,6 +15,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderScoreBoardPage;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
@@ -41,6 +46,9 @@ public class GameOver extends JFrame {
     private JPanel scoreBoardSummary = new JPanel();
 
     private JLabel[]  rankLabel = new JLabel[10];
+    private JLabel[]  nameLabel = new JLabel[10];
+    private JLabel[]  scoreLabel = new JLabel[10];
+
     private JLabel[] scoreBoardLabel = new JLabel[3];
     private JTextField myName= new JTextField();
     private JLabel myScore;
@@ -59,6 +67,7 @@ public class GameOver extends JFrame {
         labelSet();
         buttonSet();
         scoreBoardPanel();
+        scoreBoardSet();
     }
 
     public void scoreBoardPanel(){
@@ -81,6 +90,17 @@ public class GameOver extends JFrame {
         scoreBoardSummaryPanel.add(scoreBoardSummary);
         bs.add(scoreBoardSummaryPanel);
     }
+    public void scoreBoardSet(){
+        JSONArray res = JSONLoader.loaderScore();
+        ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
+        int j=0;
+        for (int i=0;i<10;i++){
+            nameLabel[j].setText((String) arr.get(i).get("Name"));
+            scoreLabel[j].setText(String.valueOf(arr.get(i).get("Score")));
+            j+=1;
+        }
+    }
+
     public void scoreBoardLabel(){
         String [] sbList = {"Rank","Name","Score"};
         int [] sbListX={0,30,110};
@@ -103,6 +123,22 @@ public class GameOver extends JFrame {
             rankLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             rankLabel[i].setForeground(Color.BLACK);
             scoreBoardSummary.add(rankLabel[i]);
+
+            nameLabel[i] =new JLabel();
+            nameLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            nameLabel[i].setBorder(new LineBorder(Color.RED,1,true));
+            nameLabel[i].setBounds(sbListX[1],LabelY,sbListSize[1],32);
+            nameLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
+            nameLabel[i].setForeground(Color.BLACK);
+            scoreBoardSummary.add(nameLabel[i]);
+
+            scoreLabel[i] =new JLabel();
+            scoreLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            scoreLabel[i].setBorder(new LineBorder(Color.RED,1,true));
+            scoreLabel[i].setBounds(sbListX[2],LabelY,sbListSize[2],32);
+            scoreLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
+            scoreLabel[i].setForeground(Color.BLACK);
+            scoreBoardSummary.add(scoreLabel[i]);
             LabelY+=30;
         }
     }

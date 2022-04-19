@@ -1,6 +1,7 @@
 package seoultech.se.tetris.component;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -9,8 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
-import static seoultech.se.tetris.component.JSONLoader.loaderScore;
 import static seoultech.se.tetris.component.JSONLoader.loaderScoreBoardPage;
 import static seoultech.se.tetris.component.JSONWriter.writeScoreBoardPage;
 
@@ -26,7 +27,9 @@ public class ScoreBoardItemMode extends JFrame {
     private JLabel[]  dateLabel = new JLabel[10];
     private JLabel[]  difficultyLabel = new JLabel[10];
     private JLabel pageNum;
-
+    private int rankNum=0; //
+    private int scoreBoardNum =0;//스코어 정보를 불러오기 위한
+    private int page = 1;
     private JButton rightPageBtn = new JButton();
     private JButton leftPageBtn = new JButton();
     private ImageIcon rightPageButtonImg =  new ImageIcon("src/main/resources/image/Button/ScoreBoard/RightButton.png");
@@ -34,13 +37,14 @@ public class ScoreBoardItemMode extends JFrame {
     int [] sbListSize={30,120,50,50,50};
     int [] sbListX={0,30,150,200,250};
     int [] currentRank={0,10,20,30,40,50,60,70,80,90};
+    int [] test = {1,11,21,31,41,51,61,71,81,91};
     Keyboard key = Keyboard.getInstance();
     public ScoreBoardItemMode(){
         setting();
         pageButton();
         scorePanel();
         frame.addKeyListener(new pageControl());
-        loadScoreBoard();
+        loadScoreBoard(scoreBoardNum);
         pageNumLabel();
     }
     public void setting(){
@@ -123,8 +127,7 @@ public class ScoreBoardItemMode extends JFrame {
         }
     }
     public void pageNumLabel(){
-        int a= loaderScoreBoardPage()+1;
-        pageNum = new JLabel(a+"/10");
+        pageNum = new JLabel(page+"/10");
         pageNum.setFont(new Font("Bahnschrift",Font.BOLD,12));
         pageNum.setBounds(180,520,40,40);
         pageNum.setHorizontalAlignment(SwingConstants.CENTER);
@@ -165,26 +168,55 @@ public class ScoreBoardItemMode extends JFrame {
         });
         frame.add(leftPageBtn);
     }
-    public void loadScoreBoard(){
-
+    public void loadScoreBoard(int a){
+        JSONArray res = JSONLoader.loaderScore();
+        ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
+        int j=0;
+        for (int i=a;i<a+10;i++){
+            nameLabel[j].setText((String) arr.get(i).get("Name"));
+            scoreLabel[j].setText(String.valueOf(arr.get(i).get("Score")));
+            dateLabel[j].setText((String) arr.get(i).get("DateTime"));
+            String difficultyVal = String.valueOf(arr.get(i).get("Difficulty"));
+            difficultyLabel[j].setText(difficultyLabelSet(difficultyVal));
+            j+=1;
+        }
+    }
+    public String difficultyLabelSet(String a){ // 임시
+        int to = Integer.parseInt(a);
+        if(to==49) return "Easy";
+        else if(to==48) return "Normal";
+        else if(to==47) return "Hard";
+        else return "hello";
     }
     public class pageControl extends KeyAdapter{
         @Override
         public void keyPressed(KeyEvent e) {
             int keyValue = e.getKeyCode();
             if (keyValue==key.LEFT){
-                int a= loaderScoreBoardPage() -1;
-                frame.setVisible(false);
-                if(a==-1) a=0;
-                writeScoreBoardPage(a);
-                new ScoreBoardItemMode();
+                scoreBoardNum -=10;
+                page-=1;
+                if(scoreBoardNum <0) {
+                    scoreBoardNum = 0;
+                    page=1;
+                }
+                loadScoreBoard(scoreBoardNum); // 스코어 정보 불러오기
+                pageNum.setText(String.valueOf(page+"/10")); // 현재 페이지 출력
+                for (int i=0;i<10;i++){
+                    rankLabel[i].setText(String.valueOf(scoreBoardNum+1+i));// 순위 설정
+                }
             }
             else if(keyValue==key.RIGHT){
-                int a= loaderScoreBoardPage() +1;
-                frame.setVisible(false);
-                if(a==10) a=9;
-                writeScoreBoardPage(a);
-                new ScoreBoardItemMode();
+                scoreBoardNum +=10;
+                page+=1;
+                if(scoreBoardNum >90) {
+                    scoreBoardNum =90;
+                    page=10;
+                }
+                loadScoreBoard(scoreBoardNum);
+                pageNum.setText(String.valueOf(page+"/10")); //페이지
+                for (int i=0;i<10;i++){
+                    rankLabel[i].setText(String.valueOf(scoreBoardNum+i+1)); // 순위
+                }
             }
         }
     }

@@ -102,7 +102,7 @@ public class JSONWriter {
         // Write to FILE
         JSONObject result = new JSONObject();
         JSONArray arr2 = new JSONArray();
-        for(int i=0; i < Math.min(allScores.size(), 10); ++i){
+        for(int i=0; i < Math.min(allScores.size(), 100); ++i){
             if(newScore.equals(allScores.get(i))){
                 rank = i;
             }

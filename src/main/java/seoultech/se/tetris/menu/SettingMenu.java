@@ -81,7 +81,7 @@ public class SettingMenu extends JFrame {
                                 writeKey(keyValueArr);
                                 writeColorMode(0);
                                 JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
-                                bs.setVisible(true);
+                                new SettingMenu();
                             }
                         });
                         break;
