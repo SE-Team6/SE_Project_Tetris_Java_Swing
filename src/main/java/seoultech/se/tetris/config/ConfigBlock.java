@@ -11,7 +11,7 @@ public class ConfigBlock {
     public static final String BLOCK_CHAR_MAC = "◼";
     public static final String NON_BLOCK_CHAR_MAC = " ";
     public static final String RANDOM_CHAR = "ʟ";
-    public static final String CHESS_QUEEN = "♛";
+    public static final String CHESS_QUEEN = "♜";
     public static final String STAR = "★";
     public static int fontSize = 24 ;
 

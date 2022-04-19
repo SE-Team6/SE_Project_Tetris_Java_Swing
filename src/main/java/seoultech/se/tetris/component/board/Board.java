@@ -74,7 +74,7 @@ public abstract class Board extends JFrame {
 
     protected PauseView pv;
 
-    protected static boolean isAction = false;
+    protected boolean isAction = false;
 
     public Board() {
         super("SW TEAM 6");
@@ -219,8 +219,6 @@ public abstract class Board extends JFrame {
             res.append(row);
             res.append("\n");
         }
-
-        System.out.println(res);
 
         pane.setText(res.toString());
         timer = new Timer(Math.round(initInterval/10), e -> {

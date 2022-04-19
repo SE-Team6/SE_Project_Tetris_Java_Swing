@@ -20,6 +20,8 @@ import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
+    private int eventX; int eventY;
+    private boolean event = false;
 
     public ItemBoard() {
         this.cnt = 0;
@@ -37,7 +39,6 @@ public class ItemBoard extends Board {
 
         // right items
         rightPanel = new JPanel();
-//        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setBackground(Color.GRAY);
@@ -62,21 +63,6 @@ public class ItemBoard extends Board {
 
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
-
-//        //Document default style.
-//        styleSet = new SimpleAttributeSet();
-//        StyleConstants.setFontSize(styleSet, 18);
-//        StyleConstants.setFontFamily(styleSet, "Courier");
-//        StyleConstants.setBold(styleSet, true);
-//        StyleConstants.setForeground(styleSet, Color.WHITE);
-//        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
-//
-//        nextStyleSet = new SimpleAttributeSet();
-//
-//        StyleConstants.setFontFamily(nextStyleSet, "Courier");
-//        StyleConstants.setBold(nextStyleSet, true);
-//        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
-//        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
 
         //Set timer for block drops.
         timer = new Timer(Math.round(initInterval), e -> {
@@ -123,8 +109,57 @@ public class ItemBoard extends Board {
         pv = new PauseView(0, this);
     }
 
+    @Override
+    protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
+        timer.stop();
+        isAction = true;
+        String all = pane.getText();
+        String[] rows = all.split("\n");
+        StringBuilder tmp = new StringBuilder();
+        for(int i=0;i<WIDTH+2;i++){
+            tmp.append(i==0 || i==WIDTH+1 ? ConfigBlock.BORDER_CHAR : ConfigBlock.STAR);
+        }
+
+        // erase Curr
+        x = previousFallX; y = previousFallY;
+        for (int j = y; j < y + focus.height(); j++) {
+            for (int i = x; i < x + focus.width(); i++) {
+                if (focus.getShape(i - x, j - y) != null) {
+                    rows[j+1] = rows[j+1].substring(0, i+1) + ConfigBlock.NON_BLOCK_CHAR + rows[j+1].substring(i+2);
+                }
+            }
+        }
+
+        if (eventX != -1) {
+            for(int i=0;i<HEIGHT;i++){
+                rows[i+1] = rows[i+1].substring(0, eventX+1) + ConfigBlock.STAR + rows[i+1].substring(eventX+2);
+            }
+            eventX = -1;
+        }
+        for (int i=0;i<HEIGHT;i++){
+            if ((targetL<=i && i<=targetR) || i == eventY) {
+                rows[i+1] = tmp.toString();
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (String row: rows) {
+            res.append(row);
+            res.append("\n");
+        }
+
+        pane.setText(res.toString());
+        event = false;
+
+        timer = new Timer(Math.round(initInterval/10), e -> {
+            activeDrawBoard();
+        });
+        timer.start();
+    }
+
     protected ParentBlock getRandomItemBlock() {
         Random random = new Random(System.currentTimeMillis());
+//        int block = random.nextInt(17);
         int block = random.nextInt(17);
         switch (block) {
             case 0: return new RandomIBlock();
@@ -143,13 +178,17 @@ public class ItemBoard extends Board {
             case 13: return new QueenSBlock();
             case 14: return new QueenTBlock();
             case 15: return new QueenOBlock();
-            default: return new PendulumBlock();
+            case 16: return new PendulumBlock();
+            default: return new QueenJBlock();
         }
     }
 
     @Override
     protected void eraseLines() {
         int combo = 0;
+        int left = 0; int right = -1;
+        boolean isErased = false;
+
         // itemType == 1 L block
         if (focus.getBlockType() == 1) {
             eraseLLine();
@@ -164,6 +203,12 @@ public class ItemBoard extends Board {
                 }
             }
             if (tmp == Board.WIDTH) {
+                if (right == -1) {
+                    right = i;
+                    left = i;
+                } else {
+                    left--;
+                }
                 for(int j=0;j<Board.WIDTH;j++){
                     for(int k=i;k>=1;k--){
                         board[k][j] = board[k-1][j];
@@ -185,12 +230,25 @@ public class ItemBoard extends Board {
             eraseQLine();
         }
 
+        if (left <= right || event) {
+            replaceBlockToStarHorizontal(left, right);
+        }
+
         // itemType == 4
         if (focus.getBlockType() == 4 && combo == 0) {
             generateNewLines(2);
         }
-        if (combo > 0) {
-            timerSet();
+        if(isErased){
+            seq += 1;
+        }else{
+            seq = 0;
+        }
+        score.addLineClearScore(combo, stage, seq);
+        if (lineCount >= 5) {
+            stage += 1;
+            System.out.println(stage);
+            lineCount -= 5;
+            timerSpeedUpSet();
         }
     }
 
@@ -199,6 +257,8 @@ public class ItemBoard extends Board {
         int targetX = x + pos[1];
         int targetY = y + pos[0];
 
+        eventX = -1; eventY = targetY; event = true;
+
         eraseHorizontalLine(targetY);
     }
 
@@ -206,7 +266,8 @@ public class ItemBoard extends Board {
         int[] pos = focus.getBlockRandomPos();
         int targetX = x + pos[1];
         int targetY = y + pos[0];
-        eraseDiagonalLine(targetX, targetY);
+
+        eventX = targetX; eventY = targetY; event = true;
         eraseHorizontalLine(targetY);
         eraseVerticalLine(targetX);
     }
@@ -296,7 +357,8 @@ public class ItemBoard extends Board {
             cnt = 0;
             next = getRandomItemBlock();
         } else {
-            next = getRandomBlock();
+//            next = getRandomBlock();
+            next = getRandomItemBlock();
         }
 //        next = getRandomItemBlock();
         drawNextBlock();
@@ -399,6 +461,7 @@ public class ItemBoard extends Board {
             moveFallPendulumCurr();
             return;
         }
+        previousFallX = x; previousFallY = y;
         super.moveFall();
     }
 }
