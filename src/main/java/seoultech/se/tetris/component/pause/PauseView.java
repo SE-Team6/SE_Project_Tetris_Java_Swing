@@ -21,7 +21,6 @@ public class PauseView extends JDialog {
 
     JButton resumeBtn;
     JButton exitBtn;
-    JTextPane tp;
 
     public PauseView(int score, Board parent) {
         this.parent = parent;
@@ -30,7 +29,7 @@ public class PauseView extends JDialog {
         this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
         this.setBackground(Color.BLACK);
         PauseView.score = score;
-        this.setLayout(new GridLayout(4, 1, 1, 1));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel scorePane = new ScoreBox(score);
@@ -50,10 +49,6 @@ public class PauseView extends JDialog {
         this.add(scorePane);
         this.add(resumeBtn);
         this.add(exitBtn);
-
-        tp = new JTextPane();
-        tp.setText(String.valueOf(123));
-        this.add(tp);
 
         this.addKeyListener(new KeyListener() {
 
@@ -90,8 +85,6 @@ public class PauseView extends JDialog {
                             showSelectedButton();
                         }
                         break;
-                    default:
-                        tp.setText(String.valueOf(idx));
                 }
             }
 

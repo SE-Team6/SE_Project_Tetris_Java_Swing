@@ -384,30 +384,21 @@ public class ItemBoard extends Board {
         placeBlock();
     }
 
+    private void moveFallPendulumCurr() {
+        erasePendulumCurr();
+        for (int i=x;i<x+focus.width();i++){
+            eraseVerticalLine(i);
+        }
+        generateNewBlock();
+        return;
+    }
+
     @Override
     protected void moveFall() {
         if (focus.getBlockType() == 2) {
-            erasePendulumCurr();
-            for (int i=x;i<x+focus.width();i++){
-                eraseVerticalLine(i);
-            }
-            generateNewBlock();
+            moveFallPendulumCurr();
             return;
         }
-        eraseCurr();
-        for (int i = y; i < Board.HEIGHT; i++) {
-            if (!isBottomTouched()) {
-                y++;
-                if (isOverlap()) {
-                    y--;
-                    generateNewBlock();
-                    break;
-                }
-            } else {
-                generateNewBlock();
-                break;
-            }
-        }
-        placeBlock();
+        super.moveFall();
     }
 }

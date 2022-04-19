@@ -194,3 +194,5 @@ gradle-app.setting
 gradlew
 gradlew.bat
 gradle/wrapper/
+
+src/main/configs/

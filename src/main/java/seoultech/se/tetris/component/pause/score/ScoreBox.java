@@ -16,6 +16,7 @@ public class ScoreBox extends JPanel {
         left.setBounds(labelX,120,100,40);
         left.setHorizontalAlignment(SwingConstants.CENTER);
         left.setForeground(Color.YELLOW);
+//        left.setBorder(new LineBorder(Color.RED,1,true));
 
         right.setFont(new Font("Bahnschrift",Font.BOLD,20));
         right.setBounds(textFiledX,120,100,40);
@@ -23,9 +24,12 @@ public class ScoreBox extends JPanel {
         right.setOpaque(true);
         right.setBackground(Color.BLACK);
         right.setForeground(Color.RED);
-        right.setBorder(new LineBorder(Color.RED,1,true));
+//        right.setBorder(new LineBorder(Color.RED,1,true));
 
+        this.setBackground(Color.BLACK);
         this.add(left);
         this.add(right);
+
+        this.setBorder(new LineBorder(Color.RED, 1, true));
     }
 }
