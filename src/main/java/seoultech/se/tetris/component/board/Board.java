@@ -65,6 +65,8 @@ public abstract class Board extends JFrame {
 
     protected int x = 3; //Default Position.
     protected int y = 0;
+    protected int previousFallX = 3;
+    protected int previousFallY = 0;
 
     protected Block[][] board;
 
@@ -147,6 +149,15 @@ public abstract class Board extends JFrame {
         timer.start();
     }
 
+    protected void timerSpeedUpSet() {
+        timer.stop();
+        timer = new Timer(Math.round(initInterval), e -> {
+            moveDown();
+            drawBoard();
+        });
+        timer.start();
+    }
+
     // add overlap check
     protected boolean isOverlap() {
         for (int i = x; i < x + focus.width(); i++) {
@@ -178,8 +189,6 @@ public abstract class Board extends JFrame {
         // GAME OVER
         if (isOverlap()) {
             gameOver();
-//            reset();
-//            score.resetScore();
         }
     }
 
@@ -195,24 +204,35 @@ public abstract class Board extends JFrame {
         for (int i=targetL;i<=targetR;i++){
             rows[i+1] = tmp.toString();
         }
-        String res = "";
+        // erase Curr
+        x = previousFallX; y = previousFallY;
+        for (int j = y; j < y + focus.height(); j++) {
+            for (int i = x; i < x + focus.width(); i++) {
+                if (focus.getShape(i - x, j - y) != null) {
+                    rows[j+1] = rows[j+1].substring(0, i+1) + ConfigBlock.NON_BLOCK_CHAR + rows[j+1].substring(i+2);
+                }
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
         for (String row: rows) {
-            res += row;
-            res += "\n";
+            res.append(row);
+            res.append("\n");
         }
-        String ret = res;
-        System.out.println(ret);
-        pane.setText(ret);
-        System.out.println("start");
-        try {
-            Thread.sleep(5000);
-            System.out.println("finish");
-            System.out.println(pane.getText());
-            isAction = false;
-            timer.start();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
+        System.out.println(res);
+
+        pane.setText(res.toString());
+        timer = new Timer(Math.round(initInterval/10), e -> {
+            activeDrawBoard();
+        });
+        timer.start();
+    }
+
+    protected void activeDrawBoard(){
+        isAction = false;
+        drawBoard();
+        timerSet();
     }
 
     protected void eraseLines() {
@@ -259,7 +279,7 @@ public abstract class Board extends JFrame {
             stage += 1;
             System.out.println(stage);
             lineCount -= 5;
-            timerSet();
+            timerSpeedUpSet();
         }
     }
 
@@ -278,6 +298,8 @@ public abstract class Board extends JFrame {
     }
 
     protected void moveFall() {
+        previousFallX = x;
+        previousFallY = y;
         eraseCurr();
         score.addUnitScore((Board.HEIGHT - y)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
@@ -329,6 +351,7 @@ public abstract class Board extends JFrame {
     protected void drawBoard() {
         if (isAction) {
             System.out.println("drawBoard stop");
+            return;
         }
         StyledDocument doc = pane.getStyledDocument();
         pane.setText("");
@@ -392,7 +415,6 @@ public abstract class Board extends JFrame {
 
         timer.stop();
         this.dispose();
-//        reset();
     }
 
     protected void pause() {
@@ -441,10 +463,8 @@ public abstract class Board extends JFrame {
             } else if (keyCode == Keyboard.SPACE) {
                 moveFall();
                 drawBoard();
-            } else if (keyCode == Keyboard.ESC){
+            } else if (keyCode == Keyboard.ESC) {
                 pause();
-            } else {
-//                pane.setText("asdjkfhasdjklfhklasdhfjkasdhjfklhasdjklfhasdkhfjklasdhfjklhjdkslafhjklashjkldfhklasd");
             }
         }
     }
