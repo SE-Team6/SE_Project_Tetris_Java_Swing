@@ -48,21 +48,30 @@ public class GameDifficulty {
                 allPositionPoint();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
-                if (positionPoint ==0){//이지 모드
-                    gameDifficultyNum=0;
-                    if (gameModeNum==0)normalMode();
-                    else if(gameModeNum==1)itemMode();
-                }
-                else if(positionPoint==1){// 노말 모드
-                    gameDifficultyNum=1;
-                    if (gameModeNum==0)normalMode();
-                    else if(gameModeNum==1)itemMode();
-                }
-                else if(positionPoint==2){// 하드 모드
-                    gameDifficultyNum=2;
-                    if (gameModeNum==0)normalMode();
-                    else if(gameModeNum==1)itemMode();
-                }
+                /*
+                    positionPoint == 0 : easy
+                    positionPoint == 1 : normal
+                    positionPoint == 2 : hard
+                 */
+                gameDifficultyNum = positionPoint;
+                if(gameModeNum == 0) normalMode(positionPoint);
+                else if(gameModeNum == 1) itemMode(positionPoint);
+
+//                if (positionPoint ==0){//이지 모드
+//                    gameDifficultyNum=0;
+//                    if (gameModeNum==0)normalMode();
+//                    else if(gameModeNum==1)itemMode();
+//                }
+//                else if(positionPoint==1){// 노말 모드
+//                    gameDifficultyNum=1;
+//                    if (gameModeNum==0)normalMode();
+//                    else if(gameModeNum==1)itemMode();
+//                }
+//                else if(positionPoint==2){// 하드 모드
+//                    gameDifficultyNum=2;
+//                    if (gameModeNum==0)normalMode();
+//                    else if(gameModeNum==1)itemMode();
+//                }
             }
         }
     }
@@ -85,15 +94,17 @@ public class GameDifficulty {
         }
         allPositionPoint();
     }
-    public void itemMode(){
+    public void itemMode(int difficulty){
         Board ib = new ItemBoard();
+        ib.setDifficulty(difficulty);
         ib.setSize(Width,Height);
         ib.setLocationRelativeTo(null);
         ib.setVisible(true);
         bs.setVisible(false);
     }
-    public void normalMode(){
+    public void normalMode(int difficulty){
         Board nb =new NormalBoard();
+        nb.setDifficulty(difficulty);
         nb.setSize(Width,Height);
         nb.setLocationRelativeTo(null);
         nb.setVisible(true);
