@@ -16,8 +16,6 @@ public class BlockGenerateProbabilityTest {
     private static double[] IBLOCK_MIN = new double[3];
     private static double[] IBLOCK_MAX = new double[3];
 
-    public static Random random = new Random(System.currentTimeMillis());
-
     private final static NormalBoard board = new NormalBoard();
 
     private static int [][] count = new int[3][7];

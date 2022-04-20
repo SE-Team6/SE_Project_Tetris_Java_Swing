@@ -22,10 +22,14 @@ public class JSONLoader {
         try {
             switch (type){
                 case "settings":
-                    obj = (JSONObject) parser.parse(new FileReader(SETTINGS_FILEPATH));
+                    FileReader settingFile = new FileReader(SETTINGS_FILEPATH);
+                    obj = (JSONObject) parser.parse(settingFile);
+                    settingFile.close();
                     break;
                 case "score":
-                    obj = (JSONObject) parser.parse(new FileReader(SCORE_FILEPATH));
+                    FileReader scoreFile = new FileReader(SCORE_FILEPATH);
+                    obj = (JSONObject) parser.parse(scoreFile);
+                    scoreFile.close();
                     break;
             }
         } catch (FileNotFoundException e){
