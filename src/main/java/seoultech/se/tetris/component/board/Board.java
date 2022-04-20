@@ -48,7 +48,7 @@ public abstract class Board extends JFrame {
 
     protected ConfigBlock config = ConfigBlock.getInstance();
 
-    public float initInterval = 1000;
+    public static float initInterval = 1000;
 
     protected JTextPane pane;
     protected JPanel rightPanel;
@@ -96,7 +96,9 @@ public abstract class Board extends JFrame {
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
         for(int i=0; i<17; ++i) itemProb[i] = (double)1/17;
 
-        rateInterval -= (rateInterval * 0.2 * (difficulty));
+        for(int i=0; i<difficulty; ++i){
+            initInterval *= 0.8;
+        }
     }
 
     protected int getRoulette(){
@@ -147,7 +149,6 @@ public abstract class Board extends JFrame {
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
-            System.out.println(initInterval);
             moveDown();
             drawBoard();
         });

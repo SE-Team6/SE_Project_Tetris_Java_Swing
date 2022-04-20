@@ -26,7 +26,7 @@ public class ScoreReset extends JFrame {
         yesReset.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                resetScore();
+                resetScore("normal");
                 JOptionPane.showMessageDialog(null,"스코어보드가 초기화 되었습니다.");
                 setVisible(false);
             }
