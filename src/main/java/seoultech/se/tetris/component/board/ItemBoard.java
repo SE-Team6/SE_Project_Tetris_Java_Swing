@@ -1,12 +1,12 @@
 package seoultech.se.tetris.component.board;
 
-import seoultech.se.tetris.blocksTmp.*;
-import seoultech.se.tetris.blocksTmp.ParentBlock;
-import seoultech.se.tetris.blocksTmp.item.one.OneBlock;
-import seoultech.se.tetris.blocksTmp.item.pendulum.PendulumBlock;
-import seoultech.se.tetris.blocksTmp.item.queen.*;
-import seoultech.se.tetris.blocksTmp.item.random.*;
-import seoultech.se.tetris.blocksTmp.item.slime.SlimeBlock;
+import seoultech.se.tetris.blocks.*;
+import seoultech.se.tetris.blocks.ParentBlock;
+import seoultech.se.tetris.blocks.item.one.OneBlock;
+import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
+import seoultech.se.tetris.blocks.item.queen.*;
+import seoultech.se.tetris.blocks.item.random.*;
+import seoultech.se.tetris.blocks.item.slime.SlimeBlock;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;

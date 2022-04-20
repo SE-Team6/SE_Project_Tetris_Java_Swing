@@ -13,7 +13,7 @@ public class ConfigBlock {
     public static final String RANDOM_CHAR = "ʟ";
     public static final String CHESS_QUEEN = "♜";
     public static final String STAR = "★";
-    public static int fontSize = 24 ;
+    public static int fontSize = 64 ;
 
     public static int colorType = 0;
     public static final String[][] BlOCK_COLOR = {
@@ -64,5 +64,9 @@ public class ConfigBlock {
 
     public static void setColorType(int type) {
         colorType = type;
+    }
+
+    public static void setFontSize(int size) {
+        fontSize = size;
     }
 }

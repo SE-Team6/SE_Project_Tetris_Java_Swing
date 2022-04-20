@@ -1,6 +1,6 @@
 package seoultech.se.tetris.component.board;
 
-import seoultech.se.tetris.blocksTmp.Block;
+import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
