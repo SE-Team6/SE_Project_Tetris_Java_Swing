@@ -13,7 +13,7 @@ import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GameMode extends JFrame {
 
-    public static int gameModeNum; //0:노말 1:아이템
+    public static int gameModeNum2; //0:노말 1:아이템
 
     private BasicSet bs = new BasicSet();
     private BackMenu bm = new BackMenu();
@@ -48,12 +48,12 @@ public class GameMode extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    gameModeNum =0;//노말
+                    gameModeNum2 =0;//노말
                     bs.setVisible(false);
                     new GameDifficulty();
                 }
                 else if(positionPoint==1){
-                    gameModeNum =1;//아이템
+                    gameModeNum2 =1;//아이템
                     bs.setVisible(false);
                     new GameDifficulty();
                 }

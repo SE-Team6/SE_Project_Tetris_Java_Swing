@@ -250,7 +250,7 @@ public class ScoreBoard extends JFrame {
     }
     public void higLightSB(int a){ // 점수 업데이트시에는 자기 점수 하이라이트
         int num = (a/10) *10;
-        page=a/10;
+        page=(a/10)+1;
         scoreBoardNum=num;
         scorePanel(scoreBoardNum);
         loadScoreBoard(scoreBoardNum);

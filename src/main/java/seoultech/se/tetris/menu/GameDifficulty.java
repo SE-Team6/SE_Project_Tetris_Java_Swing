@@ -4,7 +4,7 @@ import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.component.board.NormalBoard;
 
 import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum;
+import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
 import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 import javax.swing.*;
@@ -54,8 +54,8 @@ public class GameDifficulty {
                     positionPoint == 2 : hard
                  */
                 gameDifficultyNum = positionPoint;
-                if(gameModeNum == 0) normalMode(positionPoint);
-                else if(gameModeNum == 1) itemMode(positionPoint);
+                if(gameModeNum2 == 0) normalMode(positionPoint);
+                else if(gameModeNum2 == 1) itemMode(positionPoint);
 
 //                if (positionPoint ==0){//이지 모드
 //                    gameDifficultyNum=0;

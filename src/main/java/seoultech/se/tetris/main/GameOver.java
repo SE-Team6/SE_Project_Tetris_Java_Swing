@@ -23,7 +23,8 @@ import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
 import static seoultech.se.tetris.menu.BasicSet.*;
 import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum;
+import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
+import static seoultech.se.tetris.menu.ScoreMode.gameModeNum;
 
 public class GameOver extends JFrame {
 
@@ -61,8 +62,7 @@ public class GameOver extends JFrame {
 
     public static int higLightNum = 0;
     BasicSet bs = new BasicSet();
-    Score sc = new Score();
-    private  int score;
+    private int score;
     public static String nowDate;
     private JSONArray res;
     private JSONArray loadedScores;
@@ -70,6 +70,7 @@ public class GameOver extends JFrame {
     public GameOver(){
         bs.setVisible(true);
         score = Score.score;
+        System.out.println(Score.score);
         setXY(Width);
         labelSet();
         buttonSet();
@@ -102,11 +103,11 @@ public class GameOver extends JFrame {
         bs.add(scoreBoardSummaryPanel);
     }
     public void scoreBoardSet(){
-        if (gameModeNum==0) {
+        if (gameModeNum2 ==0) {
             res = JSONLoader.loaderScore("normal");
             loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
         }
-        else if(gameModeNum==1) {
+        else if(gameModeNum2 ==1) {
             res = JSONLoader.loaderScore("item");
             loadedScores = (JSONArray) getJSONObject("item", "scoreBoard");
         }
@@ -170,22 +171,21 @@ public class GameOver extends JFrame {
                 bs.setFocusable(false);
                 dateGet();
                 JOptionPane.showMessageDialog(null,"점수가 업데이트 되었습니다");
-                String[] updateArr= {myName.getText(),nowDate, String.valueOf(110), String.valueOf(gameDifficultyNum),String.valueOf(gameModeNum)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
-                appendScore(updateArr,"normal");
-                scoreBoardSet();
-                if (gameModeNum==0) {
+                String[] updateArr= {myName.getText(),nowDate, String.valueOf(score), String.valueOf(gameDifficultyNum),String.valueOf(gameModeNum2)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
+                if (gameModeNum2 ==0) {
                     res = JSONLoader.loaderScore("normal");
+                    loadedScores =(JSONArray) getJSONObject("normal", "scoreBoard");
+                    higLightNum = appendScore(updateArr,"normal");
+                    gameModeNum =0;
                 }
-                else if(gameModeNum==1) {
+                else if(gameModeNum2 ==1) {
                     res = JSONLoader.loaderScore("item");
-                }
-                ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
-                JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
-                ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
-                for (int i=0;i<allScores.size();i++){
-                    if (arr.get(i).get("DateTime").equals(nowDate)) higLightNum=i;
+                    loadedScores =(JSONArray) getJSONObject("item", "scoreBoard");
+                    higLightNum = appendScore(updateArr,"item");
+                    gameModeNum = 1;
                 }
                 new ScoreBoard(higLightNum);
+                scoreBoardSet();
                 bs.setFocusable(true);
             }
         });
