@@ -1,24 +1,21 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.Keyboard;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.menu.BasicSet.Width;
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
-import static seoultech.se.tetris.component.JSONWriter.writeKey;
 import static seoultech.se.tetris.menu.BasicSet.key;
 
 public class SettingMenuKeySet extends JFrame{
 
-    private int labelX=20,labelWidth=200,labelHeight=40,labelFontSize=40;
-    private int textFieldX=200,textFieldWidth=80, textFieldHeight =30,textFieldFontSize=30;
+    public static int labelX,labelWidth=200,labelHeight=40,labelFontSize=40;
+    public static int textFieldX,textFieldWidth=80, textFieldHeight =30,textFieldFontSize=30;
     private int[] labelY = {120,170,220,270,320,370};// 0:left/1:right/2:up/3:down/4:esc/5:space
 
     private String [] textSequence = {"LEFT","RIGHT","UP","DOWN","ESC","SPACE"};
@@ -164,11 +161,14 @@ public class SettingMenuKeySet extends JFrame{
         Version ver =new Version();
         switch (Width){
             case 400:
-                ver.firstKeySetScreen();
+                ver.keySetFirstSize();
+                break;
             case 600:
-                ver.secondKeySetScreen();
+                ver.keySetSecondSize();
+                break;
             case 800:
-                ver.thirdScreenSizeSet();
+                ver.keySetThirdSize();
+                break;
         }
     }
 }

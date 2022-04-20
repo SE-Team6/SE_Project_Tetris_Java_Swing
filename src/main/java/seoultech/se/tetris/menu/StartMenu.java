@@ -76,7 +76,8 @@ public class StartMenu extends JFrame {
                         new SettingMenu();
                         break;
                     case 2: // 스코어 보드
-                        new ScoreBoardItemMode();
+                        bs.setVisible(false);
+                        new ScoreMode();
                         break;
                     case 3: // 게임종료
                         bs.setVisible(false);
