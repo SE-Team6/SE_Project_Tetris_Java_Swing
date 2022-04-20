@@ -55,7 +55,7 @@ public class BasicSet extends JFrame {
     }
     public void callSize() {
         HashMap<String, Integer> map = loaderResolution();
-        System.out.println(map.keySet());
+//        System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
     }

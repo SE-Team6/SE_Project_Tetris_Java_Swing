@@ -54,7 +54,7 @@ public class Version {
         gameOverTitleX=0;
         scoreBoardWidth=170;
         scoreBoardHeight=430;
-        labelX=195;
+        scoreAndNameLabelX=195;
         textFiledX=295;
         ButtonX=210;
         scoreBoardX=10;
@@ -69,7 +69,7 @@ public class Version {
         gameOverTitleX=100;
         scoreBoardWidth=300;
         scoreBoardHeight=630;
-        labelX=370;
+        scoreAndNameLabelX=370;
         textFiledX=470;
         ButtonX=385;
         scoreBoardX=20;
@@ -84,7 +84,7 @@ public class Version {
         gameOverTitleX=200;
         scoreBoardWidth=500;
         scoreBoardHeight=800;
-        labelX=585;
+        scoreAndNameLabelX=585;
         textFiledX=685;
         ButtonX=600;
         scoreBoardX=65;

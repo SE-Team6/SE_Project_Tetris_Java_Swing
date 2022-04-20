@@ -1,7 +1,5 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.Keyboard;
-
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -55,37 +53,7 @@ public class SettingMenu extends JFrame {
                 allPositionPoint();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
-                switch (positionPoint){
-                    case 0://해상도 설정
-                        bs.setVisible(false);
-                        new SettingMenuSize();
-                        break;
-                    case 1://키 설정
-                        bs.setVisible(false);
-                        new SettingMenuKeySet();
-                        break;
-                    case 2://스코어 보드 초기화
-                        new ScoreReset();
-                        break;
-                    case 3://색맹 모드.
-                        new ColorMode();
-                        break;
-                    case 4://설정 초기화.
-                        int [] keyValueArr = {37,39,38,40,27,32};
-                        AllReset ar = new AllReset();
-                        ar.yesReset.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                bs.setVisible(false);
-                                writeResolution(400,600,18);
-                                writeKey(keyValueArr);
-                                writeColorMode(0);
-                                JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
-                                new SettingMenu();
-                            }
-                        });
-                        break;
-                }
+                menuAction(positionPoint);
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
@@ -111,7 +79,49 @@ public class SettingMenu extends JFrame {
             bs.add(menuButton[i]);
             addY+=70;
         }
+        for (int i=0; i<5;i++){
+            int finalI = i;
+            menuButton[i].addMouseListener(new MouseAdapter() {
+                @Override
+                public void mousePressed(MouseEvent e) {
+                    menuAction(finalI);
+                }
+            });}
         allPositionPoint();
+    }
+    public void menuAction(int num){
+        switch (num){
+            case 0://해상도 설정
+                bs.setVisible(false);
+                new SettingMenuSize();
+                break;
+            case 1://키 설정
+                bs.setVisible(false);
+                new SettingMenuKeySet();
+                break;
+            case 2://스코어 보드 초기화
+                new ScoreReset();
+                break;
+            case 3://색맹 모드.
+                new ColorMode();
+                break;
+            case 4://설정 초기화.
+                int [] keyValueArr = {37,39,38,40,27,32};
+                SettingAllReset ar = new SettingAllReset();
+                ar.yesReset.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        bs.setVisible(false);
+                        writeResolution(400,600,18);
+                        writeKey(keyValueArr);
+                        writeColorMode(0);
+                        JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
+                        new SettingMenu();
+                        ar.setVisible(false);
+                    }
+                });
+                break;
+        }
     }
     public void backToMenu(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
@@ -121,9 +131,6 @@ public class SettingMenu extends JFrame {
                 new StartMenu();
             }
         });
-    }
-    public void allReset(){
-
     }
 
 }

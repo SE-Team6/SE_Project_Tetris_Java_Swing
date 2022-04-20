@@ -27,7 +27,7 @@ import static seoultech.se.tetris.menu.GameMode.gameModeNum;
 
 public class GameOver extends JFrame {
 
-    public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight,labelX,textFiledX,ButtonX;
+    public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight, scoreAndNameLabelX,textFiledX,ButtonX;
 
     private ImageIcon updateBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_B.jpg");
     private ImageIcon updateBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_E.jpg");
@@ -73,6 +73,11 @@ public class GameOver extends JFrame {
         buttonSet();
         scoreBoardPanel();
         scoreBoardSet();
+    }
+    public void dateGet(){
+        Date now = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MM월dd일HH시mm분ss");
+        nowDate = formatter.format(now);
     }
     public void scoreBoardPanel(){
         JPanel scoreBoardSummaryPanel = new JPanel(){
@@ -145,11 +150,6 @@ public class GameOver extends JFrame {
             LabelY+=30;
         }
     }
-    public void dateGet(){
-        Date now = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM월dd일HH시mm분ss");
-        nowDate = formatter.format(now);
-    }
     public void buttonSet(){
         updateButton.setBounds(ButtonX,230,185,40);
         updateButton.setBorderPainted(false);
@@ -207,7 +207,7 @@ public class GameOver extends JFrame {
     }
     public void labelSet(){
         myScoreLabel.setFont(new Font("Bahnschrift",Font.BOLD,25));
-        myScoreLabel.setBounds(labelX,120,100,40);
+        myScoreLabel.setBounds(scoreAndNameLabelX,120,100,40);
         myScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         myScoreLabel.setForeground(Color.YELLOW);
 
@@ -224,7 +224,7 @@ public class GameOver extends JFrame {
         bs.add(myScore);
 
         NameLabel.setFont(new Font("Bahnschrift",Font.BOLD,25));
-        NameLabel.setBounds(labelX,180,100,40);
+        NameLabel.setBounds(scoreAndNameLabelX,180,100,40);
         NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         NameLabel.setForeground(Color.YELLOW);
         bs.add(NameLabel);

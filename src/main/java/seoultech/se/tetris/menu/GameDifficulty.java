@@ -64,6 +64,10 @@ public class GameDifficulty {
                     else if(gameModeNum==1)itemMode();
                 }
             }
+            else if(keyValue==KeyEvent.VK_BACK_SPACE){
+                bs.setVisible(false);
+                new GameMode();
+            }
         }
     }
     public void allPositionPoint(){

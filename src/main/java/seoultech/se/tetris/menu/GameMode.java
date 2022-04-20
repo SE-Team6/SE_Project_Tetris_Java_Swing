@@ -58,6 +58,10 @@ public class GameMode extends JFrame {
                     new GameDifficulty();
                 }
             }
+            else if(keyValue==KeyEvent.VK_BACK_SPACE){
+                bs.setVisible(false);
+                new StartMenu();
+            }
         }
     }
     public void allPositionPoint(){
