@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum;
+import static seoultech.se.tetris.menu.ScoreMode.gameModeNum;
 
 public class ScoreBoard extends JFrame {
     private Image backGround;
@@ -39,10 +39,12 @@ public class ScoreBoard extends JFrame {
     int [] sbListX={0,30,130,170,260};
 
     Keyboard key = Keyboard.getInstance();
-    JSONArray res = JSONLoader.loaderScore();
-    ArrayList<JSONObject> arr = JSONArrayToArrayList(res);
-    JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
-    ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
+//    JSONArray res = JSONLoader.loaderScore("");
+//    ArrayList<JSONObject> arr = JSONArrayToArrayList(res);
+//    JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
+//    ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
+    private JSONArray res;
+    private JSONArray loadedScores;
     public ScoreBoard(int num){
         setting();
         pageButton();
@@ -180,38 +182,41 @@ public class ScoreBoard extends JFrame {
             dateLabel[i].setText("");
             difficultyLabel[i].setText("");
         }
-        if (gameModeNum==0){
-            if (allScores.size()>scoreBoardNum){
-                for (int i=scoreBoardNum;i<Math.min(allScores.size(),scoreBoardNum+10);i++){ // 스코어 사이즈가 그다음 페이지의 시작 랭크보다 클때만
-                    nameLabel[i].setText((String) arr.get(i).get("Name"));
-                    scoreLabel[i].setText(String.valueOf(arr.get(i).get("Score")));
-                    dateLabel[i].setText((String) arr.get(i).get("DateTime"));
-                    String difficultyVal = String.valueOf(arr.get(i).get("Difficulty"));
-                    difficultyLabel[i].setText(difficultyLabelSet(difficultyVal));
+        System.out.println(gameModeNum);
+        if (gameModeNum==0) {
+            res = JSONLoader.loaderScore("normal");
+            loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
+        }
+        else if(gameModeNum==1) {
+            res = JSONLoader.loaderScore("item");
+            loadedScores = (JSONArray) getJSONObject("item", "scoreBoard");
+        }
+        ArrayList<JSONObject> arr = JSONArrayToArrayList(res);
+        ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
+        if (allScores.size()>scoreBoardNum){
+            for (int i=scoreBoardNum;i<Math.min(allScores.size(),scoreBoardNum+10);i++){ // 스코어 사이즈가 그다음 페이지의 시작 랭크보다 클때만
+                nameLabel[i].setText((String) arr.get(i).get("Name"));
+                scoreLabel[i].setText(String.valueOf(arr.get(i).get("Score")));
+                dateLabel[i].setText((String) arr.get(i).get("DateTime"));
+                String difficultyVal = String.valueOf(arr.get(i).get("Difficulty"));
+                difficultyLabel[i].setText(difficultyLabelSet(difficultyVal));
              }
             }
-            else{
-                for (int i=scoreBoardNum;i<scoreBoardNum+10;i++){ // 크지 않다면  빈칸으로
-                    nameLabel[i].setText("");
-                    scoreLabel[i].setText("");
-                    dateLabel[i].setText("");
-                    difficultyLabel[i].setText("");
+        else{
+            for (int i=scoreBoardNum;i<scoreBoardNum+10;i++){ // 크지 않다면  빈칸으로
+                nameLabel[i].setText("");
+                scoreLabel[i].setText("");
+                dateLabel[i].setText("");
+                difficultyLabel[i].setText("");
                 }
             }
-
-        }
-        else if(gameModeNum==1){
-
-        }
-
         pageNumLabel.setText(String.valueOf(page+"/10")); // 현재 페이지 출력
     }
     public String difficultyLabelSet(String a){ // 임시
         int to = Integer.parseInt(a);
-        if(to==49) return "Easy";
-        else if(to==48) return "Normal";
-        else if(to==47) return "Hard";
-        else return "hello";
+        if(to==0) return "Easy";
+        else if(to==1) return "Normal";
+        else return "Hard";
     }
     public class pageControl extends KeyAdapter{
         @Override

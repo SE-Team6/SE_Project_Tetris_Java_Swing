@@ -64,6 +64,8 @@ public class GameOver extends JFrame {
     Score sc = new Score();
     private  int score;
     public static String nowDate;
+    private JSONArray res;
+    private JSONArray loadedScores;
 
     public GameOver(){
         bs.setVisible(true);
@@ -100,16 +102,21 @@ public class GameOver extends JFrame {
         bs.add(scoreBoardSummaryPanel);
     }
     public void scoreBoardSet(){
-        JSONArray res = JSONLoader.loaderScore();
+        if (gameModeNum==0) {
+            res = JSONLoader.loaderScore("normal");
+            loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
+        }
+        else if(gameModeNum==1) {
+            res = JSONLoader.loaderScore("item");
+            loadedScores = (JSONArray) getJSONObject("item", "scoreBoard");
+        }
         ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
-        JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
         ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
         int j=0;
         for (int i=0;i<Math.min(allScores.size(),20);i++){
             nameLabel[j].setText((String) arr.get(i).get("Name"));
             scoreLabel[j].setText(String.valueOf(arr.get(i).get("Score")));
-            j+=1;
-        }
+            j+=1;}
     }
     public void scoreBoardLabel(){
         String [] sbList = {"Rank","Name","Score"};
@@ -164,9 +171,14 @@ public class GameOver extends JFrame {
                 dateGet();
                 JOptionPane.showMessageDialog(null,"점수가 업데이트 되었습니다");
                 String[] updateArr= {myName.getText(),nowDate, String.valueOf(110), String.valueOf(gameDifficultyNum),String.valueOf(gameModeNum)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
-                appendScore(updateArr);
+                appendScore(updateArr,"normal");
                 scoreBoardSet();
-                JSONArray res = JSONLoader.loaderScore();
+                if (gameModeNum==0) {
+                    res = JSONLoader.loaderScore("normal");
+                }
+                else if(gameModeNum==1) {
+                    res = JSONLoader.loaderScore("item");
+                }
                 ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
                 JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
                 ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
