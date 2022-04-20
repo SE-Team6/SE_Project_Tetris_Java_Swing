@@ -12,7 +12,8 @@ import java.util.HashMap;
 
 public class JSONLoader {
     final static String SETTINGS_FILEPATH = "src/main/configs/settings.json";
-    final static String SCORE_FILEPATH = "src/main/configs/score.json";
+    final static String NORMAL_SCORE_FILEPATH = "src/main/configs/normal_score.json";
+    final static String ITEM_SCORE_FILEPATH = "src/main/configs/item_score.json";
     static JSONParser parser = new JSONParser();
 
     JSONLoader(){}
@@ -22,10 +23,19 @@ public class JSONLoader {
         try {
             switch (type){
                 case "settings":
-                    obj = (JSONObject) parser.parse(new FileReader(SETTINGS_FILEPATH));
+                    FileReader settingFile = new FileReader(SETTINGS_FILEPATH);
+                    obj = (JSONObject) parser.parse(settingFile);
+                    settingFile.close();
                     break;
-                case "score":
-                    obj = (JSONObject) parser.parse(new FileReader(SCORE_FILEPATH));
+                case "normal":
+                    FileReader normalScoreFile = new FileReader(NORMAL_SCORE_FILEPATH);
+                    obj = (JSONObject) parser.parse(normalScoreFile);
+                    normalScoreFile.close();
+                    break;
+                case "item":
+                    FileReader itemScoreFile = new FileReader(ITEM_SCORE_FILEPATH);
+                    obj = (JSONObject) parser.parse(itemScoreFile);
+                    itemScoreFile.close();
                     break;
             }
         } catch (FileNotFoundException e){
@@ -72,9 +82,14 @@ public class JSONLoader {
         scoreArr[i].get("Name") -> 이름 불러오기
          NAME, SCORE, TIME, difficulty, item
      */
-    public static JSONArray loaderScore(){
-        JSONArray arr = (JSONArray) getJSONObject("score", "scoreBoard");
-        return  arr;
+    public static JSONArray loaderScore(String mode){
+        JSONArray arr = new JSONArray();
+        if(mode.equals("normal")){
+            arr = (JSONArray) getJSONObject("normal", "scoreBoard");
+        }else if(mode.equals("item")){
+            arr = (JSONArray) getJSONObject("item", "scoreBoard");
+        }
+        return arr;
     }
 
     //return mode 번호

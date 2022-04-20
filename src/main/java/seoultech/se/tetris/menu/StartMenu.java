@@ -1,13 +1,11 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.ScoreBoardItemMode;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
@@ -65,23 +63,7 @@ public class StartMenu extends JFrame {
                 allPositionPoint();
             }
             else if(keyValue == KeyEvent.VK_ENTER){
-                switch (positionPoint) {
-                    case 0: // 게임 시작
-                        new GameMode();
-                        bs.setVisible(false);
-                        break;
-                    case 1: // 게임 설정
-                        bs.setVisible(false);
-                        new SettingMenu();
-                        break;
-                    case 2: // 스코어 보드
-                        new ScoreBoardItemMode();
-                        break;
-                    case 3: // 게임종료
-                        bs.setVisible(false);
-                        new GameOver();
-                        break;
-                }
+                menuAction(positionPoint);
             }
         }
     }
@@ -102,6 +84,14 @@ public class StartMenu extends JFrame {
             bs.add(menuButton[i]);
             addH+=70;
         }
+        for (int i=0; i<4;i++){
+            int finalI = i;
+            menuButton[i].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                menuAction(finalI);
+            }
+        });}
         allPositionPoint();
     }
     public void keyLoad() {// 기존 키 정보 불러오기
@@ -160,6 +150,26 @@ public class StartMenu extends JFrame {
             currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
             bs.add(currentKey[i]);
             addH += 30;
+        }
+    }
+    public void menuAction(int num){
+        switch (num) {
+            case 0: // 게임 시작
+                new GameMode();
+                bs.setVisible(false);
+                break;
+            case 1: // 게임 설정
+                bs.setVisible(false);
+                new SettingMenu();
+                break;
+            case 2: // 스코어 보드
+                bs.setVisible(false);
+                new ScoreMode();
+                break;
+            case 3: // 게임종료
+                bs.setVisible(false);
+                new GameOver();
+                break;
         }
     }
 }

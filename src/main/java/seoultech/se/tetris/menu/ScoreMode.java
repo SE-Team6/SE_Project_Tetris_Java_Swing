@@ -1,19 +1,19 @@
 package seoultech.se.tetris.menu;
 
-import javax.swing.*;
+import seoultech.se.tetris.component.ScoreBoard;
 
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.BasicSet.buttonSizeY;
 import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
-public class GameMode extends JFrame {
+public class ScoreMode extends JFrame {
 
-    public static int gameModeNum2; //0:노말 1:아이템
+    public static int gameModeNum; //0:노말 1:아이템
 
     private BasicSet bs = new BasicSet();
     private BackMenu bm = new BackMenu();
@@ -25,7 +25,7 @@ public class GameMode extends JFrame {
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public GameMode() {
+    public ScoreMode() {
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -48,19 +48,16 @@ public class GameMode extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    gameModeNum2 =0;//노말
-                    bs.setVisible(false);
-                    new GameDifficulty();
+                    gameModeNum =0;
+                    new ScoreBoard(0);
                 }
                 else if(positionPoint==1){
-                    gameModeNum2 =1;//아이템
-                    bs.setVisible(false);
-                    new GameDifficulty();
+                    gameModeNum =1;
+                    new ScoreBoard(0);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
-                bs.setVisible(false);
-                new StartMenu();
+                backMenu();
             }
         }
     }
@@ -88,9 +85,12 @@ public class GameMode extends JFrame {
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                bs.setVisible(false);
-                new StartMenu();
+                backMenu();
             }
         });
+    }
+    public void backMenu(){
+        bs.setVisible(false);
+        new StartMenu();
     }
 }

@@ -6,8 +6,6 @@ import seoultech.se.tetris.component.JSONWriter;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -16,11 +14,11 @@ public class JSONClassTest {
     @Test
     public void writeKeyTest(){
         String[] key = {"LEFT", "RIGHT", "UP", "DOWN","ESC", "SPACE"};
-        int[] expected = {1,2,3,4,5,6};
+        int[] expected = {37,39,38,40,27,32};
         JSONWriter.writeKey(expected);
         JSONObject obj = JSONLoader.loaderKey();
         for(int i=0; i<6; ++i){
-            assertEquals(i+1, (int)(long)obj.get(key[i]));
+            assertEquals(expected[i], (int)(long)obj.get(key[i]));
         }
     }
 
@@ -44,8 +42,8 @@ public class JSONClassTest {
     public void appendScoreTest(){
         String[] key = {"Name", "DateTime", "Score", "Difficulty", "isItem"};
         String[] expected = {"khyo", "20220418", "2022041800", "2", "1"};
-        JSONWriter.appendScore(expected);
-        JSONArray res = JSONLoader.loaderScore();
+        JSONWriter.appendScore(expected, "normal");
+        JSONArray res = JSONLoader.loaderScore("normal");
         ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
         for(int i=0; i<2; ++i){
             assertEquals(expected[i], arr.get(0).get(key[i]));

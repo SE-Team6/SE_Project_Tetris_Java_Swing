@@ -4,17 +4,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static seoultech.se.tetris.component.JSONWriter.*;
-import static seoultech.se.tetris.menu.SettingMenu.*;
-
-public class AllReset extends JFrame {
+public class SettingAllReset extends JFrame {
 
     private JLabel ask = new JLabel("정말로 설정을 초기화 하시겠습니까?");
     public JButton yesReset = new JButton("Yes");
     private JButton noReset = new JButton("No");
     private int [] keyValue = {37,39,38,40,27,32};
 
-    public AllReset(){
+    public SettingAllReset(){
         setVisible(true);
         setSize(400,100);
         setFocusable(true);

@@ -29,7 +29,10 @@ public abstract class Board extends JFrame {
             {80,100,100,100,100,100,100}
     };
 
-    public static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
+    protected static final double[] iBlockFitness = {120, 100, 80};
+
+    protected static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
+    protected static double[] itemProb = new double[17];
 
     protected static Random random = new Random(System.currentTimeMillis());
 
@@ -61,6 +64,8 @@ public abstract class Board extends JFrame {
     protected ParentBlock focus;
     protected ParentBlock next;
 
+    protected boolean isErased = false;
+
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
@@ -91,10 +96,14 @@ public abstract class Board extends JFrame {
     public static void setDifficulty(int difficulty){
         double sum = Arrays.stream(blockFitness[difficulty]).sum();
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
-        rateInterval -= (rateInterval * 0.2 * (difficulty));
+        for(int i=0; i<17; ++i) itemProb[i] = (double)1/17;
+
+        for(int i=0; i<difficulty; ++i){
+            initInterval *= 0.8;
+        }
     }
 
-    public static int getRoulette(){
+    protected int getRoulette(){
         double u = random.nextDouble();
         for(int i=0; i<7; ++i){
             u -= prob[i];
@@ -107,7 +116,6 @@ public abstract class Board extends JFrame {
 
     public ParentBlock getRandomBlock() {
         int block = getRoulette();
-//        int block = random.nextInt(7);
         switch (block) {
             case 0: return new IBlock();
             case 1: return new JBlock();
@@ -166,7 +174,6 @@ public abstract class Board extends JFrame {
     protected boolean isOverlap() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
-                // @TODO
                 if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (
                         (board[j][i] != null) &&
@@ -178,10 +185,6 @@ public abstract class Board extends JFrame {
         return false;
     }
 
-    // TODO edit
-//    protected boolean isBottomTouched() {
-//        return y >= Board.HEIGHT - focus.height();
-//    }
     protected boolean isBottomTouched() {
         return y + 1>= Board.HEIGHT - focus.getBottom();
     }
@@ -246,6 +249,7 @@ public abstract class Board extends JFrame {
 
     protected void eraseLines() {
         int combo = 0;
+        isErased = false;
         int left = 0; int right = -1;
         boolean isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
@@ -255,7 +259,6 @@ public abstract class Board extends JFrame {
                     tmp++;
                 }
             }
-
             if (tmp == Board.WIDTH) {
                 if (right == -1) {
                     right = i;
@@ -284,16 +287,11 @@ public abstract class Board extends JFrame {
             seq = 0;
         }
         score.addLineClearScore(combo, stage, seq);
-        if (lineCount >= 5) {
-            stage += 1;
-            System.out.println(stage);
-            lineCount -= 5;
-            timerSpeedUpSet();
-        }
     }
 
     protected void moveDown() {
         eraseCurr();
+        score.addUnitScore(1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
@@ -327,11 +325,8 @@ public abstract class Board extends JFrame {
         placeBlock();
     }
 
-
-    // @TODO edit
     protected void moveRight() {
         eraseCurr();
-//        if (x < Board.WIDTH - focus.width()) x++;
         if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
             x--;
@@ -339,12 +334,9 @@ public abstract class Board extends JFrame {
         placeBlock();
     }
 
-    // @TODO edit
+
     protected void moveLeft() {
         eraseCurr();
-//        if (x > 0) {
-//            x--;
-//        }
         if (x + focus.getLeft()> 0){
             x--;
         }

@@ -103,4 +103,15 @@ public class NormalBoard extends Board {
         pv = new PauseView(0, this);
 
     }
+
+    @Override
+    protected void eraseLines() {
+        super.eraseLines();
+        if (lineCount >= 5) {
+            stage += 1;
+            System.out.println(stage);
+            lineCount -= 5;
+            timerSet();
+        }
+    }
 }

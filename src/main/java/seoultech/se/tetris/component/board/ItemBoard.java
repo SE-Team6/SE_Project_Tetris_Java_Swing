@@ -1,6 +1,6 @@
 package seoultech.se.tetris.component.board;
 
-import seoultech.se.tetris.blocks.*;
+import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.blocks.ParentBlock;
 import seoultech.se.tetris.blocks.item.one.OneBlock;
 import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
@@ -110,6 +110,17 @@ public class ItemBoard extends Board {
         pv = new PauseView(0, this);
     }
 
+    protected int getItemRoulette() {
+        double u = random.nextDouble();
+        for(int i=0; i<16; ++i){
+            u -= itemProb[i];
+            if(u<0){
+                return i;
+            }
+        }
+        return 17;
+    }
+
     @Override
     protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
         timer.stop();
@@ -160,9 +171,7 @@ public class ItemBoard extends Board {
     }
 
     protected ParentBlock getRandomItemBlock() {
-        Random random = new Random(System.currentTimeMillis());
-//        int block = random.nextInt(17);
-        int block = random.nextInt(17);
+        int block = getItemRoulette();
         switch (block) {
             case 0: return new RandomIBlock();
             case 1: return new RandomJBlock();
@@ -180,8 +189,7 @@ public class ItemBoard extends Board {
             case 13: return new QueenSBlock();
             case 14: return new QueenTBlock();
             case 15: return new QueenOBlock();
-            case 16: return new PendulumBlock();
-            default: return new QueenJBlock();
+            default: return new PendulumBlock();
         }
     }
 
@@ -219,6 +227,7 @@ public class ItemBoard extends Board {
                 }
                 i++;
                 combo++;
+                isErased = true;
                 this.cnt++;
             }
         }
@@ -237,7 +246,7 @@ public class ItemBoard extends Board {
         }
 
         // itemType == 4
-        if (focus.getBlockType() == 4 && combo == 0) {
+        if (focus.getBlockType() == 4 && !isErased) {
             generateNewLines(2);
         }
         if(isErased){
@@ -246,10 +255,9 @@ public class ItemBoard extends Board {
             seq = 0;
         }
         score.addLineClearScore(combo, stage, seq);
-        if (lineCount >= 5) {
+        if (lineCount >= 10) {
             stage += 1;
             System.out.println(stage);
-            lineCount -= 5;
             timerSpeedUpSet();
         }
     }
@@ -355,14 +363,12 @@ public class ItemBoard extends Board {
         }
         eraseLines();
         focus = next;
-        if (cnt > 10) {
-            cnt = 0;
+        if (lineCount >= 10) {
+            lineCount = 0;
             next = getRandomItemBlock();
         } else {
-//            next = getRandomBlock();
-            next = getRandomItemBlock();
+            next = getRandomBlock();
         }
-//        next = getRandomItemBlock();
         drawNextBlock();
         x = 3;
         y = 0;
@@ -409,9 +415,6 @@ public class ItemBoard extends Board {
     protected void moveLeft() {
         if (focus.getIsSettled()) return;
         eraseCurr();
-//        if (x > 0) {
-//            x--;
-//        }
         if (x + focus.getLeft()> 0){
             x--;
         }
@@ -435,6 +438,7 @@ public class ItemBoard extends Board {
             return;
         }
         eraseCurr();
+        score.addUnitScore(1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
