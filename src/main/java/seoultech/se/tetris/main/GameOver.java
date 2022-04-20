@@ -66,8 +66,9 @@ public class GameOver extends JFrame {
     public static String nowDate;
 
     public GameOver(){
+
         bs.setVisible(true);
-        score =sc.getScore();
+        score = Score.score;
         setXY(Width);
         labelSet();
         buttonSet();
@@ -113,6 +114,8 @@ public class GameOver extends JFrame {
     }
     public void scoreBoardLabel(){
         String [] sbList = {"Rank","Name","Score"};
+        int [] sbListX={0,30,110};
+        int [] sbListSize={30,80,40};
         for(int i=0;i<3;i++){
             scoreBoardLabel[i] = new JLabel(sbList[i]);
             scoreBoardLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
@@ -213,7 +216,7 @@ public class GameOver extends JFrame {
 
         bs.add(myScoreLabel);
 
-        myScore = new JLabel(String.valueOf(100));
+        myScore = new JLabel(String.valueOf(score));
         myScore.setFont(new Font("Bahnschrift",Font.BOLD,20));
         myScore.setBounds(textFiledX,120,100,40);
         myScore.setHorizontalAlignment(SwingConstants.CENTER);

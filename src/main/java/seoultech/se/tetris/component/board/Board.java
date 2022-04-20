@@ -1,15 +1,20 @@
 package seoultech.se.tetris.component.board;
 
 import seoultech.se.tetris.blocks.*;
+import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
+import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -69,34 +74,8 @@ public abstract class Board extends JFrame {
 
     public Board() {
         super("SW TEAM 6");
-        // fix 방법 확인
-//        this.addComponentListener(new ComponentListener() {
-//
-//            @Override
-//            public void componentResized(ComponentEvent e) {
-//                if (!isPause) {
-//                    pv.setLocationRelativeTo(e.getComponent());
-//                }
-//
-//            }
-//
-//            @Override
-//            public void componentMoved(ComponentEvent e) {
-//                if (!isPause) {
-//                    pv.setLocationRelativeTo(e.getComponent());
-//                }
-//            }
-//
-//            @Override
-//            public void componentShown(ComponentEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void componentHidden(ComponentEvent e) {
-//
-//            }
-//        });
+
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     protected void focusFrame() {
@@ -109,7 +88,6 @@ public abstract class Board extends JFrame {
         double sum = Arrays.stream(blockFitness[difficulty]).sum();
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
         rateInterval -= (rateInterval * 0.2 * (difficulty));
-        System.out.println(rateInterval);
     }
 
     public static int getRoulette(){
@@ -197,8 +175,9 @@ public abstract class Board extends JFrame {
 
         // GAME OVER
         if (isOverlap()) {
-            reset();
-            score.resetScore();
+            gameOver();
+//            reset();
+//            score.resetScore();
         }
     }
 
@@ -361,7 +340,11 @@ public abstract class Board extends JFrame {
 
     protected void gameOver() {
         System.out.println("Game over!");
-        reset();
+        new GameOver();
+
+        timer.stop();
+        this.dispose();
+//        reset();
     }
 
     protected void pause() {
@@ -390,50 +373,76 @@ public abstract class Board extends JFrame {
         timer.start();
     }
 
-    public class PlayerKeyListener implements KeyListener {
-        @Override
-        public void keyTyped(KeyEvent e) {
+//    public class PlayerKeyListener implements KeyListener {
+//        @Override
+//        public void keyTyped(KeyEvent e) {
+//
+//        }
+//
+//        @Override
+//        public void keyPressed(KeyEvent e) {
+//            switch (e.getKeyCode()) {
+//                case KeyEvent.VK_DOWN: {
+//                    moveDown();
+//                    drawBoard();
+//                    break;
+//                }
+//                case KeyEvent.VK_RIGHT: {
+//                    moveRight();
+//                    drawBoard();
+//                    break;
+//                }
+//                case KeyEvent.VK_LEFT: {
+//                    moveLeft();
+//                    drawBoard();
+//                    break;
+//                }
+//                case KeyEvent.VK_UP: {
+//                    moveRotate();
+//                    drawBoard();
+//                    break;
+//                }
+//                case KeyEvent.VK_SPACE: {
+//                    moveFall();
+//                    drawBoard();
+//                    break;
+//                }
+//                case KeyEvent.VK_ESCAPE: {
+//                    pause();
+//                    break;
+//                }
+//            }
+//        }
+//
+//        @Override
+//        public void keyReleased(KeyEvent e) {
+//
+//        }
+//    }
 
-        }
-
+    public class PlayerKeyListener extends Keyboard {
         @Override
         public void keyPressed(KeyEvent e) {
-            switch (e.getKeyCode()) {
-                case KeyEvent.VK_DOWN: {
-                    moveDown();
-                    drawBoard();
-                    break;
-                }
-                case KeyEvent.VK_RIGHT: {
-                    moveRight();
-                    drawBoard();
-                    break;
-                }
-                case KeyEvent.VK_LEFT: {
-                    moveLeft();
-                    drawBoard();
-                    break;
-                }
-                case KeyEvent.VK_UP: {
-                    moveRotate();
-                    drawBoard();
-                    break;
-                }
-                case KeyEvent.VK_SPACE: {
-                    moveFall();
-                    drawBoard();
-                    break;
-                }
-                case KeyEvent.VK_ESCAPE: {
-                    pause();
-                    break;
-                }
+            super.keyPressed(e);
+            int keyCode = e.getKeyCode();
+            if (keyCode == Keyboard.DOWN) {
+                moveDown();
+                drawBoard();
+            } else if (keyCode == Keyboard.RIGHT) {
+                moveRight();
+                drawBoard();
+            } else if (keyCode == Keyboard.LEFT) {
+                moveLeft();
+                drawBoard();
+            } else if (keyCode == Keyboard.UP) {
+                moveRotate();
+                drawBoard();
+            } else if (keyCode == Keyboard.SPACE) {
+                moveFall();
+                drawBoard();
+            } else {
+                pause();
             }
-        }
-
-        @Override
-        public void keyReleased(KeyEvent e) {
-
         }
     }
 
