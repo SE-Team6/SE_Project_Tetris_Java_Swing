@@ -45,6 +45,13 @@ public class PauseView extends JDialog {
         });
         exitBtn = new JButton();
         exitBtn.setText(EXIT);
+        exitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parent.gameOver();
+                disposeComponent();
+            }
+        });
 
         this.add(scorePane);
         this.add(resumeBtn);

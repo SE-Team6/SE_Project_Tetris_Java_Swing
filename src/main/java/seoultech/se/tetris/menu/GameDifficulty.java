@@ -1,17 +1,18 @@
 package seoultech.se.tetris.menu;
+
 import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.component.board.NormalBoard;
-
-import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
+import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GameDifficulty {
     private BasicSet bs = new BasicSet();
@@ -99,16 +100,16 @@ public class GameDifficulty {
         allPositionPoint();
     }
     public void itemMode(int difficulty){
+        ItemBoard.setDifficulty(difficulty);
         Board ib = new ItemBoard();
-        ib.setDifficulty(difficulty);
         ib.setSize(Width,Height);
         ib.setLocationRelativeTo(null);
         ib.setVisible(true);
         bs.setVisible(false);
     }
     public void normalMode(int difficulty){
+        NormalBoard.setDifficulty(difficulty);
         Board nb =new NormalBoard();
-        nb.setDifficulty(difficulty);
         nb.setSize(Width,Height);
         nb.setLocationRelativeTo(null);
         nb.setVisible(true);

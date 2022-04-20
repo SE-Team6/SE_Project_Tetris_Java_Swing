@@ -46,7 +46,7 @@ public abstract class Board extends JFrame {
 
     protected ConfigBlock config = ConfigBlock.getInstance();
 
-    public float initInterval = 1000;
+    public static float initInterval = 1000;
 
     protected JTextPane pane;
     protected JPanel rightPanel;
@@ -152,7 +152,6 @@ public abstract class Board extends JFrame {
     protected void timerSet() {
         isAction = false;
         timer.stop();
-        initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
             moveDown();
             drawBoard();
@@ -163,6 +162,7 @@ public abstract class Board extends JFrame {
     protected void timerSpeedUpSet() {
         isAction = false;
         timer.stop();
+        initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
             moveDown();
             drawBoard();

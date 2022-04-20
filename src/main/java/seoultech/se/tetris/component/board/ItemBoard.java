@@ -367,7 +367,7 @@ public class ItemBoard extends Board {
             lineCount = 0;
             next = getRandomItemBlock();
         } else {
-            next = getRandomBlock();
+            next = getRandomItemBlock();
         }
         drawNextBlock();
         x = 3;
