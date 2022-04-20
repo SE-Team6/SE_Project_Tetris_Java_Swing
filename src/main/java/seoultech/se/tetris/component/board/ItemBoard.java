@@ -123,9 +123,19 @@ public class ItemBoard extends Board {
         pv = new PauseView(0, this);
     }
 
+    protected int getItemRoulette() {
+        double u = random.nextDouble();
+        for(int i=0; i<16; ++i){
+            u -= itemProb[i];
+            if(u<0){
+                return i;
+            }
+        }
+        return 17;
+    }
+
     protected ParentBlock getRandomItemBlock() {
-        Random random = new Random(System.currentTimeMillis());
-        int block = random.nextInt(17);
+        int block = getItemRoulette();
         switch (block) {
             case 0: return new RandomIBlock();
             case 1: return new RandomJBlock();
@@ -149,34 +159,18 @@ public class ItemBoard extends Board {
 
     @Override
     protected void eraseLines() {
-        int combo = 0;
         // itemType == 1 L block
         if (focus.getBlockType() == 1) {
             eraseLLine();
-            combo++;
         }
 
-        for(int i=Board.HEIGHT-1;i>=0;i--){
-            int tmp = 0;
-            for(int j=0;j<Board.WIDTH;j++){
-                if (board[i][j] != null) {
-                    tmp++;
-                }
-            }
-            if (tmp == Board.WIDTH) {
-                for(int j=0;j<Board.WIDTH;j++){
-                    for(int k=i;k>=1;k--){
-                        board[k][j] = board[k-1][j];
-                    }
-                    board[0][j] = null;
-                }
-                i++;
-                combo++;
-                this.cnt++;
-            }
+        super.eraseLines();
+
+        if (lineCount >= 2) {
+            stage += 1;
+            System.out.println(stage);
+            timerSet();
         }
-
-
 
         // itemType == 2 무게추
 
@@ -186,11 +180,8 @@ public class ItemBoard extends Board {
         }
 
         // itemType == 4
-        if (focus.getBlockType() == 4 && combo == 0) {
+        if (focus.getBlockType() == 4 && !isErased) {
             generateNewLines(2);
-        }
-        if (combo > 0) {
-            timerSet();
         }
     }
 
@@ -292,13 +283,12 @@ public class ItemBoard extends Board {
         }
         eraseLines();
         focus = next;
-        if (cnt > 10) {
-            cnt = 0;
+        if (lineCount >= 2) {
+            lineCount -= 2;
             next = getRandomItemBlock();
         } else {
             next = getRandomBlock();
         }
-//        next = getRandomItemBlock();
         drawNextBlock();
         x = 3;
         y = 0;
@@ -367,6 +357,7 @@ public class ItemBoard extends Board {
             return;
         }
         eraseCurr();
+        score.addUnitScore(1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
@@ -395,6 +386,7 @@ public class ItemBoard extends Board {
             return;
         }
         eraseCurr();
+        score.addUnitScore((Board.HEIGHT - y)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
             if (!isBottomTouched()) {
                 y++;

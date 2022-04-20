@@ -18,6 +18,8 @@ import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Random;
 
+import static seoultech.se.tetris.component.JSONLoader.loaderColor;
+
 
 public abstract class Board extends JFrame {
     public static final long serialVersionUID = 2434035659171694595L;
@@ -29,7 +31,10 @@ public abstract class Board extends JFrame {
             {80,100,100,100,100,100,100}
     };
 
-    public static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
+    protected static final double[] iBlockFitness = {120, 100, 80};
+
+    protected static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
+    protected static double[] itemProb = new double[17];
 
     protected static Random random = new Random(System.currentTimeMillis());
 
@@ -61,6 +66,8 @@ public abstract class Board extends JFrame {
     protected ParentBlock focus;
     protected ParentBlock next;
 
+    protected boolean isErased = false;
+
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
@@ -87,10 +94,12 @@ public abstract class Board extends JFrame {
     public static void setDifficulty(int difficulty){
         double sum = Arrays.stream(blockFitness[difficulty]).sum();
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
+        for(int i=0; i<17; ++i) itemProb[i] = (double)1/17;
+
         rateInterval -= (rateInterval * 0.2 * (difficulty));
     }
 
-    public static int getRoulette(){
+    protected int getRoulette(){
         double u = random.nextDouble();
         for(int i=0; i<7; ++i){
             u -= prob[i];
@@ -103,7 +112,6 @@ public abstract class Board extends JFrame {
 
     public ParentBlock getRandomBlock() {
         int block = getRoulette();
-//        int block = random.nextInt(7);
         switch (block) {
             case 0: return new IBlock();
             case 1: return new JBlock();
@@ -139,6 +147,7 @@ public abstract class Board extends JFrame {
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
+            System.out.println(initInterval);
             moveDown();
             drawBoard();
         });
@@ -183,7 +192,7 @@ public abstract class Board extends JFrame {
 
     protected void eraseLines() {
         int combo = 0;
-        boolean isErased = false;
+        isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
             int tmp = 0;
             for (int j = 0; j < Board.WIDTH; j++) {
@@ -210,16 +219,11 @@ public abstract class Board extends JFrame {
             seq = 0;
         }
         score.addLineClearScore(combo, stage, seq);
-        if (lineCount >= 5) {
-            stage += 1;
-            System.out.println(stage);
-            lineCount -= 5;
-            timerSet();
-        }
     }
 
     protected void moveDown() {
         eraseCurr();
+        score.addUnitScore(1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
