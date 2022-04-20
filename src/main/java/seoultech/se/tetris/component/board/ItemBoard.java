@@ -1,12 +1,12 @@
 package seoultech.se.tetris.component.board;
 
-import seoultech.se.tetris.blocks.Block;
-import seoultech.se.tetris.blocks.ParentBlock;
-import seoultech.se.tetris.blocks.item.one.OneBlock;
-import seoultech.se.tetris.blocks.item.pendulum.PendulumBlock;
-import seoultech.se.tetris.blocks.item.queen.*;
-import seoultech.se.tetris.blocks.item.random.*;
-import seoultech.se.tetris.blocks.item.slime.SlimeBlock;
+import seoultech.se.tetris.blocksTmp.*;
+import seoultech.se.tetris.blocksTmp.ParentBlock;
+import seoultech.se.tetris.blocksTmp.item.one.OneBlock;
+import seoultech.se.tetris.blocksTmp.item.pendulum.PendulumBlock;
+import seoultech.se.tetris.blocksTmp.item.queen.*;
+import seoultech.se.tetris.blocksTmp.item.random.*;
+import seoultech.se.tetris.blocksTmp.item.slime.SlimeBlock;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
@@ -77,6 +77,7 @@ public class ItemBoard extends Board {
         playerMouseListener = new PlayerMouseListener();
         addMouseListener(playerMouseListener);
         pane.addMouseListener(playerMouseListener);
+        rightPanel.addMouseListener(playerMouseListener);
         requestFocus();
         setFocusable(true);
 
@@ -124,6 +125,7 @@ public class ItemBoard extends Board {
         x = previousFallX; y = previousFallY;
         for (int j = y; j < y + focus.height(); j++) {
             for (int i = x; i < x + focus.width(); i++) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (focus.getShape(i - x, j - y) != null) {
                     rows[j+1] = rows[j+1].substring(0, i+1) + ConfigBlock.NON_BLOCK_CHAR + rows[j+1].substring(i+2);
                 }
@@ -394,7 +396,8 @@ public class ItemBoard extends Board {
     protected void moveRight() {
         if (focus.getIsSettled()) return;
         eraseCurr();
-        if (x < Board.WIDTH - focus.width()) x++;
+//        if (x < Board.WIDTH - focus.width()) x++;
+        if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
             x--;
         }
@@ -406,7 +409,10 @@ public class ItemBoard extends Board {
     protected void moveLeft() {
         if (focus.getIsSettled()) return;
         eraseCurr();
-        if (x > 0) {
+//        if (x > 0) {
+//            x--;
+//        }
+        if (x + focus.getLeft()> 0){
             x--;
         }
         if (isOverlap()) {

@@ -1,6 +1,6 @@
 package seoultech.se.tetris.component.board;
 
-import seoultech.se.tetris.blocks.*;
+import seoultech.se.tetris.blocksTmp.*;
 import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
@@ -122,6 +122,7 @@ public abstract class Board extends JFrame {
     public void placeBlock() {
         for (int j = 0; j < focus.height(); j++) {
             for (int i = 0; i < focus.width(); i++) {
+                if (x + i<0 || y + j<0 || x + i>=Board.WIDTH || y + j>=Board.HEIGHT) continue;
                 if (board[y + j][x + i] == null && focus.getShape(i, j) != null) {
                     board[y + j][x + i] = focus.getShape(i, j);
                 }
@@ -132,6 +133,7 @@ public abstract class Board extends JFrame {
     public void eraseCurr() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (focus.getShape(i - x, j - y) != null) {
                     board[j][i] = null;
                 }
@@ -140,6 +142,7 @@ public abstract class Board extends JFrame {
     }
 
     protected void timerSet() {
+        isAction = false;
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
@@ -150,6 +153,7 @@ public abstract class Board extends JFrame {
     }
 
     protected void timerSpeedUpSet() {
+        isAction = false;
         timer.stop();
         timer = new Timer(Math.round(initInterval), e -> {
             moveDown();
@@ -162,6 +166,8 @@ public abstract class Board extends JFrame {
     protected boolean isOverlap() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
+                // @TODO
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (
                         (board[j][i] != null) &&
                                 (focus.getShape(i - x, j - y) != null)) {
@@ -172,8 +178,12 @@ public abstract class Board extends JFrame {
         return false;
     }
 
+    // TODO edit
+//    protected boolean isBottomTouched() {
+//        return y >= Board.HEIGHT - focus.height();
+//    }
     protected boolean isBottomTouched() {
-        return y >= Board.HEIGHT - focus.height();
+        return y + 1>= Board.HEIGHT - focus.getBottom();
     }
 
     // generate new block
@@ -230,6 +240,7 @@ public abstract class Board extends JFrame {
     protected void activeDrawBoard(){
         isAction = false;
         drawBoard();
+        isAction = false;
         timerSet();
     }
 
@@ -316,19 +327,25 @@ public abstract class Board extends JFrame {
         placeBlock();
     }
 
+
+    // @TODO edit
     protected void moveRight() {
         eraseCurr();
-        if (x < Board.WIDTH - focus.width()) x++;
+//        if (x < Board.WIDTH - focus.width()) x++;
+        if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
             x--;
         }
         placeBlock();
     }
 
-
+    // @TODO edit
     protected void moveLeft() {
         eraseCurr();
-        if (x > 0) {
+//        if (x > 0) {
+//            x--;
+//        }
+        if (x + focus.getLeft()> 0){
             x--;
         }
         if (isOverlap()) {
@@ -444,8 +461,8 @@ public abstract class Board extends JFrame {
     public class PlayerKeyListener extends Keyboard {
         @Override
         public void keyPressed(KeyEvent e) {
-            super.keyPressed(e);
             int keyCode = e.getKeyCode();
+
             if (keyCode == Keyboard.DOWN) {
                 moveDown();
                 drawBoard();
@@ -468,9 +485,6 @@ public abstract class Board extends JFrame {
     }
 
 
-    // @TODO
-    // 일단 불편해서 추가함
-    // Mouse 객체도 관리해야할 듯
     public class PlayerMouseListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
