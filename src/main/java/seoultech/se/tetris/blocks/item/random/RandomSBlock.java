@@ -10,10 +10,10 @@ import java.util.Random;
 
 public class RandomSBlock extends SBlock {
     protected final int[][][] randomType = {
-            {{0, 1}, {1, 1}, {1, 1}, {1, 0}},
-            {{0, 2}, {2, 1}, {1, 0}, {0, 0}},
-            {{1, 0}, {0, 0}, {0, 2}, {2, 1}},
-            {{1, 1}, {1, 0}, {0, 1}, {1, 1}},
+            {{1, 1}, {1, 1}, {1, 1}, {1, 1}},
+            {{1, 2}, {2, 1}, {1, 0}, {0, 1}},
+            {{2, 0}, {0, 0}, {0, 2}, {2, 2}},
+            {{2, 1}, {1, 0}, {0, 1}, {1, 2}},
     };
     public RandomSBlock() {
         blockType = BlockType.ITEM1;

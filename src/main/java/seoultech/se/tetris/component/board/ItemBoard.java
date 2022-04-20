@@ -20,6 +20,8 @@ import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
+    private int eventX; int eventY;
+    private boolean event = false;
 
     public ItemBoard() {
         this.cnt = 0;
@@ -37,7 +39,6 @@ public class ItemBoard extends Board {
 
         // right items
         rightPanel = new JPanel();
-//        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
         rightPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setLayout(new GridLayout(4, 1));
         rightPanel.setBackground(Color.GRAY);
@@ -63,21 +64,6 @@ public class ItemBoard extends Board {
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
 
-//        //Document default style.
-//        styleSet = new SimpleAttributeSet();
-//        StyleConstants.setFontSize(styleSet, 18);
-//        StyleConstants.setFontFamily(styleSet, "Courier");
-//        StyleConstants.setBold(styleSet, true);
-//        StyleConstants.setForeground(styleSet, Color.WHITE);
-//        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
-//
-//        nextStyleSet = new SimpleAttributeSet();
-//
-//        StyleConstants.setFontFamily(nextStyleSet, "Courier");
-//        StyleConstants.setBold(nextStyleSet, true);
-//        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
-//        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
-
         //Set timer for block drops.
         timer = new Timer(Math.round(initInterval), e -> {
             moveDown();
@@ -91,6 +77,7 @@ public class ItemBoard extends Board {
         playerMouseListener = new PlayerMouseListener();
         addMouseListener(playerMouseListener);
         pane.addMouseListener(playerMouseListener);
+        rightPanel.addMouseListener(playerMouseListener);
         requestFocus();
         setFocusable(true);
 
@@ -134,6 +121,55 @@ public class ItemBoard extends Board {
         return 17;
     }
 
+    @Override
+    protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
+        timer.stop();
+        isAction = true;
+        String all = pane.getText();
+        String[] rows = all.split("\n");
+        StringBuilder tmp = new StringBuilder();
+        for(int i=0;i<WIDTH+2;i++){
+            tmp.append(i==0 || i==WIDTH+1 ? ConfigBlock.BORDER_CHAR : ConfigBlock.STAR);
+        }
+
+        // erase Curr
+        x = previousFallX; y = previousFallY;
+        for (int j = y; j < y + focus.height(); j++) {
+            for (int i = x; i < x + focus.width(); i++) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
+                if (focus.getShape(i - x, j - y) != null) {
+                    rows[j+1] = rows[j+1].substring(0, i+1) + ConfigBlock.NON_BLOCK_CHAR + rows[j+1].substring(i+2);
+                }
+            }
+        }
+
+        if (eventX != -1) {
+            for(int i=0;i<HEIGHT;i++){
+                rows[i+1] = rows[i+1].substring(0, eventX+1) + ConfigBlock.STAR + rows[i+1].substring(eventX+2);
+            }
+            eventX = -1;
+        }
+        for (int i=0;i<HEIGHT;i++){
+            if ((targetL<=i && i<=targetR) || i == eventY) {
+                rows[i+1] = tmp.toString();
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (String row: rows) {
+            res.append(row);
+            res.append("\n");
+        }
+
+        pane.setText(res.toString());
+        event = false;
+
+        timer = new Timer(Math.round(initInterval/10), e -> {
+            activeDrawBoard();
+        });
+        timer.start();
+    }
+
     protected ParentBlock getRandomItemBlock() {
         int block = getItemRoulette();
         switch (block) {
@@ -159,18 +195,44 @@ public class ItemBoard extends Board {
 
     @Override
     protected void eraseLines() {
+        int combo = 0;
+        int left = 0; int right = -1;
+        boolean isErased = false;
+
         // itemType == 1 L block
         if (focus.getBlockType() == 1) {
             eraseLLine();
+            combo++;
         }
 
-        super.eraseLines();
-
-        if (lineCount >= 2) {
-            stage += 1;
-            System.out.println(stage);
-            timerSet();
+        for(int i=Board.HEIGHT-1;i>=0;i--){
+            int tmp = 0;
+            for(int j=0;j<Board.WIDTH;j++){
+                if (board[i][j] != null) {
+                    tmp++;
+                }
+            }
+            if (tmp == Board.WIDTH) {
+                if (right == -1) {
+                    right = i;
+                    left = i;
+                } else {
+                    left--;
+                }
+                for(int j=0;j<Board.WIDTH;j++){
+                    for(int k=i;k>=1;k--){
+                        board[k][j] = board[k-1][j];
+                    }
+                    board[0][j] = null;
+                }
+                i++;
+                combo++;
+                isErased = true;
+                this.cnt++;
+            }
         }
+
+
 
         // itemType == 2 무게추
 
@@ -179,9 +241,24 @@ public class ItemBoard extends Board {
             eraseQLine();
         }
 
+        if (left <= right || event) {
+            replaceBlockToStarHorizontal(left, right);
+        }
+
         // itemType == 4
         if (focus.getBlockType() == 4 && !isErased) {
             generateNewLines(2);
+        }
+        if(isErased){
+            seq += 1;
+        }else{
+            seq = 0;
+        }
+        score.addLineClearScore(combo, stage, seq);
+        if (lineCount >= 10) {
+            stage += 1;
+            System.out.println(stage);
+            timerSpeedUpSet();
         }
     }
 
@@ -190,6 +267,8 @@ public class ItemBoard extends Board {
         int targetX = x + pos[1];
         int targetY = y + pos[0];
 
+        eventX = -1; eventY = targetY; event = true;
+
         eraseHorizontalLine(targetY);
     }
 
@@ -197,7 +276,8 @@ public class ItemBoard extends Board {
         int[] pos = focus.getBlockRandomPos();
         int targetX = x + pos[1];
         int targetY = y + pos[0];
-        eraseDiagonalLine(targetX, targetY);
+
+        eventX = targetX; eventY = targetY; event = true;
         eraseHorizontalLine(targetY);
         eraseVerticalLine(targetX);
     }
@@ -283,11 +363,11 @@ public class ItemBoard extends Board {
         }
         eraseLines();
         focus = next;
-        if (lineCount >= 2) {
-            lineCount -= 2;
+        if (lineCount >= 10) {
+            lineCount = 0;
             next = getRandomItemBlock();
         } else {
-            next = getRandomBlock();
+            next = getRandomItemBlock();
         }
         drawNextBlock();
         x = 3;
@@ -322,7 +402,8 @@ public class ItemBoard extends Board {
     protected void moveRight() {
         if (focus.getIsSettled()) return;
         eraseCurr();
-        if (x < Board.WIDTH - focus.width()) x++;
+//        if (x < Board.WIDTH - focus.width()) x++;
+        if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
             x--;
         }
@@ -334,7 +415,7 @@ public class ItemBoard extends Board {
     protected void moveLeft() {
         if (focus.getIsSettled()) return;
         eraseCurr();
-        if (x > 0) {
+        if (x + focus.getLeft()> 0){
             x--;
         }
         if (isOverlap()) {
@@ -375,31 +456,22 @@ public class ItemBoard extends Board {
         placeBlock();
     }
 
+    private void moveFallPendulumCurr() {
+        erasePendulumCurr();
+        for (int i=x;i<x+focus.width();i++){
+            eraseVerticalLine(i);
+        }
+        generateNewBlock();
+        return;
+    }
+
     @Override
     protected void moveFall() {
         if (focus.getBlockType() == 2) {
-            erasePendulumCurr();
-            for (int i=x;i<x+focus.width();i++){
-                eraseVerticalLine(i);
-            }
-            generateNewBlock();
+            moveFallPendulumCurr();
             return;
         }
-        eraseCurr();
-        score.addUnitScore((Board.HEIGHT - y)*2);
-        for (int i = y; i < Board.HEIGHT; i++) {
-            if (!isBottomTouched()) {
-                y++;
-                if (isOverlap()) {
-                    y--;
-                    generateNewBlock();
-                    break;
-                }
-            } else {
-                generateNewBlock();
-                break;
-            }
-        }
-        placeBlock();
+        previousFallX = x; previousFallY = y;
+        super.moveFall();
     }
 }

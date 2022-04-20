@@ -1,17 +1,18 @@
 package seoultech.se.tetris.menu;
+
 import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.component.board.NormalBoard;
-
-import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
+import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GameDifficulty {
     private BasicSet bs = new BasicSet();
@@ -54,8 +55,8 @@ public class GameDifficulty {
                     positionPoint == 2 : hard
                  */
                 gameDifficultyNum = positionPoint;
-                if(gameModeNum == 0) normalMode(positionPoint);
-                else if(gameModeNum == 1) itemMode(positionPoint);
+                if(gameModeNum2 == 0) normalMode(positionPoint);
+                else if(gameModeNum2 == 1) itemMode(positionPoint);
 
 //                if (positionPoint ==0){//이지 모드
 //                    gameDifficultyNum=0;
@@ -72,6 +73,10 @@ public class GameDifficulty {
 //                    if (gameModeNum==0)normalMode();
 //                    else if(gameModeNum==1)itemMode();
 //                }
+            }
+            else if(keyValue==KeyEvent.VK_BACK_SPACE){
+                bs.setVisible(false);
+                new GameMode();
             }
         }
     }
@@ -95,16 +100,16 @@ public class GameDifficulty {
         allPositionPoint();
     }
     public void itemMode(int difficulty){
+        ItemBoard.setDifficulty(difficulty);
         Board ib = new ItemBoard();
-        ib.setDifficulty(difficulty);
         ib.setSize(Width,Height);
         ib.setLocationRelativeTo(null);
         ib.setVisible(true);
         bs.setVisible(false);
     }
     public void normalMode(int difficulty){
+        NormalBoard.setDifficulty(difficulty);
         Board nb =new NormalBoard();
-        nb.setDifficulty(difficulty);
         nb.setSize(Width,Height);
         nb.setLocationRelativeTo(null);
         nb.setVisible(true);

@@ -53,22 +53,6 @@ public class NormalBoard extends Board {
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
 
-//        //Document default style.
-//        styleSet = new SimpleAttributeSet();
-//        StyleConstants.setFontSize(styleSet, 18);
-//        StyleConstants.setFontFamily(styleSet, "Courier");
-//        StyleConstants.setBold(styleSet, true);
-//        StyleConstants.setForeground(styleSet, Color.WHITE);
-//        StyleConstants.setAlignment(styleSet, StyleConstants.ALIGN_CENTER);
-//
-//        nextStyleSet = new SimpleAttributeSet();
-//
-//        StyleConstants.setFontSize(nextStyleSet, 10);
-//        StyleConstants.setFontFamily(nextStyleSet, "Courier");
-//        StyleConstants.setBold(nextStyleSet, true);
-//        StyleConstants.setForeground(nextStyleSet, Color.WHITE);
-//        StyleConstants.setAlignment(nextStyleSet, StyleConstants.ALIGN_CENTER);
-
         //Set timer for block drops.
         timer = new Timer(Math.round(initInterval), e -> {
             moveDown();
@@ -83,6 +67,7 @@ public class NormalBoard extends Board {
 
         addMouseListener(playerMouseListener);
         pane.addMouseListener(playerMouseListener);
+        rightPanel.addMouseListener(playerMouseListener);
         requestFocus();
         setFocusable(true);
 
@@ -116,6 +101,7 @@ public class NormalBoard extends Board {
         drawNextBlock();
 
         pv = new PauseView(0, this);
+
     }
 
     @Override

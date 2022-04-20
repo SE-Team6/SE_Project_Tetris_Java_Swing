@@ -1,6 +1,7 @@
 package seoultech.se.tetris.component.pause;
 
 import seoultech.se.tetris.component.board.Board;
+import seoultech.se.tetris.component.pause.score.ScoreBox;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,14 +27,12 @@ public class PauseView extends JDialog {
 
         this.setUndecorated(true);
         this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
+        this.setBackground(Color.BLACK);
         PauseView.score = score;
-        this.setLayout(new GridLayout(3, 1, 0, 0));
+        this.setLayout(new GridLayout(3, 1, 1, 1));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JLabel scorePane = new JLabel();
-        scorePane.setBackground(Color.WHITE);
-        scorePane.setHorizontalAlignment(SwingConstants.CENTER);
-        scorePane.setText(String.valueOf(PauseView.score));
+        JPanel scorePane = new ScoreBox(score);
 
 
         resumeBtn = new JButton();
@@ -46,6 +45,13 @@ public class PauseView extends JDialog {
         });
         exitBtn = new JButton();
         exitBtn.setText(EXIT);
+        exitBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                parent.gameOver();
+                disposeComponent();
+            }
+        });
 
         this.add(scorePane);
         this.add(resumeBtn);
@@ -63,6 +69,10 @@ public class PauseView extends JDialog {
                 switch(e.getKeyCode()) {
                     case KeyEvent.VK_ENTER:
                         if (idx == 0) {
+                            disposeComponent();
+                        } else {
+                            System.out.println(111112);
+                            parent.gameOver();
                             disposeComponent();
                         }
                         break;
@@ -82,7 +92,6 @@ public class PauseView extends JDialog {
                             showSelectedButton();
                         }
                         break;
-                    default:
                 }
             }
 

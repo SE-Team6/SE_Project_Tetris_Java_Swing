@@ -35,4 +35,24 @@ public class OneBlock extends ParentBlock {
         };
         shape = shapes[type];
     };
+
+    @Override
+    public int getLeft() {
+        return 0;
+    }
+
+    @Override
+    public int getRight() {
+        return width()-1;
+    }
+
+    @Override
+    public int getTop() {
+        return 0;
+    }
+
+    @Override
+    public int getBottom() {
+        return height()-1;
+    }
 }

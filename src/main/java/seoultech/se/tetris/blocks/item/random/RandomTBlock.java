@@ -10,10 +10,10 @@ import java.util.Random;
 
 public class RandomTBlock extends TBlock {
     protected final int[][][] randomType = {
-            {{0, 1}, {1, 1}, {1, 1}, {1, 0}},
-            {{1, 0}, {0, 0}, {0, 2}, {2, 1}},
-            {{1, 1}, {1, 0}, {0, 1}, {1, 1}},
-            {{1, 2}, {2, 0}, {0, 0}, {0, 1}},
+            {{0, 1}, {1, 2}, {2, 1}, {1, 0}},
+            {{1, 0}, {0, 1}, {1, 2}, {2, 1}},
+            {{1, 1}, {1, 1}, {1, 1}, {1, 1}},
+            {{1, 2}, {2, 1}, {1, 0}, {0, 1}},
     };
     public RandomTBlock() {
         blockType = BlockType.ITEM1;

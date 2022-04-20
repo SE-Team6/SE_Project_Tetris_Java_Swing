@@ -8,6 +8,7 @@ import java.awt.*;
 public abstract class ParentBlock {
     protected Block[][] shape;
     protected Block[][][] shapes;
+    protected int[][] centerPos;
     protected Color color;
     // rotate type
     protected int type = 0;
@@ -16,6 +17,11 @@ public abstract class ParentBlock {
     protected static int colorType = ConfigBlock.colorType;
     protected int randomIdx = 0;
     protected boolean isSettled = false;
+
+    protected int[] left;
+    protected int[] top;
+    protected int[] right;
+    protected int[] bottom;
 
     public ParentBlock() {
         color = Color.GRAY;
@@ -63,4 +69,16 @@ public abstract class ParentBlock {
     public boolean getIsSettled() {
         return isSettled;
     }
+
+    public static void setColorType(int type) {colorType=type;}
+
+    public int getLeft() {return left[type];}
+
+    public int getRight() { return right[type]; }
+
+
+    public int getTop() {return top[type];}
+
+    // bottom 까지 거리
+    public int getBottom() { return bottom[type]; }
 }

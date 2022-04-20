@@ -1,17 +1,15 @@
 package seoultech.se.tetris.menu;
 
-import org.json.simple.JSONObject;
 import seoultech.se.tetris.component.Keyboard;
+import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
-import java.util.Arrays;
 import java.util.HashMap;
 
-import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class BasicSet extends JFrame {
@@ -55,9 +53,10 @@ public class BasicSet extends JFrame {
     }
     public void callSize() {
         HashMap<String, Integer> map = loaderResolution();
-        System.out.println(map.keySet());
+//        System.out.println(map.keySet());
         Width = map.get("width");
         Height = map.get("height");
+        ConfigBlock.setFontSize(map.get("font_size"));
     }
     public void basicSet() {
         buttonX = (Width - buttonSizeX) / 2;

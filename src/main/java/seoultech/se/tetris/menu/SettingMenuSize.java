@@ -70,17 +70,17 @@ public class SettingMenuSize extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER) {
                 switch (positionPoint){
                     case 0:
-                        writeResolution(400,600,18);
+                        writeResolution(400,600,32);
                         ver.firstScreenSizeSet();
                         screenSizeSet();
                         break;
                     case 1:
-                        writeResolution(600,800,18);
+                        writeResolution(600,800,48);
                         ver.secondScreenSizeSet();
                         screenSizeSet();
                         break;
                     case 2:
-                        writeResolution(800,1000,18);
+                        writeResolution(800,1000,64);
                         ver.thirdScreenSizeSet();
                         screenSizeSet();
                         break;

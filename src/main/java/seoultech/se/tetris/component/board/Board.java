@@ -18,8 +18,6 @@ import java.awt.event.MouseListener;
 import java.util.Arrays;
 import java.util.Random;
 
-import static seoultech.se.tetris.component.JSONLoader.loaderColor;
-
 
 public abstract class Board extends JFrame {
     public static final long serialVersionUID = 2434035659171694595L;
@@ -72,12 +70,16 @@ public abstract class Board extends JFrame {
 
     protected int x = 3; //Default Position.
     protected int y = 0;
+    protected int previousFallX = 3;
+    protected int previousFallY = 0;
 
     protected Block[][] board;
 
     protected boolean isPause = false;
 
     protected PauseView pv;
+
+    protected boolean isAction = false;
 
     public Board() {
         super("SW TEAM 6");
@@ -128,6 +130,7 @@ public abstract class Board extends JFrame {
     public void placeBlock() {
         for (int j = 0; j < focus.height(); j++) {
             for (int i = 0; i < focus.width(); i++) {
+                if (x + i<0 || y + j<0 || x + i>=Board.WIDTH || y + j>=Board.HEIGHT) continue;
                 if (board[y + j][x + i] == null && focus.getShape(i, j) != null) {
                     board[y + j][x + i] = focus.getShape(i, j);
                 }
@@ -138,6 +141,7 @@ public abstract class Board extends JFrame {
     public void eraseCurr() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (focus.getShape(i - x, j - y) != null) {
                     board[j][i] = null;
                 }
@@ -146,6 +150,17 @@ public abstract class Board extends JFrame {
     }
 
     protected void timerSet() {
+        isAction = false;
+        timer.stop();
+        timer = new Timer(Math.round(initInterval), e -> {
+            moveDown();
+            drawBoard();
+        });
+        timer.start();
+    }
+
+    protected void timerSpeedUpSet() {
+        isAction = false;
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
@@ -159,6 +174,7 @@ public abstract class Board extends JFrame {
     protected boolean isOverlap() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 if (
                         (board[j][i] != null) &&
                                 (focus.getShape(i - x, j - y) != null)) {
@@ -170,7 +186,7 @@ public abstract class Board extends JFrame {
     }
 
     protected boolean isBottomTouched() {
-        return y >= Board.HEIGHT - focus.height();
+        return y + 1>= Board.HEIGHT - focus.getBottom();
     }
 
     // generate new block
@@ -186,14 +202,56 @@ public abstract class Board extends JFrame {
         // GAME OVER
         if (isOverlap()) {
             gameOver();
-//            reset();
-//            score.resetScore();
         }
+    }
+
+    protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
+        timer.stop();
+        isAction = true;
+        String all = pane.getText();
+        String[] rows = all.split("\n");
+        StringBuilder tmp = new StringBuilder();
+        for(int i=0;i<WIDTH+2;i++){
+            tmp.append(i==0 || i==WIDTH+1 ? ConfigBlock.BORDER_CHAR : ConfigBlock.STAR);
+        }
+        for (int i=targetL;i<=targetR;i++){
+            rows[i+1] = tmp.toString();
+        }
+        // erase Curr
+        x = previousFallX; y = previousFallY;
+        for (int j = y; j < y + focus.height(); j++) {
+            for (int i = x; i < x + focus.width(); i++) {
+                if (focus.getShape(i - x, j - y) != null) {
+                    rows[j+1] = rows[j+1].substring(0, i+1) + ConfigBlock.NON_BLOCK_CHAR + rows[j+1].substring(i+2);
+                }
+            }
+        }
+
+        StringBuilder res = new StringBuilder();
+        for (String row: rows) {
+            res.append(row);
+            res.append("\n");
+        }
+
+        pane.setText(res.toString());
+        timer = new Timer(Math.round(initInterval/10), e -> {
+            activeDrawBoard();
+        });
+        timer.start();
+    }
+
+    protected void activeDrawBoard(){
+        isAction = false;
+        drawBoard();
+        isAction = false;
+        timerSet();
     }
 
     protected void eraseLines() {
         int combo = 0;
         isErased = false;
+        int left = 0; int right = -1;
+        boolean isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
             int tmp = 0;
             for (int j = 0; j < Board.WIDTH; j++) {
@@ -202,6 +260,12 @@ public abstract class Board extends JFrame {
                 }
             }
             if (tmp == Board.WIDTH) {
+                if (right == -1) {
+                    right = i;
+                    left = i;
+                } else {
+                    left--;
+                }
                 for (int j = 0; j < Board.WIDTH; j++) {
                     for (int k = i; k >= 1; k--) {
                         board[k][j] = board[k - 1][j];
@@ -213,6 +277,9 @@ public abstract class Board extends JFrame {
                 combo++;
                 lineCount++;
             }
+        }
+        if (left <= right) {
+            replaceBlockToStarHorizontal(left, right);
         }
         if(isErased){
             seq += 1;
@@ -238,6 +305,8 @@ public abstract class Board extends JFrame {
     }
 
     protected void moveFall() {
+        previousFallX = x;
+        previousFallY = y;
         eraseCurr();
         score.addUnitScore((Board.HEIGHT - y)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
@@ -258,7 +327,7 @@ public abstract class Board extends JFrame {
 
     protected void moveRight() {
         eraseCurr();
-        if (x < Board.WIDTH - focus.width()) x++;
+        if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
             x--;
         }
@@ -268,7 +337,7 @@ public abstract class Board extends JFrame {
 
     protected void moveLeft() {
         eraseCurr();
-        if (x > 0) {
+        if (x + focus.getLeft()> 0){
             x--;
         }
         if (isOverlap()) {
@@ -287,6 +356,10 @@ public abstract class Board extends JFrame {
     }
 
     protected void drawBoard() {
+        if (isAction) {
+            System.out.println("drawBoard stop");
+            return;
+        }
         StyledDocument doc = pane.getStyledDocument();
         pane.setText("");
         try {
@@ -343,13 +416,12 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
-    protected void gameOver() {
+    public void gameOver() {
         System.out.println("Game over!");
         new GameOver();
 
         timer.stop();
         this.dispose();
-//        reset();
     }
 
     protected void pause() {
@@ -378,58 +450,11 @@ public abstract class Board extends JFrame {
         timer.start();
     }
 
-//    public class PlayerKeyListener implements KeyListener {
-//        @Override
-//        public void keyTyped(KeyEvent e) {
-//
-//        }
-//
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            switch (e.getKeyCode()) {
-//                case KeyEvent.VK_DOWN: {
-//                    moveDown();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_RIGHT: {
-//                    moveRight();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_LEFT: {
-//                    moveLeft();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_UP: {
-//                    moveRotate();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_SPACE: {
-//                    moveFall();
-//                    drawBoard();
-//                    break;
-//                }
-//                case KeyEvent.VK_ESCAPE: {
-//                    pause();
-//                    break;
-//                }
-//            }
-//        }
-//
-//        @Override
-//        public void keyReleased(KeyEvent e) {
-//
-//        }
-//    }
-
     public class PlayerKeyListener extends Keyboard {
         @Override
         public void keyPressed(KeyEvent e) {
-            super.keyPressed(e);
             int keyCode = e.getKeyCode();
+
             if (keyCode == Keyboard.DOWN) {
                 moveDown();
                 drawBoard();
@@ -445,16 +470,13 @@ public abstract class Board extends JFrame {
             } else if (keyCode == Keyboard.SPACE) {
                 moveFall();
                 drawBoard();
-            } else {
+            } else if (keyCode == Keyboard.ESC) {
                 pause();
             }
         }
     }
 
 
-    // @TODO
-    // 일단 불편해서 추가함
-    // Mouse 객체도 관리해야할 듯
     public class PlayerMouseListener implements MouseListener {
         @Override
         public void mouseClicked(MouseEvent e) {
