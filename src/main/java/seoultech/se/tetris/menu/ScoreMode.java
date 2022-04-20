@@ -1,6 +1,6 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.ScoreBoardItemMode;
+import seoultech.se.tetris.component.ScoreBoard;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -49,11 +49,11 @@ public class ScoreMode extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
                     gameModeNum =0;
-//                    new ScoreBoardNormalMode();
+                    new ScoreBoard(0);
                 }
                 else if(positionPoint==1){
                     gameModeNum =1;
-                    new ScoreBoardItemMode(0);
+                    new ScoreBoard(0);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){

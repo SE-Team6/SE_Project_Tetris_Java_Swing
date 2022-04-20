@@ -48,12 +48,12 @@ public class GameMode extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    gameModeNum =0;
+                    gameModeNum =0;//노말
                     bs.setVisible(false);
                     new GameDifficulty();
                 }
                 else if(positionPoint==1){
-                    gameModeNum =1;
+                    gameModeNum =1;//아이템
                     bs.setVisible(false);
                     new GameDifficulty();
                 }

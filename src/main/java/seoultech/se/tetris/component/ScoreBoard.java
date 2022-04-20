@@ -14,9 +14,10 @@ import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
+import static seoultech.se.tetris.menu.GameMode.gameModeNum;
 
-public class ScoreBoardItemMode extends JFrame {
-    private Image backGround = new ImageIcon("src/main/resources/image/backGround/ScoreBoard/ScoreBoard_BG.jpg").getImage();
+public class ScoreBoard extends JFrame {
+    private Image backGround;
     private ImageIcon rightPageButtonImg =  new ImageIcon("src/main/resources/image/Button/ScoreBoard/RightButton.png");
     private ImageIcon leftPageButtonImg =  new ImageIcon("src/main/resources/image/Button/ScoreBoard/LeftButton.png");
 
@@ -42,10 +43,11 @@ public class ScoreBoardItemMode extends JFrame {
     ArrayList<JSONObject> arr = JSONArrayToArrayList(res);
     JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
     ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
-    public ScoreBoardItemMode(int num){
+    public ScoreBoard(int num){
         setting();
         pageButton();
         pageNumLabel();
+        setMode();
         if(num>0){
             higLightSB(num);
         }
@@ -178,23 +180,30 @@ public class ScoreBoardItemMode extends JFrame {
             dateLabel[i].setText("");
             difficultyLabel[i].setText("");
         }
-        if (allScores.size()>scoreBoardNum){
-        for (int i=scoreBoardNum;i<Math.min(allScores.size(),scoreBoardNum+10);i++){ // 스코어 사이즈가 그다음 페이지의 시작 랭크보다 클때만
-            nameLabel[i].setText((String) arr.get(i).get("Name"));
-            scoreLabel[i].setText(String.valueOf(arr.get(i).get("Score")));
-            dateLabel[i].setText((String) arr.get(i).get("DateTime"));
-            String difficultyVal = String.valueOf(arr.get(i).get("Difficulty"));
-            difficultyLabel[i].setText(difficultyLabelSet(difficultyVal));
-         }
-        }
-        else{
-            for (int i=scoreBoardNum;i<scoreBoardNum+10;i++){ // 크지 않다면  빈칸으로
-                nameLabel[i].setText("");
-                scoreLabel[i].setText("");
-                dateLabel[i].setText("");
-                difficultyLabel[i].setText("");
+        if (gameModeNum==0){
+            if (allScores.size()>scoreBoardNum){
+                for (int i=scoreBoardNum;i<Math.min(allScores.size(),scoreBoardNum+10);i++){ // 스코어 사이즈가 그다음 페이지의 시작 랭크보다 클때만
+                    nameLabel[i].setText((String) arr.get(i).get("Name"));
+                    scoreLabel[i].setText(String.valueOf(arr.get(i).get("Score")));
+                    dateLabel[i].setText((String) arr.get(i).get("DateTime"));
+                    String difficultyVal = String.valueOf(arr.get(i).get("Difficulty"));
+                    difficultyLabel[i].setText(difficultyLabelSet(difficultyVal));
+             }
             }
+            else{
+                for (int i=scoreBoardNum;i<scoreBoardNum+10;i++){ // 크지 않다면  빈칸으로
+                    nameLabel[i].setText("");
+                    scoreLabel[i].setText("");
+                    dateLabel[i].setText("");
+                    difficultyLabel[i].setText("");
+                }
+            }
+
         }
+        else if(gameModeNum==1){
+
+        }
+
         pageNumLabel.setText(String.valueOf(page+"/10")); // 현재 페이지 출력
     }
     public String difficultyLabelSet(String a){ // 임시
@@ -250,5 +259,13 @@ public class ScoreBoardItemMode extends JFrame {
         dateLabel[a].setBackground(Color.YELLOW);
         nameLabel[a].setBackground(Color.YELLOW);
         difficultyLabel[a].setBackground(Color.YELLOW);
+    }
+    public void setMode(){
+        if(gameModeNum==0){
+            backGround= new ImageIcon("src/main/resources/image/backGround/ScoreBoard/ScoreBoard_BG_2.jpg").getImage();
+        }
+        else if(gameModeNum==1){
+            backGround= new ImageIcon("src/main/resources/image/backGround/ScoreBoard/ScoreBoard_BG.jpg").getImage();
+        }
     }
 }

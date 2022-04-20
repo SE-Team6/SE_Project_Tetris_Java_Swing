@@ -1,7 +1,6 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.ScoreBoardItemMode;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
