@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
-import seoultech.se.tetris.blocks.ParentBlock;
-import seoultech.se.tetris.blocks.item.random.RandomIBlock;
+import seoultech.se.tetris.previousBlocks.ParentBlock;
+import seoultech.se.tetris.previousBlocks.item.random.RandomIBlock;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

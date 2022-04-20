@@ -1,6 +1,6 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.blocks.ParentBlock;
+import seoultech.se.tetris.previousBlocks.ParentBlock;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import seoultech.se.tetris.blocks.ParentBlock;
+import seoultech.se.tetris.previousBlocks.ParentBlock;
 import seoultech.se.tetris.component.board.NormalBoard;
 
 import java.util.Arrays;
