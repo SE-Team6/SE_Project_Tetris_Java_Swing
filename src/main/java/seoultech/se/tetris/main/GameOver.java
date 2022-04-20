@@ -115,7 +115,11 @@ public class GameOver extends JFrame {
                 //추후 업데이트 누르면 스코어보드 객체가 실행되서 한번더 강조
                 JOptionPane.showMessageDialog(null,"점수가 업데이트 되었습니다");
                 String[] updateArr= {myName.getText(),"2022/04/17", String.valueOf(score), String.valueOf(gameDifficultyNum),String.valueOf(gameModeNum)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
-                appendScore(updateArr);
+                if(gameModeNum == 0){
+                    appendScore(updateArr, "normal");
+                }else if(gameModeNum == 1){
+                    appendScore(updateArr, "item");
+                }
                 new ScoreBoardItemMode();
                 updateButton.setVisible(false);
             }

@@ -13,7 +13,8 @@ import static seoultech.se.tetris.component.JSONLoader.*;
 
 public class JSONWriter {
     final static String SETTINGS_FILEPATH = "src/main/configs/settings.json";
-    final static String SCORE_FILEPATH = "src/main/configs/score.json";
+    final static String NORMAL_SCORE_FILEPATH = "src/main/configs/normal_score.json";
+    final static String ITEM_SCORE_FILEPATH = "src/main/configs/item_score.json";
 
     JSONWriter(){}
 
@@ -78,7 +79,7 @@ public class JSONWriter {
         return rank -> rank를 업데이트 하고 하이라이트로 보여주기 위해서 반환함.
         input 스코어를 입력받고, 하나의 리스트에 입력한 후 sort
      */
-    public static int appendScore(String[] inputScore){
+    public static int appendScore(String[] inputScore, String mode){
         int rank = -1;
         // InputScore -> New Score Object(JSONObject)
         String[] key = {"Name", "DateTime", "Score", "Difficulty", "isItem"};
@@ -89,8 +90,13 @@ public class JSONWriter {
         for(int i=2; i<5; ++i)
             newScore.put(key[i], Integer.parseInt(inputScore[i]));
 
+        JSONArray loadedScores = new JSONArray();
         //Load JSONArray
-        JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
+        if(mode.equals("normal")){
+            loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
+        }else if(mode.equals("item")){
+            loadedScores = (JSONArray) getJSONObject("item", "scoreBoard");
+        }
 
         //For compare To new Score
         ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
@@ -102,7 +108,7 @@ public class JSONWriter {
         // Write to FILE
         JSONObject result = new JSONObject();
         JSONArray arr2 = new JSONArray();
-        for(int i=0; i < Math.min(allScores.size(), 10); ++i){
+        for(int i=0; i < Math.min(allScores.size(), 100); ++i){
             if(newScore.equals(allScores.get(i))){
                 rank = i;
             }
@@ -110,22 +116,38 @@ public class JSONWriter {
         }
         result.put("scoreBoard", arr2);
 
-        try(FileWriter file = new FileWriter(SCORE_FILEPATH)){
-            file.write(result.toJSONString());
-            file.flush();
-        } catch (IOException e){
-            e.printStackTrace();
+        if(mode.equals("normal")){
+            try(FileWriter file = new FileWriter(NORMAL_SCORE_FILEPATH)){
+                file.write(result.toJSONString());
+                file.flush();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }else if(mode.equals("item")){
+            try(FileWriter file = new FileWriter(ITEM_SCORE_FILEPATH)){
+                file.write(result.toJSONString());
+                file.flush();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
         }
-
         return rank;
     }
 
     //SCORE_FILEPATH의 내용을 비운다.
-    public static void resetScore(){
-        try{
-            new FileOutputStream(SCORE_FILEPATH).close();
-        }catch (IOException e){
-            e.printStackTrace();
+    public static void resetScore(String mode) {
+        if (mode.equals("normal")) {
+            try {
+                new FileOutputStream(NORMAL_SCORE_FILEPATH).close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else if (mode.equals("item")) {
+            try {
+                new FileOutputStream(ITEM_SCORE_FILEPATH).close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -42,8 +42,8 @@ public class JSONClassTest {
     public void appendScoreTest(){
         String[] key = {"Name", "DateTime", "Score", "Difficulty", "isItem"};
         String[] expected = {"khyo", "20220418", "2022041800", "2", "1"};
-        JSONWriter.appendScore(expected);
-        JSONArray res = JSONLoader.loaderScore();
+        JSONWriter.appendScore(expected, "normal");
+        JSONArray res = JSONLoader.loaderScore("normal");
         ArrayList<JSONObject> arr = JSONWriter.JSONArrayToArrayList(res);
         for(int i=0; i<2; ++i){
             assertEquals(expected[i], arr.get(0).get(key[i]));
