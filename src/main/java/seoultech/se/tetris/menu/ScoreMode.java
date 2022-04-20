@@ -15,7 +15,7 @@ public class ScoreMode extends JFrame {
 
     public static int gameModeNum; //0:노말 1:아이템
 
-    private BasicSet bs = new BasicSet();
+    private BasicSet bs;
     private BackMenu bm = new BackMenu();
     private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
     private ImageIcon itemModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/itemMode_B.jpeg");
@@ -25,7 +25,10 @@ public class ScoreMode extends JFrame {
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public ScoreMode() {
+    public ScoreMode(){}
+
+    public ScoreMode(int x, int y) {
+        bs = new BasicSet(x,y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -91,6 +94,6 @@ public class ScoreMode extends JFrame {
     }
     public void backMenu(){
         bs.setVisible(false);
-        new StartMenu();
+        new StartMenu(bs.getX(), bs.getY());
     }
 }

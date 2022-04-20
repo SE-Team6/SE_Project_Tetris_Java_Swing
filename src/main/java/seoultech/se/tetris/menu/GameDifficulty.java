@@ -15,7 +15,7 @@ import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
 import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GameDifficulty {
-    private BasicSet bs = new BasicSet();
+    private BasicSet bs;
     private BackMenu bm = new BackMenu();
     private ImageIcon easyModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/EasyMode_B.jpeg");
     private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
@@ -27,7 +27,11 @@ public class GameDifficulty {
     private ImageIcon[] EnterImage = {easyModeBtnEnterImage, normalModeBtnEnterImage,hardModeBtnEnterImage};
     private JButton[] menuButton = new JButton[3];
     public static int gameDifficultyNum=1; //0:이지,1:노말,2:하드
-    public GameDifficulty(){
+
+    public GameDifficulty(){}
+
+    public GameDifficulty(int x, int y){
+        bs = new BasicSet(x,y);
         positionPoint=0;
         bs.setVisible(true);
         bs.addKeyListener(new menuKeyListener());
@@ -103,7 +107,8 @@ public class GameDifficulty {
         ItemBoard.setDifficulty(difficulty);
         Board ib = new ItemBoard();
         ib.setSize(Width,Height);
-        ib.setLocationRelativeTo(null);
+        ib.setLocation(bs.getX(), bs.getY());
+//        ib.setLocationRelativeTo(null);
         ib.setVisible(true);
         bs.setVisible(false);
     }
@@ -111,7 +116,8 @@ public class GameDifficulty {
         NormalBoard.setDifficulty(difficulty);
         Board nb =new NormalBoard();
         nb.setSize(Width,Height);
-        nb.setLocationRelativeTo(null);
+        nb.setLocation(bs.getX(), bs.getY());
+//        nb.setLocationRelativeTo(null);
         nb.setVisible(true);
         bs.setVisible(false);
     }

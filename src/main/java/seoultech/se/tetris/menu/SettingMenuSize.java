@@ -28,12 +28,16 @@ public class SettingMenuSize extends JFrame {
     private  JButton[] menuButton= new JButton[3];
 
     Version ver = new Version();
-    BasicSet bs = new BasicSet();
+    BasicSet bs;
     BackMenu bm = new BackMenu();
     Keyboard key = new Keyboard();
 
     private int positionPoint=0;
-    public SettingMenuSize(){
+
+    public SettingMenuSize(){}
+
+    public SettingMenuSize(int x, int y){
+        bs = new BasicSet(x, y);
         positionPoint =0;
         bs.setVisible(true);
         bs.add(bm.backMenuBtn);

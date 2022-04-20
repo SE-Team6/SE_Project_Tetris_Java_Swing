@@ -328,7 +328,7 @@ public class ItemBoard extends Board {
         Random random = new Random(System.currentTimeMillis());
         for(int i=0;i<HEIGHT-line;i++){
             if (i<line && !isNullLine(i)) {
-                gameOver();
+                gameOver(getX(), getY());
             }
             board[i] = board[i+line];
         }
@@ -375,7 +375,7 @@ public class ItemBoard extends Board {
 
         // GAME OVER
         if (isOverlap()) {
-            gameOver();
+            gameOver(getX(), getY());
         }
     }
 

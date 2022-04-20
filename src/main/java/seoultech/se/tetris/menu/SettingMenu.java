@@ -27,10 +27,14 @@ public class SettingMenu extends JFrame {
 
     private int positionPoint;
 
-    BasicSet bs = new BasicSet();
+    BasicSet bs;
     BackMenu bm = new BackMenu();
-    public SettingMenu(){
-        positionPoint =0;
+
+    public SettingMenu(){}
+
+    public SettingMenu(int x, int y){
+        bs = new BasicSet(x,y);
+        positionPoint = 0;
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new menuKeyListener());
         bs.setVisible(true);
@@ -57,7 +61,7 @@ public class SettingMenu extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new StartMenu();
+                new StartMenu(bs.getX(), bs.getY());
             }
         }
         }
@@ -93,11 +97,11 @@ public class SettingMenu extends JFrame {
         switch (num){
             case 0://해상도 설정
                 bs.setVisible(false);
-                new SettingMenuSize();
+                new SettingMenuSize(bs.getX(), bs.getY());
                 break;
             case 1://키 설정
                 bs.setVisible(false);
-                new SettingMenuKeySet();
+                new SettingMenuKeySet(bs.getX(), bs.getY());
                 break;
             case 2://스코어 보드 초기화
                 new ScoreReset();
@@ -116,7 +120,7 @@ public class SettingMenu extends JFrame {
                         writeKey(keyValueArr);
                         writeColorMode(0);
                         JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
-                        new SettingMenu();
+                        new SettingMenu(bs.getX(), bs.getY());
                         ar.setVisible(false);
                     }
                 });
@@ -128,7 +132,7 @@ public class SettingMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new StartMenu();
+                new StartMenu(bs.getX(), bs.getY());
             }
         });
     }

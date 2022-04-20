@@ -3,7 +3,11 @@ package seoultech.se.tetris.menu;
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.main.GameOver;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
@@ -37,10 +41,11 @@ public class StartMenu extends JFrame {
     String [] keyLoadStringValue = new String[6];
 
     private int positionPoint = 0;
-    BasicSet bs = new BasicSet();
+    public BasicSet bs;
 
     //시작 메뉴
-    public StartMenu(){
+    public StartMenu(int x, int y){
+        bs = new BasicSet(x,y);
         start_Menu_Screen_btn();
         bs.setVisible(true);
         keyLoad();
@@ -155,20 +160,20 @@ public class StartMenu extends JFrame {
     public void menuAction(int num){
         switch (num) {
             case 0: // 게임 시작
-                new GameMode();
+                new GameMode(bs.getX(), bs.getY());
                 bs.setVisible(false);
                 break;
             case 1: // 게임 설정
                 bs.setVisible(false);
-                new SettingMenu();
+                new SettingMenu(bs.getX(), bs.getY());
                 break;
             case 2: // 스코어 보드
                 bs.setVisible(false);
-                new ScoreMode();
+                new ScoreMode(bs.getX(), bs.getY());
                 break;
             case 3: // 게임종료
                 bs.setVisible(false);
-                new GameOver();
+                new GameOver(bs.getX(), bs.getY());
                 break;
         }
     }

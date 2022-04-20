@@ -29,8 +29,6 @@ public abstract class Board extends JFrame {
             {80,100,100,100,100,100,100}
     };
 
-    protected static final double[] iBlockFitness = {120, 100, 80};
-
     protected static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
     protected static double[] itemProb = new double[17];
 
@@ -201,7 +199,7 @@ public abstract class Board extends JFrame {
 
         // GAME OVER
         if (isOverlap()) {
-            gameOver();
+            gameOver(getX(), getY());
         }
     }
 
@@ -416,9 +414,9 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
-    public void gameOver() {
+    public void gameOver(int x, int y) {
         System.out.println("Game over!");
-        new GameOver();
+        new GameOver(x, y);
 
         timer.stop();
         this.dispose();

@@ -48,7 +48,7 @@ public class PauseView extends JDialog {
         exitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.gameOver();
+                parent.gameOver(parent.getX(), parent.getY());
                 disposeComponent();
             }
         });
@@ -72,7 +72,7 @@ public class PauseView extends JDialog {
                             disposeComponent();
                         } else {
                             System.out.println(111112);
-                            parent.gameOver();
+                            parent.gameOver(parent.getX(), parent.getY());
                             disposeComponent();
                         }
                         break;

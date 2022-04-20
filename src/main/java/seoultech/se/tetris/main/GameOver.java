@@ -61,13 +61,16 @@ public class GameOver extends JFrame {
     public static int scoreBoardPanelHeight;
 
     public static int higLightNum = 0;
-    BasicSet bs = new BasicSet();
+    BasicSet bs;
     private int score;
     public static String nowDate;
     private JSONArray res;
     private JSONArray loadedScores;
 
-    public GameOver(){
+    public GameOver(){}
+
+    public GameOver(int x, int y){
+        bs = new BasicSet(x, y);
         bs.setVisible(true);
         score = Score.score;
         System.out.println(Score.score);
@@ -200,7 +203,7 @@ public class GameOver extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 bs.setVisible(false);
-                new StartMenu();
+                new StartMenu(bs.getX(), bs.getY());
             }
         });
         bs.add(StartMenuButton);

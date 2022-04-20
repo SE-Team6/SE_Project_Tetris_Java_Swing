@@ -24,7 +24,7 @@ public class Score extends JLabel {
         updateScore();
     }
 
-    public int getScore() {
+    public static int getScore() {
         return score;
     }
 
