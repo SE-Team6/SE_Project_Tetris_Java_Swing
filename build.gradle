@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+
+    id "edu.sc.seis.launch4j" version "2.5.3"
 }
 
 group 'tetro.puzzle'
@@ -29,6 +31,12 @@ jar {
         }
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+launch4j {
+    outfile = 'tetris.exe'
+    mainClassName = 'Tetris'
+    icon = "${projectDir}/src/main/resources/icon.ico"
 }
 
 dependencies {
