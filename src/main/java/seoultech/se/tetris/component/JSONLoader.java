@@ -3,48 +3,55 @@ package seoultech.se.tetris.component;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 public class JSONLoader {
-    final static String SETTINGS_FILEPATH = JSONWriter.class.getResource("/configs/settings.json").toString();
-    final static String NORMAL_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/normal_score.json").toString();
-    final static String ITEM_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/item_score.json").toString();
+    static String SETTINGS_FILEPATH = "./config/settings.json";
+    static String NORMAL_SCORE_FILEPATH = "./config/normal_score.json";
+    static String ITEM_SCORE_FILEPATH = "./config/item_score.json";
 
     static JSONParser parser = new JSONParser();
 
     JSONLoader(){}
 
+    public static String jarPathToFile(String path) {
+        String s = null;
+        try{
+            InputStream stream = JSONLoader.class.getResourceAsStream(path);
+            byte[] bytes = stream.readAllBytes();
+            s = new String(bytes, StandardCharsets.UTF_8);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
+
+
     public static Object getJSONObject(String type, String key){
         JSONObject obj = new JSONObject();
         try {
-            switch (type){
+            switch (type) {
                 case "settings":
                     FileReader settingFile = new FileReader(SETTINGS_FILEPATH);
                     obj = (JSONObject) parser.parse(settingFile);
                     settingFile.close();
                     break;
                 case "normal":
-                    FileReader normalScoreFile = new FileReader(NORMAL_SCORE_FILEPATH);
-                    obj = (JSONObject) parser.parse(normalScoreFile);
-                    normalScoreFile.close();
+                    FileReader normalFile = new FileReader(NORMAL_SCORE_FILEPATH);
+                    obj = (JSONObject) parser.parse(normalFile);
+                    normalFile.close();
                     break;
                 case "item":
-                    FileReader itemScoreFile = new FileReader(ITEM_SCORE_FILEPATH);
-                    obj = (JSONObject) parser.parse(itemScoreFile);
-                    itemScoreFile.close();
+                    FileReader itemFile = new FileReader(ITEM_SCORE_FILEPATH);
+                    obj = (JSONObject) parser.parse(itemFile);
+                    itemFile.close();
                     break;
             }
-        } catch (FileNotFoundException e){
+        }catch (Exception e){
             e.printStackTrace();
-        } catch (IOException e){
-            e.printStackTrace();
-        } catch (ParseException e){
-            System.out.println("Score Board is Empty!");
         }
         return obj.get(key);
     }

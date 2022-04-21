@@ -12,13 +12,13 @@ repositories {
 sourceSets {
     main {
         resources {
-            srcDirs "src/main/resourses/image", "src/main/configs"
+            srcDirs "src/main/resourses"
         }
     }
 }
 
 jar {
-    baseName "SW-Team 6"
+    baseName "SW-Team6"
     version '0.1.0'
     manifest {
         attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris'
@@ -30,7 +30,6 @@ jar {
     }
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
-
 dependencies {
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
