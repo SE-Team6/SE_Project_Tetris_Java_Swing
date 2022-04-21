@@ -50,7 +50,7 @@ public class Version {
     }
 
     public void gameOverFirstSize(){
-        gameOverBackGround = new ImageIcon("src/main/resources/image/backGround/GameOver/scoreBoardsummary.jpg").getImage();
+        gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary.jpg")).getImage();
         gameOverTitleX=0;
         scoreBoardWidth=170;
         scoreBoardHeight=430;
@@ -65,7 +65,7 @@ public class Version {
         sbListX= new int[]{0, 30, 110};
     }
     public void gameOverSecondSize(){
-        gameOverBackGround = new ImageIcon("src/main/resources/image/backGround/GameOver/scoreBoardsummary_600.jpg").getImage();
+        gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_600.jpg")).getImage();
         gameOverTitleX=100;
         scoreBoardWidth=300;
         scoreBoardHeight=630;
@@ -80,7 +80,7 @@ public class Version {
         sbListX= new int[]{0, 60, 200};
     }
     public void gameOverThirdSize(){
-        gameOverBackGround = new ImageIcon("src/main/resources/image/backGround/GameOver/scoreBoardsummary_800.jpg").getImage();
+        gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_800.jpg")).getImage();
         gameOverTitleX=200;
         scoreBoardWidth=500;
         scoreBoardHeight=800;

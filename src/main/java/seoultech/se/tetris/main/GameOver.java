@@ -33,16 +33,16 @@ public class GameOver extends JFrame {
 
     public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight, scoreAndNameLabelX,textFiledX,ButtonX;
 
-    private ImageIcon updateBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_B.jpg");
-    private ImageIcon updateBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/updateBtn_E.jpg");
-    private ImageIcon StartMenuBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/StartMenuBtn_B.jpg");
-    private ImageIcon StartMenuBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/StartMenuBtn_E.jpg");
-    private ImageIcon ExitGameBtnBasicImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/ExitGameBtn_B.jpg");
-    private ImageIcon ExitGameBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameover_btn/ExitGameBtn_E.jpg");
+    private ImageIcon updateBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_B.jpg"));
+    private ImageIcon updateBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_E.jpg"));
+    private ImageIcon StartMenuBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/StartMenuBtn_B.jpg"));
+    private ImageIcon StartMenuBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/StartMenuBtn_E.jpg"));
+    private ImageIcon ExitGameBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/ExitGameBtn_B.jpg"));
+    private ImageIcon ExitGameBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/ExitGameBtn_E.jpg"));
     public static Image gameOverBackGround;
 
 
-    private JLabel gameOverTitle = new JLabel(new ImageIcon("src/main/resources/image/Label/title/GameOverTitle.png"),SwingConstants.CENTER);
+    private JLabel gameOverTitle = new JLabel(new ImageIcon(getClass().getResource("/image/Label/title/GameOverTitle.png")),SwingConstants.CENTER);
     private JLabel myScoreLabel = new JLabel("Score");
     private JLabel NameLabel = new JLabel("Name");
     private JPanel scoreBoardSummary = new JPanel();

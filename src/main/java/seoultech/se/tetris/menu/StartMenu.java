@@ -17,16 +17,16 @@ import static seoultech.se.tetris.menu.BasicSet.*;
 public class StartMenu extends JFrame {
 
     // 시작 메뉴 버튼 이미지
-    private ImageIcon gameStartBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Start_Basic.jpg");
-    private ImageIcon gameSettingBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Setting_Basic.jpg");
-    private ImageIcon scoreBoardBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Basic.jpg");
-    private ImageIcon exitBtnImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Basic.jpg");
+    private ImageIcon gameStartBtnImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Game_Start_Basic.jpg"));
+    private ImageIcon gameSettingBtnImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Game_Setting_Basic.jpg"));
+    private ImageIcon scoreBoardBtnImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/ScoreBoard_Basic.jpg"));
+    private ImageIcon exitBtnImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Exit_Basic.jpg"));
 
     // 선택된 시작 메뉴 버튼 이미지
-    private ImageIcon gameStartBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Start_Enter.jpg");
-    private ImageIcon gameSettingBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Game_Setting_Enter.jpg");
-    private ImageIcon scoreBoardBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/ScoreBoard_Enter.jpg");
-    private ImageIcon exitBtnEnterImage = new ImageIcon("src/main/resources/image/Button/start_Menu_btn/Exit_Enter.jpg");
+    private ImageIcon gameStartBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Game_Start_Enter.jpg"));
+    private ImageIcon gameSettingBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Game_Setting_Enter.jpg"));
+    private ImageIcon scoreBoardBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/ScoreBoard_Enter.jpg"));
+    private ImageIcon exitBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/start_Menu_btn/Exit_Enter.jpg"));
 
     private ImageIcon[] BasicImage = {gameStartBtnImage,gameSettingBtnImage,scoreBoardBtnImage,exitBtnImage};
     private ImageIcon[] EnterImage = {gameStartBtnEnterImage,gameSettingBtnEnterImage,scoreBoardBtnEnterImage,exitBtnEnterImage};

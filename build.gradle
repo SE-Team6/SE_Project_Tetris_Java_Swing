@@ -16,15 +16,6 @@ sourceSets {
         }
     }
 }
-//sourceSets.main.resources.srcDirs = ["src/main/resources/image/Test",]
-
-
-sourceSets.each{
-    println(it)
-    it.allSource.each{
-        println(it)
-    }
-}
 
 jar {
     baseName "SW-Team 6"
@@ -32,11 +23,11 @@ jar {
     manifest {
         attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris'
     }
-//    from{
-//        configurations.runtimeClasspath.collect{
-//            it.isDirectory() ? it : zipTree(it)
-//        }
-//    }
+    from{
+        configurations.runtimeClasspath.collect{
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
 
 dependencies {
