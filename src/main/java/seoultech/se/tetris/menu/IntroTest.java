@@ -12,6 +12,7 @@ public class IntroTest extends Frame{
         for(int i = 0; i < 7; i++){
             img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }
+        System.out.println(getClass().getResource("/image/Test/step0.jpg"));
         addWindowListener(new WindowHandler());
         setSize(400, 500);
         setVisible(true);
