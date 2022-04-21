@@ -1,7 +1,7 @@
+package seoultech.se.tetris.component;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import seoultech.se.tetris.component.JSONLoader;
-import seoultech.se.tetris.component.JSONWriter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
