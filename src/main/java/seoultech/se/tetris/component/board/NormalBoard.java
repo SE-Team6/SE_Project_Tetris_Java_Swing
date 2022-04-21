@@ -101,8 +101,6 @@ public class NormalBoard extends Board {
         next = getRandomBlock();
         drawNextBlock();
 
-        System.out.println(11111111);
-        System.out.println(isOverlap());
 
         pv = new PauseView(0, this);
 
