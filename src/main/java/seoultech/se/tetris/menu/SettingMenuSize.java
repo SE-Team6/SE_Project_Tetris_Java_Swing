@@ -118,7 +118,7 @@ public class SettingMenuSize extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SettingMenu();
+                new SettingMenu(bs.getX(), bs.getY());
             }
         });
     }

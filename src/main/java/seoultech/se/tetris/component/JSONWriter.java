@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import static seoultech.se.tetris.component.JSONLoader.*;
 
 public class JSONWriter {
-    final static String SETTINGS_FILEPATH = "src/main/configs/settings.json";
-    final static String NORMAL_SCORE_FILEPATH = "src/main/configs/normal_score.json";
-    final static String ITEM_SCORE_FILEPATH = "src/main/configs/item_score.json";
+    final static String SETTINGS_FILEPATH = "src/main/resources/configs/settings.json";
+    final static String NORMAL_SCORE_FILEPATH = "src/main/resources/configs/normal_score.json";
+    final static String ITEM_SCORE_FILEPATH = "src/main/resources/configs/item_score.json";
 
     JSONWriter(){}
 
