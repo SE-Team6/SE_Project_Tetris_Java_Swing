@@ -9,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class ScoreMode extends JFrame {
 
@@ -24,6 +23,8 @@ public class ScoreMode extends JFrame {
     private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
+
+    private int positionPoint;
 
     public ScoreMode(){}
 

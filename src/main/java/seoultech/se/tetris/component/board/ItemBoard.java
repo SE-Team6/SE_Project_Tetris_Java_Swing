@@ -16,7 +16,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
-import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
@@ -261,7 +260,7 @@ public class ItemBoard extends Board {
         }
     }
 
-    private void eraseLLine() {
+    protected void eraseLLine() {
         int[] pos = focus.getBlockRandomPos();
         int targetX = x + pos[1];
         int targetY = y + pos[0];
@@ -272,7 +271,7 @@ public class ItemBoard extends Board {
         eraseHorizontalLine(targetY);
     }
 
-    private void eraseQLine() {
+    protected void eraseQLine() {
         int[] pos = focus.getBlockRandomPos();
         int targetX = x + pos[1];
         int targetY = y + pos[0];
@@ -297,49 +296,7 @@ public class ItemBoard extends Board {
         }
     }
 
-    private void eraseDiagonalLine(int targetX, int targetY) {
-        int[] dx = {-1, -1, 1, 1};
-        int[] dy = {1, -1, 1, -1};
-
-        for (int i=1;i<WIDTH;i++){
-            for(int j=0;j<4;j++){
-                int cx = targetX + dx[j]*i;
-                int cy = targetY + dy[j]*i;
-                if (checkBoundary(cx, cy)) {
-                    board[cy][cx] = null;
-                }
-            }
-        }
-    }
-
-    private boolean checkBoundary(int x, int y) {
-        return checkBoundaryY(y) && checkBoundaryX(x);
-    }
-
-    private boolean checkBoundaryX(int x) {
-        return x >= 0 && x < WIDTH;
-    }
-
-    private boolean checkBoundaryY(int y) {
-        return y >= 0 && y < HEIGHT;
-    }
-
-    private void generateNewLines(int line) {
-        Random random = new Random(System.currentTimeMillis());
-        for(int i=0;i<HEIGHT-line;i++){
-            if (i<line && !isNullLine(i)) {
-                gameOver(getX(), getY());
-            }
-            board[i] = board[i+line];
-        }
-        for(int i=0;i<line;i++){
-            int idx = random.nextInt(WIDTH);
-            Block[] row = generateNewLine(idx);
-            board[HEIGHT-i-1] = row;
-        }
-    }
-
-    private Block[] generateNewLine(int idx) {
+    protected Block[] generateNewLines(int idx) {
         Block[] row = new Block[WIDTH];
         for(int i=0;i<WIDTH;i++){
             if (i==idx) continue;
@@ -383,6 +340,7 @@ public class ItemBoard extends Board {
         for (int j = 0; j < focus.height(); j++) {
             for (int i = 0; i < focus.width(); i++) {
 //                if (board[y + j][x + i] == null && focus.getShape(i, j) != null) {
+                if (x + i<0 || y + j<0 || x + i>=Board.WIDTH || y + j>=Board.HEIGHT) continue;
                 board[y + j][x + i] = focus.getShape(i, j);
             }
         }
@@ -392,6 +350,7 @@ public class ItemBoard extends Board {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
 //                if (focus.getShape(i - x, j - y) != null) {
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
                 board[j][i] = null;
 //                }
             }
@@ -456,7 +415,7 @@ public class ItemBoard extends Board {
         placeBlock();
     }
 
-    private void moveFallPendulumCurr() {
+    protected void moveFallPendulumCurr() {
         erasePendulumCurr();
         for (int i=x;i<x+focus.width();i++){
             eraseVerticalLine(i);

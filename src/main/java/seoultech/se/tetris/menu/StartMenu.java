@@ -1,11 +1,13 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
