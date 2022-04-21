@@ -23,7 +23,7 @@ public class BasicSet extends JFrame {
     public static int currentNum=1;
 
     // 기본 이미지
-    private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/800x1000_BG.jpg")).getImage();
+    private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/600x800_BG.jpg")).getImage();
     public JLabel gameTitle = new JLabel(new ImageIcon(getClass().getResource("/image/Label/title/title.png")), SwingConstants.CENTER);
 
     //상단 메뉴바 이미지
