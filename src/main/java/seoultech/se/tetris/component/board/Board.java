@@ -116,7 +116,7 @@ public abstract class Board extends JFrame {
         return 6;
     }
 
-    public ParentBlock getRandomBlock() {
+    protected ParentBlock getRandomBlock() {
         int block = getRoulette();
         switch (block) {
             case 0: return new IBlock();

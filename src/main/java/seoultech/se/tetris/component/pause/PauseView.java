@@ -41,6 +41,7 @@ public class PauseView extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 disposeComponent();
+
             }
         });
         exitBtn = new JButton();
