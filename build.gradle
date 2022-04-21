@@ -34,7 +34,7 @@ jar {
 }
 
 launch4j {
-    outfile = 'tetris.exe'
+    outfile = 'tetris.jar'
     mainClassName = 'Tetris'
     icon = "${projectDir}/src/main/resources/icon.ico"
 }
