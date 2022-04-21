@@ -15,7 +15,7 @@ import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GetKeyPanel extends JFrame {
 
-    private Image backGround = new ImageIcon("src/main/resources/image/backGround/testBackground.jpg").getImage();
+    private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/testBackground.jpg")).getImage();
     private JButton updateKey = new JButton("UPDATE");
     private JLabel getKeyLabel = new JLabel();
 

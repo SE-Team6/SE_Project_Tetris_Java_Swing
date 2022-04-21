@@ -16,12 +16,12 @@ import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
 public class GameDifficulty {
     private BasicSet bs;
     private BackMenu bm = new BackMenu();
-    private ImageIcon easyModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/EasyMode_B.jpeg");
-    private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
-    private ImageIcon hardModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/HardMode_B.jpeg");
-    private ImageIcon easyModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/EasyMode_E.jpeg");
-    private ImageIcon normalModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_E.jpeg");
-    private ImageIcon hardModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/HardMode_E.jpeg");
+    private ImageIcon easyModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/EasyMode_B.jpeg"));
+    private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
+    private ImageIcon hardModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/HardMode_B.jpeg"));
+    private ImageIcon easyModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/EasyMode_E.jpeg"));
+    private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
+    private ImageIcon hardModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/HardMode_E.jpeg"));
     private ImageIcon[] BasicImage = {easyModeBtnImage,normalModeBtnImage ,hardModeBtnImage};
     private ImageIcon[] EnterImage = {easyModeBtnEnterImage, normalModeBtnEnterImage,hardModeBtnEnterImage};
     private JButton[] menuButton = new JButton[3];

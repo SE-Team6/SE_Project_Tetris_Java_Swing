@@ -14,10 +14,10 @@ public class ScoreResetMode extends JFrame {
 
     private BasicSet bs = new BasicSet();
     private BackMenu bm = new BackMenu();
-    private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
-    private ImageIcon itemModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/itemMode_B.jpeg");
-    private ImageIcon normalModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_E.jpeg");
-    private ImageIcon itemModeBtnEnterImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/itemMode_E.jpeg");
+    private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
+    private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/itemMode_B.jpeg"));
+    private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
+    private ImageIcon itemModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/itemMode_E.jpeg"));
     private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];

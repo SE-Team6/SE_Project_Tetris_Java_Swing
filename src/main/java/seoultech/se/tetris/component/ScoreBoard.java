@@ -18,8 +18,8 @@ import static seoultech.se.tetris.menu.ScoreMode.gameModeNum;
 
 public class ScoreBoard extends JFrame {
     private Image backGround;
-    private ImageIcon rightPageButtonImg =  new ImageIcon("src/main/resources/image/Button/ScoreBoard/RightButton.png");
-    private ImageIcon leftPageButtonImg =  new ImageIcon("src/main/resources/image/Button/ScoreBoard/LeftButton.png");
+    private ImageIcon rightPageButtonImg =  new ImageIcon(getClass().getResource("/image/Button/ScoreBoard/RightButton.png"));
+    private ImageIcon leftPageButtonImg =  new ImageIcon(getClass().getResource("/image/Button/ScoreBoard/LeftButton.png"));
 
     public JFrame frame = new JFrame();
     private JPanel[] panel = new JPanel[10];
@@ -267,10 +267,10 @@ public class ScoreBoard extends JFrame {
     }
     public void setMode(){
         if(gameModeNum==0){
-            backGround= new ImageIcon("src/main/resources/image/backGround/ScoreBoard/ScoreBoard_BG_2.jpg").getImage();
+            backGround= new ImageIcon(getClass().getResource("/image/backGround/ScoreBoard/ScoreBoard_BG_2.jpg")).getImage();
         }
         else if(gameModeNum==1){
-            backGround= new ImageIcon("src/main/resources/image/backGround/ScoreBoard/ScoreBoard_BG.jpg").getImage();
+            backGround= new ImageIcon(getClass().getResource("/image/backGround/ScoreBoard/ScoreBoard_BG.jpg")).getImage();
         }
     }
 }

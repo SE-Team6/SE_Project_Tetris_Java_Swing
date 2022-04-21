@@ -8,8 +8,8 @@ public class IntroTest extends Frame{
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
     public IntroTest(){
-        for(int i = 0; i < 8; i++){
-            img[i] = Toolkit.getDefaultToolkit().getImage("src/main/resources/image/Test/step"+(i)+".jpg");
+        for(int i = 0; i < 7; i++){
+            img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }
         addWindowListener(new WindowHandler());
         setSize(400, 500);

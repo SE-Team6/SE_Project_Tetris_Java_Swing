@@ -9,17 +9,17 @@ import static seoultech.se.tetris.menu.BasicSet.*;
 public class SettingMenu extends JFrame {
 
     //설정 화면 이미지
-    private ImageIcon screenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/해상도_B.jpg");
-    private ImageIcon keySettingImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/조작설정_B.jpg");
-    private ImageIcon scoreResetImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/기록초기화_B.jpg");
-    private ImageIcon colorBlindnessImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/색맹모드_B.jpg");
-    private ImageIcon allResetImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/설정초기화_B.jpg");
+    private ImageIcon screenSizeImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/해상도_B.jpg"));
+    private ImageIcon keySettingImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/조작설정_B.jpg"));
+    private ImageIcon scoreResetImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/기록초기화_B.jpg"));
+    private ImageIcon colorBlindnessImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/색맹모드_B.jpg"));
+    private ImageIcon allResetImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/설정초기화_B.jpg"));
 
-    private ImageIcon screenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/해상도_E.jpg");
-    private ImageIcon keySettingEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/조작설정_E.jpg");
-    private ImageIcon scoreResetEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/기록초기화_E.jpg");
-    private ImageIcon colorBlindnessEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/색맹모드_E.jpg");
-    private ImageIcon allResetEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/main_btn/설정초기화_E.jpg");
+    private ImageIcon screenSizeEImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/해상도_E.jpg"));
+    private ImageIcon keySettingEImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/조작설정_E.jpg"));
+    private ImageIcon scoreResetEImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/기록초기화_E.jpg"));
+    private ImageIcon colorBlindnessEImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/색맹모드_E.jpg"));
+    private ImageIcon allResetEImage = new ImageIcon(getClass().getResource("/image//Button/setting_Menu_btn/main_btn/설정초기화_E.jpg"));
 
     private ImageIcon[] BasicImage = {screenSizeImage,keySettingImage,scoreResetImage,colorBlindnessImage,allResetImage};
     private ImageIcon[] EnterImage = {screenSizeEImage,keySettingEImage,scoreResetEImage,colorBlindnessEImage,allResetEImage};

@@ -12,16 +12,21 @@ repositories {
 sourceSets {
     main {
         resources {
-            srcDirs "src/main/resourses/image", "src/main/configs"
+            srcDirs += ["src/main/resources", "src/main/configs"]
         }
     }
 }
 
 jar {
-    baseName "SW-Team 11"
+    baseName "SW-Team 6"
     version '0.1.0'
     manifest {
-        attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris.Class'
+        attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris'
+    }
+    from{
+        configurations.runtimeClasspath.collect{
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
 }
 
