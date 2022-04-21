@@ -418,9 +418,8 @@ public abstract class Board extends JFrame {
 
     public void gameOver() {
         System.out.println("Game over!");
-        new GameOver();
-
         timer.stop();
+        new GameOver();
         this.dispose();
     }
 
