@@ -117,14 +117,14 @@ public class JSONWriter {
         result.put("scoreBoard", arr2);
 
         if(mode.equals("normal")){
-            try(FileWriter file = new FileWriter(NORMAL_SCORE_FILEPATH)){
+            try(FileWriter file = new FileWriter(NORMAL_SCORE_FILEPATH.split(":")[2])){
                 file.write(result.toJSONString());
                 file.flush();
             } catch (IOException e){
                 e.printStackTrace();
             }
         }else if(mode.equals("item")){
-            try(FileWriter file = new FileWriter(ITEM_SCORE_FILEPATH)){
+            try(FileWriter file = new FileWriter(ITEM_SCORE_FILEPATH.split(":")[2])){
                 file.write(result.toJSONString());
                 file.flush();
             } catch (IOException e){
@@ -138,13 +138,13 @@ public class JSONWriter {
     public static void resetScore(String mode) {
         if (mode.equals("normal")) {
             try {
-                new FileOutputStream(NORMAL_SCORE_FILEPATH).close();
+                new FileOutputStream(NORMAL_SCORE_FILEPATH.split(":")[2]).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (mode.equals("item")) {
             try {
-                new FileOutputStream(ITEM_SCORE_FILEPATH).close();
+                new FileOutputStream(ITEM_SCORE_FILEPATH.split(":")[2]).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -178,7 +178,7 @@ public class JSONWriter {
         jsonList.put("colorBlindMode", colorBlindModeObj);
         jsonList.put("scoreBoardPage",scoreBoardPageObj);
 
-        try(FileWriter file = new FileWriter(SETTINGS_FILEPATH)){
+        try(FileWriter file = new FileWriter(SETTINGS_FILEPATH.split(":")[2])){
             file.write(jsonList.toJSONString());
             file.flush();
         } catch (IOException e){

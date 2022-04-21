@@ -12,7 +12,7 @@ repositories {
 sourceSets {
     main {
         resources {
-            srcDirs("src/main/resources")
+            srcDirs "src/main/resourses/image", "src/main/configs"
         }
     }
 }
@@ -28,6 +28,7 @@ jar {
             it.isDirectory() ? it : zipTree(it)
         }
     }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 dependencies {
