@@ -1,7 +1,8 @@
 package seoultech.se.tetris.menu;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class IntroTest extends Frame{
     Image img[] = new Image[8];
