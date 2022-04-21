@@ -11,11 +11,13 @@ repositories {
 
 sourceSets {
     main {
-        java {
-            srcDirs "src/main/resources", "src/main/configs"
+        resources {
+            srcDirs("src/main/resources")
         }
     }
 }
+//sourceSets.main.resources.srcDirs = ["src/main/resources/image/Test",]
+
 
 sourceSets.each{
     println(it)
@@ -30,11 +32,11 @@ jar {
     manifest {
         attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris'
     }
-    from{
-        configurations.runtimeClasspath.collect{
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
+//    from{
+//        configurations.runtimeClasspath.collect{
+//            it.isDirectory() ? it : zipTree(it)
+//        }
+//    }
 }
 
 dependencies {

@@ -1,15 +1,16 @@
 package seoultech.se.tetris.menu;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class IntroTest extends Frame{
     Image img[] = new Image[8];
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
     public IntroTest(){
-        for(int i = 0; i < 8; i++){
-            img[i] = Toolkit.getDefaultToolkit().getImage("src/main/resources/image/Test/step"+(i)+".jpg");
+        for(int i = 0; i < 7; i++){
+            img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }
         addWindowListener(new WindowHandler());
         setSize(400, 500);
