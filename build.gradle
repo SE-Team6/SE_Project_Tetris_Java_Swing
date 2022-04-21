@@ -17,13 +17,6 @@ sourceSets {
     }
 }
 
-sourceSets.each{
-    println(it)
-    it.allSource.each{
-        println(it)
-    }
-}
-
 jar {
     baseName "SW-Team 6"
     version '0.1.0'
