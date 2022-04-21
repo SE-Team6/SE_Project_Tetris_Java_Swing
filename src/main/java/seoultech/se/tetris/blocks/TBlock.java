@@ -13,14 +13,14 @@ public class TBlock extends ParentBlock {
                 {
                         {
                             null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
-                            new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                            new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {null,null,null,null},
@@ -29,19 +29,19 @@ public class TBlock extends ParentBlock {
                 {
                         {
                             null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
                             null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {
                             null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
@@ -50,14 +50,14 @@ public class TBlock extends ParentBlock {
                 {
                         {null,null,null,null},
                         {
-                                new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
@@ -66,19 +66,19 @@ public class TBlock extends ParentBlock {
                 {
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
-                                new Block(color, config.BLOCK_CHAR, blockType),
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },

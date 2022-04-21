@@ -48,8 +48,8 @@ public class PauseView extends JDialog {
         exitBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                disposeExit();
                 parent.gameOver();
-                disposeComponent();
             }
         });
 
@@ -71,9 +71,8 @@ public class PauseView extends JDialog {
                         if (idx == 0) {
                             disposeComponent();
                         } else {
-                            System.out.println(111112);
+                            disposeExit();
                             parent.gameOver();
-                            disposeComponent();
                         }
                         break;
                     case KeyEvent.VK_ESCAPE:
@@ -113,6 +112,12 @@ public class PauseView extends JDialog {
         this.dispose();
 
         this.parent.startTimer();
+        this.parent.setIsPause();
+    }
+
+    public void disposeExit() {
+        this.dispose();
+
         this.parent.setIsPause();
     }
 

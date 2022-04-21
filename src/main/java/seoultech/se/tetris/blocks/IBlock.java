@@ -12,7 +12,7 @@ public class IBlock extends ParentBlock {
         shapes = new Block[][][]{
                 {
                         {null,null,null,null,},
-                        {new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType)},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType)},
                         {null,null,null,null,},
                         {null,null,null,null,},
                 },
@@ -20,56 +20,56 @@ public class IBlock extends ParentBlock {
                         {
                                 null,
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {
                                 null,
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {
                                 null,
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                         {
                                 null,
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                         },
                 },
                 {
                         {null,null,null,null,},
                         {null,null,null,null,},
-                        {new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType)},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType)},
                         {null,null,null,null,},
                 },
                 {
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         },
                         {
                                 null,
-                                new Block(color, config.BLOCK_CHAR, blockType),
+                                new Block(color, ConfigBlock.BLOCK_CHAR, blockType),
                                 null,
                                 null,
                         }

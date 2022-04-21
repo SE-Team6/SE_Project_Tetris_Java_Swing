@@ -94,11 +94,15 @@ public class NormalBoard extends Board {
 
         //Create the first block and draw.
         focus = getRandomBlock();
+        y = - focus.getTop();
         placeBlock();
         drawBoard();
         timer.start();
         next = getRandomBlock();
         drawNextBlock();
+
+        System.out.println(11111111);
+        System.out.println(isOverlap());
 
         pv = new PauseView(0, this);
 

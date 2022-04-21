@@ -174,7 +174,12 @@ public abstract class Board extends JFrame {
     protected boolean isOverlap() {
         for (int i = x; i < x + focus.width(); i++) {
             for (int j = y; j < y + focus.height(); j++) {
-                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) continue;
+                if (i<0 || j<0 || i>=Board.WIDTH || j>=Board.HEIGHT) {
+                    if (focus.getShape(i - x, j - y) != null && y < 0) {
+                        return true;
+                    }
+                    continue;
+                }
                 if (
                         (board[j][i] != null) &&
                                 (focus.getShape(i - x, j - y) != null)) {
@@ -197,7 +202,7 @@ public abstract class Board extends JFrame {
         next = getRandomBlock();
         drawNextBlock();
         x = 3;
-        y = 0;
+        y = -focus.getTop();
 
         // GAME OVER
         if (isOverlap()) {
@@ -417,10 +422,10 @@ public abstract class Board extends JFrame {
     }
 
     public void gameOver() {
-        System.out.println("Game over!");
-        timer.stop();
-        new GameOver();
+        System.out.println("Game over!") ;
+        this.timer.stop();
         this.dispose();
+        new GameOver();
     }
 
     protected void pause() {

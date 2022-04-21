@@ -5,7 +5,7 @@ import seoultech.se.tetris.config.block.BlockType;
 
 import java.awt.*;
 
-public abstract class ParentBlock {
+public class ParentBlock {
     protected Block[][] shape;
     protected Block[][][] shapes;
     protected int[][] centerPos;
@@ -13,7 +13,6 @@ public abstract class ParentBlock {
     // rotate type
     protected int type = 0;
     protected int blockType = BlockType.NONE;
-    protected ConfigBlock config = ConfigBlock.getInstance();
     protected static int colorType = ConfigBlock.colorType;
     protected int randomIdx = 0;
     protected boolean isSettled = false;

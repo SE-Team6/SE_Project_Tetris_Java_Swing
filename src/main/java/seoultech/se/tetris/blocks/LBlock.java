@@ -12,26 +12,26 @@ public class LBlock extends ParentBlock {
         shapes = new Block[][][]{
                 {
                         {null,null,null,null},
-                        {new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),null,},
-                        {new Block(color, config.BLOCK_CHAR, blockType), null, null,null,},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), null, null,null,},
                         {null,null,null,null},
                 },
                 {
-                        {new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),null,null,},
-                        {null, new Block(color, config.BLOCK_CHAR, blockType),null,null,},
-                        {null, new Block(color, config.BLOCK_CHAR, blockType),null,null,},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,null,},
+                        {null, new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,null,},
+                        {null, new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,null,},
                         {null,null,null,null},
                 },
                 {
-                        {null, null, new Block(color, config.BLOCK_CHAR, blockType),null,},
-                        {new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType),null,},
+                        {null, null, new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,},
+                        {new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType),null,},
                         {null,null,null,null},
                         {null,null,null,null},
                 },
                 {
-                        {null,new Block(color, config.BLOCK_CHAR, blockType), null,null,},
-                        {null,new Block(color, config.BLOCK_CHAR, blockType), null,null,},
-                        {null,new Block(color, config.BLOCK_CHAR, blockType), new Block(color, config.BLOCK_CHAR, blockType), null,},
+                        {null,new Block(color, ConfigBlock.BLOCK_CHAR, blockType), null,null,},
+                        {null,new Block(color, ConfigBlock.BLOCK_CHAR, blockType), null,null,},
+                        {null,new Block(color, ConfigBlock.BLOCK_CHAR, blockType), new Block(color, ConfigBlock.BLOCK_CHAR, blockType), null,},
                         {null,null,null,null},
                 },
         };

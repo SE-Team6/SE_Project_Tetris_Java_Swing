@@ -101,6 +101,7 @@ public class ItemBoard extends Board {
 
         //Create the first block and draw.
         focus = getRandomBlock();
+        y = - focus.getTop();
         placeBlock();
         drawBoard();
         timer.start();
@@ -267,6 +268,7 @@ public class ItemBoard extends Board {
         int targetX = x + pos[1];
         int targetY = y + pos[0];
 
+        eventX = -1; eventY = targetY; event = true;
         eventX = -1; eventY = targetY; event = true;
 
         eraseHorizontalLine(targetY);
