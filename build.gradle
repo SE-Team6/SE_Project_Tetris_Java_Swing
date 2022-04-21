@@ -14,13 +14,13 @@ repositories {
 sourceSets {
     main {
         resources {
-            srcDirs "src/main/resourses/image", "src/main/configs"
+            srcDirs "src/main/resourses"
         }
     }
 }
 
 jar {
-    baseName "SW-Team 6"
+    baseName "SW-Team6"
     version '0.1.0'
     manifest {
         attributes 'Main-Class': 'seoultech.se.tetris.main.Tetris'

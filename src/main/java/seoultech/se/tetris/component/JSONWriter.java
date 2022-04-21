@@ -4,19 +4,15 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.net.URL;
+import java.io.*;
 import java.util.ArrayList;
 
-import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
-import static seoultech.se.tetris.component.JSONLoader.parser;
+import static seoultech.se.tetris.component.JSONLoader.*;
 
 public class JSONWriter {
-    final static URL SETTINGS_FILEPATH = JSONWriter.class.getResource("/configs/settings.json");
-    final static URL NORMAL_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/normal_score.json");
-    final static URL ITEM_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/item_score.json");
+    final static String SETTINGS_FILEPATH = "./config/settings.json";
+    final static String NORMAL_SCORE_FILEPATH = "./config/normal_score.json";
+    final static String ITEM_SCORE_FILEPATH = "./config/item_score.json";
 
     JSONWriter(){}
 
@@ -119,15 +115,14 @@ public class JSONWriter {
         result.put("scoreBoard", arr2);
 
         if(mode.equals("normal")){
-            try(FileWriter file = new FileWriter(NORMAL_SCORE_FILEPATH.getFile())){
-
+            try(FileWriter file = new FileWriter(NORMAL_SCORE_FILEPATH)){
                 file.write(result.toJSONString());
                 file.flush();
             } catch (IOException e){
                 e.printStackTrace();
             }
         }else if(mode.equals("item")){
-            try(FileWriter file = new FileWriter(ITEM_SCORE_FILEPATH.getFile())){
+            try(FileWriter file = new FileWriter(ITEM_SCORE_FILEPATH)){
                 file.write(result.toJSONString());
                 file.flush();
             } catch (IOException e){
@@ -141,13 +136,13 @@ public class JSONWriter {
     public static void resetScore(String mode) {
         if (mode.equals("normal")) {
             try {
-                new FileOutputStream(NORMAL_SCORE_FILEPATH.getFile()).close();
+                new FileOutputStream(NORMAL_SCORE_FILEPATH).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (mode.equals("item")) {
             try {
-                new FileOutputStream(ITEM_SCORE_FILEPATH.getFile()).close();
+                new FileOutputStream(ITEM_SCORE_FILEPATH).close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -181,7 +176,8 @@ public class JSONWriter {
         jsonList.put("colorBlindMode", colorBlindModeObj);
         jsonList.put("scoreBoardPage",scoreBoardPageObj);
 
-        try(FileWriter file = new FileWriter(SETTINGS_FILEPATH.getFile())){
+
+        try(FileWriter file = new FileWriter(SETTINGS_FILEPATH)){
             file.write(jsonList.toJSONString());
             file.flush();
         } catch (IOException e){
