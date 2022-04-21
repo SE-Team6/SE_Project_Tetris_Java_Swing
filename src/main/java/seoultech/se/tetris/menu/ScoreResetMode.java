@@ -1,7 +1,5 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.ScoreBoard;
-
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,7 +7,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class ScoreResetMode extends JFrame {
 
@@ -24,6 +21,8 @@ public class ScoreResetMode extends JFrame {
     private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
+
+    private int positionPoint;
 
     public ScoreResetMode(){
 

@@ -12,7 +12,6 @@ import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.BasicSet.*;
 import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
 
 public class GameDifficulty {
     private BasicSet bs;
@@ -27,6 +26,8 @@ public class GameDifficulty {
     private ImageIcon[] EnterImage = {easyModeBtnEnterImage, normalModeBtnEnterImage,hardModeBtnEnterImage};
     private JButton[] menuButton = new JButton[3];
     public static int gameDifficultyNum=1; //0:이지,1:노말,2:하드
+
+    private int positionPoint;
 
     public GameDifficulty(){}
 

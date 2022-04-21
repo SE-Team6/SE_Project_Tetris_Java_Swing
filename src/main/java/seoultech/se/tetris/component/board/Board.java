@@ -432,6 +432,7 @@ public abstract class Board extends JFrame {
 
     protected void pause() {
         System.out.println("pause");
+        System.out.println(isPause);
         if (!isPause) {
             timer.stop();
             pv = new PauseView(score.getScore(), this);
