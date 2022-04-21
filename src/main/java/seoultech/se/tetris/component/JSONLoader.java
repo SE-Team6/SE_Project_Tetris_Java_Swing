@@ -5,15 +5,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 
 public class JSONLoader {
-    final static String SETTINGS_FILEPATH = JSONWriter.class.getResource("/configs/settings.json").toString();
-    final static String NORMAL_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/normal_score.json").toString();
-    final static String ITEM_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/item_score.json").toString();
+    final static InputStream SETTINGS_FILEPATH = JSONWriter.class.getResourceAsStream("/configs/settings.json");
+    final static InputStream NORMAL_SCORE_FILEPATH = JSONWriter.class.getResourceAsStream("/configs/normal_score.json");
+    final static InputStream ITEM_SCORE_FILEPATH = JSONWriter.class.getResourceAsStream("/configs/item_score.json");
 
     static JSONParser parser = new JSONParser();
 
@@ -24,19 +22,13 @@ public class JSONLoader {
         try {
             switch (type){
                 case "settings":
-                    FileReader settingFile = new FileReader(SETTINGS_FILEPATH);
-                    obj = (JSONObject) parser.parse(settingFile);
-                    settingFile.close();
+                    obj = (JSONObject) parser.parse(new InputStreamReader(SETTINGS_FILEPATH, "UTF-8"));
                     break;
                 case "normal":
-                    FileReader normalScoreFile = new FileReader(NORMAL_SCORE_FILEPATH);
-                    obj = (JSONObject) parser.parse(normalScoreFile);
-                    normalScoreFile.close();
+                    obj = (JSONObject) parser.parse(new InputStreamReader(NORMAL_SCORE_FILEPATH, "UTF-8"));
                     break;
                 case "item":
-                    FileReader itemScoreFile = new FileReader(ITEM_SCORE_FILEPATH);
-                    obj = (JSONObject) parser.parse(itemScoreFile);
-                    itemScoreFile.close();
+                    obj = (JSONObject) parser.parse(new InputStreamReader(ITEM_SCORE_FILEPATH, "UTF-8"));
                     break;
             }
         } catch (FileNotFoundException e){
@@ -46,6 +38,10 @@ public class JSONLoader {
         } catch (ParseException e){
             System.out.println("Score Board is Empty!");
         }
+        System.out.println(JSONWriter.class.getResource("/configs/settings.json"));
+        System.out.println(type);
+        System.out.println(key);
+        System.out.println(obj.get(key));
         return obj.get(key);
     }
 
