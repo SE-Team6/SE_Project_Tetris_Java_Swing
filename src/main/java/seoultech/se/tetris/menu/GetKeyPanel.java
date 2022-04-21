@@ -94,7 +94,7 @@ public class GetKeyPanel extends JFrame {
             keyWriteValue[i]= Integer.parseInt(var[i].toString());
             char b = (char)keyWriteValue[i];
             keyLoadCharValue[i]=b;
-            System.out.println(keyLoadCharValue[i]);
+//            System.out.println(keyLoadCharValue[i]);
         }
     }
     public void setting(){

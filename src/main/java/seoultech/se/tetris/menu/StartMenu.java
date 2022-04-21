@@ -167,8 +167,7 @@ public class StartMenu extends JFrame {
                 new ScoreMode();
                 break;
             case 3: // 게임종료
-                bs.setVisible(false);
-                new GameOver();
+                System.exit(0);
                 break;
         }
     }

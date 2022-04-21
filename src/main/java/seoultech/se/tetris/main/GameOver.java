@@ -49,7 +49,7 @@ public class GameOver extends JFrame {
     private JLabel[]  scoreLabel = new JLabel[20];
 
     private JLabel[] scoreBoardLabel = new JLabel[3];
-    private JTextField myName= new JTextField();
+    private JTextField setMyName = new JTextField();
     private JLabel myScore;
     private JButton updateButton = new JButton(updateBtnBasicImage);
     private JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
@@ -168,25 +168,27 @@ public class GameOver extends JFrame {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                bs.setFocusable(false);
-                dateGet();
-                JOptionPane.showMessageDialog(null,"점수가 업데이트 되었습니다");
-                String[] updateArr= {myName.getText(),nowDate, String.valueOf(score), String.valueOf(gameDifficultyNum),String.valueOf(gameModeNum2)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
-                if (gameModeNum2 ==0) {
-                    res = JSONLoader.loaderScore("normal");
-                    loadedScores =(JSONArray) getJSONObject("normal", "scoreBoard");
-                    higLightNum = appendScore(updateArr,"normal");
-                    gameModeNum =0;
+                if (setMyName.getText().isEmpty()==true) {JOptionPane.showMessageDialog(null, "이름을 입력해주세요");}
+                else {
+                    bs.setFocusable(false);
+                    dateGet();
+                    JOptionPane.showMessageDialog(null, "점수가 업데이트 되었습니다");
+                    String[] updateArr = {setMyName.getText(), nowDate, String.valueOf(score), String.valueOf(gameDifficultyNum), String.valueOf(gameModeNum2)};//{"Name", "DateTime", "Score", "Difficulty", "isItem"}
+                    if (gameModeNum2 == 0) {
+                        res = JSONLoader.loaderScore("normal");
+                        loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
+                        higLightNum = appendScore(updateArr, "normal");
+                        gameModeNum = 0;
+                    } else if (gameModeNum2 == 1) {
+                        res = JSONLoader.loaderScore("item");
+                        loadedScores = (JSONArray) getJSONObject("item", "scoreBoard");
+                        higLightNum = appendScore(updateArr, "item");
+                        gameModeNum = 1;
+                    }
+                    new ScoreBoard(higLightNum);
+                    scoreBoardSet();
+                    bs.setFocusable(true);
                 }
-                else if(gameModeNum2 ==1) {
-                    res = JSONLoader.loaderScore("item");
-                    loadedScores =(JSONArray) getJSONObject("item", "scoreBoard");
-                    higLightNum = appendScore(updateArr,"item");
-                    gameModeNum = 1;
-                }
-                new ScoreBoard(higLightNum);
-                scoreBoardSet();
-                bs.setFocusable(true);
             }
         });
         bs.add(updateButton);
@@ -242,12 +244,12 @@ public class GameOver extends JFrame {
         NameLabel.setForeground(Color.YELLOW);
         bs.add(NameLabel);
 
-        myName.setBounds(textFiledX,180,100,40);
-        myName.setBackground(Color.BLACK);
-        myName.setForeground(Color.RED);
-        myName.setBorder(new LineBorder(Color.RED,1,true));
+        setMyName.setBounds(textFiledX,180,100,40);
+        setMyName.setBackground(Color.BLACK);
+        setMyName.setForeground(Color.RED);
+        setMyName.setBorder(new LineBorder(Color.RED,1,true));
 //        myName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-        bs.add(myName);
+        bs.add(setMyName);
 
         bs.gameTitle.setVisible(false);
         gameOverTitle.setBounds(gameOverTitleX, 30,400,100);
