@@ -28,6 +28,7 @@ public class GameMode extends JFrame {
     public GameMode(){}
 
     public GameMode(int x, int y) {
+        System.out.println(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
         bs = new BasicSet(x, y);
         positionPoint=0;
         bs.setVisible(true);
