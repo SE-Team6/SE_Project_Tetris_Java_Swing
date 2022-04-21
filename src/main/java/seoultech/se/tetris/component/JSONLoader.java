@@ -11,9 +11,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class JSONLoader {
-    final static String SETTINGS_FILEPATH = JSONWriter.class.getResource("/configs/settings.json").toString();
-    final static String NORMAL_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/normal_score.json").toString();
-    final static String ITEM_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/item_score.json").toString();
+    final static String SETTINGS_FILEPATH = JSONWriter.class.getResource("/configs/settings.json").getFile();
+    final static String NORMAL_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/normal_score.json").getFile();
+    final static String ITEM_SCORE_FILEPATH = JSONWriter.class.getResource("/configs/item_score.json").getFile();
 
     static JSONParser parser = new JSONParser();
 
