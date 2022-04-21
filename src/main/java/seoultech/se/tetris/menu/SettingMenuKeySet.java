@@ -14,8 +14,8 @@ import static seoultech.se.tetris.menu.BasicSet.key;
 
 public class SettingMenuKeySet extends JFrame{
 
-    public static int labelX,labelWidth=200,labelHeight=40,labelFontSize=40;
-    public static int textFieldX,textFieldWidth=80, textFieldHeight =30,textFieldFontSize=30;
+    public static int labelX,labelWidth=200,labelHeight=35,labelFontSize=40;
+    public static int textFieldX,textFieldWidth=80, textFieldHeight =35,textFieldFontSize=30;
     private int[] labelY = {120,170,220,270,320,370};// 0:left/1:right/2:up/3:down/4:esc/5:space
 
     private String [] textSequence = {"LEFT","RIGHT","UP","DOWN","ESC","SPACE"};
@@ -98,7 +98,7 @@ public class SettingMenuKeySet extends JFrame{
         for (int i=0;i<6;i++){
             setLabel[i]=new JLabel(textSequence[i]);
             setLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,labelFontSize));
-            setLabel[i].setBounds(labelX,labelY[i],labelWidth,40);
+            setLabel[i].setBounds(labelX,labelY[i],labelWidth,labelHeight);
             setLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             setLabel[i].setForeground(Color.YELLOW);
             bs.add(setLabel[i]);

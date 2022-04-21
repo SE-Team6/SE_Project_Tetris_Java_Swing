@@ -194,17 +194,9 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver();
-                    gm.scoreBoardSet();
+                    GameOver gm =new GameOver(bs.getX(),bs.getY());
                     gm.updateButton.setVisible(false);
                     ScoreBoard sb =new ScoreBoard(higLightNum);
-                    sb.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                    bs.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosing(WindowEvent evt) {
-                            bs.setVisible(false);
-                        }
-                    });
                 }
             }
         });
