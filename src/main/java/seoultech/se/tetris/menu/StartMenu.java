@@ -3,11 +3,7 @@ package seoultech.se.tetris.menu;
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.main.GameOver;
 
-import javax.swing.JFrame;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
@@ -172,8 +168,7 @@ public class StartMenu extends JFrame {
                 new ScoreMode(bs.getX(), bs.getY());
                 break;
             case 3: // 게임종료
-                bs.setVisible(false);
-                new GameOver(bs.getX(), bs.getY());
+                System.exit(0);
                 break;
         }
     }
