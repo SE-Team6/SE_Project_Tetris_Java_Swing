@@ -86,6 +86,30 @@ public class GameDifficulty {
             bs.add(menuButton[i]);
             addY += 70;
         }
+        menuButton[0].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameDifficultyNum=0;
+                if(gameModeNum2 == 0) normalMode(positionPoint);
+                else if(gameModeNum2 == 1) itemMode(positionPoint);
+            }
+        });
+        menuButton[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameDifficultyNum=1;
+                if(gameModeNum2 == 0) normalMode(positionPoint);
+                else if(gameModeNum2 == 1) itemMode(positionPoint);
+            }
+        });
+        menuButton[2].addMouseListener((new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameDifficultyNum=2;
+                if(gameModeNum2 == 0) normalMode(positionPoint);
+                else if(gameModeNum2 == 1) itemMode(positionPoint);
+            }
+        }));
         allPositionPoint();
     }
     public void itemMode(int difficulty){
