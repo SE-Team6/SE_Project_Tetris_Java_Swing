@@ -65,7 +65,7 @@ public class Version {
         sbListX= new int[]{0, 30, 110};
     }
     public void gameOverSecondSize(){
-        gameOverBackGround = new ImageIcon("src/main/resources/image/backGround/GameOver/scoreBoardsummary_600.jpg").getImage();
+        gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_600.jpg")).getImage();
         gameOverTitleX=100;
         scoreBoardWidth=300;
         scoreBoardHeight=630;
