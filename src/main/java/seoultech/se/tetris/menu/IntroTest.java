@@ -12,9 +12,9 @@ public class IntroTest extends Frame{
             img[i] = Toolkit.getDefaultToolkit().getImage("src/main/resources/image/Test/step"+(i)+".jpg");
         }
         addWindowListener(new WindowHandler());
-        setLocation(100,100);
         setSize(400, 500);
         setVisible(true);
+        setLocationRelativeTo(null);
         num=0;
         while(num<8){
             try{

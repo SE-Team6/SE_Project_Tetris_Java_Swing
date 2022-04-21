@@ -50,7 +50,7 @@ public class ScoreBoard extends JFrame {
         pageButton();
         pageNumLabel();
         setMode();
-        if(num>0){
+        if(num>=0){
             higLightSB(num);
         }
         else{

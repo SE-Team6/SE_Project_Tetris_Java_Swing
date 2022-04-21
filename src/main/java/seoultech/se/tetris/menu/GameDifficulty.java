@@ -62,25 +62,10 @@ public class GameDifficulty {
                 if(gameModeNum2 == 0) normalMode(positionPoint);
                 else if(gameModeNum2 == 1) itemMode(positionPoint);
 
-//                if (positionPoint ==0){//이지 모드
-//                    gameDifficultyNum=0;
-//                    if (gameModeNum==0)normalMode();
-//                    else if(gameModeNum==1)itemMode();
-//                }
-//                else if(positionPoint==1){// 노말 모드
-//                    gameDifficultyNum=1;
-//                    if (gameModeNum==0)normalMode();
-//                    else if(gameModeNum==1)itemMode();
-//                }
-//                else if(positionPoint==2){// 하드 모드
-//                    gameDifficultyNum=2;
-//                    if (gameModeNum==0)normalMode();
-//                    else if(gameModeNum==1)itemMode();
-//                }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new GameMode();
+                new GameMode(bs.getX(), bs.getY());
             }
         }
     }
@@ -126,7 +111,7 @@ public class GameDifficulty {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameMode();
+                new GameMode(bs.getX(),bs.getY());
             }
         });
     }

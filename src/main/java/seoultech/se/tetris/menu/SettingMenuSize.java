@@ -92,7 +92,7 @@ public class SettingMenuSize extends JFrame {
             }
             else if(keyValue == KeyEvent.VK_BACK_SPACE){
                     bs.setVisible(false);
-                    new SettingMenu();
+                    new SettingMenu(bs.getX(), bs.getY());
             }
         }
     }

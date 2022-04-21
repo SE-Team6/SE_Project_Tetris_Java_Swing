@@ -120,7 +120,8 @@ public class GameOver extends JFrame {
         for (int i=0;i<Math.min(allScores.size(),20);i++){
             nameLabel[j].setText((String) arr.get(i).get("Name"));
             scoreLabel[j].setText(String.valueOf(arr.get(i).get("Score")));
-            j+=1;}
+            j+=1;
+        }
     }
     public void scoreBoardLabel(){
         String [] sbList = {"Rank","Name","Score"};
@@ -190,6 +191,7 @@ public class GameOver extends JFrame {
                 new ScoreBoard(higLightNum);
                 scoreBoardSet();
                 bs.setFocusable(true);
+                updateButton.setVisible(false);
             }
         });
         bs.add(updateButton);

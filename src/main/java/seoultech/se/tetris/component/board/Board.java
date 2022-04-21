@@ -63,7 +63,8 @@ public abstract class Board extends JFrame {
     protected ParentBlock next;
 
     protected boolean isErased = false;
-
+    protected static int diff = 0;
+    protected static int stageUpStandard = 5;
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
@@ -92,10 +93,13 @@ public abstract class Board extends JFrame {
 
     // set difficulty -> probability and interval
     public static void setDifficulty(int difficulty){
+        lineCount = 0;
+        initInterval = 1000;
         double sum = Arrays.stream(blockFitness[difficulty]).sum();
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
         for(int i=0; i<17; ++i) itemProb[i] = (double)1/17;
-
+        diff = difficulty;
+        stage = difficulty*5+1;
         for(int i=0; i<difficulty; ++i){
             initInterval *= 0.8;
         }
@@ -151,6 +155,7 @@ public abstract class Board extends JFrame {
         isAction = false;
         timer.stop();
         timer = new Timer(Math.round(initInterval), e -> {
+            System.out.println("initInterval : "+initInterval);
             moveDown();
             drawBoard();
         });
@@ -162,6 +167,7 @@ public abstract class Board extends JFrame {
         timer.stop();
         initInterval *= rateInterval;
         timer = new Timer(Math.round(initInterval), e -> {
+            System.out.println("initInterval : "+initInterval);
             moveDown();
             drawBoard();
         });
@@ -289,7 +295,7 @@ public abstract class Board extends JFrame {
 
     protected void moveDown() {
         eraseCurr();
-        score.addUnitScore(1);
+        score.addUnitScore(diff+1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {
@@ -306,7 +312,7 @@ public abstract class Board extends JFrame {
         previousFallX = x;
         previousFallY = y;
         eraseCurr();
-        score.addUnitScore((Board.HEIGHT - y)*2);
+        score.addUnitScore((Board.HEIGHT - y)*(diff+1)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
             if (!isBottomTouched()) {
                 y++;
