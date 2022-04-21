@@ -1,7 +1,7 @@
+package seoultech.se.tetris.component;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import seoultech.se.tetris.component.JSONLoader;
-import seoultech.se.tetris.component.JSONWriter;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,8 +25,8 @@ public class JSONClassTest {
     @Test
     public void writeResolutionTest(){
         String[] key = {"width", "height", "font_size"};
-        int[] expected = {400,600,20};
-        JSONWriter.writeResolution(400, 600, 20);
+        int[] expected = {400,600,32};
+        JSONWriter.writeResolution(400, 600, 32);
         HashMap<String, Integer> obj = JSONLoader.loaderResolution();
         for(int i=0; i<3; ++i){
             assertEquals(expected[i], Integer.parseInt(obj.get(key[i]).toString()));
@@ -34,9 +34,9 @@ public class JSONClassTest {
     }
     @Test
     public void writeColorModeTest(){
-        JSONWriter.writeColorMode(1);
+        JSONWriter.writeColorMode(0);
         int val = JSONLoader.loaderColor();
-        assertEquals(1, val);
+        assertEquals(0, val);
     }
     @Test
     public void appendScoreTest(){

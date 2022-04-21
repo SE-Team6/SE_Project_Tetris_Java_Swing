@@ -43,7 +43,7 @@
 # .idea/modules
 # *.iml
 # *.ipr
-
+src/**/META-INF/
 # CMake
 cmake-build-*/
 

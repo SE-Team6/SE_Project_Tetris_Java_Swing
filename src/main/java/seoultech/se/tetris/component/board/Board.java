@@ -29,8 +29,6 @@ public abstract class Board extends JFrame {
             {80,100,100,100,100,100,100}
     };
 
-    protected static final double[] iBlockFitness = {120, 100, 80};
-
     protected static double[] prob = {0.142857,0.142857,0.142857,0.142857,0.142857,0.142857,0.142857};
     protected static double[] itemProb = new double[17];
 
@@ -65,7 +63,8 @@ public abstract class Board extends JFrame {
     protected ParentBlock next;
 
     protected boolean isErased = false;
-
+    protected static int diff = 0;
+    protected static int stageUpStandard = 5;
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
@@ -94,10 +93,13 @@ public abstract class Board extends JFrame {
 
     // set difficulty -> probability and interval
     public static void setDifficulty(int difficulty){
+        lineCount = 0;
+        initInterval = 1000;
         double sum = Arrays.stream(blockFitness[difficulty]).sum();
         prob = Arrays.stream(blockFitness[difficulty]).map((x)->x/sum).toArray();
         for(int i=0; i<17; ++i) itemProb[i] = (double)1/17;
-
+        diff = difficulty;
+        stage = difficulty*5+1;
         for(int i=0; i<difficulty; ++i){
             initInterval *= 0.8;
         }
@@ -114,7 +116,7 @@ public abstract class Board extends JFrame {
         return 6;
     }
 
-    public ParentBlock getRandomBlock() {
+    protected ParentBlock getRandomBlock() {
         int block = getRoulette();
         switch (block) {
             case 0: return new IBlock();
@@ -206,7 +208,7 @@ public abstract class Board extends JFrame {
 
         // GAME OVER
         if (isOverlap()) {
-            gameOver();
+            gameOver(getX(), getY());
         }
     }
 
@@ -313,7 +315,7 @@ public abstract class Board extends JFrame {
         previousFallX = x;
         previousFallY = y;
         eraseCurr();
-        score.addUnitScore((Board.HEIGHT - y)*2);
+        score.addUnitScore((Board.HEIGHT - y)*(diff+1)*2);
         for (int i = y; i < Board.HEIGHT; i++) {
             if (!isBottomTouched()) {
                 y++;
@@ -421,11 +423,11 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
-    public void gameOver() {
-        System.out.println("Game over!") ;
-        this.timer.stop();
+    public void gameOver(int x, int y) {
+        System.out.println("Game over!");
+        timer.stop();
         this.dispose();
-        new GameOver();
+        new GameOver(x, y);
     }
 
     protected void pause() {

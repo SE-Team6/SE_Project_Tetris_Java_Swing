@@ -60,7 +60,6 @@ public class ItemBoard extends Board {
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         rightPanel.setBorder(rightBorder);
 
-
         this.getContentPane().add(pane, BorderLayout.CENTER);
         this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
 
@@ -228,12 +227,11 @@ public class ItemBoard extends Board {
                 }
                 i++;
                 combo++;
+                lineCount++;
                 isErased = true;
                 this.cnt++;
             }
         }
-
-
 
         // itemType == 2 무게추
 
@@ -256,7 +254,7 @@ public class ItemBoard extends Board {
             seq = 0;
         }
         score.addLineClearScore(combo, stage, seq);
-        if (lineCount >= 10) {
+        if (lineCount >= stageUpStandard) {
             stage += 1;
             System.out.println(stage);
             timerSpeedUpSet();
@@ -330,7 +328,7 @@ public class ItemBoard extends Board {
         Random random = new Random(System.currentTimeMillis());
         for(int i=0;i<HEIGHT-line;i++){
             if (i<line && !isNullLine(i)) {
-                gameOver();
+                gameOver(getX(), getY());
             }
             board[i] = board[i+line];
         }
@@ -365,11 +363,11 @@ public class ItemBoard extends Board {
         }
         eraseLines();
         focus = next;
-        if (lineCount >= 10) {
-            lineCount = 0;
+        if (lineCount >= stageUpStandard) {
+            lineCount -= stageUpStandard;
             next = getRandomItemBlock();
         } else {
-            next = getRandomItemBlock();
+            next = getRandomBlock();
         }
         drawNextBlock();
         x = 3;
@@ -377,7 +375,7 @@ public class ItemBoard extends Board {
 
         // GAME OVER
         if (isOverlap()) {
-            gameOver();
+            gameOver(getX(), getY());
         }
     }
 
@@ -440,7 +438,7 @@ public class ItemBoard extends Board {
             return;
         }
         eraseCurr();
-        score.addUnitScore(1);
+        score.addUnitScore(diff+1);
         if (!isBottomTouched()) {
             y++;
             if (isOverlap()) {

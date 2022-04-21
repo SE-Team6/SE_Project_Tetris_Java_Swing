@@ -36,7 +36,10 @@ public class BasicSet extends JFrame {
 
 
     public static Keyboard key = Keyboard.getInstance();
-    public BasicSet() {
+
+    public BasicSet(){}
+
+    public BasicSet(int x, int y) {
 //        key.getInstance();
         key.setKey();
         JPanel bg = new JPanel() {
@@ -48,7 +51,7 @@ public class BasicSet extends JFrame {
         };
         setContentPane(bg);
         callSize();
-        basicSet();
+        basicSet(x, y);
         basicBtnSet();
     }
     public void callSize() {
@@ -58,19 +61,21 @@ public class BasicSet extends JFrame {
         Height = map.get("height");
         ConfigBlock.setFontSize(map.get("font_size"));
     }
-    public void basicSet() {
+    public void basicSet(int x, int y) {
         buttonX = (Width - buttonSizeX) / 2;
         gameTitleX = (Width - 300) / 2;
         setUndecorated(true);
         setTitle("Tetris Game");
         setSize(Width, Height);
         setResizable(false); // 한번 만들어진 게임창은 사용자가 임의적으로 못바꿈
-        setLocationRelativeTo(null); // 게임창이 컴퓨터 정중앙에 뜨도록
+        setLocation(x, y);
+//        setLocationRelativeTo(null); // 게임창이 컴퓨터 정중앙에 뜨도록
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 게임창 종료시 프로그램도 종료하도록
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
         setFocusable(true);
     }
+
     public void basicBtnSet() {
         gameTitle.setBounds(gameTitleX, gameTitleY, 300, 50);
         add(gameTitle);

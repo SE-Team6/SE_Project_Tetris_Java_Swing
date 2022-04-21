@@ -109,11 +109,11 @@ public class NormalBoard extends Board {
     @Override
     protected void eraseLines() {
         super.eraseLines();
-        if (lineCount >= 5) {
+        if (lineCount >= stageUpStandard) {
             stage += 1;
-            System.out.println(stage);
-            lineCount -= 5;
-            timerSet();
+            System.out.println("Stage : "+stage);
+            lineCount -= stageUpStandard;
+            timerSpeedUpSet();
         }
     }
 }

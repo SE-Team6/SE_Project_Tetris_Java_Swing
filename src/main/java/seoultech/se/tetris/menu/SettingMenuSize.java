@@ -15,11 +15,11 @@ import static seoultech.se.tetris.menu.BasicSet.*;
 public class SettingMenuSize extends JFrame {
 
     //해상도 이미지
-    private  ImageIcon firstScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x500.jpg");
+    private  ImageIcon firstScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x600.jpg");
     private  ImageIcon secondScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/600x800.jpg");
     private  ImageIcon thirdScreenSizeImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/800x1000.jpg");
 
-    private  ImageIcon firstScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x500_E.jpg");
+    private  ImageIcon firstScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/400x600_E.jpg");
     private  ImageIcon secondScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/600x800_E.jpg");
     private  ImageIcon thirdScreenSizeEImage = new ImageIcon("src/main/resources/image//Button/setting_Menu_btn/size_set_btn/800x1000_E.jpg");
 
@@ -28,12 +28,16 @@ public class SettingMenuSize extends JFrame {
     private  JButton[] menuButton= new JButton[3];
 
     Version ver = new Version();
-    BasicSet bs = new BasicSet();
+    BasicSet bs;
     BackMenu bm = new BackMenu();
     Keyboard key = new Keyboard();
 
     private int positionPoint=0;
-    public SettingMenuSize(){
+
+    public SettingMenuSize(){}
+
+    public SettingMenuSize(int x, int y){
+        bs = new BasicSet(x, y);
         positionPoint =0;
         bs.setVisible(true);
         bs.add(bm.backMenuBtn);
@@ -88,7 +92,7 @@ public class SettingMenuSize extends JFrame {
             }
             else if(keyValue == KeyEvent.VK_BACK_SPACE){
                     bs.setVisible(false);
-                    new SettingMenu();
+                    new SettingMenu(bs.getX(), bs.getY());
             }
         }
     }

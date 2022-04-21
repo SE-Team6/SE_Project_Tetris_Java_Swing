@@ -23,12 +23,15 @@ public class GetKeyPanel extends JFrame {
     int [] keyWriteValue = new int[6];
     char [] keyLoadCharValue = new char[6];
     int checkValue=0;
-
-
+    int prevX, prevY;
     // 보이는 방향키 및 스페이스 바와 ESC=> {"SPACE":9251,"DOWN":8595,"LEFT":8592,"ESC":9099,"RIGHT":8594,"UP":8593} => 시각적으로 보일때 쓰일 코드 // 내가 입력하는 코드
     // 실제 아스키 코드 =>{"SPACE":32,"DOWN":40,"LEFT":37,"ESC":27,"RIGHT":39,"UP":38}=> 실제 json 파일에 입력되어야할 코드 // 내가 입력한 코드가 변해야할 코드
 
-    public GetKeyPanel(){
+    public GetKeyPanel(){}
+
+    public GetKeyPanel(int x, int y){
+        prevX = x;
+        prevY = y;
         setting();
         keyLoad();
         addKeyListener(new setKeyListener());
@@ -64,7 +67,7 @@ public class GetKeyPanel extends JFrame {
                         keyWrite();
                         JOptionPane.showMessageDialog(null, "키 변경이 완료되었습니다.");
                         setVisible(false);
-                        new SettingMenuKeySet();
+                        new SettingMenuKeySet(prevX, prevY);
                     }
                 }
             }
@@ -94,7 +97,7 @@ public class GetKeyPanel extends JFrame {
             keyWriteValue[i]= Integer.parseInt(var[i].toString());
             char b = (char)keyWriteValue[i];
             keyLoadCharValue[i]=b;
-            System.out.println(keyLoadCharValue[i]);
+//            System.out.println(keyLoadCharValue[i]);
         }
     }
     public void setting(){

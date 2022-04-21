@@ -15,7 +15,7 @@ public class GameMode extends JFrame {
 
     public static int gameModeNum2; //0:노말 1:아이템
 
-    private BasicSet bs = new BasicSet();
+    private BasicSet bs;
     private BackMenu bm = new BackMenu();
     private ImageIcon normalModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/NormalMode_B.jpeg");
     private ImageIcon itemModeBtnImage = new ImageIcon("src/main/resources/image/Button/gameMode_btn/itemMode_B.jpeg");
@@ -25,7 +25,10 @@ public class GameMode extends JFrame {
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public GameMode() {
+    public GameMode(){}
+
+    public GameMode(int x, int y) {
+        bs = new BasicSet(x, y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -50,17 +53,17 @@ public class GameMode extends JFrame {
                 if (positionPoint==0){
                     gameModeNum2 =0;//노말
                     bs.setVisible(false);
-                    new GameDifficulty();
+                    new GameDifficulty(bs.getX(), bs.getY());
                 }
                 else if(positionPoint==1){
                     gameModeNum2 =1;//아이템
                     bs.setVisible(false);
-                    new GameDifficulty();
+                    new GameDifficulty(bs.getX(), bs.getY());
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new StartMenu();
+                new StartMenu(bs.getX(), bs.getY());
             }
         }
     }
@@ -89,7 +92,7 @@ public class GameMode extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new StartMenu();
+                new StartMenu(bs.getX(), bs.getY());
             }
         });
     }

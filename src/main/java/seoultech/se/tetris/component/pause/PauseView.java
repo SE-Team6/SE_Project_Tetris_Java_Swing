@@ -49,7 +49,7 @@ public class PauseView extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 disposeExit();
-                parent.gameOver();
+                parent.gameOver(parent.getX(), parent.getY());
             }
         });
 
@@ -72,7 +72,7 @@ public class PauseView extends JDialog {
                             disposeComponent();
                         } else {
                             disposeExit();
-                            parent.gameOver();
+                            parent.gameOver(parent.getX(), parent.getY());
                         }
                         break;
                     case KeyEvent.VK_ESCAPE:

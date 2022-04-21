@@ -26,13 +26,16 @@ public class SettingMenuKeySet extends JFrame{
     private LineBorder selectBorder = new LineBorder(Color.RED,3,true);
     private LineBorder noBorder = new LineBorder(Color.BLACK,3,true);
 
-    BasicSet bs = new BasicSet();
+    BasicSet bs;
     BackMenu bm = new BackMenu();
 
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
 
-    public SettingMenuKeySet(){
+    public SettingMenuKeySet(){}
+
+    public SettingMenuKeySet(int x, int y){
+        bs = new BasicSet(x, y);
         bs.setVisible(true);
         keyLoad();
         setLocation();
@@ -58,9 +61,10 @@ public class SettingMenuKeySet extends JFrame{
                 allPositionPoint();
             }
             else if(keyVal== KeyEvent.VK_ENTER){
-                if(positionPoint<6)
-                {new GetKeyPanel();
-                bs.setVisible(false);}
+                if(positionPoint<6) {
+                    new GetKeyPanel(bs.getX(), bs.getY());
+                    bs.setVisible(false);
+                }
                 else{//중복키 처리 과정
                     int count=0;
                     for (int i=0;i<5;i++){
@@ -76,11 +80,12 @@ public class SettingMenuKeySet extends JFrame{
                     else JOptionPane.showMessageDialog(null,"저장이 완료되었숩니다.");
                 }
             }
-            else if (keyVal==KeyEvent.VK_BACK_SPACE)
-            {bs.setVisible(false);
-            new SettingMenu();}
+            else if (keyVal==KeyEvent.VK_BACK_SPACE){
+                bs.setVisible(false);
+                new SettingMenu(bs.getX(), bs.getY());
             }
         }
+    }
     public void allPositionPoint(){
         for (int i=0;i<6;i++){
             if(positionPoint==i) getLabel[i].setBorder(selectBorder);
@@ -153,7 +158,7 @@ public class SettingMenuKeySet extends JFrame{
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SettingMenu();
+                new SettingMenu(bs.getX(), bs.getY());
             }
         });
     }
