@@ -4,13 +4,12 @@ import seoultech.se.tetris.blocks.ParentBlock;
 import seoultech.se.tetris.component.board.NormalBoard;
 
 import java.util.Arrays;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BlockGenerateProbabilityTest {
 
-    private static final int TIMES = 1000000;
+    private static final int TIMES = 100000;
     private static double[] MIN = new double[3];
     private static double[] MAX = new double[3];
     private static double[] IBLOCK_MIN = new double[3];

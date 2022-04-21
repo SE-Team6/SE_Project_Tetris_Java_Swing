@@ -349,7 +349,7 @@ public abstract class Board extends JFrame {
     protected void moveRotate() {
         eraseCurr();
         focus.rotate();
-        if (x < 0 || x >= Board.WIDTH - focus.width() + 1 || y + focus.height() - 1 >= Board.HEIGHT || isOverlap()) {
+        if (x +focus.getLeft() < 0 || x >= Board.WIDTH - focus.getRight()  || y + focus.getBottom() >= Board.HEIGHT || isOverlap()) {
             focus.rotateBack();
         }
         placeBlock();
