@@ -81,6 +81,20 @@ public class ScoreMode extends JFrame {
             bs.add(menuButton[i]);
             addY += 70;
         }
+        menuButton[0].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameModeNum =0;
+                new ScoreBoard(-1);
+            }
+        });
+        menuButton[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                gameModeNum =1;
+                new ScoreBoard(-1);
+            }
+        });
         allPositionPoint();
     }
 

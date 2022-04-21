@@ -105,7 +105,7 @@ public class SettingMenu extends JFrame {
                 break;
             case 2://스코어 보드 초기화
                 bs.setVisible(false);
-                new ScoreResetMode();
+                new ScoreResetMode(bs.getX(), bs.getY());
                 break;
             case 3://색맹 모드.
                 new ColorMode();
