@@ -69,7 +69,9 @@ public class ItemBoardTest {
 
     @Test
     public void isOverlapTest() {
-        assertTrue(new ItemBoard().isOverlap());
+        Board b = new ItemBoard();
+        b.eraseCurr();
+        assertFalse(b.isOverlap());
     }
 
     @Test
