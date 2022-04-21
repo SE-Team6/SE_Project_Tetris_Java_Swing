@@ -49,11 +49,11 @@ public class ScoreMode extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
                     gameModeNum =0;
-                    new ScoreBoard(0);
+                    new ScoreBoard(-1);
                 }
                 else if(positionPoint==1){
                     gameModeNum =1;
-                    new ScoreBoard(0);
+                    new ScoreBoard(-1);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){

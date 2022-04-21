@@ -50,7 +50,7 @@ public class ScoreBoard extends JFrame {
         pageButton();
         pageNumLabel();
         setMode();
-        if(num>0){
+        if(num>-1){
             higLightSB(num);
         }
         else{
@@ -182,7 +182,6 @@ public class ScoreBoard extends JFrame {
             dateLabel[i].setText("");
             difficultyLabel[i].setText("");
         }
-        System.out.println(gameModeNum);
         if (gameModeNum==0) {
             res = JSONLoader.loaderScore("normal");
             loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
@@ -212,7 +211,7 @@ public class ScoreBoard extends JFrame {
             }
         pageNumLabel.setText(String.valueOf(page+"/10")); // 현재 페이지 출력
     }
-    public String difficultyLabelSet(String a){ // 임시
+    public String difficultyLabelSet(String a){ // 난이도
         int to = Integer.parseInt(a);
         if(to==0) return "Easy";
         else if(to==1) return "Normal";
