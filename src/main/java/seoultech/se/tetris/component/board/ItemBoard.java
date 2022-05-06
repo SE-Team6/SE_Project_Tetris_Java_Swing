@@ -16,6 +16,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.util.Random;
 
 public class ItemBoard extends Board {
     private int cnt;
@@ -295,8 +296,22 @@ public class ItemBoard extends Board {
             board[j][targetX] = null;
         }
     }
+    protected void generateNewLines(int line) {
+        Random random = new Random(System.currentTimeMillis());
+        for(int i=0;i<HEIGHT-line;i++){
+            if (i<line && !isNullLine(i)) {
+                gameOver(getX(), getY());
+            }
+            board[i] = board[i+line];
+        }
+        for(int i=0;i<line;i++){
+            int idx = random.nextInt(WIDTH);
+            Block[] row = generateNewLine(idx);
+            board[HEIGHT-i-1] = row;
+        }
+    }
 
-    protected Block[] generateNewLines(int idx) {
+    private Block[] generateNewLine(int idx) {
         Block[] row = new Block[WIDTH];
         for(int i=0;i<WIDTH;i++){
             if (i==idx) continue;
