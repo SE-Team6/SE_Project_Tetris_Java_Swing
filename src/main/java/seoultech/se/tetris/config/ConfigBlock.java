@@ -6,14 +6,14 @@ import seoultech.se.tetris.component.JSONLoader;
 public class ConfigBlock {
     public static final String BORDER_CHAR_WIN = "X";
     public static final String BLOCK_CHAR_WIN = "O";
-    public static final String NON_BLOCK_CHAR_WIN = "   ";
+    public static final String NON_BLOCK_CHAR_WIN = "  ";
     public static final String BORDER_CHAR_MAC = "◻";
     public static final String BLOCK_CHAR_MAC = "◼";
     public static final String NON_BLOCK_CHAR_MAC = " ";
     public static final String RANDOM_CHAR = "ʟ";
     public static final String CHESS_QUEEN = "♜";
     public static final String STAR = "★";
-    public static int fontSize = 64 ;
+    public static int fontSize = 32;
 
     public static int colorType = 0;
     public static final String[][] BlOCK_COLOR = {
