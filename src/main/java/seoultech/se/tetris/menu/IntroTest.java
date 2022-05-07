@@ -9,6 +9,7 @@ public class IntroTest extends Frame{
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
     public IntroTest(){
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getClassLoader().getResource("icon.ico")));
         for(int i = 0; i < 7; i++){
             img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }

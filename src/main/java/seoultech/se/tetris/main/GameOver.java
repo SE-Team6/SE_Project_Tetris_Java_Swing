@@ -4,15 +4,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.component.*;
 import seoultech.se.tetris.menu.BasicSet;
-import seoultech.se.tetris.menu.GameMode;
 import seoultech.se.tetris.menu.StartMenu;
 import seoultech.se.tetris.menu.Version;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

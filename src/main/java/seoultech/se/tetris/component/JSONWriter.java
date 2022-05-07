@@ -20,14 +20,14 @@ public class JSONWriter {
         JSONArray -> JSONObject를 변환하는 함수
         귀찮게 이 함수를 쓰지 않으면 JSON의 키로 접근할 수가 없음.
     */
-    public static ArrayList<JSONObject> JSONArrayToArrayList(JSONArray array){
+    public static ArrayList<JSONObject> JSONArrayToArrayList(JSONArray array) {
         ArrayList<JSONObject> newList = new ArrayList<>();
-        if(array != null){
+        if (array != null) {
             try {
-                for(int i=0; i<array.size(); ++i){
-                    newList.add( (JSONObject) parser.parse(array.get(i).toString()));
+                for (int i = 0; i < array.size(); ++i) {
+                    newList.add((JSONObject) parser.parse(array.get(i).toString()));
                 }
-            }catch (ParseException e){
+            } catch (ParseException e) {
                 e.printStackTrace();
             }
         }
@@ -63,11 +63,11 @@ public class JSONWriter {
         System.out.println(colorObject);
         JSONDumps("colorBlindMode", list);
     }
+
     public static void writeScoreBoardPage(int val){
         JSONObject list = new JSONObject();
         list.put("mode", val);
         JSONObject pageObject = new JSONObject();
-//        System.out.println(pageObject);
         JSONDumps("scoreBoardPage", list);
     }
 
@@ -89,6 +89,7 @@ public class JSONWriter {
             newScore.put(key[i], Integer.parseInt(inputScore[i]));
 
         JSONArray loadedScores = new JSONArray();
+
         //Load JSONArray
         if(mode.equals("normal")){
             loadedScores = (JSONArray) getJSONObject("normal", "scoreBoard");
@@ -175,7 +176,6 @@ public class JSONWriter {
         jsonList.put("resolution", resolutionObj);
         jsonList.put("colorBlindMode", colorBlindModeObj);
         jsonList.put("scoreBoardPage",scoreBoardPageObj);
-
 
         try(FileWriter file = new FileWriter(SETTINGS_FILEPATH)){
             file.write(jsonList.toJSONString());

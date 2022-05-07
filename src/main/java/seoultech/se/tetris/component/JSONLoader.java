@@ -17,7 +17,7 @@ public class JSONLoader {
 
     JSONLoader(){}
 
-    public static String jarPathToFile(String path) {
+    public static String makeSettingsFileToPath(String path) {
         String s = null;
         try{
             InputStream stream = JSONLoader.class.getResourceAsStream(path);
@@ -28,7 +28,6 @@ public class JSONLoader {
         }
         return s;
     }
-
 
     public static Object getJSONObject(String type, String key){
         JSONObject obj = new JSONObject();
