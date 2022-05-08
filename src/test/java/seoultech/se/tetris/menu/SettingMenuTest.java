@@ -19,7 +19,7 @@ public class SettingMenuTest {
         mkl.keyPressed(ke);
         Field transfer = SettingMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertEquals(1, positionPoint);
         ke.setKeyCode(Keyboard.UP);
@@ -43,7 +43,7 @@ public class SettingMenuTest {
 
     @Test
     public void backToMenuTest() {
-        new SettingMenu().backToMenu();
+        new SettingMenu().backToMenuBtnAction();
         assertTrue(true);
     }
 }

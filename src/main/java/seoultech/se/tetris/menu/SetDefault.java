@@ -12,15 +12,14 @@ import java.util.HashMap;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
-public class BasicSet extends JFrame {
+public class SetDefault extends JFrame {
 
     public static int buttonSizeX = 145, buttonSizeY = 45;
     public static int buttonX, buttonY = 130;
-    public static int Width, Height;
+    public static int screenWidth, screenHeight;
     public static int menuBarHeight = 20;
     public static int menuBarExitBtnWidth = 380, menuBarExitBtnHeight = 0;
     public static int gameTitleX, gameTitleY = 30;
-    public static int currentNum=1;
 
     // 기본 이미지
     private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/600x800_BG.jpg")).getImage();
@@ -30,46 +29,44 @@ public class BasicSet extends JFrame {
     public JLabel menuBar = new JLabel(new ImageIcon(getClass().getResource("/image/Label/menubar/third_menubar.jpg")));
     private ImageIcon menuBarExitBasicImage = new ImageIcon(getClass().getResource("/image/Button/static_btn/ExitButton_Basic.png"));
     private ImageIcon menuBarExitEnterImage = new ImageIcon(getClass().getResource("/image/Button/static_btn/ExitButton_Enter.png"));
-
     public JButton menuBarExitBtn = new JButton(menuBarExitBasicImage);
+
+
+
     private int mouseX, mouseY;
 
 
     public static Keyboard key = Keyboard.getInstance();
 
-    public BasicSet(){}
+    public SetDefault(){}
 
-    public BasicSet(int x, int y) {
-//        key.getInstance();
+    public SetDefault(int x, int y) {
         key.setKey();
-        JPanel bg = new JPanel() {
+        JPanel panel = new JPanel() {
             public void paintComponent(Graphics g) {
                 g.drawImage(backGround, 0, 0, null);
                 setOpaque(false);
                 super.paintComponent(g);
             }
         };
-        setContentPane(bg);
-        callSize();
+        setContentPane(panel);
+        getResolution();
         basicSet(x, y);
         basicBtnSet();
     }
-    public void callSize() {
+    public void getResolution() {
         HashMap<String, Integer> map = loaderResolution();
-//        System.out.println(map.keySet());
-        Width = map.get("width");
-        Height = map.get("height");
+        screenWidth = map.get("width");
+        screenHeight = map.get("height");
         ConfigBlock.setFontSize(map.get("font_size"));
     }
     public void basicSet(int x, int y) {
-        buttonX = (Width - buttonSizeX) / 2;
-        gameTitleX = (Width - 300) / 2;
+        buttonX = (screenWidth - buttonSizeX) / 2;
+        gameTitleX = (screenWidth - 300) / 2;
         setUndecorated(true);
-        setTitle("Tetris Game");
-        setSize(Width, Height);
+        setSize(screenWidth, screenHeight);
         setResizable(false); // 한번 만들어진 게임창은 사용자가 임의적으로 못바꿈
         setLocation(x, y);
-//        setLocationRelativeTo(null); // 게임창이 컴퓨터 정중앙에 뜨도록
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // 게임창 종료시 프로그램도 종료하도록
         setBackground(new Color(0, 0, 0, 0));
         setLayout(null);
@@ -81,7 +78,7 @@ public class BasicSet extends JFrame {
         add(gameTitle);
 
         //상단메뉴바 종료 설정
-        menuBarExitBtn.setBounds(Width - 20, menuBarExitBtnHeight, 20, 20);
+        menuBarExitBtn.setBounds(screenWidth - 20, menuBarExitBtnHeight, 20, 20);
         menuBarExitBtn.setBorderPainted(false);
         menuBarExitBtn.setContentAreaFilled(false);
         menuBarExitBtn.setFocusPainted(false);
@@ -105,7 +102,7 @@ public class BasicSet extends JFrame {
         add(menuBarExitBtn);
 
         //상단메뉴바 설정
-        menuBar.setBounds(0, 0, Width, menuBarHeight);
+        menuBar.setBounds(0, 0, screenWidth, menuBarHeight);
         menuBar.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -118,7 +115,6 @@ public class BasicSet extends JFrame {
             public void mouseDragged(MouseEvent e) {
                 int x = e.getXOnScreen();
                 int y = e.getYOnScreen();
-
                 setLocation(x - mouseX, y - mouseY); // 메뉴바 이동가능하게
             }
         });

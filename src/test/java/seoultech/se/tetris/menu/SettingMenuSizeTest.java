@@ -12,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SettingMenuSizeTest {
     @Test
     public void settingScreenSizeBtnTest() throws NoSuchFieldException, IllegalAccessException {
-        new SettingMenuSize(0, 0).settingScreenSizeBtn();
-        SettingMenuSize sms = new SettingMenuSize(0, 0);
-        Field transfer = SettingMenuSize.class.getDeclaredField("menuButton");
+        new SetResolutionMenu(0, 0).setResolutionMenuBtn();
+        SetResolutionMenu sms = new SetResolutionMenu(0, 0);
+        Field transfer = SetResolutionMenu.class.getDeclaredField("menuButton");
         transfer.setAccessible(true);
         JButton[] menuButton = (JButton[]) transfer.get(sms);
         for (int i=0;i<3;i++){
@@ -24,31 +24,31 @@ public class SettingMenuSizeTest {
 
     @Test
     public void allPositionPointTest() throws NoSuchFieldException, IllegalAccessException {
-        new SettingMenuSize(0, 0).allPositionPoint();
-        SettingMenuSize sms = new SettingMenuSize(0, 0);
-        Field transfer = SettingMenuSize.class.getDeclaredField("positionPoint");
+        new SetResolutionMenu(0, 0).setBtnImage();
+        SetResolutionMenu sms = new SetResolutionMenu(0, 0);
+        Field transfer = SetResolutionMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertTrue(positionPoint >= 0 && positionPoint<=3);
     }
 
     @Test
     public void basicSetKeyListenerTest() {
-        BasicSet bs = new SettingMenuSize(0, 0).bs;
+        SetDefault bs = new SetResolutionMenu(0, 0).bs;
         assertEquals(0.0, bs.menuBarExitBtn.getAlignmentX());
     }
 
     @Test
     public void menuKeyListenerTest() throws NoSuchFieldException, IllegalAccessException {
-        SettingMenuSize sms = new SettingMenuSize(0,0);
+        SetResolutionMenu sms = new SetResolutionMenu(0,0);
         KeyAdapter mkl = sms.new menuKeyListener();
         KeyEvent ke = new KeyEvent(sms, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
         ke.setKeyCode(sms.key.DOWN);
         mkl.keyPressed(ke);
-        Field transfer = SettingMenuSize.class.getDeclaredField("positionPoint");
+        Field transfer = SetResolutionMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertEquals(1, positionPoint);
         ke.setKeyCode(sms.key.UP);

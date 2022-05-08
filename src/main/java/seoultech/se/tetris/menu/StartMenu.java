@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 
 
 public class StartMenu extends JFrame {
@@ -39,12 +39,12 @@ public class StartMenu extends JFrame {
     String [] keyLoadStringValue = new String[6];
 
     private int positionPoint = 0;
-    public BasicSet bs;
+    public SetDefault bs;
 
     //시작 메뉴
     public StartMenu(int x, int y){
-        bs = new BasicSet(x,y);
-        start_Menu_Screen_btn();
+        bs = new SetDefault(x,y);
+        setStartMenuBtn();
         bs.setVisible(true);
         keyLoad();
         setCurrentKeyLabel();
@@ -58,25 +58,26 @@ public class StartMenu extends JFrame {
             if (keyValue == key.DOWN){
                 positionPoint +=1;
                 if(positionPoint ==4) positionPoint =0;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue == key.UP){
                 positionPoint -=1;
                 if(positionPoint ==-1) positionPoint =3;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue == KeyEvent.VK_ENTER){
                 menuAction(positionPoint);
             }
         }
+
     }
-    public void allPositionPoint(){
+    public void setBtnImage(){ // positionPoint에 맞는 버튼 이미지 바꾸기
         for (int i=0;i<4;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void start_Menu_Screen_btn(){//menuButton[] = {게임 시작버튼,게임 설정버튼, 스코어 보드버튼, 게임종료버튼}
+    public void setStartMenuBtn(){//menuButton[] = {게임 시작버튼,게임 설정버튼, 스코어 보드버튼, 게임종료버튼}
         int addH = 0;
         for(int i=0;i<4;i++){
             menuButton[i] = new JButton(BasicImage[i]);
@@ -95,7 +96,7 @@ public class StartMenu extends JFrame {
                 menuAction(finalI);
             }
         });}
-        allPositionPoint();
+        setBtnImage();
     }
     public void keyLoad() {// 기존 키 정보 불러오기
         JSONObject obj = loaderKey();
@@ -137,7 +138,7 @@ public class StartMenu extends JFrame {
         int addH = 0;
         for (int i = 0; i < 3; i++) {
             currentKey[i] = new JLabel();
-            currentKey[i].setBounds(10, (Height - 100) + addH, 100, 30);
+            currentKey[i].setBounds(10, (screenHeight - 100) + addH, 100, 30);
             currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
             currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
@@ -147,7 +148,7 @@ public class StartMenu extends JFrame {
         addH = 0;
         for (int i = 3; i < 6; i++) {
             currentKey[i] = new JLabel();
-            currentKey[i].setBounds(110, (Height - 100) + addH, 100, 30);
+            currentKey[i].setBounds(110, (screenHeight - 100) + addH, 100, 30);
             currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
             currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
@@ -167,7 +168,7 @@ public class StartMenu extends JFrame {
                 break;
             case 2: // 스코어 보드
                 bs.setVisible(false);
-                new ScoreMode(bs.getX(), bs.getY());
+                new SelectScoreMode(bs.getX(), bs.getY());
                 break;
             case 3: // 게임종료
                 System.exit(0);

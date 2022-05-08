@@ -1,7 +1,7 @@
 package seoultech.se.tetris.main;
 
 import seoultech.se.tetris.component.JSONLoader;
-import seoultech.se.tetris.menu.IntroTest;
+import seoultech.se.tetris.menu.Intro;
 
 import java.io.*;
 
@@ -31,6 +31,6 @@ public class Tetris {
 
 	public static void main(String[] args) {
 		initialization();
-		new IntroTest();
+		new Intro();
 	}
 }

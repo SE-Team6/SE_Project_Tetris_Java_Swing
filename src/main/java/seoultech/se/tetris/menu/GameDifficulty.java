@@ -10,12 +10,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
 
 public class GameDifficulty {
-    private BasicSet bs;
-    private BackMenu bm = new BackMenu();
+    private SetDefault bs;
+    private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon easyModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/EasyMode_B.jpeg"));
     private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
     private ImageIcon hardModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/HardMode_B.jpeg"));
@@ -32,12 +32,12 @@ public class GameDifficulty {
     public GameDifficulty(){}
 
     public GameDifficulty(int x, int y){
-        bs = new BasicSet(x,y);
+        bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);
         bs.addKeyListener(new menuKeyListener());
         bs.add(bm.backMenuBtn);
-        setButton();
+        setGameDifficultyBtn();
         backToMenu();
     }
     public class menuKeyListener extends KeyAdapter {
@@ -47,11 +47,11 @@ public class GameDifficulty {
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
                 if (positionPoint == 3) positionPoint = 0;
-                allPositionPoint();
+                setBtnImage();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
                 if (positionPoint == -1) positionPoint = 2;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 /*
@@ -70,13 +70,13 @@ public class GameDifficulty {
             }
         }
     }
-    public void allPositionPoint(){
+    public void setBtnImage(){
         for (int i=0;i<3;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() {
+    public void setGameDifficultyBtn() { // 이지,노말,하드
         int addY = 0;
         for (int i = 0; i < 3; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -111,12 +111,12 @@ public class GameDifficulty {
                 else if(gameModeNum2 == 1) itemMode(positionPoint);
             }
         }));
-        allPositionPoint();
+        setBtnImage();
     }
     public void itemMode(int difficulty){
         ItemBoard.setDifficulty(difficulty);
         Board ib = new ItemBoard();
-        ib.setSize(Width,Height);
+        ib.setSize(screenWidth, screenHeight);
         ib.setLocation(bs.getX(), bs.getY());
 //        ib.setLocationRelativeTo(null);
         ib.setVisible(true);
@@ -125,7 +125,7 @@ public class GameDifficulty {
     public void normalMode(int difficulty){
         NormalBoard.setDifficulty(difficulty);
         Board nb =new NormalBoard();
-        nb.setSize(Width,Height);
+        nb.setSize(screenWidth, screenHeight);
         nb.setLocation(bs.getX(), bs.getY());
 //        nb.setLocationRelativeTo(null);
         nb.setVisible(true);

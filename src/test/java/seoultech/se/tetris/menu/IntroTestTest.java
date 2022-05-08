@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class IntroTestTest {
     @Test
     public void paintTest() {
-        IntroTest it = new IntroTest();
+        Intro it = new Intro();
 //        it.paint();
         assertTrue(true);
     }

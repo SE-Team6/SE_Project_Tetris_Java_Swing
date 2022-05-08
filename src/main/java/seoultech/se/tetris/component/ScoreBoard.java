@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
-import static seoultech.se.tetris.menu.ScoreMode.gameModeNum;
+import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
 
 public class ScoreBoard extends JFrame {
     private Image backGround;
@@ -39,10 +39,6 @@ public class ScoreBoard extends JFrame {
     int [] sbListX={0,30,130,170,260};
 
     Keyboard key = Keyboard.getInstance();
-//    JSONArray res = JSONLoader.loaderScore("");
-//    ArrayList<JSONObject> arr = JSONArrayToArrayList(res);
-//    JSONArray loadedScores = (JSONArray) getJSONObject("score", "scoreBoard");
-//    ArrayList<JSONObject> allScores = JSONArrayToArrayList(loadedScores);
     private JSONArray res;
     private JSONArray loadedScores;
     public ScoreBoard(int num){
@@ -51,7 +47,7 @@ public class ScoreBoard extends JFrame {
         pageNumLabel();
         setMode();
         if(num>-1){
-            higLightSB(num);
+            higLightScoreBoard(num);
         }
         else{
             scorePanel(scoreBoardNum);
@@ -155,7 +151,7 @@ public class ScoreBoard extends JFrame {
         rightPageBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                keyRight();
+                rightKeyAction();
             }
         });
         frame.add(rightPageBtn);
@@ -167,7 +163,7 @@ public class ScoreBoard extends JFrame {
         leftPageBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                keyLeft();
+                leftKeyAction();
             }
         });
         frame.add(leftPageBtn);
@@ -223,14 +219,14 @@ public class ScoreBoard extends JFrame {
         public void keyPressed(KeyEvent e) {
             int keyValue = e.getKeyCode();
             if (keyValue==key.LEFT){
-                keyLeft();
+                leftKeyAction();
             }
             else if(keyValue==key.RIGHT){
-                keyRight();
+                rightKeyAction();
             }
         }
     }
-    public void keyLeft(){//왼쪽 으로 넘길때 작동 내용
+    public void leftKeyAction(){//왼쪽 으로 넘길때 작동 내용
         panel[page-1].setVisible(false);
         scoreBoardNum -=10;
         page-=1;
@@ -239,7 +235,7 @@ public class ScoreBoard extends JFrame {
         scorePanel(scoreBoardNum);
         loadScoreBoard(scoreBoardNum); // 스코어 정보 불러오기
     }
-    public void keyRight(){// 오른쪽으로 넘길때 작동 내용
+    public void rightKeyAction(){// 오른쪽으로 넘길때 작동 내용
         panel[page-1].setVisible(false);
         scoreBoardNum +=10;
         page+=1;
@@ -248,22 +244,22 @@ public class ScoreBoard extends JFrame {
         scorePanel(scoreBoardNum);
         loadScoreBoard(scoreBoardNum);
     }
-    public void higLightSB(int a){ // 점수 업데이트시에는 자기 점수 하이라이트
-        int num = (a/10) *10;
-        page=(a/10)+1;
+    public void higLightScoreBoard(int myScoreRank){ // 점수 업데이트시에는 자기 점수 하이라이트
+        int num = (myScoreRank/10) *10;
+        page=(myScoreRank/10)+1;
         scoreBoardNum=num;
         scorePanel(scoreBoardNum);
         loadScoreBoard(scoreBoardNum);
-        rankLabel[a].setOpaque(true);
-        scoreLabel[a].setOpaque(true);
-        dateLabel[a].setOpaque(true);
-        nameLabel[a].setOpaque(true);
-        difficultyLabel[a].setOpaque(true);
-        rankLabel[a].setBackground(Color.YELLOW);
-        scoreLabel[a].setBackground(Color.YELLOW);
-        dateLabel[a].setBackground(Color.YELLOW);
-        nameLabel[a].setBackground(Color.YELLOW);
-        difficultyLabel[a].setBackground(Color.YELLOW);
+        rankLabel[myScoreRank].setOpaque(true);
+        scoreLabel[myScoreRank].setOpaque(true);
+        dateLabel[myScoreRank].setOpaque(true);
+        nameLabel[myScoreRank].setOpaque(true);
+        difficultyLabel[myScoreRank].setOpaque(true);
+        rankLabel[myScoreRank].setBackground(Color.YELLOW);
+        scoreLabel[myScoreRank].setBackground(Color.YELLOW);
+        dateLabel[myScoreRank].setBackground(Color.YELLOW);
+        nameLabel[myScoreRank].setBackground(Color.YELLOW);
+        difficultyLabel[myScoreRank].setBackground(Color.YELLOW);
     }
     public void setMode(){
         if(gameModeNum==0){

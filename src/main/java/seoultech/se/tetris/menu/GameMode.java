@@ -7,16 +7,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.BasicSet.buttonSizeY;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
+import static seoultech.se.tetris.menu.SetDefault.*;
+import static seoultech.se.tetris.menu.SetDefault.buttonSizeY;
+import static seoultech.se.tetris.menu.SetKeyMenu.positionPoint;
 
 public class GameMode extends JFrame {
 
     public static int gameModeNum2; //0:노말 1:아이템
 
-    private BasicSet bs;
-    private BackMenu bm = new BackMenu();
+    private SetDefault bs;
+    private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
     private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
     private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
@@ -28,7 +28,7 @@ public class GameMode extends JFrame {
     public GameMode(){}
 
     public GameMode(int x, int y) {
-        bs = new BasicSet(x, y);
+        bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -43,11 +43,11 @@ public class GameMode extends JFrame {
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
                 if (positionPoint == 2) positionPoint = 0;
-                allPositionPoint();
+                setBtnImage();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
                 if (positionPoint == -1) positionPoint = 1;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
@@ -67,13 +67,13 @@ public class GameMode extends JFrame {
             }
         }
     }
-    public void allPositionPoint(){
+    public void setBtnImage(){
         for (int i=0;i<2;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() {
+    public void setButton() { // 일반,아이템
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -100,7 +100,7 @@ public class GameMode extends JFrame {
                 new GameDifficulty(bs.getX(), bs.getY());
             }
         });
-        allPositionPoint();
+        setBtnImage();
     }
 
     public void backToMenu(){
