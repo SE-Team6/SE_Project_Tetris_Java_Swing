@@ -4,7 +4,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
@@ -21,7 +24,8 @@ public class JSONLoader {
         String s = null;
         try{
             InputStream stream = JSONLoader.class.getResourceAsStream(path);
-            byte[] bytes = stream.readAllBytes();
+//            byte[] bytes = readAllBytes(stream);
+            byte[] bytes = readAllBytes(stream);
             s = new String(bytes, StandardCharsets.UTF_8);
         }catch(Exception e) {
             e.printStackTrace();
@@ -29,6 +33,31 @@ public class JSONLoader {
         return s;
     }
 
+    public static byte[] readAllBytes(InputStream inputStream) throws IOException {
+        final int bufLen = 16 * 0x400; // 4KB
+        byte[] buf = new byte[bufLen];
+        int readLen;
+        IOException exception = null;
+
+        try {
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                while ((readLen = inputStream.read(buf, 0, bufLen)) != -1)
+                    outputStream.write(buf, 0, readLen);
+
+                return outputStream.toByteArray();
+            }
+        } catch (IOException e) {
+            exception = e;
+            throw e;
+        } finally {
+            if (exception == null) inputStream.close();
+            else try {
+                inputStream.close();
+            } catch (IOException e) {
+                exception.addSuppressed(e);
+            }
+        }
+    }
 
     public static Object getJSONObject(String type, String key){
         JSONObject obj = new JSONObject();

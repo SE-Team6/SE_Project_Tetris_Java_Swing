@@ -229,7 +229,6 @@ public class ItemBoard extends Board {
                 combo++;
                 lineCount++;
                 isErased = true;
-                this.cnt++;
             }
         }
 
@@ -339,7 +338,7 @@ public class ItemBoard extends Board {
             lineCount -= stageUpStandard;
             next = getRandomItemBlock();
         } else {
-            next = getRandomBlock();
+            next = getRandomItemBlock();
         }
         drawNextBlock();
         x = 3;

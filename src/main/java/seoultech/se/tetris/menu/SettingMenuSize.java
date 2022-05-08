@@ -3,10 +3,7 @@ package seoultech.se.tetris.menu;
 import seoultech.se.tetris.component.Keyboard;
 
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 import static seoultech.se.tetris.component.JSONWriter.writeResolution;
 import static seoultech.se.tetris.menu.BasicSet.*;
