@@ -1,7 +1,6 @@
 plugins {
     id 'java'
-
-    id "edu.sc.seis.launch4j" version "2.5.3"
+    id 'edu.sc.seis.launch4j' version '2.5.3'
 }
 
 group 'tetro.puzzle'
@@ -33,11 +32,6 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-launch4j {
-    outfile = 'tetris.jar'
-    mainClassName = 'Tetris'
-    icon = "${projectDir}/src/main/resources/icon.ico"
-}
 
 dependencies {
     implementation group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
@@ -47,4 +41,9 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+launch4j {
+    mainClassName = 'seoultech.se.tetris.main.Tetris'
+    icon = "${projectDir}/icon.ico"
 }
