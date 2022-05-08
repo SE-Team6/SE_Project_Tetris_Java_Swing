@@ -19,7 +19,7 @@ public class ScoreResetModeTest {
         mkl.keyPressed(ke);
         Field transfer = ScoreResetMode.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertEquals(1, positionPoint);
         ke.setKeyCode(Keyboard.UP);

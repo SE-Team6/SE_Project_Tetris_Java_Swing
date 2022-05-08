@@ -17,14 +17,14 @@ public class GameDifficultyTest {
         KeyAdapter mkl = sms.new menuKeyListener();
         Field transfer = GameDifficulty.class.getDeclaredField("bs");
         transfer.setAccessible(true);
-        BasicSet bs = (BasicSet)transfer.get(sms);
+        SetDefault bs = (SetDefault)transfer.get(sms);
 
         KeyEvent ke = new KeyEvent(bs, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
         ke.setKeyCode(Keyboard.DOWN);
         mkl.keyPressed(ke);
         transfer = GameDifficulty.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertEquals(1, positionPoint);
         ke.setKeyCode(Keyboard.UP);

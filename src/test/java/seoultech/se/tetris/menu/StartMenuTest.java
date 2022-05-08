@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class StartMenuTest {
     @Test
     public void addPositionPointTest() throws NoSuchFieldException, IllegalAccessException {
-        new StartMenu(0, 0).allPositionPoint();
+        new StartMenu(0, 0).setBtnImage();
         StartMenu sm = new StartMenu(0, 0);
-        sm.allPositionPoint();
+        sm.setBtnImage();
         Field transfer = StartMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
         int positionPoint = (int) transfer.get(sm);
@@ -25,7 +25,7 @@ public class StartMenuTest {
     @Test
     public void start_Menu_Screen_btnTest() throws NoSuchFieldException, IllegalAccessException {
         StartMenu sm = new StartMenu(0, 0);
-        sm.start_Menu_Screen_btn();
+        sm.setStartMenuBtn();
         Field transfer = StartMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
         int positionPoint = (int) transfer.get(sm);
@@ -80,7 +80,7 @@ public class StartMenuTest {
         mkl.keyPressed(ke);
         Field transfer = StartMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
-        sms.allPositionPoint();
+        sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);
         assertEquals(1, positionPoint);
         ke.setKeyCode(Keyboard.UP);

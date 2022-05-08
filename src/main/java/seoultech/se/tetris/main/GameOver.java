@@ -3,16 +3,13 @@ package seoultech.se.tetris.main;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.component.*;
-import seoultech.se.tetris.menu.BasicSet;
-import seoultech.se.tetris.menu.GameMode;
+import seoultech.se.tetris.menu.SetDefault;
 import seoultech.se.tetris.menu.StartMenu;
-import seoultech.se.tetris.menu.Version;
+import seoultech.se.tetris.menu.GetSetting;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,10 +21,10 @@ import java.util.ArrayList;
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
 import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
-import static seoultech.se.tetris.menu.ScoreMode.gameModeNum;
+import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
 
 public class GameOver extends JFrame {
 
@@ -64,7 +61,7 @@ public class GameOver extends JFrame {
     public static int scoreBoardPanelHeight;
 
     public static int higLightNum = 0;
-    BasicSet bs;
+    SetDefault bs;
     private int score;
     public static String nowDate;
     private JSONArray res;
@@ -73,11 +70,11 @@ public class GameOver extends JFrame {
     public GameOver(){}
 
     public GameOver(int x, int y){
-        bs = new BasicSet(x, y);
+        bs = new SetDefault(x, y);
         bs.setVisible(true);
         score = Score.score;
         System.out.println(Score.score);
-        setXY(Width);
+        setXY(screenWidth);
         labelSet();
         buttonSet();
         scoreBoardPanel();
@@ -267,16 +264,16 @@ public class GameOver extends JFrame {
     }
 
     public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
-        Version ver =new Version();
+        GetSetting ver =new GetSetting();
         switch (num){
             case 400:
-                ver.gameOverFirstSize();
+                ver.gameOverFirstSet();
                 break;
             case 600:
-                ver.gameOverSecondSize();
+                ver.gameOverSecondSet();
                 break;
             case 800:
-                ver.gameOverThirdSize();
+                ver.gameOverThirdSet();
                 break;
         }
     }

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 import static seoultech.se.tetris.component.JSONWriter.*;
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 
 public class SettingMenu extends JFrame {
 
@@ -27,19 +27,19 @@ public class SettingMenu extends JFrame {
 
     private int positionPoint;
 
-    BasicSet bs;
-    BackMenu bm = new BackMenu();
+    SetDefault bs;
+    BackMenuBtn bm = new BackMenuBtn();
 
     public SettingMenu(){}
 
     public SettingMenu(int x, int y){
-        bs = new BasicSet(x,y);
+        bs = new SetDefault(x,y);
         positionPoint = 0;
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new menuKeyListener());
         bs.setVisible(true);
-        settingScreenBtn();
-        backToMenu();
+        setSettingMenuBtn();
+        backToMenuBtnAction();
     }
 
     public class menuKeyListener extends KeyAdapter {
@@ -49,12 +49,12 @@ public class SettingMenu extends JFrame {
             if(keyValue==key.DOWN){
                 positionPoint +=1;
                 if(positionPoint ==5) positionPoint =0;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue==key.UP){
                 positionPoint -=1;
                 if(positionPoint ==-1) positionPoint =4;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 menuAction(positionPoint);
@@ -65,14 +65,14 @@ public class SettingMenu extends JFrame {
             }
         }
         }
-    public void allPositionPoint(){
+    public void setBtnImage(){
 
         for(int i=0;i<5;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void settingScreenBtn(){//menuButton[] = {해상도 설정버튼,게임 조작설정버튼, 스코어 보드 초기화버튼,색맹모드버튼, 설정 초기화버튼}
+    public void setSettingMenuBtn(){//menuButton[] = {해상도 설정버튼,게임 조작설정버튼, 스코어 보드 초기화버튼,색맹모드버튼, 설정 초기화버튼}
         int addY=0;
         for (int i=0;i<5;i++){
             menuButton[i]=new JButton(BasicImage[i]);
@@ -91,17 +91,17 @@ public class SettingMenu extends JFrame {
                     menuAction(finalI);
                 }
             });}
-        allPositionPoint();
+        setBtnImage();
     }
     public void menuAction(int num){
         switch (num){
             case 0://해상도 설정
                 bs.setVisible(false);
-                new SettingMenuSize(bs.getX(), bs.getY());
+                new SetResolutionMenu(bs.getX(), bs.getY());
                 break;
             case 1://키 설정
                 bs.setVisible(false);
-                new SettingMenuKeySet(bs.getX(), bs.getY());
+                new SetKeyMenu(bs.getX(), bs.getY());
                 break;
             case 2://스코어 보드 초기화
                 bs.setVisible(false);
@@ -128,7 +128,7 @@ public class SettingMenu extends JFrame {
                 break;
         }
     }
-    public void backToMenu(){
+    public void backToMenuBtnAction(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

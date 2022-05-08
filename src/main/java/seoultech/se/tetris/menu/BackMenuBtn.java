@@ -6,11 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 
-public class BackMenu extends JFrame{
+public class BackMenuBtn extends JFrame{
     private ImageIcon backMenuImage = new ImageIcon(getClass().getResource("/image/Button/static_btn/back_B.png"));
     private ImageIcon backMenuEImage = new ImageIcon(getClass().getResource("/image/Button/static_btn/back_E.png"));
     public JButton backMenuBtn = new JButton(backMenuImage);
-    public BackMenu(){
+    public BackMenuBtn(){
         backMenuBtn.setBounds(10,50,50,50);
         backMenuBtn.setBorderPainted(false);
         backMenuBtn.setContentAreaFilled(false);

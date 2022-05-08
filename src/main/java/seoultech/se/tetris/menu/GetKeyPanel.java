@@ -11,7 +11,7 @@ import java.awt.event.KeyEvent;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.component.JSONWriter.writeKey;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.positionPoint;
+import static seoultech.se.tetris.menu.SetKeyMenu.positionPoint;
 
 public class GetKeyPanel extends JFrame {
 
@@ -67,7 +67,7 @@ public class GetKeyPanel extends JFrame {
                         keyWrite();
                         JOptionPane.showMessageDialog(null, "키 변경이 완료되었습니다.");
                         setVisible(false);
-                        new SettingMenuKeySet(prevX, prevY);
+                        new SetKeyMenu(prevX, prevY);
                     }
                 }
             }

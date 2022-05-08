@@ -6,14 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.menu.BasicSet.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 
 public class ScoreResetMode extends JFrame {
 
     public static int resetModeNum; //0:노말 1:아이템
 
-    private BasicSet bs = new BasicSet();
-    private BackMenu bm = new BackMenu();
+    private SetDefault bs = new SetDefault();
+    private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
     private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
     private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
@@ -28,7 +28,7 @@ public class ScoreResetMode extends JFrame {
 
     }
     public ScoreResetMode(int x ,int y) {
-        bs = new BasicSet(x,y);
+        bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -43,11 +43,11 @@ public class ScoreResetMode extends JFrame {
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
                 if (positionPoint == 2) positionPoint = 0;
-                allPositionPoint();
+                setBtnImage();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
                 if (positionPoint == -1) positionPoint = 1;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
@@ -64,7 +64,7 @@ public class ScoreResetMode extends JFrame {
             }
         }
     }
-    public void allPositionPoint(){
+    public void setBtnImage(){
         for (int i=0;i<2;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
@@ -95,7 +95,7 @@ public class ScoreResetMode extends JFrame {
                 new ScoreReset();
             }
         });
-        allPositionPoint();
+        setBtnImage();
     }
 
     public void backToMenu(){

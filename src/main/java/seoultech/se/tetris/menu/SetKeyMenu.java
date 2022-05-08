@@ -8,11 +8,11 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Arrays;
 
-import static seoultech.se.tetris.menu.BasicSet.Width;
+import static seoultech.se.tetris.menu.SetDefault.screenWidth;
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
-import static seoultech.se.tetris.menu.BasicSet.key;
+import static seoultech.se.tetris.menu.SetDefault.key;
 
-public class SettingMenuKeySet extends JFrame{
+public class SetKeyMenu extends JFrame{
 
     public static int labelX,labelWidth=200,labelHeight=35,labelFontSize=40;
     public static int textFieldX,textFieldWidth=80, textFieldHeight =35,textFieldFontSize=30;
@@ -26,16 +26,16 @@ public class SettingMenuKeySet extends JFrame{
     private LineBorder selectBorder = new LineBorder(Color.RED,3,true);
     private LineBorder noBorder = new LineBorder(Color.BLACK,3,true);
 
-    BasicSet bs;
-    BackMenu bm = new BackMenu();
+    SetDefault bs;
+    BackMenuBtn bm = new BackMenuBtn();
 
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
 
-    public SettingMenuKeySet(){}
+    public SetKeyMenu(){}
 
-    public SettingMenuKeySet(int x, int y){
-        bs = new BasicSet(x, y);
+    public SetKeyMenu(int x, int y){
+        bs = new SetDefault(x, y);
         bs.setVisible(true);
         keyLoad();
         setLocation();
@@ -43,7 +43,7 @@ public class SettingMenuKeySet extends JFrame{
         getKeyLabel();
         bs.add(bm.backMenuBtn);
         bs.addKeyListener(new setKeyListener());
-        backToMenu();
+        backToMenuBtnAction();
     }
 
     public class setKeyListener extends KeyAdapter {
@@ -53,12 +53,12 @@ public class SettingMenuKeySet extends JFrame{
             if (keyVal==key.DOWN) {
                 positionPoint +=1;
                 if(positionPoint ==6) positionPoint =0;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyVal == key.UP){
                 positionPoint -=1;
                 if(positionPoint == -1) positionPoint =5;
-                allPositionPoint();
+                setBtnImage();
             }
             else if(keyVal== KeyEvent.VK_ENTER){
                 if(positionPoint<6) {
@@ -86,7 +86,7 @@ public class SettingMenuKeySet extends JFrame{
             }
         }
     }
-    public void allPositionPoint(){
+    public void setBtnImage(){
         for (int i=0;i<6;i++){
             if(positionPoint==i) getLabel[i].setBorder(selectBorder);
             else getLabel[i].setBorder(noBorder);
@@ -116,7 +116,7 @@ public class SettingMenuKeySet extends JFrame{
             getLabel[i].setText(String.valueOf(keyLoadCharValue[i]));
             bs.add(getLabel[i]);
         }
-        allPositionPoint();
+        setBtnImage();
     }
     public void keyLoad(){// 기존 키 정보 불러오기
         JSONObject obj = loaderKey();
@@ -153,7 +153,7 @@ public class SettingMenuKeySet extends JFrame{
             keyLoadCharValue[i]=b;
         }
     }
-    public void backToMenu(){
+    public void backToMenuBtnAction(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -163,16 +163,16 @@ public class SettingMenuKeySet extends JFrame{
         });
     }
     public void setLocation(){// 해상도에 따른 버튼 라벨 텍스트필드 등 위치 설정 불러오기
-        Version ver =new Version();
-        switch (Width){
+        GetSetting ver =new GetSetting();
+        switch (screenWidth){
             case 400:
-                ver.keySetFirstSize();
+                ver.keySetFirstSet();
                 break;
             case 600:
-                ver.keySetSecondSize();
+                ver.keySetSecondSet();
                 break;
             case 800:
-                ver.keySetThirdSize();
+                ver.keySetThirdSet();
                 break;
         }
     }

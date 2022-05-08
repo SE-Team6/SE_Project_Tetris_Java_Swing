@@ -4,11 +4,11 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class IntroTest extends Frame{
+public class Intro extends Frame{
     Image img[] = new Image[8];
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
-    public IntroTest(){
+    public Intro(){
         for(int i = 0; i < 7; i++){
             img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }

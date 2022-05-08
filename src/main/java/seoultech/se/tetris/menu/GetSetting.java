@@ -5,51 +5,51 @@ import java.util.HashMap;
 
 import static seoultech.se.tetris.component.JSONLoader.*;
 
-import static seoultech.se.tetris.menu.BasicSet.*;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.labelX;
-import static seoultech.se.tetris.menu.SettingMenuKeySet.textFieldX;
+import static seoultech.se.tetris.menu.SetDefault.*;
+import static seoultech.se.tetris.menu.SetKeyMenu.labelX;
+import static seoultech.se.tetris.menu.SetKeyMenu.textFieldX;
 import static seoultech.se.tetris.main.GameOver.*;
 
-public class Version {
-    public void firstScreenSizeSet(){
+public class GetSetting {
+    public void getFirstResolution(){
         HashMap<String, Integer>map = loaderResolution();
-        Width = map.get("width");
-        Height = map.get("height");
-        menuBarExitBtnWidth=Width-20;
-        buttonX =(Width-buttonSizeX)/2;
-        gameTitleX=(Width-300)/2;
+        screenWidth = map.get("width");
+        screenHeight = map.get("height");
+        menuBarExitBtnWidth= screenWidth -20;
+        buttonX =(screenWidth -buttonSizeX)/2;
+        gameTitleX=(screenWidth -300)/2;
     }
-    public void secondScreenSizeSet(){
+    public void getSecondResolution(){
         HashMap<String, Integer>map = loaderResolution();
-        Width = map.get("width");
-        Height = map.get("height");
-        menuBarExitBtnWidth=Width-20;
-        buttonX =(Width-buttonSizeX)/2;
-        gameTitleX=(Width-300)/2;
+        screenWidth = map.get("width");
+        screenHeight = map.get("height");
+        menuBarExitBtnWidth= screenWidth -20;
+        buttonX =(screenWidth -buttonSizeX)/2;
+        gameTitleX=(screenWidth -300)/2;
     }
-    public void thirdScreenSizeSet(){
+    public void getThirdResolution(){
         HashMap<String, Integer>map = loaderResolution();
-        Width = map.get("width");
-        Height = map.get("height");
-        menuBarExitBtnWidth=Width-20;
-        buttonX =(Width-buttonSizeX)/2;
-        gameTitleX=(Width-300)/2;
+        screenWidth = map.get("width");
+        screenHeight = map.get("height");
+        menuBarExitBtnWidth= screenWidth -20;
+        buttonX =(screenWidth -buttonSizeX)/2;
+        gameTitleX=(screenWidth -300)/2;
     }
 
-    public void keySetFirstSize(){
+    public void keySetFirstSet(){
         labelX =40;
         textFieldX=220;
     }
-    public void keySetSecondSize(){
+    public void keySetSecondSet(){
         labelX =140;
         textFieldX=320;
     }
-    public void keySetThirdSize(){
+    public void keySetThirdSet(){
         labelX =240;
         textFieldX=420;
     }
 
-    public void gameOverFirstSize(){
+    public void gameOverFirstSet(){
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary.jpg")).getImage();
         gameOverTitleX=0;
         scoreBoardWidth=170;
@@ -64,7 +64,7 @@ public class Version {
         sbListSize= new int[]{30, 80, 40};
         sbListX= new int[]{0, 30, 110};
     }
-    public void gameOverSecondSize(){
+    public void gameOverSecondSet(){
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_600.jpg")).getImage();
         gameOverTitleX=100;
         scoreBoardWidth=300;
@@ -79,7 +79,7 @@ public class Version {
         sbListSize= new int[]{60, 140, 60};
         sbListX= new int[]{0, 60, 200};
     }
-    public void gameOverThirdSize(){
+    public void gameOverThirdSet(){
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_800.jpg")).getImage();
         gameOverTitleX=200;
         scoreBoardWidth=500;
