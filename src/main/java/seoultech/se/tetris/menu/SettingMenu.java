@@ -76,7 +76,7 @@ public class SettingMenu extends JFrame {
         int addY=0;
         for (int i=0;i<5;i++){
             menuButton[i]=new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX,buttonY+addY,buttonSizeX,buttonSizeY);
+            menuButton[i].setBounds(buttonX,buttonY+addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);

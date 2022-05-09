@@ -11,7 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
+import static seoultech.se.tetris.menu.GameModeMenu.gameModeNum2;
 
 public class GameDifficulty {
     private SetDefault bs;
@@ -66,7 +66,7 @@ public class GameDifficulty {
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new GameMode(bs.getX(), bs.getY());
+                new GameModeMenu(bs.getX(), bs.getY());
             }
         }
     }
@@ -80,7 +80,7 @@ public class GameDifficulty {
         int addY = 0;
         for (int i = 0; i < 3; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX, buttonY + addY, buttonSizeX, buttonSizeY);
+            menuButton[i].setBounds(buttonX, buttonY + addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -136,7 +136,7 @@ public class GameDifficulty {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameMode(bs.getX(),bs.getY());
+                new GameModeMenu(bs.getX(),bs.getY());
             }
         });
     }

@@ -81,7 +81,7 @@ public class StartMenu extends JFrame {
         int addH = 0;
         for(int i=0;i<4;i++){
             menuButton[i] = new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX, buttonY+addH,buttonSizeX,buttonSizeY);
+            menuButton[i].setBounds(buttonX, buttonY+addH, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -159,7 +159,7 @@ public class StartMenu extends JFrame {
     public void menuAction(int num){
         switch (num) {
             case 0: // 게임 시작
-                new GameMode(bs.getX(), bs.getY());
+                new PlayModeMenu(bs.getX(), bs.getY());
                 bs.setVisible(false);
                 break;
             case 1: // 게임 설정

@@ -16,7 +16,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
     public void getSecondResolution(){
@@ -24,7 +24,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
     public void getThirdResolution(){
@@ -32,7 +32,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
 

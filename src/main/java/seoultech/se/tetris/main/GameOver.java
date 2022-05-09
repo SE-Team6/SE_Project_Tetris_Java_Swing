@@ -23,7 +23,7 @@ import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
 import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
+import static seoultech.se.tetris.menu.GameModeMenu.gameModeNum2;
 import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
 
 public class GameOver extends JFrame {

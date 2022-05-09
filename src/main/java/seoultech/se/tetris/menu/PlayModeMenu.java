@@ -8,26 +8,26 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetDefault.buttonSizeY;
+import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
 import static seoultech.se.tetris.menu.SetKeyMenu.positionPoint;
 
-public class GameMode extends JFrame {
+public class PlayModeMenu extends JFrame {
 
-    public static int gameModeNum2; //0:노말 1:아이템
+    public static int playModeNum; //0:1p 1:battle mode
 
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
-    private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
-    private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
-    private ImageIcon itemModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
-    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
-    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
+    private ImageIcon onePlayModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
+    private ImageIcon battleModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
+    private ImageIcon onePlayModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
+    private ImageIcon battleModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
+    private ImageIcon[] BasicImage = {onePlayModeBtnImage, battleModeBtnImage};
+    private ImageIcon[] EnterImage = {onePlayModeBtnEnterImage, battleModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public GameMode(){}
+    public PlayModeMenu(){}
 
-    public GameMode(int x, int y) {
+    public PlayModeMenu(int x, int y) {
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
@@ -51,14 +51,12 @@ public class GameMode extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    gameModeNum2 =0;//노말
                     bs.setVisible(false);
-                    new GameDifficulty(bs.getX(), bs.getY());
+                    new GameModeMenu(bs.getX(), bs.getY());
                 }
                 else if(positionPoint==1){
-                    gameModeNum2 =1;//아이템
                     bs.setVisible(false);
-                    new GameDifficulty(bs.getX(), bs.getY());
+                    new BattleModeMenu(bs.getX(), bs.getY());
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
@@ -77,7 +75,7 @@ public class GameMode extends JFrame {
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX, buttonY + addY, buttonSizeX, buttonSizeY);
+            menuButton[i].setBounds(buttonX, buttonY + addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -87,7 +85,6 @@ public class GameMode extends JFrame {
         menuButton[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                gameModeNum2 =0;//노말
                 bs.setVisible(false);
                 new GameDifficulty(bs.getX(), bs.getY());
             }
@@ -95,11 +92,11 @@ public class GameMode extends JFrame {
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                gameModeNum2 =1;//아이템
                 bs.setVisible(false);
                 new GameDifficulty(bs.getX(), bs.getY());
             }
         });
+
         setBtnImage();
     }
 
