@@ -2,29 +2,29 @@ package seoultech.se.tetris.main;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import seoultech.se.tetris.component.*;
+import seoultech.se.tetris.component.JSONLoader;
+import seoultech.se.tetris.component.JSONWriter;
+import seoultech.se.tetris.component.ScoreBoard;
+import seoultech.se.tetris.menu.GetSetting;
 import seoultech.se.tetris.menu.SetDefault;
 import seoultech.se.tetris.menu.StartMenu;
-import seoultech.se.tetris.menu.GetSetting;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
-import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
 import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
 import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
+import static seoultech.se.tetris.menu.SetDefault.screenWidth;
 
 public class GameOver extends JFrame {
 
@@ -69,11 +69,10 @@ public class GameOver extends JFrame {
 
     public GameOver(){}
 
-    public GameOver(int x, int y){
+    public GameOver(int x, int y, int score){
         bs = new SetDefault(x, y);
         bs.setVisible(true);
-        score = Score.score;
-        System.out.println(Score.score);
+        this.score = score;
         setXY(screenWidth);
         labelSet();
         buttonSet();
@@ -191,7 +190,7 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver(bs.getX(),bs.getY());
+                    GameOver gm =new GameOver(bs.getX(),bs.getY(), score);
                     gm.updateButton.setVisible(false);
                     ScoreBoard sb =new ScoreBoard(higLightNum);
                 }

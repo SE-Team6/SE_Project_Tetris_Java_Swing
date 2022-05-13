@@ -3,7 +3,9 @@ package seoultech.se.tetris.main;
 import seoultech.se.tetris.component.JSONLoader;
 import seoultech.se.tetris.menu.Intro;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 public class Tetris {
 	public static void initialization(){
@@ -32,5 +34,7 @@ public class Tetris {
 	public static void main(String[] args) {
 		initialization();
 		new Intro();
+//		MatchBoardParent b = new MatchBoardParent();
+
 	}
 }

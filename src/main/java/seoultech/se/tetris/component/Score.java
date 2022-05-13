@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class Score extends JLabel {
     private final int[] combo = {0,100,300,500,800};
-    public static int score;
+    public int score;
     private CompoundBorder border;
 
     public Score() {
@@ -24,7 +24,7 @@ public class Score extends JLabel {
         updateScore();
     }
 
-    public static int getScore() {
+    public int getScore() {
         return score;
     }
 

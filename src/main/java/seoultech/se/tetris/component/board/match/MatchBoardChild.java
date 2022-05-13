@@ -1,8 +1,8 @@
-package seoultech.se.tetris.component.board;
+package seoultech.se.tetris.component.board.match;
 
 import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.component.Score;
-import seoultech.se.tetris.component.pause.PauseView;
+import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
@@ -11,12 +11,10 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
 
-public class NormalBoard extends Board {
-    public NormalBoard() {
-
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Board display setting.
+public class MatchBoardChild extends MatchInnerBoard {
+    public MatchBoardChild(Score score) {
+        GridBagConstraints layout = new GridBagConstraints();
+        this.setLayout(new GridBagLayout());
         pane = new JTextPane();
         pane.setEditable(false);
         pane.setBackground(Color.BLACK);
@@ -27,12 +25,13 @@ public class NormalBoard extends Board {
 
         // right items
         rightPanel = new JPanel();
-//        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
-        rightPanel.setLayout(new GridLayout(4, 1));
+        rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+//        rightPanel.setLayout(new GridBagLayout());
         rightPanel.setBackground(Color.GRAY);
 
-        score = new Score();
-        rightPanel.add(score);
+        this.score = score;
+
+        rightPanel.add(this.score, layout);
 
         nextPanel = new JTextPane();
         nextPanel.setEditable(false);
@@ -41,16 +40,26 @@ public class NormalBoard extends Board {
                 BorderFactory.createLineBorder(Color.GRAY, 10),
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         nextPanel.setBorder(nextBorder);
-        rightPanel.add(nextPanel);
+
+        rightPanel.add(nextPanel, layout);
+
+        stackPanel = new JTextPane();
+        stackPanel.setEditable(false);
+        stackPanel.setBackground(Color.BLACK);
+        stackPanel.setBorder(nextBorder);
+
+        rightPanel.add(stackPanel, layout);
 
         CompoundBorder rightBorder = BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.GRAY, 10),
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         rightPanel.setBorder(rightBorder);
 
-
-        this.getContentPane().add(pane, BorderLayout.CENTER);
-        this.getContentPane().add(rightPanel, BorderLayout.LINE_END);
+        layout.fill = GridBagConstraints.BOTH;
+        layout.weightx = 0.2;
+        this.add(pane, layout);
+        layout.weightx = 0.1;
+        this.add(rightPanel, layout);
 
         //Set timer for block drops.
         timer = new Timer(Math.round(initInterval), e -> {
@@ -60,15 +69,8 @@ public class NormalBoard extends Board {
 
         //Initialize board for the game.
         board = new Block[Board.HEIGHT][Board.WIDTH];
-        playerKeyListener = new PlayerKeyListener();
-        addKeyListener(playerKeyListener);
-        playerMouseListener = new PlayerMouseListener();
-
-        addMouseListener(playerMouseListener);
-        pane.addMouseListener(playerMouseListener);
-        rightPanel.addMouseListener(playerMouseListener);
-        requestFocus();
-        setFocusable(true);
+        prevBoard = new Block[Board.HEIGHT][Board.WIDTH];
+        stackBoard = new Block[STACK_MAX][Board.WIDTH];
 
         // line height
         SimpleAttributeSet tmp = new SimpleAttributeSet();
@@ -78,6 +80,8 @@ public class NormalBoard extends Board {
 
         nextPanel.setParagraphAttributes(tmp, false);
         pane.setParagraphAttributes(tmp, false);
+        stackPanel.setParagraphAttributes(tmp, false);
+
 
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
@@ -91,6 +95,9 @@ public class NormalBoard extends Board {
         defaultStyle = pane.addStyle("defaultStyle", parentStyle);
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
+        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize / 2);
+        stackStyle = nextPanel.addStyle("stackStyle", parentStyle);
+
         //Create the first block and draw.
         focus = getRandomBlock();
         y = - focus.getTop();
@@ -99,20 +106,6 @@ public class NormalBoard extends Board {
         timer.start();
         next = getRandomBlock();
         drawNextBlock();
-
-
-        pv = new PauseView(0, this);
-
-    }
-
-    @Override
-    protected void eraseLines() {
-        super.eraseLines();
-        if (lineCount >= stageUpStandard) {
-            stage += 1;
-            System.out.println("Stage : "+stage);
-            lineCount -= stageUpStandard;
-            timerSpeedUpSet();
-        }
+        drawStackBoard();
     }
 }

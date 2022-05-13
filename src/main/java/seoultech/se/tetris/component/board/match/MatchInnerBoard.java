@@ -1,25 +1,21 @@
-package seoultech.se.tetris.component.board;
+package seoultech.se.tetris.component.board.match;
 
 import seoultech.se.tetris.blocks.*;
-import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
-import seoultech.se.tetris.component.pause.PauseView;
+import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.config.ConfigBlock;
-import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-
-public abstract class Board extends JFrame {
+public class MatchInnerBoard extends JPanel {
     public static final long serialVersionUID = 2434035659171694595L;
 
     //easy, normal, hard
@@ -36,11 +32,13 @@ public abstract class Board extends JFrame {
 
     public static final int HEIGHT = 20;
     public static final int WIDTH = 10;
+    public static final int STACK_MAX = 10;
 
     // Erased Line Count
     protected static int lineCount = 0;
     protected static int stage = 1;
     protected static int seq = 0;
+
 
     protected ConfigBlock config = ConfigBlock.getInstance();
 
@@ -50,6 +48,7 @@ public abstract class Board extends JFrame {
     protected JPanel rightPanel;
     protected Score score;
     protected JTextPane nextPanel;
+    protected JTextPane stackPanel;
 
     protected KeyListener playerKeyListener;
     protected MouseListener playerMouseListener;
@@ -57,6 +56,7 @@ public abstract class Board extends JFrame {
     protected Style parentStyle;
     protected Style defaultStyle;
     protected Style blockStyle;
+    protected Style stackStyle;
 
     protected Timer timer;
     protected ParentBlock focus;
@@ -73,17 +73,17 @@ public abstract class Board extends JFrame {
     protected int previousFallY = 0;
 
     protected Block[][] board;
-
-    protected boolean isPause = false;
-
-    protected PauseView pv;
+    protected Block[][] stackBoard;
+    protected Block[][] prevBoard;
+    public int stackLine = 0;
 
     protected boolean isAction = false;
+    public boolean gameDone = false;
 
-    public Board() {
-        super("SW TEAM 6");
+    public ArrayList<Block[]> attProp;
 
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    public MatchInnerBoard() {
+
     }
 
     protected void focusFrame() {
@@ -132,7 +132,7 @@ public abstract class Board extends JFrame {
     public void placeBlock() {
         for (int j = 0; j < focus.height(); j++) {
             for (int i = 0; i < focus.width(); i++) {
-                if (x + i<0 || y + j<0 || x + i>=Board.WIDTH || y + j>=Board.HEIGHT) continue;
+                if (x + i<0 || y + j<0 || x + i>= Board.WIDTH || y + j>=Board.HEIGHT) continue;
                 if (board[y + j][x + i] == null && focus.getShape(i, j) != null) {
                     board[y + j][x + i] = focus.getShape(i, j);
                 }
@@ -198,7 +198,9 @@ public abstract class Board extends JFrame {
 
     // generate new block
     protected void generateNewBlock() {
+        copyBlock();
         placeBlock();
+        loadStackBaord();
         eraseLines();
         focus = next;
         next = getRandomBlock();
@@ -208,8 +210,70 @@ public abstract class Board extends JFrame {
 
         // GAME OVER
         if (isOverlap()) {
-            gameOver(getX(), getY());
+            gameOver();
         }
+    }
+
+    protected void copyBlock() {
+//        prevBoard = board.clone();
+        for(int i=0;i<HEIGHT;i++){
+            prevBoard[i] = Arrays.copyOf(board[i], WIDTH);
+        }
+    }
+
+    protected void attackLines(ArrayList<Integer> att) {
+        ArrayList<Block[]> stack = new ArrayList<Block[]>();
+        for(int i=0;i<att.size();i++){
+            int row = att.get(i);
+            stack.add(prevBoard[row].clone());
+        }
+
+        firePropertyChange("attProp", attProp, stack);
+    }
+
+    public void attackedLines(ArrayList<Block[]> att) {
+        if (stackLine >= STACK_MAX) return;
+        int size = stackLine + att.size() > STACK_MAX ? stackLine+ att.size()-STACK_MAX+1 : att.size();
+        //        int size = STACK_MAX-stackLine<att.size()?1:0;
+        // size 만큼 땡김
+        for(int i=0;i<STACK_MAX-size;i++){
+            stackBoard[i] = stackBoard[i+size];
+        }
+        // prev 밑에 저장
+        for(int i=att.size()-size,j=0;i<size;i++,j++){
+            stackBoard[STACK_MAX-j-1] = att.get(i);
+        }
+
+        this.stackLine += att.size();
+        if(this.stackLine > STACK_MAX) {
+            this.stackLine = STACK_MAX;
+        }
+
+        drawStackBoard();
+    }
+
+    protected void loadStackBaord() {
+        if (stackLine == 0) return;
+        for(int i=0;i<HEIGHT-stackLine;i++){
+            if (i<stackLine && !isNullLine(i)) {
+                gameOver();
+            }
+            board[i] = board[i+stackLine];
+        }
+        for(int i=0;i<stackLine;i++){
+            board[HEIGHT-i-1] = stackBoard[STACK_MAX - i - 1];
+        }
+
+        stackBoard = new Block[STACK_MAX][WIDTH];
+        stackLine = 0;
+        drawStackBoard();
+    }
+
+    protected boolean isNullLine(int row) {
+        for(int i=0;i<WIDTH;i++){
+            if (board[row][i] != null) return false;
+        }
+        return true;
     }
 
     protected void replaceBlockToStarHorizontal(int targetL, int targetR) {
@@ -257,6 +321,7 @@ public abstract class Board extends JFrame {
     protected void eraseLines() {
         int combo = 0;
         isErased = false;
+        ArrayList<Integer> attack = new ArrayList<Integer>();
         int left = 0; int right = -1;
         boolean isErased = false;
         for (int i = Board.HEIGHT - 1; i >= 0; i--) {
@@ -267,6 +332,7 @@ public abstract class Board extends JFrame {
                 }
             }
             if (tmp == Board.WIDTH) {
+                attack.add(i-combo);
                 if (right == -1) {
                     right = i;
                     left = i;
@@ -294,6 +360,9 @@ public abstract class Board extends JFrame {
             seq = 0;
         }
         score.addLineClearScore(combo, stage, seq);
+        if (combo>1){
+            attackLines(attack);
+        }
     }
 
     protected void moveDown() {
@@ -397,6 +466,27 @@ public abstract class Board extends JFrame {
         }
     }
 
+    protected void drawStackBoard() {
+        StyledDocument doc = stackPanel.getStyledDocument();
+        stackPanel.setText("");
+        try {
+            for (Block[] blocks : stackBoard) {
+
+                for (Block block : blocks) {
+                    if (block != null) {
+                        StyleConstants.setForeground(blockStyle, block.getColor());
+                        doc.insertString(doc.getLength(), block.getCharacter(), blockStyle);
+                    } else {
+                        doc.insertString(doc.getLength(), ConfigBlock.NON_BLOCK_CHAR, defaultStyle);
+                    }
+                }
+                doc.insertString(doc.getLength(), "\n", defaultStyle);
+
+            }
+        } catch (Exception ignored) {
+        }
+    }
+
     // draw next block
     protected void drawNextBlock() {
         StyledDocument doc = nextPanel.getStyledDocument();
@@ -423,90 +513,23 @@ public abstract class Board extends JFrame {
         this.board = new Block[20][10];
     }
 
-    public void gameOver(int x, int y) {
+    public void gameOver() {
         System.out.println("Game over!");
         timer.stop();
-        this.dispose();
-        new GameOver(x, y, score.getScore());
+
+        firePropertyChange("gameDone", this.gameDone, true);
+        this.gameDone = true;
+
+        //        new GameOver(x, y);
     }
 
-    protected void pause() {
-        System.out.println("pause");
-        System.out.println(isPause);
-        if (!isPause) {
-            timer.stop();
-            pv = new PauseView(score.getScore(), this);
-            pv.setScore(score.getScore());
-            pv.setLocationRelativeTo(this);
-            int w = this.getWidth();
-            int h = this.getHeight();
-            int x = this.getX();
-            int y = this.getY();
-            pv.setLocation(x + w/4, y + h/4);
-            pv.setSize(w/2, h/2);
-            pv.setVisible(true);
-        }
-        setIsPause();
-    }
 
-    public void setIsPause() {
-        this.isPause = !this.isPause;
-    }
 
     public void startTimer() {
         timer.start();
     }
 
-    public class PlayerKeyListener extends Keyboard {
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int keyCode = e.getKeyCode();
-
-            if (keyCode == Keyboard.DOWN) {
-                moveDown();
-                drawBoard();
-            } else if (keyCode == Keyboard.RIGHT) {
-                moveRight();
-                drawBoard();
-            } else if (keyCode == Keyboard.LEFT) {
-                moveLeft();
-                drawBoard();
-            } else if (keyCode == Keyboard.UP) {
-                moveRotate();
-                drawBoard();
-            } else if (keyCode == Keyboard.SPACE) {
-                moveFall();
-                drawBoard();
-            } else if (keyCode == Keyboard.ESC) {
-                pause();
-            }
-        }
-    }
-
-
-    public class PlayerMouseListener implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent e) {
-            focusFrame();
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-        }
+    public void stopTimer() {
+        timer.stop();
     }
 }

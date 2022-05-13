@@ -195,9 +195,15 @@ gradlew
 gradlew.bat
 gradle/wrapper/
 
-config/*
+config
 config/settings.json
 config/item_score.json
 config/normal_score.json
 
+configs
+configs/settings.json
+configs/item_score.json
+configs/normal_score.json
+
+*.json
 
