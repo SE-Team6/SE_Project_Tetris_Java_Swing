@@ -1,26 +1,21 @@
 package seoultech.se.tetris.component.board.match;
 
-import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.MatchPauseView;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
 public class MatchBoardParent extends JFrame {
-    protected MatchBoardChild left;
-    protected MatchBoardChild right;
+    protected MatchInnerBoard left;
+    protected MatchInnerBoard right;
     protected boolean isPause = false;
     protected MatchPauseView pv;
     private final Set<Integer> pressedKeys = new HashSet<>();
@@ -29,66 +24,7 @@ public class MatchBoardParent extends JFrame {
 
 
     public MatchBoardParent() {
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        leftScore = new Score();
-        rightScore = new Score();
-        left = new MatchBoardChild(leftScore);
-        right = new MatchBoardChild(rightScore);
-        left.addPropertyChangeListener("gameDone", new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
-            }
-        });
-        left.addPropertyChangeListener("attProp", new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                ArrayList<Block[]> stack = (ArrayList<Block[]>) evt.getNewValue();
-                right.attackedLines(stack);
-            }
-        });
-        right.addPropertyChangeListener("gameDone", new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
-            }
-        });
-        right.addPropertyChangeListener("attProp", new PropertyChangeListener() {
-
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                ArrayList<Block[]> stack = (ArrayList<Block[]>) evt.getNewValue();
-                left.attackedLines(stack);
-            }
-        });
-
-        this.addMouseListener(new PlayerMouseListener());
-        left.addMouseListener(new PlayerMouseListener());
-        right.addMouseListener(new PlayerMouseListener());
-
-
-
-//        this.setLayout(new GridLayout(1, 2));
-        JPanel out = new JPanel();
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        out.setLayout(new GridLayout(1, 2));
-        out.add(left);
-        out.add(right);
-        this.add(out);
-//        this.setLayout(new GridBagLayout());
-//        this.add(left, c);
-//        this.add(right, c);
-        this.addKeyListener(new PlayerLeftKeyListener());
-        this.setFocusable(true);
-
-        setSize(700, 320);
-        setVisible(true);
-        setLocationRelativeTo(null);
     }
 
     protected void pause() {

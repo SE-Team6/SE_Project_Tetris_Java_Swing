@@ -1,6 +1,7 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.board.match.MatchBoardParent;
+import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
+import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -21,9 +22,9 @@ public class GameMode extends JFrame {
     private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
     private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
     private ImageIcon itemModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
-    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage, itemModeBtnImage};
-    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage, itemModeBtnEnterImage};
-    private JButton[] menuButton = new JButton[3];
+    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage, itemModeBtnImage, itemModeBtnImage};
+    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage, itemModeBtnEnterImage, itemModeBtnEnterImage};
+    private JButton[] menuButton = new JButton[4];
 
     public GameMode(){}
 
@@ -42,7 +43,7 @@ public class GameMode extends JFrame {
             int keyValue = e.getKeyCode();
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
-                if (positionPoint == 3) positionPoint = 0;
+                if (positionPoint == 4) positionPoint = 0;
                 setBtnImage();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
@@ -54,14 +55,16 @@ public class GameMode extends JFrame {
                     gameModeNum2 =0;//노말
                     bs.setVisible(false);
                     new GameDifficulty(bs.getX(), bs.getY());
-                }
-                else if(positionPoint==1) {
+                } else if(positionPoint==1) {
                     gameModeNum2 = 1;//아이템
                     bs.setVisible(false);
                     new GameDifficulty(bs.getX(), bs.getY());
+                } else if(positionPoint==2) {
+                    bs.setVisible(false);
+                    new MatchNormalBoardParent();
                 } else {
                     bs.setVisible(false);
-                    new MatchBoardParent();
+                    new MatchItemBoardParent();
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
@@ -71,14 +74,14 @@ public class GameMode extends JFrame {
         }
     }
     public void setBtnImage(){
-        for (int i=0;i<2;i++){
+        for (int i=0;i<4;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
     public void setButton() { // 일반,아이템
         int addY = 0;
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
             menuButton[i].setBounds(buttonX, buttonY + addY, buttonSizeX, buttonSizeY);
             menuButton[i].setBorderPainted(false);
@@ -106,9 +109,18 @@ public class GameMode extends JFrame {
         menuButton[2].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                new MatchBoardParent();
+                bs.setVisible(false);
+                new MatchNormalBoardParent();
             }
         });
+        menuButton[3].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                bs.setVisible(false);
+                new MatchItemBoardParent();
+            }
+        });
+
         setBtnImage();
     }
 

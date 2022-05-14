@@ -365,7 +365,7 @@ public class MatchInnerBoard extends JPanel {
         }
     }
 
-    protected void moveDown() {
+    public void moveDown() {
         eraseCurr();
         score.addUnitScore(1);
         if (!isBottomTouched()) {
@@ -380,7 +380,7 @@ public class MatchInnerBoard extends JPanel {
         placeBlock();
     }
 
-    protected void moveFall() {
+    public void moveFall() {
         previousFallX = x;
         previousFallY = y;
         eraseCurr();
@@ -401,7 +401,7 @@ public class MatchInnerBoard extends JPanel {
         placeBlock();
     }
 
-    protected void moveRight() {
+    public void moveRight() {
         eraseCurr();
         if (x + 1 < Board.WIDTH - focus.getRight()) x++;
         if (isOverlap()) {
@@ -411,7 +411,7 @@ public class MatchInnerBoard extends JPanel {
     }
 
 
-    protected void moveLeft() {
+    public void moveLeft() {
         eraseCurr();
         if (x + focus.getLeft()> 0){
             x--;
@@ -422,7 +422,7 @@ public class MatchInnerBoard extends JPanel {
         placeBlock();
     }
 
-    protected void moveRotate() {
+    public void moveRotate() {
         eraseCurr();
         focus.rotate();
         if (x +focus.getLeft() < 0 || x >= Board.WIDTH - focus.getRight()  || y + focus.getBottom() >= Board.HEIGHT || isOverlap()) {
@@ -431,7 +431,7 @@ public class MatchInnerBoard extends JPanel {
         placeBlock();
     }
 
-    protected void drawBoard() {
+    public void drawBoard() {
         if (isAction) {
             System.out.println("drawBoard stop");
             return;

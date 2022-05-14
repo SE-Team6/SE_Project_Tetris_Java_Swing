@@ -1,8 +1,9 @@
-package seoultech.se.tetris.component.board.match;
+package seoultech.se.tetris.component.board.match.normal;
 
 import seoultech.se.tetris.blocks.Block;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.board.Board;
+import seoultech.se.tetris.component.board.match.MatchInnerBoard;
 import seoultech.se.tetris.config.ConfigBlock;
 
 import javax.swing.*;
