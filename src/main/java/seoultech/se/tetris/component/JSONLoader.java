@@ -20,9 +20,15 @@ public class JSONLoader {
     public static String makeSettingsFileToPath(String path) {
         String s = null;
         try{
+            byte[] buffer = new byte[179];
             InputStream stream = JSONLoader.class.getResourceAsStream(path);
-            byte[] bytes = stream.readAllBytes();
-            s = new String(bytes, StandardCharsets.UTF_8);
+            ByteArrayOutputStream byteArrayOutputStream
+                    = new ByteArrayOutputStream();
+            int temp;
+            while((temp = stream.read(buffer)) != -1){
+                byteArrayOutputStream.write(buffer, 0, temp);
+            }
+            s = new String(buffer, StandardCharsets.UTF_8);
         }catch(Exception e) {
             e.printStackTrace();
         }
