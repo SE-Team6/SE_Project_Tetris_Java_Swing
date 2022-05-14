@@ -13,6 +13,7 @@ import java.awt.*;
 
 public class MatchBoardChild extends MatchInnerBoard {
     public MatchBoardChild(Score score) {
+        GridBagConstraints outLayout = new GridBagConstraints();
         GridBagConstraints layout = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
         pane = new JTextPane();
@@ -55,11 +56,11 @@ public class MatchBoardChild extends MatchInnerBoard {
                 BorderFactory.createLineBorder(Color.DARK_GRAY, 5));
         rightPanel.setBorder(rightBorder);
 
-        layout.fill = GridBagConstraints.BOTH;
-        layout.weightx = 0.2;
-        this.add(pane, layout);
-        layout.weightx = 0.1;
-        this.add(rightPanel, layout);
+        outLayout.fill = GridBagConstraints.BOTH;
+        outLayout.weightx = 0.3;
+        this.add(pane, outLayout);
+        outLayout.weightx = 0.1;
+        this.add(rightPanel, outLayout);
 
         //Set timer for block drops.
         timer = new Timer(Math.round(initInterval), e -> {

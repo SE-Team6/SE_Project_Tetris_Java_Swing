@@ -72,13 +72,21 @@ public class MatchBoardParent extends JFrame {
 
 
 
-        this.setLayout(new GridLayout(1, 2));
-        this.getContentPane().add(left);
-        this.getContentPane().add(right);
+//        this.setLayout(new GridLayout(1, 2));
+        JPanel out = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        out.setLayout(new GridLayout(1, 2));
+        out.add(left);
+        out.add(right);
+        this.add(out);
+//        this.setLayout(new GridBagLayout());
+//        this.add(left, c);
+//        this.add(right, c);
         this.addKeyListener(new PlayerLeftKeyListener());
         this.setFocusable(true);
 
-        setSize(1000, 600);
+        setSize(700, 320);
         setVisible(true);
         setLocationRelativeTo(null);
     }
