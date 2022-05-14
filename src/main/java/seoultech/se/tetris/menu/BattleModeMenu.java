@@ -1,35 +1,37 @@
 package seoultech.se.tetris.menu;
 
-import seoultech.se.tetris.component.ScoreBoard;
-
 import javax.swing.*;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static seoultech.se.tetris.menu.OnePlayModeMenu.gameModeNum2;
 import static seoultech.se.tetris.menu.SetDefault.*;
+import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
+import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class SelectScoreMode extends JFrame {
-
-    public static int gameModeNum; //0:노말 1:아이템
+public class BattleModeMenu extends JFrame {
 
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
     private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
+    private ImageIcon timerModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/TimerMode_B.jpg"));
+
     private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
     private ImageIcon itemModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
-    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
-    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
-    private JButton[] menuButton = new JButton[2];
+    private ImageIcon timerModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/TimerMode_E.jpg"));
 
-    private int positionPoint;
+    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage,timerModeBtnImage};
+    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage,timerModeBtnEnterImage};
+    private JButton[] menuButton = new JButton[3];
 
-    public SelectScoreMode(){}
+    public BattleModeMenu(){}
 
-    public SelectScoreMode(int x, int y) {
-        bs = new SetDefault(x,y);
+    public BattleModeMenu(int x, int y) {
+        bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -43,39 +45,44 @@ public class SelectScoreMode extends JFrame {
             int keyValue = e.getKeyCode();
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
-                if (positionPoint == 2) positionPoint = 0;
+                if (positionPoint == 3) positionPoint = 0;
                 setBtnImage();
             } else if (keyValue == key.UP) {
                 positionPoint -= 1;
-                if (positionPoint == -1) positionPoint = 1;
+                if (positionPoint == -1) positionPoint = 2;
                 setBtnImage();
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    gameModeNum =0;
-                    new ScoreBoard(-1);
+                    bs.setVisible(false);
+                    // 노말 배틀 모드
                 }
                 else if(positionPoint==1){
-                    gameModeNum =1;
-                    new ScoreBoard(-1);
+                    bs.setVisible(false);
+                    // 아이템 배틀 모드
+                }
+                else if(positionPoint==2){
+                    bs.setVisible(false);
+                    // 타이머 배틀 모드
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
-                backMenu();
+                bs.setVisible(false);
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         }
     }
     public void setBtnImage(){
-        for (int i=0;i<2;i++){
+        for (int i=0;i<3;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() {
+    public void setButton() { // 일반,아이템
         int addY = 0;
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX, buttonY + addY, buttonSizeX, buttonSizeY);
+            menuButton[i].setBounds(buttonX, buttonY + addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -85,15 +92,22 @@ public class SelectScoreMode extends JFrame {
         menuButton[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                gameModeNum =0;
-                new ScoreBoard(-1);
+                bs.setVisible(false);
+                //노말 배틀 모드
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                gameModeNum =1;
-                new ScoreBoard(-1);
+                bs.setVisible(false);
+                // 아이템 배틀 모드
+            }
+        });
+        menuButton[2].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                bs.setVisible(false);
+                // 타이머 배틀 모드
             }
         });
         setBtnImage();
@@ -103,12 +117,9 @@ public class SelectScoreMode extends JFrame {
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                backMenu();
+                bs.setVisible(false);
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         });
-    }
-    public void backMenu(){
-        bs.setVisible(false);
-        new StartMenu(bs.getX(), bs.getY());
     }
 }

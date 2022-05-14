@@ -14,7 +14,7 @@ import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class SetDefault extends JFrame {
 
-    public static int buttonSizeX = 145, buttonSizeY = 45;
+    public static int buttonWidth = 145, buttonHeight = 45;
     public static int buttonX, buttonY = 130;
     public static int screenWidth, screenHeight;
     public static int menuBarHeight = 20;
@@ -61,7 +61,7 @@ public class SetDefault extends JFrame {
         ConfigBlock.setFontSize(map.get("font_size"));
     }
     public void basicSet(int x, int y) {
-        buttonX = (screenWidth - buttonSizeX) / 2;
+        buttonX = (screenWidth - buttonWidth) / 2;
         gameTitleX = (screenWidth - 300) / 2;
         setUndecorated(true);
         setSize(screenWidth, screenHeight);

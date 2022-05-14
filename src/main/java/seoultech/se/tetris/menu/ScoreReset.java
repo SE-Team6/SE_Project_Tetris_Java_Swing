@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static seoultech.se.tetris.component.JSONWriter.resetScore;
-import static seoultech.se.tetris.menu.ScoreResetMode.resetModeNum;
+import static seoultech.se.tetris.menu.ScoreResetMenu.resetModeNum;
 
 public class ScoreReset extends JFrame {
 

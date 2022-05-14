@@ -11,21 +11,23 @@ import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class SetKeyMenu extends JFrame {
+public class keySetMenu extends JFrame {
+
+    public static int gameModeNum2; //0:노말 1:아이템
 
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon onePlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_B.jpg"));
-    private ImageIcon twoPlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_B.jpg"));
-    private ImageIcon onePlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_E.jpg"));
-    private ImageIcon twoPlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_E.jpg"));
-    private ImageIcon[] BasicImage = {onePlayBtnImage, twoPlayBtnImage};
-    private ImageIcon[] EnterImage = {onePlayBtnEnterImage, twoPlayBtnEnterImage};
+    private ImageIcon onePlaySetBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
+    private ImageIcon twoPlaySetBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
+    private ImageIcon onePlaySetBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
+    private ImageIcon twoPlaySetBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
+    private ImageIcon[] BasicImage = {onePlaySetBtnImage, twoPlaySetBtnImage};
+    private ImageIcon[] EnterImage = {onePlaySetBtnEnterImage, twoPlaySetBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public SetKeyMenu(){}
+    public keySetMenu(){}
 
-    public SetKeyMenu(int x, int y) {
+    public keySetMenu(int x, int y) {
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
@@ -49,17 +51,19 @@ public class SetKeyMenu extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
+                    gameModeNum2 =0;//노말
                     bs.setVisible(false);
-                    new SetKey1P(bs.getX(), bs.getY());
+                    new GameDifficultyMenu(bs.getX(), bs.getY());
                 }
                 else if(positionPoint==1){
+                    gameModeNum2 =1;//아이템
                     bs.setVisible(false);
-                    new SetKey2P(bs.getX(), bs.getY());
+                    new GameDifficultyMenu(bs.getX(), bs.getY());
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         }
     }
@@ -69,7 +73,7 @@ public class SetKeyMenu extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() { //
+    public void setButton() { // 일반,아이템
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -83,6 +87,7 @@ public class SetKeyMenu extends JFrame {
         menuButton[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                gameModeNum2 =0;//노말
                 bs.setVisible(false);
                 new GameDifficultyMenu(bs.getX(), bs.getY());
             }
@@ -90,6 +95,7 @@ public class SetKeyMenu extends JFrame {
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                gameModeNum2 =1;//아이템
                 bs.setVisible(false);
                 new GameDifficultyMenu(bs.getX(), bs.getY());
             }
@@ -103,7 +109,7 @@ public class SetKeyMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         });
     }

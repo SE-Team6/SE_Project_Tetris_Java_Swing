@@ -190,7 +190,7 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver(bs.getX(),bs.getY(), score);
+                    GameOver gm =new GameOver(bs.getX(),bs.getY());
                     gm.updateButton.setVisible(false);
                     ScoreBoard sb =new ScoreBoard(higLightNum);
                 }

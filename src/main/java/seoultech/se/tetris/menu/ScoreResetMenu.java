@@ -1,32 +1,34 @@
 package seoultech.se.tetris.menu;
 
 import javax.swing.*;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
-import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class SetKeyMenu extends JFrame {
+public class ScoreResetMenu extends JFrame {
 
-    private SetDefault bs;
+    public static int resetModeNum; //0:노말 1:아이템
+
+    private SetDefault bs = new SetDefault();
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon onePlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_B.jpg"));
-    private ImageIcon twoPlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_B.jpg"));
-    private ImageIcon onePlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_E.jpg"));
-    private ImageIcon twoPlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_E.jpg"));
-    private ImageIcon[] BasicImage = {onePlayBtnImage, twoPlayBtnImage};
-    private ImageIcon[] EnterImage = {onePlayBtnEnterImage, twoPlayBtnEnterImage};
+    private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
+    private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
+    private ImageIcon normalModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
+    private ImageIcon itemModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
+    private ImageIcon[] BasicImage = {normalModeBtnImage, itemModeBtnImage};
+    private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public SetKeyMenu(){}
+    private int positionPoint;
 
-    public SetKeyMenu(int x, int y) {
-        bs = new SetDefault(x, y);
+    public ScoreResetMenu(){
+
+    }
+    public ScoreResetMenu(int x , int y) {
+        bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -49,17 +51,16 @@ public class SetKeyMenu extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    bs.setVisible(false);
-                    new SetKey1P(bs.getX(), bs.getY());
+                    resetModeNum =0;
+                    new ScoreReset();
                 }
                 else if(positionPoint==1){
-                    bs.setVisible(false);
-                    new SetKey2P(bs.getX(), bs.getY());
+                    resetModeNum =1;
+                    new ScoreReset();
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
-                bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                backMenu();
             }
         }
     }
@@ -69,7 +70,7 @@ public class SetKeyMenu extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() { //
+    public void setButton() {
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -83,18 +84,17 @@ public class SetKeyMenu extends JFrame {
         menuButton[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                resetModeNum =0;
+                new ScoreReset();
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                resetModeNum =1;
+                new ScoreReset();
             }
         });
-
         setBtnImage();
     }
 
@@ -102,9 +102,12 @@ public class SetKeyMenu extends JFrame {
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                backMenu();
             }
         });
+    }
+    public void backMenu(){
+        bs.setVisible(false);
+        new SettingMenu(bs.getX(),bs.getY());
     }
 }

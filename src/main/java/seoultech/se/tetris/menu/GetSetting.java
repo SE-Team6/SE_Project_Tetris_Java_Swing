@@ -6,8 +6,8 @@ import java.util.HashMap;
 import static seoultech.se.tetris.component.JSONLoader.*;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetKeyMenu.labelX;
-import static seoultech.se.tetris.menu.SetKeyMenu.textFieldX;
+import static seoultech.se.tetris.menu.SetKey1P.labelX;
+import static seoultech.se.tetris.menu.SetKey1P.textFieldX;
 import static seoultech.se.tetris.main.GameOver.*;
 
 public class GetSetting {
@@ -16,7 +16,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
     public void getSecondResolution(){
@@ -24,7 +24,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
     public void getThirdResolution(){
@@ -32,7 +32,7 @@ public class GetSetting {
         screenWidth = map.get("width");
         screenHeight = map.get("height");
         menuBarExitBtnWidth= screenWidth -20;
-        buttonX =(screenWidth -buttonSizeX)/2;
+        buttonX =(screenWidth - buttonWidth)/2;
         gameTitleX=(screenWidth -300)/2;
     }
 

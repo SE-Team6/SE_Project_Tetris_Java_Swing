@@ -46,7 +46,7 @@ public class SetResolutionMenu extends JFrame {
         int addY=0;
         for (int i=0;i<3;i++){
             menuButton[i]=new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX,buttonY+addY,buttonSizeX,buttonSizeY);
+            menuButton[i].setBounds(buttonX,buttonY+addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -106,9 +106,9 @@ public class SetResolutionMenu extends JFrame {
         bs.menuBar.setBounds(0, 0, screenWidth, menuBarHeight);
         bs.menuBarExitBtn.setBounds(screenWidth -20,menuBarExitBtnHeight,20,20);
         bs.gameTitle.setBounds(gameTitleX, gameTitleY,300,50);
-        menuButton[0].setBounds(buttonX,buttonY,buttonSizeX,buttonSizeY);
-        menuButton[1].setBounds(buttonX,buttonY+70,buttonSizeX,buttonSizeY);
-        menuButton[2].setBounds(buttonX,buttonY+140,buttonSizeX,buttonSizeY);
+        menuButton[0].setBounds(buttonX,buttonY, buttonWidth, buttonHeight);
+        menuButton[1].setBounds(buttonX,buttonY+70, buttonWidth, buttonHeight);
+        menuButton[2].setBounds(buttonX,buttonY+140, buttonWidth, buttonHeight);
     }
     public void backToMenuBtnAction(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {

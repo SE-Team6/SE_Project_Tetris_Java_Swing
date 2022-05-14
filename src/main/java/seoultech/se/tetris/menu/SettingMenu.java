@@ -9,17 +9,17 @@ import static seoultech.se.tetris.menu.SetDefault.*;
 public class SettingMenu extends JFrame {
 
     //설정 화면 이미지
-    private ImageIcon screenSizeImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/해상도_B.jpg"));
-    private ImageIcon keySettingImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/조작설정_B.jpg"));
-    private ImageIcon scoreResetImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/기록초기화_B.jpg"));
-    private ImageIcon colorBlindnessImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/색맹모드_B.jpg"));
-    private ImageIcon allResetImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/설정초기화_B.jpg"));
+    private ImageIcon screenSizeImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/Resolution_B.jpg"));
+    private ImageIcon keySettingImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/KeySet_B.jpg"));
+    private ImageIcon scoreResetImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/ScoreReset_B.jpg"));
+    private ImageIcon colorBlindnessImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/ColorBlindness_B.jpg"));
+    private ImageIcon allResetImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/SettingReset_B.jpg"));
 
-    private ImageIcon screenSizeEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/해상도_E.jpg"));
-    private ImageIcon keySettingEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/조작설정_E.jpg"));
-    private ImageIcon scoreResetEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/기록초기화_E.jpg"));
-    private ImageIcon colorBlindnessEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/색맹모드_E.jpg"));
-    private ImageIcon allResetEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/설정초기화_E.jpg"));
+    private ImageIcon screenSizeEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/Resolution_E.jpg"));
+    private ImageIcon keySettingEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/KeySet_E.jpg"));
+    private ImageIcon scoreResetEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/ScoreReset_E.jpg"));
+    private ImageIcon colorBlindnessEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/ColorBlindness_E.jpg"));
+    private ImageIcon allResetEImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/main_btn/SettingReset_E.jpg"));
 
     private ImageIcon[] BasicImage = {screenSizeImage,keySettingImage,scoreResetImage,colorBlindnessImage,allResetImage};
     private ImageIcon[] EnterImage = {screenSizeEImage,keySettingEImage,scoreResetEImage,colorBlindnessEImage,allResetEImage};
@@ -66,7 +66,6 @@ public class SettingMenu extends JFrame {
         }
         }
     public void setBtnImage(){
-
         for(int i=0;i<5;i++){
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
@@ -76,7 +75,7 @@ public class SettingMenu extends JFrame {
         int addY=0;
         for (int i=0;i<5;i++){
             menuButton[i]=new JButton(BasicImage[i]);
-            menuButton[i].setBounds(buttonX,buttonY+addY,buttonSizeX,buttonSizeY);
+            menuButton[i].setBounds(buttonX,buttonY+addY, buttonWidth, buttonHeight);
             menuButton[i].setBorderPainted(false);
             menuButton[i].setContentAreaFilled(false);
             menuButton[i].setFocusPainted(false);
@@ -105,7 +104,7 @@ public class SettingMenu extends JFrame {
                 break;
             case 2://스코어 보드 초기화
                 bs.setVisible(false);
-                new ScoreResetMode(bs.getX(), bs.getY());
+                new ScoreResetMenu(bs.getX(), bs.getY());
                 break;
             case 3://색맹 모드.
                 new ColorMode();
