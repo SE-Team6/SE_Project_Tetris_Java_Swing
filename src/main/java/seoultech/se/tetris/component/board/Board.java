@@ -64,7 +64,8 @@ public abstract class Board extends JFrame {
 
     protected boolean isErased = false;
     protected static int diff = 0;
-    protected static int stageUpStandard = 5;
+    // 몇 줄을 지우면 다음 아이템이 나올지?
+    protected static int stageUpStandard = 10;
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
