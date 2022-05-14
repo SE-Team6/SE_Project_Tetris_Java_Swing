@@ -26,9 +26,7 @@ public class Tetris {
 				e.printStackTrace();
 			}
 		}
-
 	}
-
 	public static void main(String[] args) {
 		initialization();
 		new Intro();

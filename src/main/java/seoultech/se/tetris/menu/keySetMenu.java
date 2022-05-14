@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
-import static seoultech.se.tetris.menu.SetKeyMenu.positionPoint;
+import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
 public class keySetMenu extends JFrame {
 
@@ -53,12 +53,12 @@ public class keySetMenu extends JFrame {
                 if (positionPoint==0){
                     gameModeNum2 =0;//노말
                     bs.setVisible(false);
-                    new GameDifficulty(bs.getX(), bs.getY());
+                    new GameDifficultyMenu(bs.getX(), bs.getY());
                 }
                 else if(positionPoint==1){
                     gameModeNum2 =1;//아이템
                     bs.setVisible(false);
-                    new GameDifficulty(bs.getX(), bs.getY());
+                    new GameDifficultyMenu(bs.getX(), bs.getY());
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
@@ -89,7 +89,7 @@ public class keySetMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 gameModeNum2 =0;//노말
                 bs.setVisible(false);
-                new GameDifficulty(bs.getX(), bs.getY());
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
@@ -97,7 +97,7 @@ public class keySetMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 gameModeNum2 =1;//아이템
                 bs.setVisible(false);
-                new GameDifficulty(bs.getX(), bs.getY());
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         });
 

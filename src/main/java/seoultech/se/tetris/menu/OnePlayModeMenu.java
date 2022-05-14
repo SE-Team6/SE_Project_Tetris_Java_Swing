@@ -1,18 +1,26 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.component.board.Board;
+import seoultech.se.tetris.component.board.ItemBoard;
+import seoultech.se.tetris.component.board.NormalBoard;
+
 import javax.swing.*;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.SetDefault.*;
+import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
+import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class ScoreResetMode extends JFrame {
+public class OnePlayModeMenu extends JFrame {
 
-    public static int resetModeNum; //0:노말 1:아이템
+    public static int gameModeNum2; //0:노말 1:아이템
 
-    private SetDefault bs = new SetDefault();
+    private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon normalModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
     private ImageIcon itemModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
@@ -22,13 +30,10 @@ public class ScoreResetMode extends JFrame {
     private ImageIcon[] EnterImage = {normalModeBtnEnterImage, itemModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    private int positionPoint;
+    public OnePlayModeMenu(){}
 
-    public ScoreResetMode(){
-
-    }
-    public ScoreResetMode(int x ,int y) {
-        bs = new SetDefault(x,y);
+    public OnePlayModeMenu(int x, int y) {
+        bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
         setButton();
@@ -51,18 +56,39 @@ public class ScoreResetMode extends JFrame {
             }
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
-                    resetModeNum =0;
-                    new ScoreReset();
+                    gameModeNum2 =0;//노말
+                    bs.setVisible(false);
+                    normalMode(gameDifficultyNum);
                 }
                 else if(positionPoint==1){
-                    resetModeNum =1;
-                    new ScoreReset();
+                    gameModeNum2 =1;//아이템
+                    bs.setVisible(false);
+                    itemMode(gameDifficultyNum);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
-                backMenu();
+                bs.setVisible(false);
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         }
+    }
+    public void itemMode(int difficulty){
+        ItemBoard.setDifficulty(difficulty);
+        Board ib = new ItemBoard();
+        ib.setSize(screenWidth, screenHeight);
+        ib.setLocation(bs.getX(), bs.getY());
+//        ib.setLocationRelativeTo(null);
+        ib.setVisible(true);
+        bs.setVisible(false);
+    }
+    public void normalMode(int difficulty){
+        NormalBoard.setDifficulty(difficulty);
+        Board nb =new NormalBoard();
+        nb.setSize(screenWidth, screenHeight);
+        nb.setLocation(bs.getX(), bs.getY());
+//        nb.setLocationRelativeTo(null);
+        nb.setVisible(true);
+        bs.setVisible(false);
     }
     public void setBtnImage(){
         for (int i=0;i<2;i++){
@@ -70,7 +96,7 @@ public class ScoreResetMode extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() {
+    public void setButton() { // 일반,아이템
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -84,17 +110,20 @@ public class ScoreResetMode extends JFrame {
         menuButton[0].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                resetModeNum =0;
-                new ScoreReset();
+                gameModeNum2 =0;//노말
+                bs.setVisible(false);
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                resetModeNum =1;
-                new ScoreReset();
+                gameModeNum2 =1;//아이템
+                bs.setVisible(false);
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         });
+
         setBtnImage();
     }
 
@@ -102,12 +131,9 @@ public class ScoreResetMode extends JFrame {
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                backMenu();
+                bs.setVisible(false);
+                new PlayModeMenu(bs.getX(), bs.getY());
             }
         });
-    }
-    public void backMenu(){
-        bs.setVisible(false);
-        new SettingMenu(bs.getX(),bs.getY());
     }
 }

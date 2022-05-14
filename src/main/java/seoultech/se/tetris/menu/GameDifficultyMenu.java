@@ -11,9 +11,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.GameModeMenu.gameModeNum2;
 
-public class GameDifficulty {
+public class GameDifficultyMenu {
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
     private ImageIcon easyModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/EasyMode_B.jpeg"));
@@ -25,13 +24,13 @@ public class GameDifficulty {
     private ImageIcon[] BasicImage = {easyModeBtnImage,normalModeBtnImage ,hardModeBtnImage};
     private ImageIcon[] EnterImage = {easyModeBtnEnterImage, normalModeBtnEnterImage,hardModeBtnEnterImage};
     private JButton[] menuButton = new JButton[3];
-    public static int gameDifficultyNum=1; //0:이지,1:노말,2:하드
+    public static int gameDifficultyNum; //0:이지,1:노말,2:하드
 
     private int positionPoint;
 
-    public GameDifficulty(){}
+    public GameDifficultyMenu(){}
 
-    public GameDifficulty(int x, int y){
+    public GameDifficultyMenu(int x, int y){
         bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);
@@ -60,13 +59,23 @@ public class GameDifficulty {
                     positionPoint == 2 : hard
                  */
                 gameDifficultyNum = positionPoint;
-                if(gameModeNum2 == 0) normalMode(positionPoint);
-                else if(gameModeNum2 == 1) itemMode(positionPoint);
+                bs.setVisible(false);
+                new PlayModeMenu(bs.getX(), bs.getY());
+//                if(gameModeNum2 == 0) normalMode(positionPoint);
+//                else if(gameModeNum2 == 1) itemMode(positionPoint);
 
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
+//                if (playModeNum == 0) {
+//                bs.setVisible(false);
+//                new GameModeMenu(bs.getX(), bs.getY());
+//                }
+//                else if (playModeNum == 1) {
+//                    bs.setVisible(false);
+//                    new BattleModeMenu(bs.getX(), bs.getY());
+//                }
                 bs.setVisible(false);
-                new GameModeMenu(bs.getX(), bs.getY());
+                new StartMenu(bs.getX(),bs.getY());
             }
         }
     }
@@ -91,52 +100,45 @@ public class GameDifficulty {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=0;
-                if(gameModeNum2 == 0) normalMode(positionPoint);
-                else if(gameModeNum2 == 1) itemMode(positionPoint);
+                new PlayModeMenu(bs.getX(), bs.getY());
+//                if(gameModeNum2 == 0) normalMode(positionPoint);
+//                else if(gameModeNum2 == 1) itemMode(positionPoint);
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=1;
-                if(gameModeNum2 == 0) normalMode(positionPoint);
-                else if(gameModeNum2 == 1) itemMode(positionPoint);
+                new PlayModeMenu(bs.getX(), bs.getY());
+//                if(gameModeNum2 == 0) normalMode(positionPoint);
+//                else if(gameModeNum2 == 1) itemMode(positionPoint);
             }
         });
         menuButton[2].addMouseListener((new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=2;
-                if(gameModeNum2 == 0) normalMode(positionPoint);
-                else if(gameModeNum2 == 1) itemMode(positionPoint);
+                new PlayModeMenu(bs.getX(), bs.getY());
+//                if(gameModeNum2 == 0) normalMode(positionPoint);
+//                else if(gameModeNum2 == 1) itemMode(positionPoint);
             }
         }));
         setBtnImage();
-    }
-    public void itemMode(int difficulty){
-        ItemBoard.setDifficulty(difficulty);
-        Board ib = new ItemBoard();
-        ib.setSize(screenWidth, screenHeight);
-        ib.setLocation(bs.getX(), bs.getY());
-//        ib.setLocationRelativeTo(null);
-        ib.setVisible(true);
-        bs.setVisible(false);
-    }
-    public void normalMode(int difficulty){
-        NormalBoard.setDifficulty(difficulty);
-        Board nb =new NormalBoard();
-        nb.setSize(screenWidth, screenHeight);
-        nb.setLocation(bs.getX(), bs.getY());
-//        nb.setLocationRelativeTo(null);
-        nb.setVisible(true);
-        bs.setVisible(false);
     }
     public void backToMenu(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+//                if (playModeNum == 0) {
+//                    bs.setVisible(false);
+//                    new GameModeMenu(bs.getX(), bs.getY());
+//                }
+//                else if (playModeNum == 1) {
+//                    bs.setVisible(false);
+//                    new BattleModeMenu(bs.getX(), bs.getY());
+//                }
                 bs.setVisible(false);
-                new GameModeMenu(bs.getX(),bs.getY());
+                new StartMenu(bs.getX(),bs.getY());
             }
         });
     }

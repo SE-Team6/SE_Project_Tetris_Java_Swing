@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
-import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
+import static seoultech.se.tetris.menu.SelectScoreMenu.gameModeNum;
 
 public class ScoreBoard extends JFrame {
     private Image backGround;

@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
 
-public class SelectScoreMode extends JFrame {
+public class SelectScoreMenu extends JFrame {
 
     public static int gameModeNum; //0:노말 1:아이템
 
@@ -26,9 +26,9 @@ public class SelectScoreMode extends JFrame {
 
     private int positionPoint;
 
-    public SelectScoreMode(){}
+    public SelectScoreMenu(){}
 
-    public SelectScoreMode(int x, int y) {
+    public SelectScoreMenu(int x, int y) {
         bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);

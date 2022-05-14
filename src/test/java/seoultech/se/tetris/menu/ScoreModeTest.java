@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ScoreModeTest {
     @Test
     public void menuKeyListenerTest() throws NoSuchFieldException, IllegalAccessException {
-        SelectScoreMode sms = new SelectScoreMode(0,0);
+        SelectScoreMenu sms = new SelectScoreMenu(0,0);
         KeyAdapter mkl = sms.new menuKeyListener();
         KeyEvent ke = new KeyEvent(sms, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
         ke.setKeyCode(Keyboard.DOWN);
         mkl.keyPressed(ke);
-        Field transfer = SelectScoreMode.class.getDeclaredField("positionPoint");
+        Field transfer = SelectScoreMenu.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
         sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);

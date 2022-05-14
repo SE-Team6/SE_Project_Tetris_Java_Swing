@@ -9,7 +9,7 @@ import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
-import static seoultech.se.tetris.menu.SetKeyMenu.positionPoint;
+import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
 public class PlayModeMenu extends JFrame {
 
@@ -17,14 +17,13 @@ public class PlayModeMenu extends JFrame {
 
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon onePlayModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_B.jpeg"));
-    private ImageIcon battleModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_B.jpeg"));
-    private ImageIcon onePlayModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/NormalMode_E.jpeg"));
-    private ImageIcon battleModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/ItemMode_E.jpeg"));
+    private ImageIcon onePlayModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/1PMode_B.jpg"));
+    private ImageIcon battleModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/2PMode_B.jpg"));
+    private ImageIcon onePlayModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/1PMode_E.jpg"));
+    private ImageIcon battleModeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/2PMode_E.jpg"));
     private ImageIcon[] BasicImage = {onePlayModeBtnImage, battleModeBtnImage};
     private ImageIcon[] EnterImage = {onePlayModeBtnEnterImage, battleModeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
-
     public PlayModeMenu(){}
 
     public PlayModeMenu(int x, int y) {
@@ -52,16 +51,18 @@ public class PlayModeMenu extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
                     bs.setVisible(false);
-                    new GameModeMenu(bs.getX(), bs.getY());
+                    playModeNum=0;
+                    new OnePlayModeMenu(bs.getX(), bs.getY());
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
+                    playModeNum=1;
                     new BattleModeMenu(bs.getX(), bs.getY());
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new StartMenu(bs.getX(), bs.getY());
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         }
     }
@@ -86,14 +87,16 @@ public class PlayModeMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameDifficulty(bs.getX(), bs.getY());
+                playModeNum=0;
+                new OnePlayModeMenu(bs.getX(), bs.getY());
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameDifficulty(bs.getX(), bs.getY());
+                playModeNum=1;
+                new BattleModeMenu(bs.getX(), bs.getY());
             }
         });
 
@@ -105,7 +108,7 @@ public class PlayModeMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new StartMenu(bs.getX(), bs.getY());
+                new GameDifficultyMenu(bs.getX(), bs.getY());
             }
         });
     }

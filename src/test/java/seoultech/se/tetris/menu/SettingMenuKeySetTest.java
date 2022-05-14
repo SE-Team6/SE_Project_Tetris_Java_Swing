@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class SettingMenuKeySetTest {
     @Test
     public void setKeyListenerTest() throws NoSuchFieldException, IllegalAccessException {
-        SetKeyMenu sms = new SetKeyMenu(0,0);
+        SetKey1P sms = new SetKey1P(0,0);
         KeyAdapter mkl = sms.new setKeyListener();
         KeyEvent ke = new KeyEvent(sms, KeyEvent.KEY_PRESSED, System.currentTimeMillis(), 0,  KeyEvent.VK_UP,'Z');
         ke.setKeyCode(Keyboard.DOWN);
         mkl.keyPressed(ke);
-        Field transfer = SetKeyMenu.class.getDeclaredField("positionPoint");
+        Field transfer = SetKey1P.class.getDeclaredField("positionPoint");
         transfer.setAccessible(true);
         sms.setBtnImage();
         int positionPoint = (int) transfer.get(sms);

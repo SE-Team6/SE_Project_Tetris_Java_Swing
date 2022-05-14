@@ -159,7 +159,7 @@ public class StartMenu extends JFrame {
     public void menuAction(int num){
         switch (num) {
             case 0: // 게임 시작
-                new PlayModeMenu(bs.getX(), bs.getY());
+                new GameDifficultyMenu(bs.getX(), bs.getY());
                 bs.setVisible(false);
                 break;
             case 1: // 게임 설정
@@ -168,7 +168,7 @@ public class StartMenu extends JFrame {
                 break;
             case 2: // 스코어 보드
                 bs.setVisible(false);
-                new SelectScoreMode(bs.getX(), bs.getY());
+                new SelectScoreMenu(bs.getX(), bs.getY());
                 break;
             case 3: // 게임종료
                 System.exit(0);

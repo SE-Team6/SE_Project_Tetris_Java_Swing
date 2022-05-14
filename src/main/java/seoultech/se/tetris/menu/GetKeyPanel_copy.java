@@ -13,7 +13,7 @@ import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.component.JSONWriter.writeKey;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class GetKeyPanel extends JFrame {
+public class GetKeyPanel_copy extends JFrame {
 
     private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/testBackground.jpg")).getImage();
     private JButton updateKey = new JButton("UPDATE");
@@ -27,9 +27,9 @@ public class GetKeyPanel extends JFrame {
     // 보이는 방향키 및 스페이스 바와 ESC=> {"SPACE":9251,"DOWN":8595,"LEFT":8592,"ESC":9099,"RIGHT":8594,"UP":8593} => 시각적으로 보일때 쓰일 코드 // 내가 입력하는 코드
     // 실제 아스키 코드 =>{"SPACE":32,"DOWN":40,"LEFT":37,"ESC":27,"RIGHT":39,"UP":38}=> 실제 json 파일에 입력되어야할 코드 // 내가 입력한 코드가 변해야할 코드
 
-    public GetKeyPanel(){}
+    public GetKeyPanel_copy(){}
 
-    public GetKeyPanel(int x, int y){
+    public GetKeyPanel_copy(int x, int y){
         prevX = x;
         prevY = y;
         setting();
@@ -81,7 +81,6 @@ public class GetKeyPanel extends JFrame {
     public void keyWrite(){//json에 바꾼 키 입력
         char tmp= keyGetValue[positionPoint].charAt(0);
         keyWriteValue[positionPoint]=(int)tmp;
-        System.out.println(keyGetValue[positionPoint]);
         keyWriteValue[positionPoint] =checkingValue(keyWriteValue[positionPoint]);
         writeKey(keyWriteValue);
     }
@@ -98,7 +97,7 @@ public class GetKeyPanel extends JFrame {
             keyWriteValue[i]= Integer.parseInt(var[i].toString());
             char b = (char)keyWriteValue[i];
             keyLoadCharValue[i]=b;
-            System.out.println(keyLoadCharValue[i]);
+//            System.out.println(keyLoadCharValue[i]);
         }
     }
     public void setting(){
@@ -158,8 +157,6 @@ public class GetKeyPanel extends JFrame {
         getKeyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(getKeyLabel);
     }
-
-
     public int checkingValue(int value){
         switch (value){//내가 시각적으로 원하는 방향키와 space 및 esc 키를 입력하면 실제 사용되는 아스키코드로 처리가 안되므로 그에대한 처리
             case 8592://left
@@ -183,31 +180,6 @@ public class GetKeyPanel extends JFrame {
             default:
         }
         return value;
-    }
-    public int checkingValue2(String value){
-        int num= Integer.parseInt(value);
-        switch (value){//내가 시각적으로 원하는 방향키와 space 및 esc 키를 입력하면 실제 사용되는 아스키코드로 처리가 안되므로 그에대한 처리
-            case "Left"://left
-                num=37;
-                break;
-            case "right"://right
-                num=39;
-                break;
-            case "up"://up
-                num=38;
-                break;
-            case "down"://down
-                num=40;
-                break;
-            case "esc"://esc
-                num=27;
-                break;
-            case "space"://space
-                num=32;
-                break;
-            default:
-        }
-        return num;
     }
 }
 
