@@ -1,15 +1,15 @@
 package seoultech.se.tetris.menu;
 
-import javax.swing.*;
+import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
+import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
 
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static seoultech.se.tetris.menu.OnePlayModeMenu.gameModeNum2;
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
 public class BattleModeMenu extends JFrame {
@@ -56,6 +56,7 @@ public class BattleModeMenu extends JFrame {
                 if (positionPoint==0){
                     bs.setVisible(false);
                     // 노말 배틀 모드
+                    new MatchNormalBoardParent();
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
@@ -94,6 +95,8 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 //노말 배틀 모드
+//                MatchNormalBoardParent.setDifficulty();
+                new MatchNormalBoardParent();
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
@@ -101,6 +104,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 아이템 배틀 모드
+                new MatchItemBoardParent();
             }
         });
         menuButton[2].addMouseListener(new MouseAdapter() {

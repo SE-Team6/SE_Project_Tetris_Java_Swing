@@ -5,7 +5,6 @@ import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.component.board.NormalBoard;
 
 import javax.swing.*;
-
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -13,7 +12,6 @@ import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
 public class OnePlayModeMenu extends JFrame {
@@ -112,7 +110,7 @@ public class OnePlayModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 gameModeNum2 =0;//노말
                 bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                normalMode(gameDifficultyNum);
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
@@ -120,7 +118,7 @@ public class OnePlayModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 gameModeNum2 =1;//아이템
                 bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                itemMode(gameDifficultyNum);
             }
         });
 

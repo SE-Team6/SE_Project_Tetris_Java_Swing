@@ -21,9 +21,9 @@ import java.util.Date;
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
-import static seoultech.se.tetris.menu.GameDifficulty.gameDifficultyNum;
-import static seoultech.se.tetris.menu.GameMode.gameModeNum2;
-import static seoultech.se.tetris.menu.SelectScoreMode.gameModeNum;
+import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
+import static seoultech.se.tetris.menu.OnePlayModeMenu.gameModeNum2;
+import static seoultech.se.tetris.menu.SelectScoreMenu.gameModeNum;
 import static seoultech.se.tetris.menu.SetDefault.screenWidth;
 
 public class GameOver extends JFrame {
@@ -190,7 +190,7 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver(bs.getX(),bs.getY());
+                    GameOver gm =new GameOver();
                     gm.updateButton.setVisible(false);
                     ScoreBoard sb =new ScoreBoard(higLightNum);
                 }
