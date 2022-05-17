@@ -82,7 +82,7 @@ public class GetKeyPanel extends JFrame {
         char tmp= keyGetValue[positionPoint].charAt(0);
         keyWriteValue[positionPoint]=(int)tmp;
         keyWriteValue[positionPoint] =checkingValue(keyWriteValue[positionPoint]);
-        writeKey(keyWriteValue);
+        writeKey(keyWriteValue, 1);
     }
     public void keyLoad(){// 기존 키 정보 불러오기
         JSONObject obj = loaderKey();

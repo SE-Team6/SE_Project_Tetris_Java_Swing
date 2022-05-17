@@ -6,6 +6,7 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static seoultech.se.tetris.component.JSONLoader.*;
 
@@ -36,38 +37,42 @@ public class JSONWriter {
     /*
         int [] values = {right, left, up, down, esc, space};
     */
-    public static void writeKey(int [] values){
+    public static void writeKey(int [] values, int player){
         String[] key = {"LEFT", "RIGHT", "UP", "DOWN", "ESC", "SPACE"};
-        JSONObject list = new JSONObject();
+        HashMap<String, Integer> hashMap = new HashMap<>();
         for(int i=0; i<6; ++i){
-            list.put(key[i], values[i]);
+            hashMap.put(key[i], values[i]);
         }
-        JSONDumps("key", list);
+        JSONObject list = new JSONObject(hashMap);
+        if(player == 1)
+            JSONDumps("key1p", list);
+        else
+            JSONDumps("key2p", list);
     }
 
     // WIDTH, HEIGHT, FONT_SIZE
     public static void writeResolution(int width, int height, int font_size){
-        JSONObject list = new JSONObject();
-        list.put("width", width);
-        list.put("height", height);
-        list.put("font_size", font_size);
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("width", width);
+        hashMap.put("height", height);
+        hashMap.put("font_size", font_size);
+        JSONObject list = new JSONObject(hashMap);
         JSONDumps("resolution", list);
     }
 
     // Loader와 동일
     // 적녹 : 1, 이런식으로
     public static void writeColorMode(int val){
-        JSONObject list = new JSONObject();
-        list.put("mode", val);
-        JSONObject colorObject = new JSONObject();
-        System.out.println(colorObject);
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("mode", val);
+        JSONObject list = new JSONObject(hashMap);
         JSONDumps("colorBlindMode", list);
     }
 
     public static void writeScoreBoardPage(int val){
-        JSONObject list = new JSONObject();
-        list.put("mode", val);
-        JSONObject pageObject = new JSONObject();
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        hashMap.put("mode", val);
+        JSONObject list = new JSONObject(hashMap);
         JSONDumps("scoreBoardPage", list);
     }
 
@@ -81,13 +86,14 @@ public class JSONWriter {
         int rank = -1;
         // InputScore -> New Score Object(JSONObject)
         String[] key = {"Name", "DateTime", "Score", "Difficulty", "isItem"};
-        JSONObject newScore = new JSONObject();
 
-        newScore.put(key[0], inputScore[0]);
-        newScore.put(key[1], inputScore[1]);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put(key[0], inputScore[0]);
+        hashMap.put(key[1], inputScore[1]);
         for(int i=2; i<5; ++i)
-            newScore.put(key[i], Integer.parseInt(inputScore[i]));
+            hashMap.put(key[i], Integer.parseInt(inputScore[i]));
 
+        JSONObject newScore = new JSONObject(hashMap);
         JSONArray loadedScores = new JSONArray();
 
         //Load JSONArray
@@ -151,14 +157,18 @@ public class JSONWriter {
     }
 
     public static void JSONDumps(String type, JSONObject content){
-        JSONObject keyObj = (JSONObject) getJSONObject("settings","key");
+        JSONObject key1pObj = (JSONObject) getJSONObject("settings","key1p");
+        JSONObject key2pObj = (JSONObject) getJSONObject("settings","key2p");
         JSONObject resolutionObj = (JSONObject) getJSONObject("settings", "resolution");
         JSONObject colorBlindModeObj = (JSONObject) getJSONObject("settings", "colorBlindMode");
         JSONObject scoreBoardPageObj = (JSONObject) getJSONObject("settings", "scoreBoardPage");
 
         switch (type){
-            case "key":
-                keyObj = content;
+            case "key1p":
+                key1pObj = content;
+                break;
+            case "key2p":
+                key2pObj = content;
                 break;
             case "resolution":
                 resolutionObj = content;
@@ -171,12 +181,14 @@ public class JSONWriter {
                 break;
         }
 
-        JSONObject jsonList = new JSONObject();
-        jsonList.put("key", keyObj);
-        jsonList.put("resolution", resolutionObj);
-        jsonList.put("colorBlindMode", colorBlindModeObj);
-        jsonList.put("scoreBoardPage",scoreBoardPageObj);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("key1p", key1pObj);
+        hashMap.put("key2p", key2pObj);
+        hashMap.put("resolution", resolutionObj);
+        hashMap.put("colorBlindMode", colorBlindModeObj);
+        hashMap.put("scoreBoardPage",scoreBoardPageObj);
 
+        JSONObject jsonList = new JSONObject(hashMap);
         try(FileWriter file = new FileWriter(SETTINGS_FILEPATH)){
             file.write(jsonList.toJSONString());
             file.flush();
