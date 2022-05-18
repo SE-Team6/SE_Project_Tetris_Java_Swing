@@ -4,11 +4,13 @@ import seoultech.se.tetris.blocks.*;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.config.ConfigBlock;
+import seoultech.se.tetris.config.block.BlockType;
 
 import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.awt.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -225,6 +227,11 @@ public class MatchInnerBoard extends JPanel {
         ArrayList<Block[]> stack = new ArrayList<Block[]>();
         for(int i=0;i<att.size();i++){
             int row = att.get(i);
+            for(int j=0;j<WIDTH;j++){
+                if (prevBoard[row][j]!=null){
+                    prevBoard[row][j] = new Block(Color.gray, ConfigBlock.BLOCK_CHAR, BlockType.NONE);
+                }
+            }
             stack.add(prevBoard[row].clone());
         }
 
