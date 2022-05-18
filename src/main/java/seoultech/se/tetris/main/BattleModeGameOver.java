@@ -43,8 +43,7 @@ public class BattleModeGameOver extends JFrame {
         bs = new SetDefault(x, y);
         setXY(400);
         bs.setVisible(true);
-        score = Score.score;
-        System.out.println(Score.score);
+        score = 0;
         labelSet();
         buttonSet();
         System.out.println(ButtonX);

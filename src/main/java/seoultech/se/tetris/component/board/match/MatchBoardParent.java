@@ -31,7 +31,7 @@ public class MatchBoardParent extends JFrame {
         System.out.println("pause");
         if (!isPause) {
             stopTimer();
-            pv = new MatchPauseView(leftScore.getScore(),this);
+            pv = new MatchPauseView(leftScore.getScore(), rightScore.getScore(), this);
             pv.setScore(leftScore.getScore());
             pv.setLocationRelativeTo(this);
             int w = this.getWidth();
@@ -86,7 +86,7 @@ public class MatchBoardParent extends JFrame {
                     } else if (keyCode == KeyEvent.VK_F) {
                         left.moveFall();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.ESC) {
+                    } else if (keyCode == Keyboard.ESC || keyCode == 27) {
                         pause();
                     } else if (keyCode == Keyboard.DOWN) {
                         right.moveDown();

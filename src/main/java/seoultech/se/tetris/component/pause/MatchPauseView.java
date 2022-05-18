@@ -13,26 +13,31 @@ import java.awt.event.KeyListener;
 public class MatchPauseView extends JDialog{
     private static String RESUME = "RESUME";
     private static String EXIT = "EXIT";
-    private static int score = 0;
 
     private int idx = 0;
     private final int IDX_LENGTH = 2;
     private MatchBoardParent parent;
 
+    JPanel scoreContainer;
     JButton resumeBtn;
     JButton exitBtn;
 
-    public MatchPauseView(int score, MatchBoardParent parent) {
+    public MatchPauseView(int leftScore, int rightScore, MatchBoardParent parent) {
         this.parent = parent;
 
         this.setUndecorated(true);
         this.setModalityType(Dialog.DEFAULT_MODALITY_TYPE);
         this.setBackground(Color.BLACK);
-        MatchPauseView.score = score;
         this.setLayout(new GridLayout(3, 1, 1, 1));
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        JPanel scorePane = new ScoreBox(score);
+        JPanel leftScorePane = new ScoreBox(leftScore);
+        JPanel rightScorePane = new ScoreBox(rightScore);
+
+        scoreContainer = new JPanel();
+        scoreContainer.setLayout(new GridLayout(1, 2));
+        scoreContainer.add(leftScorePane);
+        scoreContainer.add(rightScorePane);
 
         resumeBtn = new JButton();
         resumeBtn.setText(RESUME);
@@ -52,7 +57,7 @@ public class MatchPauseView extends JDialog{
             }
         });
 
-        this.add(scorePane);
+        this.add(scoreContainer);
         this.add(resumeBtn);
         this.add(exitBtn);
 
@@ -104,7 +109,7 @@ public class MatchPauseView extends JDialog{
     }
 
     public void setScore(int score) {
-        this.score = score;
+//        this.score = score;
     }
 
     public void disposeComponent() {
