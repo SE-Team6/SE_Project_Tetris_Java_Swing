@@ -19,6 +19,7 @@ public class SetKey1P extends JFrame{
     private int[] labelY = {120,170,220,270,320,370};// 0:left/1:right/2:up/3:down/4:esc/5:space
 
     private String [] textSequence = {"LEFT","RIGHT","UP","DOWN","ESC","SPACE"};
+    private char [] arrows={'←','→','↑','↓','⎋','␣'};
     private JLabel[] getLabel = new JLabel[6]; // 0:left/1:right/2:up/3:down/4:esc/5:space
     private JLabel[] setLabel =  new JLabel[6];
     private JButton saveButton = new JButton("SAVE");
@@ -92,8 +93,6 @@ public class SetKey1P extends JFrame{
             if(positionPoint==i) getLabel[i].setBorder(selectBorder);
             else getLabel[i].setBorder(noBorder);
         }
-        if(positionPoint==6) saveButton.setBackground(Color.RED);
-        else saveButton.setBackground(Color.white);
         }
     public void setLabel(){ // 라벨 세팅
         for (int i=0;i<6;i++){
@@ -129,23 +128,27 @@ public class SetKey1P extends JFrame{
         for(int i=0;i<6;i++){
             int a= Integer.parseInt(var[i].toString());
             //json에서 받아온 아스키코드를 그대로 받으면 시각적으로 방향키와 esc 및 space가 원하는 대로 안보임 그래서 원하는대로 보기위한 처리과정
-            switch (a){
+            switch (a) {
                 case 37://left
-                    a=2190;
+                    keyLoadCharValue[i]=arrows[0];
+                    break;
+                case 39://right
+                    keyLoadCharValue[i]=arrows[1];
+                    break;
+                case 38://up
+                    keyLoadCharValue[i]=arrows[2];
                     break;
                 case 40://down
-                    a=8595;
+                    keyLoadCharValue[i]=arrows[3];
                     break;
                 case 27://esc
-                    a=9099;
+                    keyLoadCharValue[i]=arrows[4];
                     break;
                 case 32://space
-                    a=9251;
+                    keyLoadCharValue[i]=arrows[5];
                     break;
                 default:
             }
-            char b = (char)a;
-            keyLoadCharValue[i]=b;
         }
     }
     public void backToMenuBtnAction(){
