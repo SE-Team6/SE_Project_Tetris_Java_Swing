@@ -2,6 +2,7 @@ package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
 import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
+import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardParent;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -61,10 +62,12 @@ public class BattleModeMenu extends JFrame {
                 else if(positionPoint==1){
                     bs.setVisible(false);
                     // 아이템 배틀 모드
+                    new MatchItemBoardParent();
                 }
                 else if(positionPoint==2){
                     bs.setVisible(false);
                     // 타이머 배틀 모드
+                    new MatchTimerBoardParent(100000);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
@@ -112,6 +115,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 타이머 배틀 모드
+                new MatchTimerBoardParent(10000000);
             }
         });
         setBtnImage();
