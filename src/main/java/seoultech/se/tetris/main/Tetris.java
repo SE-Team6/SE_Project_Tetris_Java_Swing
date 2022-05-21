@@ -15,7 +15,7 @@ public class Tetris {
 				dir.mkdir();
 				File settingFile = new File("./config/settings.json");
 				settingFile.createNewFile();
-				String DefaultSettings = JSONLoader.jarPathToFile("/configs/default_settings.json");
+				String DefaultSettings = JSONLoader.makeSettingsFileToPath("/configs/default_settings.json");
 				BufferedWriter writer = new BufferedWriter(new FileWriter("./config/settings.json"));
 				writer.write(DefaultSettings);
 				writer.close();

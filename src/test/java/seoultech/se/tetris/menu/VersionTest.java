@@ -4,8 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetKey1P.labelX;
-import static seoultech.se.tetris.menu.SetKey1P.textFieldX;
+import static seoultech.se.tetris.menu.GetSetting.*;
 
 public class VersionTest {
     @Test

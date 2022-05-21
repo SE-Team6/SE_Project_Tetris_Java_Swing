@@ -18,6 +18,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+
+import static seoultech.se.tetris.menu.GetSetting.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
@@ -27,8 +30,6 @@ import static seoultech.se.tetris.menu.SelectScoreMenu.gameModeNum;
 import static seoultech.se.tetris.menu.SetDefault.screenWidth;
 
 public class GameOver extends JFrame {
-
-    public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight, scoreAndNameLabelX,textFiledX,ButtonX;
 
     private ImageIcon updateBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_B.jpg"));
     private ImageIcon updateBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_E.jpg"));
