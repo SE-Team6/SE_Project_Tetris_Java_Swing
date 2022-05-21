@@ -6,6 +6,8 @@ import seoultech.se.tetris.component.board.match.MatchBoardParent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -52,8 +54,6 @@ public class MatchItemBoardParent extends MatchBoardParent {
         this.addMouseListener(new PlayerMouseListener());
         left.addMouseListener(new MatchBoardParent.PlayerMouseListener());
         right.addMouseListener(new MatchBoardParent.PlayerMouseListener());
-
-
 
         JPanel out = new JPanel();
         GridBagConstraints c = new GridBagConstraints();

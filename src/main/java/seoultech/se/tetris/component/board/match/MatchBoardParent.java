@@ -6,9 +6,7 @@ import seoultech.se.tetris.component.pause.MatchPauseView;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -24,7 +22,18 @@ public class MatchBoardParent extends JFrame {
 
 
     public MatchBoardParent() {
+        // focus out
+        this.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
 
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                pressedKeys.clear();
+            }
+        });
     }
 
     protected void pause() {
