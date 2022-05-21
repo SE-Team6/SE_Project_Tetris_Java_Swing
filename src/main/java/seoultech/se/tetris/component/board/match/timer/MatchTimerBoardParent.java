@@ -95,9 +95,10 @@ public class MatchTimerBoardParent extends MatchBoardParent {
            matchGameOver();
         });
         currentTime = time;
+        timeView.setText(Long.toString(currentTime / 1000 / 60) + ":"+ Long.toString(currentTime / 1000 % 60));
         startTime = System.currentTimeMillis();
-        timeViewController = new Timer(99, e -> {
-            currentTime -= 100;
+        timeViewController = new Timer(999, e -> {
+            currentTime -= 1000;
             long hour = currentTime / 1000 / 60;
             long minute = currentTime / 1000 % 60;
             timeView.setText(Long.toString(hour) + ":"+ Long.toString(minute));

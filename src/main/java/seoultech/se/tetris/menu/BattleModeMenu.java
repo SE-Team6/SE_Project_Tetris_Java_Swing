@@ -1,5 +1,6 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.component.board.match.item.MatchItemBoardChild;
 import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
 import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
 import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardParent;
@@ -10,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
@@ -62,6 +64,7 @@ public class BattleModeMenu extends JFrame {
                 else if(positionPoint==1){
                     bs.setVisible(false);
                     // 아이템 배틀 모드
+                    MatchItemBoardChild.setDifficulty(gameDifficultyNum);
                     new MatchItemBoardParent();
                 }
                 else if(positionPoint==2){
@@ -98,7 +101,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 //노말 배틀 모드
-//                MatchNormalBoardParent.setDifficulty();
+                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
                 new MatchNormalBoardParent();
             }
         });
