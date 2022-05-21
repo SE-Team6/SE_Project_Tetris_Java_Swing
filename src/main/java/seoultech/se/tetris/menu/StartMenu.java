@@ -223,8 +223,8 @@ public class StartMenu extends JFrame {
                 break;
             case 3: // 게임종료
                 bs.setVisible(false);
-                new BattleModeGameOver(bs.getX(),bs.getY());
-//                System.exit(0);
+//                new BattleModeGameOver(bs.getX(),bs.getY());
+                System.exit(0);
                 break;
         }
     }

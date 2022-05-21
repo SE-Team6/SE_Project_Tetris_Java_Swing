@@ -28,7 +28,7 @@ public class BattleModeGameOver extends JFrame {
     public Image winnerImage;
     public static Image winner1pImage;
     public static Image winner2pImage;
-    public int leftScore=4,rightScore=3; // left:1p right : 2p
+    public int leftScore,rightScore; // left:1p right : 2p
 
     private JLabel Score2P;
     private JLabel Score1P;
@@ -41,7 +41,9 @@ public class BattleModeGameOver extends JFrame {
 
     public BattleModeGameOver(){}
 
-    public BattleModeGameOver(int x, int y){ // # TODO add arg scores
+    public BattleModeGameOver(int x, int y, int leftScore, int rightScore){
+        this.leftScore = leftScore;
+        this.rightScore = rightScore;
         bs = new SetDefault(x, y);
         setXY(screenWidth);
         bs.setVisible(true);
@@ -87,7 +89,7 @@ public class BattleModeGameOver extends JFrame {
 
         bs.add(myScoreLabel);
 
-        Score1P = new JLabel(String.valueOf(score));
+        Score1P = new JLabel(String.valueOf(leftScore));
         Score1P.setFont(new Font("Bahnschrift",Font.BOLD,20));
         Score1P.setBounds(textFiledX,120,100,40);
         Score1P.setHorizontalAlignment(SwingConstants.CENTER);
@@ -103,7 +105,7 @@ public class BattleModeGameOver extends JFrame {
         NameLabel.setForeground(Color.YELLOW);
         bs.add(NameLabel);
 
-        Score2P = new JLabel(String.valueOf(score));
+        Score2P = new JLabel(String.valueOf(rightScore));
         Score2P.setFont(new Font("Bahnschrift",Font.BOLD,20));
         Score2P.setBounds(textFiledX,180,100,40);
         Score2P.setHorizontalAlignment(SwingConstants.CENTER);

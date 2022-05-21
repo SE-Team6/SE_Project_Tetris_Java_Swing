@@ -3,6 +3,7 @@ package seoultech.se.tetris.component.board.match;
 import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.MatchPauseView;
+import seoultech.se.tetris.main.BattleModeGameOver;
 import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
@@ -125,7 +126,7 @@ public class MatchBoardParent extends JFrame {
     public void matchGameOver() {
         stopTimer();
         this.dispose();
-        new GameOver(getX(), getY(), leftScore.getScore());
+        new BattleModeGameOver(getX(), getY(), leftScore.getScore(), rightScore.getScore());
     }
 
 //    public class PlayerLeftKeyListener extends Keyboard {
