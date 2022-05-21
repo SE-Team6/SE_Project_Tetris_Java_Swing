@@ -19,17 +19,17 @@ public class JSONLoader {
 
     public static String makeSettingsFileToPath(String path) {
         String s = null;
-        try{
-            byte[] buffer = new byte[179];
+        try {
+            byte[] buffer = new byte[251];
             InputStream stream = JSONLoader.class.getResourceAsStream(path);
             ByteArrayOutputStream byteArrayOutputStream
                     = new ByteArrayOutputStream();
             int temp;
-            while((temp = stream.read(buffer)) != -1){
+            while ((temp = stream.read(buffer)) != -1) {
                 byteArrayOutputStream.write(buffer, 0, temp);
             }
             s = new String(buffer, StandardCharsets.UTF_8);
-        }catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return s;
@@ -56,7 +56,7 @@ public class JSONLoader {
                     break;
             }
         }catch (Exception e){
-            e.printStackTrace();
+            System.out.println("Scoreboard is empty");
         }
         return obj.get(key);
     }
@@ -70,7 +70,7 @@ public class JSONLoader {
         SPACE 값 얻기  : obj.get("SPACE");
      */
     public static JSONObject loaderKey(){
-        JSONObject obj = (JSONObject) getJSONObject("settings","key");
+        JSONObject obj = (JSONObject) getJSONObject("settings","key1p");
         return obj;
     }
 
