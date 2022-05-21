@@ -15,7 +15,7 @@ public class Tetris {
 				settingFile.createNewFile();
 				String DefaultSettings = JSONLoader.makeSettingsFileToPath("/configs/default_settings.json");
 				BufferedWriter writer = new BufferedWriter(new FileWriter("./config/settings.json"));
-				writer.write(DefaultSettings);
+				writer.write(DefaultSettings);    
 				writer.close();
 
 				File itemScoreFile = new File("./config/item_score.json");
