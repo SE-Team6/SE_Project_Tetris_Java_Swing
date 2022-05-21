@@ -71,7 +71,7 @@ public class SetResolutionMenu extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER) {
                 switch (positionPoint){
                     case 0:
-                        writeResolution(400,600,32);
+                        writeResolution(400,600,28);
                         ver.getFirstResolution();
                         setResolution();
                         break;

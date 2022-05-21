@@ -3,6 +3,7 @@ package seoultech.se.tetris.menu;
 import seoultech.se.tetris.component.board.match.item.MatchItemBoardChild;
 import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
 import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
+import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardChild;
 import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardParent;
 
 import javax.swing.*;
@@ -110,6 +111,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 아이템 배틀 모드
+                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
                 new MatchItemBoardParent();
             }
         });
@@ -118,6 +120,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 타이머 배틀 모드
+                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
                 new MatchTimerBoardParent(10000000);
             }
         });

@@ -10,6 +10,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import java.awt.*;
+import java.io.IOException;
 
 public class NormalBoard extends Board {
     public NormalBoard() {
@@ -72,7 +73,7 @@ public class NormalBoard extends Board {
 
         // line height
         SimpleAttributeSet tmp = new SimpleAttributeSet();
-        StyleConstants.setLineSpacing(tmp, -0.5F);
+        StyleConstants.setLineSpacing(tmp, ConfigBlock.lineSpacing);
 
         StyleConstants.setAlignment(tmp, StyleConstants.ALIGN_CENTER);
 
@@ -83,10 +84,10 @@ public class NormalBoard extends Board {
         parentStyle = pane.addStyle("parentStyle", null);
 
         StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
-        StyleConstants.setFontFamily(parentStyle, "Courier");
+        StyleConstants.setFontFamily(parentStyle, ConfigBlock.font);
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
-        StyleConstants.setAlignment(parentStyle, StyleConstants.ALIGN_RIGHT);
+        //StyleConstants.setAlignment(parentStyle, StyleConstants.ALIGN_RIGHT);
 
         defaultStyle = pane.addStyle("defaultStyle", parentStyle);
         blockStyle = pane.addStyle("blockStyle", parentStyle);

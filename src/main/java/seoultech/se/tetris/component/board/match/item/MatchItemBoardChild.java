@@ -87,7 +87,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
 
         // line height
         SimpleAttributeSet tmp = new SimpleAttributeSet();
-        StyleConstants.setLineSpacing(tmp, -0.5F);
+        StyleConstants.setLineSpacing(tmp, ConfigBlock.lineSpacing);
 
         StyleConstants.setAlignment(tmp, StyleConstants.ALIGN_CENTER);
 
@@ -100,7 +100,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
         parentStyle = pane.addStyle("parentStyle", null);
 
         StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
-        StyleConstants.setFontFamily(parentStyle, "Courier");
+        StyleConstants.setFontFamily(parentStyle, ConfigBlock.font);
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
         StyleConstants.setAlignment(parentStyle, StyleConstants.ALIGN_RIGHT);
