@@ -73,17 +73,20 @@ public class SetResolutionMenu extends JFrame {
                     case 0:
                         writeResolution(400,600,32);
                         ver.getFirstResolution();
-                        setResolution();
+                        bs.setVisible(false);
+                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                     case 1:
                         writeResolution(600,800,48);
                         ver.getSecondResolution();
-                        setResolution();
+                        bs.setVisible(false);
+                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                     case 2:
                         writeResolution(800,1000,64);
                         ver.getThirdResolution();
-                        setResolution();
+                        bs.setVisible(false);
+                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                 }
             }
@@ -98,17 +101,6 @@ public class SetResolutionMenu extends JFrame {
             if (positionPoint==i) menuButton[i].setIcon(EnterImage[i]);
             else menuButton[i].setIcon(BasicImage[i]);
         }
-    }
-    public void setResolution(){
-        bs.setVisible(false);
-        bs.setVisible(true);
-        bs.setSize(screenWidth, screenHeight);
-        bs.menuBar.setBounds(0, 0, screenWidth, menuBarHeight);
-        bs.menuBarExitBtn.setBounds(screenWidth -20,menuBarExitBtnHeight,20,20);
-        bs.gameTitle.setBounds(gameTitleX, gameTitleY,300,50);
-        menuButton[0].setBounds(buttonX,buttonY, buttonWidth, buttonHeight);
-        menuButton[1].setBounds(buttonX,buttonY+70, buttonWidth, buttonHeight);
-        menuButton[2].setBounds(buttonX,buttonY+140, buttonWidth, buttonHeight);
     }
     public void backToMenuBtnAction(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {

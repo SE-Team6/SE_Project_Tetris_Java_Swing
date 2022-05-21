@@ -23,6 +23,7 @@ public class GetKeyPanel extends JFrame {
     int [] keyWriteValue = new int[6];
     char [] keyLoadCharValue = new char[6];
     int checkValue=0;
+    int  checkValue2=0;
     int prevX, prevY;
     // 보이는 방향키 및 스페이스 바와 ESC=> {"SPACE":9251,"DOWN":8595,"LEFT":8592,"ESC":9099,"RIGHT":8594,"UP":8593} => 시각적으로 보일때 쓰일 코드 // 내가 입력하는 코드
     // 실제 아스키 코드 =>{"SPACE":32,"DOWN":40,"LEFT":37,"ESC":27,"RIGHT":39,"UP":38}=> 실제 json 파일에 입력되어야할 코드 // 내가 입력한 코드가 변해야할 코드
@@ -41,12 +42,15 @@ public class GetKeyPanel extends JFrame {
         public void keyPressed(KeyEvent e) {
             int keyVal= e.getKeyCode();
             if(keyVal == KeyEvent.VK_ENTER){
+//                checkValue2 = checkingValue2(getKeyLabel.getText());
                 if(checkValue==0) JOptionPane.showMessageDialog(null,"변경하실 키를 입력해주세요");
                 else {
                     int count = 0;
                     for (int i = 0; i < 6; i++) {
                         if (positionPoint == i) {
-                        } else if (checkValue == keyLoadCharValue[i]) count += 1;
+                        }
+//                        else if (checkValue2 >0) count+=1;
+                        else if (checkValue == keyLoadCharValue[i]) count += 1;
                     }
                     if (count > 0) JOptionPane.showMessageDialog(null, "중복된 키가 존재합니다 다시 세팅해주세요");
                     else {
@@ -73,19 +77,62 @@ public class GetKeyPanel extends JFrame {
             }
             else{
                 getKeyLabel.setText(e.getKeyText(keyVal));
-                checkValue=(int)getKeyLabel.getText().charAt(0);
-                checkValue=checkingValue(checkValue);
+                switch (getKeyLabel.getText()){
+                    case "Left":
+                        checkValue = 37;
+                        break;
+                    case "Right":
+                        checkValue  = 39;
+                        break;
+                    case "Up":
+                        checkValue  = 38;
+                        break;
+                    case "Down":
+                        checkValue  = 40;
+                        break;
+                    case "Escape":
+                        checkValue  = 27;
+                        break;
+                    case "Space":
+                        checkValue  = 32;
+                        break;
+                    default:
+                        checkValue=(int)getKeyLabel.getText().charAt(0);
+//                        checkValue=checkingValue(checkValue);
+                }
             }
         }
     }
     public void keyWrite(){//json에 바꾼 키 입력
-        char tmp= keyGetValue[positionPoint].charAt(0);
-        keyWriteValue[positionPoint]=(int)tmp;
-        System.out.println(keyGetValue[positionPoint]);
-        keyWriteValue[positionPoint] =checkingValue(keyWriteValue[positionPoint]);
+        switch (keyGetValue[positionPoint]){
+            case "Left":
+                keyWriteValue[positionPoint] = 37;
+                break;
+            case "Right":
+                keyWriteValue[positionPoint] = 39;
+                break;
+            case "Up":
+                keyWriteValue[positionPoint] = 38;
+                break;
+            case "Down":
+                keyWriteValue[positionPoint] = 40;
+                break;
+            case "Escape":
+                keyWriteValue[positionPoint] = 27;
+                break;
+            case "Space":
+                keyWriteValue[positionPoint] = 32;
+                break;
+            default:
+                char tmp= keyGetValue[positionPoint].charAt(0);
+                keyWriteValue[positionPoint]=(int)tmp;
+        }
+//        char tmp= keyGetValue[positionPoint].charAt(0);
+//        keyWriteValue[positionPoint]=(int)tmp;
+//        keyWriteValue[positionPoint] =checkingValue(keyWriteValue[positionPoint]);
         writeKey(keyWriteValue);
     }
-    public void keyLoad(){// 기존 키 정보 불러오기
+    public void keyLoad(){// 중복을 검사하기 위한 기존 키 정보 불러오기
         JSONObject obj = loaderKey();
         Object [] var = new Object[6];
         var[0]= obj.get("LEFT");
@@ -190,16 +237,16 @@ public class GetKeyPanel extends JFrame {
             case "Left"://left
                 num=37;
                 break;
-            case "right"://right
+            case "Right"://right
                 num=39;
                 break;
-            case "up"://up
+            case "Up"://up
                 num=38;
                 break;
-            case "down"://down
+            case "Down"://down
                 num=40;
                 break;
-            case "esc"://esc
+            case "Escape"://esc
                 num=27;
                 break;
             case "space"://space

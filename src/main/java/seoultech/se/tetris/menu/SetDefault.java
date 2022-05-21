@@ -22,7 +22,7 @@ public class SetDefault extends JFrame {
     public static int gameTitleX, gameTitleY = 30;
 
     // 기본 이미지
-    private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/600x800_BG.jpg")).getImage();
+    public static Image backGround;
     public JLabel gameTitle = new JLabel(new ImageIcon(getClass().getResource("/image/Label/title/title.png")), SwingConstants.CENTER);
 
     //상단 메뉴바 이미지
@@ -37,10 +37,12 @@ public class SetDefault extends JFrame {
 
 
     public static Keyboard key = Keyboard.getInstance();
-
+    GetSetting ver =new GetSetting();
     public SetDefault(){}
 
     public SetDefault(int x, int y) {
+        getResolution();
+        ver.setBackGround(screenWidth);
         key.setKey();
         JPanel panel = new JPanel() {
             public void paintComponent(Graphics g) {
@@ -50,7 +52,6 @@ public class SetDefault extends JFrame {
             }
         };
         setContentPane(panel);
-        getResolution();
         basicSet(x, y);
         basicBtnSet();
     }

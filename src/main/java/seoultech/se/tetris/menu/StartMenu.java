@@ -38,7 +38,8 @@ public class StartMenu extends JFrame {
     private JLabel[] currentKey = new JLabel[6];
     char[] keyLoadCharValue = new char[6];
     String [] keyLoadStringValue = new String[6];
-
+    JSONObject obj = loaderKey();
+    Object[] var = new Object[6];
     private int positionPoint = 0;
     public SetDefault bs;
 
@@ -100,40 +101,38 @@ public class StartMenu extends JFrame {
         setBtnImage();
     }
     public void keyLoad() {// 기존 키 정보 불러오기
-        JSONObject obj = loaderKey();
-        Object[] var = new Object[6];
         Arrays.fill(var, 0);
         for (int i = 0; i < 6; i++) {
             var[i] = obj.get(textSequence[i]);
         }
-        for (int i = 0; i < 6; i++) {
-            int a = Integer.parseInt(var[i].toString());
-            //json에서 받아온 아스키코드를 그대로 받으면 시각적으로 방향키와 esc 및 space가 원하는 대로 안보임 그래서 원하는대로 보기위한 처리과정
-            switch (a) {
-                case 37://left
-                    a = 8592;
-                    break;
-                case 39://right
-                    a = 8594;
-                    break;
-                case 38://up
-                    a = 8593;
-                    break;
-                case 40://down
-                    a = 8595;
-                    break;
-                case 27://esc
-                    a = 9099;
-                    break;
-                case 32://space
-                    a = 9251;
-                    break;
-                default:
-            }
-            char b = (char) a;
-            keyLoadCharValue[i] = b;
-            keyLoadStringValue[i]= String.valueOf(keyLoadCharValue[i]);
-        }
+//        for (int i = 0; i < 6; i++) {
+//            int a = Integer.parseInt(var[i].toString());
+//            //json에서 받아온 아스키코드를 그대로 받으면 시각적으로 방향키와 esc 및 space가 원하는 대로 안보임 그래서 원하는대로 보기위한 처리과정
+//            switch (a) {
+//                case 37://left
+//                    a = 8592;
+//                    break;
+//                case 39://right
+//                    a = 8594;
+//                    break;
+//                case 38://up
+//                    a = 8593;
+//                    break;
+//                case 40://down
+//                    a = 8595;
+//                    break;
+//                case 27://esc
+//                    a = 9099;
+//                    break;
+//                case 32://space
+//                    a = 9251;
+//                    break;
+//                default:
+//            }
+//            char b = (char) a;
+//            keyLoadCharValue[i] = b;
+//            keyLoadStringValue[i]= String.valueOf(keyLoadCharValue[i]);
+//        }
     }
     public void setCurrentKeyLabel() {
         int addH = 0;
@@ -143,6 +142,32 @@ public class StartMenu extends JFrame {
             currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
             currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            int num= Integer.parseInt(var[i].toString());
+            switch (num){
+                case 37: // left
+                    currentKey[i].setText(textSequence[i]+" : Left");
+                    break;
+                case 39: // Right
+                    currentKey[i].setText(textSequence[i]+" : Right");
+                    break;
+                case 38: // Up
+                    currentKey[i].setText(textSequence[i]+" : Up");
+                    break;
+                case 40: // Down
+                    currentKey[i].setText(textSequence[i]+" : Down");
+                    break;
+                case 27: // Esc
+                    currentKey[i].setText(textSequence[i]+" : Esc");
+                    break;
+                case 32: // Space
+                    currentKey[i].setText(textSequence[i]+" : Space");
+                    break;
+                default:
+                    char value = (char)num;
+                    keyLoadCharValue[i]=value;
+                    keyLoadStringValue[i]= String.valueOf(keyLoadCharValue[i]);
+                    currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            }
             bs.add(currentKey[i]);
             addH += 30;
         }
@@ -152,7 +177,32 @@ public class StartMenu extends JFrame {
             currentKey[i].setBounds(110, (screenHeight - 100) + addH, 100, 30);
             currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
-            currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            int num= Integer.parseInt(var[i].toString());
+            switch (num){
+                case 37: // left
+                    currentKey[i].setText(textSequence[i]+" : Left");
+                    break;
+                case 39: // Right
+                    currentKey[i].setText(textSequence[i]+" : Right");
+                    break;
+                case 38: // Up
+                    currentKey[i].setText(textSequence[i]+" : Up");
+                    break;
+                case 40: // Down
+                    currentKey[i].setText(textSequence[i]+" : Down");
+                    break;
+                case 27: // Esc
+                    currentKey[i].setText(textSequence[i]+" : Esc");
+                    break;
+                case 32: // Space
+                    currentKey[i].setText(textSequence[i]+" : Space");
+                    break;
+                default:
+                    char value = (char)num;
+                    keyLoadCharValue[i]=value;
+                    keyLoadStringValue[i]= String.valueOf(keyLoadCharValue[i]);
+                    currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
+            }
             bs.add(currentKey[i]);
             addH += 30;
         }

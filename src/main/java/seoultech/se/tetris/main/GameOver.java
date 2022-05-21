@@ -18,17 +18,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
+import static seoultech.se.tetris.menu.GetSetting.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
-import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.OnePlayModeMenu.gameModeNum2;
 import static seoultech.se.tetris.menu.SelectScoreMenu.gameModeNum;
 
 public class GameOver extends JFrame {
-
-    public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight, scoreAndNameLabelX,textFiledX,ButtonX;
 
     private ImageIcon updateBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_B.jpg"));
     private ImageIcon updateBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/updateBtn_E.jpg"));
