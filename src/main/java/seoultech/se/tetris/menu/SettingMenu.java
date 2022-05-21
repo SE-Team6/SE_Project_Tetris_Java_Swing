@@ -117,7 +117,7 @@ public class SettingMenu extends JFrame {
                     public void actionPerformed(ActionEvent e) {
                         bs.setVisible(false);
                         writeResolution(400,600,32);
-                        writeKey(keyValueArr);
+                        writeKey(keyValueArr, 1);
                         writeColorMode(0);
                         JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
                         new SettingMenu(bs.getX(), bs.getY());

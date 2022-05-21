@@ -28,7 +28,7 @@ public class BattleModeGameOver extends JFrame {
     public Image winnerImage;
     public static Image winner1pImage;
     public static Image winner2pImage;
-    public int leftScore=2,rightScore=3; // left:1p right : 2p
+    public int leftScore=4,rightScore=3; // left:1p right : 2p
 
     private JLabel Score2P;
     private JLabel Score1P;

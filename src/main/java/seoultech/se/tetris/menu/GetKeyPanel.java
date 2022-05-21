@@ -42,15 +42,12 @@ public class GetKeyPanel extends JFrame {
         public void keyPressed(KeyEvent e) {
             int keyVal= e.getKeyCode();
             if(keyVal == KeyEvent.VK_ENTER){
-//                checkValue2 = checkingValue2(getKeyLabel.getText());
                 if(checkValue==0) JOptionPane.showMessageDialog(null,"변경하실 키를 입력해주세요");
                 else {
                     int count = 0;
                     for (int i = 0; i < 6; i++) {
                         if (positionPoint == i) {
-                        }
-//                        else if (checkValue2 >0) count+=1;
-                        else if (checkValue == keyLoadCharValue[i]) count += 1;
+                        } else if (checkValue == keyLoadCharValue[i]) count += 1;
                     }
                     if (count > 0) JOptionPane.showMessageDialog(null, "중복된 키가 존재합니다 다시 세팅해주세요");
                     else {
@@ -130,7 +127,7 @@ public class GetKeyPanel extends JFrame {
 //        char tmp= keyGetValue[positionPoint].charAt(0);
 //        keyWriteValue[positionPoint]=(int)tmp;
 //        keyWriteValue[positionPoint] =checkingValue(keyWriteValue[positionPoint]);
-        writeKey(keyWriteValue);
+        writeKey(keyWriteValue,1);
     }
     public void keyLoad(){// 중복을 검사하기 위한 기존 키 정보 불러오기
         JSONObject obj = loaderKey();
@@ -145,7 +142,7 @@ public class GetKeyPanel extends JFrame {
             keyWriteValue[i]= Integer.parseInt(var[i].toString());
             char b = (char)keyWriteValue[i];
             keyLoadCharValue[i]=b;
-            System.out.println(keyLoadCharValue[i]);
+//            System.out.println(keyLoadCharValue[i]);
         }
     }
     public void setting(){
@@ -170,7 +167,6 @@ public class GetKeyPanel extends JFrame {
         updateKey.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(getKeyLabel.getText());
                 switch (positionPoint){
                     case 0:
                         keyGetValue[0]=getKeyLabel.getText();
@@ -205,8 +201,6 @@ public class GetKeyPanel extends JFrame {
         getKeyLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(getKeyLabel);
     }
-
-
     public int checkingValue(int value){
         switch (value){//내가 시각적으로 원하는 방향키와 space 및 esc 키를 입력하면 실제 사용되는 아스키코드로 처리가 안되므로 그에대한 처리
             case 8592://left
