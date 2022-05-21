@@ -11,9 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BattleModeGameOver extends JFrame {
+import static seoultech.se.tetris.menu.GetSetting.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 
-    public  static int gameOverTitleX,scoreBoardX,scoreBoardY,scoreBoardWidth,scoreBoardHeight, scoreAndNameLabelX,textFiledX,ButtonX;
+public class BattleModeGameOver extends JFrame {
 
     private ImageIcon StartMenuBtnBasicImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/StartMenuBtn_B.jpg"));
     private ImageIcon StartMenuBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameover_btn/StartMenuBtn_E.jpg"));
@@ -24,14 +25,15 @@ public class BattleModeGameOver extends JFrame {
     private JLabel gameOverTitle = new JLabel(new ImageIcon(getClass().getResource("/image/Label/title/GameOverTitle.png")),SwingConstants.CENTER);
     private JLabel myScoreLabel = new JLabel("1P Score");
     private JLabel NameLabel = new JLabel("2P Score");
-    private JPanel scoreBoardSummary = new JPanel();
-
+    public Image winnerImage;
+    public static Image winner1pImage;
+    public static Image winner2pImage;
+    public int leftScore=2,rightScore=3; // left:1p right : 2p
 
     private JLabel Score2P;
     private JLabel Score1P;
     private JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
     private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
-
 
     SetDefault bs;
     private int score;
@@ -41,14 +43,14 @@ public class BattleModeGameOver extends JFrame {
 
     public BattleModeGameOver(int x, int y){
         bs = new SetDefault(x, y);
-        setXY(400);
+        setXY(screenWidth);
         bs.setVisible(true);
         score = Score.score;
-        System.out.println(Score.score);
         labelSet();
         buttonSet();
-        System.out.println(ButtonX);
+        winnerImage();
     }
+
     public void buttonSet(){
         StartMenuButton.setBounds(ButtonX,320,185,55);
         StartMenuButton.setBorderPainted(false);
@@ -115,15 +117,28 @@ public class BattleModeGameOver extends JFrame {
         gameOverTitle.setBounds(gameOverTitleX, 30,400,100);
         bs.add(gameOverTitle);
     }
-
+    public void winnerImage(){
+        getWinnerImage();
+        JPanel winnerPanel = new JPanel(){
+            public void paintComponent(Graphics g){
+                g.drawImage(winnerImage,0,0,null);
+                setOpaque(false);
+                super.paintComponent(g);
+            }
+        };
+        winnerPanel.setBounds(25,120,scoreBoardWidth,scoreBoardHeight);
+        winnerPanel.setBorder(new LineBorder(Color.RED,2,true));
+        winnerPanel.setLayout(null);
+        bs.add(winnerPanel);
+    }
+    public void getWinnerImage(){
+        if(leftScore>rightScore)  winnerImage = winner1pImage;
+        else if(leftScore<rightScore)  winnerImage = winner2pImage;
+    }
     public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
         GetSetting ver =new GetSetting();
         switch (num){
             case 400:
-                ButtonX=210;
-                scoreAndNameLabelX=195;
-                textFiledX=295;
-                System.out.println("hello");
                 ver.gameOverFirstSet();
                 break;
             case 600:

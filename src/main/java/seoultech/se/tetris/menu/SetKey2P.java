@@ -1,5 +1,4 @@
 package seoultech.se.tetris.menu;
-
 import org.json.simple.JSONObject;
 
 import javax.swing.*;
@@ -11,10 +10,12 @@ import java.util.Arrays;
 import static seoultech.se.tetris.menu.SetDefault.screenWidth;
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
 import static seoultech.se.tetris.menu.SetDefault.key;
-import static seoultech.se.tetris.menu.SetKey1P.*;
+import static seoultech.se.tetris.menu.GetSetting.*;
+import static seoultech.se.tetris.menu.SetDefault.*;
 
-public class SetKey2P extends JFrame{
-
+public class SetKey2P {
+    public static int labelWidth=200,labelHeight=40,labelFontSize=40;
+    public static int textFieldWidth=120, textFieldHeight =40,textFieldFontSize=30;
     private int[] labelY = {120,170,220,270,320,370};// 0:left/1:right/2:up/3:down/4:esc/5:space
 
     private String [] textSequence = {"LEFT","RIGHT","UP","DOWN","ESC","SPACE"};
@@ -30,7 +31,9 @@ public class SetKey2P extends JFrame{
 
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
-
+    String [] keyLoadStringValue = new String[6];
+    JSONObject obj = loaderKey();
+    Object [] var = new Object[6];
     public SetKey2P(){}
 
     public SetKey2P(int x, int y){
@@ -45,7 +48,6 @@ public class SetKey2P extends JFrame{
         backToMenuBtnAction();
         System.out.println(labelX);
     }
-
     public class setKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
@@ -64,20 +66,6 @@ public class SetKey2P extends JFrame{
                 if(positionPoint<6) {
                     new GetKeyPanel(bs.getX(), bs.getY());
                     bs.setVisible(false);
-                }
-                else{//중복키 처리 과정
-                    int count=0;
-                    for (int i=0;i<5;i++){
-                        for (int j=i+1;j<6;j++){
-                            if(keyLoadCharValue[i]==keyLoadCharValue[j]) {
-                                count+=1;
-                                getLabel[i].setText("");
-                                getLabel[j].setText("");
-                            }
-                        }
-                    }
-                    if (count>0)JOptionPane.showMessageDialog(null,"중복된 키가 존재합니다 다시 세팅해주세요");
-                    else JOptionPane.showMessageDialog(null,"저장이 완료되었숩니다.");
                 }
             }
             else if (keyVal==KeyEvent.VK_BACK_SPACE){
@@ -113,38 +101,39 @@ public class SetKey2P extends JFrame{
             getLabel[i].setBackground(Color.BLACK);
             getLabel[i].setForeground(Color.RED);
             getLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
-            getLabel[i].setText(String.valueOf(keyLoadCharValue[i]));
+            int num= Integer.parseInt(var[i].toString());
+            switch (num){
+                case 37: // left
+                    getLabel[i].setText("Left");
+                    break;
+                case 39: // Right
+                    getLabel[i].setText("Right");
+                    break;
+                case 38: // Up
+                    getLabel[i].setText("Up");
+                    break;
+                case 40: // Down
+                    getLabel[i].setText("Down");
+                    break;
+                case 27: // Esc
+                    getLabel[i].setText("Esc");
+                    break;
+                case 32: // Space
+                    getLabel[i].setText("Space");
+                    break;
+                default:
+                    char value = (char)num;
+                    keyLoadCharValue[i]=value;
+                    getLabel[i].setText(String.valueOf(keyLoadCharValue[i]));
+            }
             bs.add(getLabel[i]);
         }
         setBtnImage();
     }
-    public void keyLoad(){// 기존 키 정보 불러오기
-        JSONObject obj = loaderKey();
-        Object [] var = new Object[6];
+    public void keyLoad(){// 기존 키 정보 불러오기?
         Arrays.fill(var,0);
-        for (int i=0;i<6;i++){
+        for (int i =0;i<6;i++){
             var[i]=obj.get(textSequence[i]);
-        }
-        for(int i=0;i<6;i++){
-            int a= Integer.parseInt(var[i].toString());
-            //json에서 받아온 아스키코드를 그대로 받으면 시각적으로 방향키와 esc 및 space가 원하는 대로 안보임 그래서 원하는대로 보기위한 처리과정
-            switch (a){
-                case 37://left
-                    a=2190;
-                    break;
-                case 40://down
-                    a=8595;
-                    break;
-                case 27://esc
-                    a=9099;
-                    break;
-                case 32://space
-                    a=9251;
-                    break;
-                default:
-            }
-            char b = (char)a;
-            keyLoadCharValue[i]=b;
         }
     }
     public void backToMenuBtnAction(){
@@ -156,18 +145,19 @@ public class SetKey2P extends JFrame{
             }
         });
     }
-    public void setLocation(){// 해상도에 따른 버튼 라벨 텍스트필드 등 위치 설정 불러오기
-        GetSetting ver =new GetSetting();
+    public void setLocation(){
+        GetSetting gs = new GetSetting();
         switch (screenWidth){
             case 400:
-                ver.keySetFirstSet();
+                gs.keySetFirstSet();
                 break;
             case 600:
-                ver.keySetSecondSet();
+                gs.keySetSecondSet();
                 break;
             case 800:
-                ver.keySetThirdSet();
+                gs.keySetThirdSet();
                 break;
+
         }
     }
 }
