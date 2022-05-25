@@ -83,7 +83,7 @@ public class ScoreBoard extends JFrame {
         String [] sbList = {"Rank","Name","Score","Date","Difficulty"};
         for(int i=0;i<5;i++){
             listLabel[i] = new JLabel(sbList[i]);
-            listLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            listLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             listLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             listLabel[i].setBounds(sbListX[i],0,sbListSize[i],40);
             listLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,35 +93,35 @@ public class ScoreBoard extends JFrame {
         int LabelY=38;
         for (int i=scoreBoardNum;i<scoreBoardNum+10;i++){
             rankLabel[i] =new JLabel(String.valueOf(i+1));
-            rankLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            rankLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             rankLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             rankLabel[i].setBounds(sbListX[0],LabelY,sbListSize[0],40);
             rankLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             rankLabel[i].setForeground(Color.BLACK);
 
             nameLabel[i] =new JLabel();
-            nameLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            nameLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             nameLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             nameLabel[i].setBounds(sbListX[1],LabelY,sbListSize[1],40);
             nameLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             nameLabel[i].setForeground(Color.BLACK);
 
             scoreLabel[i] =new JLabel();
-            scoreLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            scoreLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             scoreLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             scoreLabel[i].setBounds(sbListX[2],LabelY,sbListSize[2],40);
             scoreLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             scoreLabel[i].setForeground(Color.BLACK);
 
             dateLabel[i] =new JLabel();
-            dateLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,7));
+            dateLabel[i].setFont(new Font("Sans Serif",Font.BOLD,7));
             dateLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             dateLabel[i].setBounds(sbListX[3],LabelY,sbListSize[3],40);
             dateLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             dateLabel[i].setForeground(Color.BLACK);
 
             difficultyLabel[i] =new JLabel();
-            difficultyLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            difficultyLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             difficultyLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             difficultyLabel[i].setBounds(sbListX[4],LabelY,sbListSize[4],40);
             difficultyLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -136,7 +136,7 @@ public class ScoreBoard extends JFrame {
     }
     public void pageNumLabel(){ //현재 페이지 작동 내용
         pageNumLabel = new JLabel(page+"/10");
-        pageNumLabel.setFont(new Font("Bahnschrift",Font.BOLD,12));
+        pageNumLabel.setFont(new Font("Sans Serif",Font .BOLD,12));
         pageNumLabel.setBounds(180,520,40,40);
         pageNumLabel.setHorizontalAlignment(SwingConstants.CENTER);
         pageNumLabel.setForeground(Color.RED);

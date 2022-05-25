@@ -15,10 +15,10 @@ public class SetKeyMenu extends JFrame {
 
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon onePlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_B.jpg"));
-    private ImageIcon twoPlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_B.jpg"));
-    private ImageIcon onePlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1p_Set_E.jpg"));
-    private ImageIcon twoPlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2p_Set_E.jpg"));
+    private ImageIcon onePlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1P_Set_B.jpg"));
+    private ImageIcon twoPlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2P_Set_B.jpg"));
+    private ImageIcon onePlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1P_Set_E.jpg"));
+    private ImageIcon twoPlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2P_Set_E.jpg"));
     private ImageIcon[] BasicImage = {onePlayBtnImage, twoPlayBtnImage};
     private ImageIcon[] EnterImage = {onePlayBtnEnterImage, twoPlayBtnEnterImage};
     private JButton[] menuButton = new JButton[2];

@@ -82,7 +82,7 @@ public class BattleModeGameOver extends JFrame {
         bs.add(ExitGameButton);
     }
     public void labelSet(){
-        myScoreLabel.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        myScoreLabel.setFont(new Font("Sans Serif",Font.BOLD,20));
         myScoreLabel.setBounds(scoreAndNameLabelX,120,100,40);
         myScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         myScoreLabel.setForeground(Color.YELLOW);
@@ -90,7 +90,7 @@ public class BattleModeGameOver extends JFrame {
         bs.add(myScoreLabel);
 
         Score1P = new JLabel(String.valueOf(leftScore));
-        Score1P.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        Score1P.setFont(new Font("Sans Serif",Font.BOLD,20));
         Score1P.setBounds(textFiledX,120,100,40);
         Score1P.setHorizontalAlignment(SwingConstants.CENTER);
         Score1P.setOpaque(true);
@@ -99,14 +99,14 @@ public class BattleModeGameOver extends JFrame {
         Score1P.setBorder(new LineBorder(Color.RED,1,true));
         bs.add(Score1P);
 
-        NameLabel.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        NameLabel.setFont(new Font("Sans Serif",Font.BOLD,20));
         NameLabel.setBounds(scoreAndNameLabelX,180,100,40);
         NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         NameLabel.setForeground(Color.YELLOW);
         bs.add(NameLabel);
 
         Score2P = new JLabel(String.valueOf(rightScore));
-        Score2P.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        Score2P.setFont(new Font("Sans Serif",Font.BOLD,20));
         Score2P.setBounds(textFiledX,180,100,40);
         Score2P.setHorizontalAlignment(SwingConstants.CENTER);
         Score2P.setOpaque(true);

@@ -194,7 +194,7 @@ public class GetKeyPanel extends JFrame {
             }
         });
         getKeyLabel.setBounds(10,10,170,50);
-        getKeyLabel.setFont(new Font("Bahnschrift",Font.BOLD,30));
+        getKeyLabel.setFont(new Font("Sans Serif",Font.BOLD,30));
         getKeyLabel.setOpaque(true);
         getKeyLabel.setBackground(Color.BLACK);
         getKeyLabel.setForeground(Color.RED);

@@ -139,28 +139,28 @@ public class StartMenu extends JFrame {
         for (int i = 0; i < 3; i++) {
             currentKey[i] = new JLabel();
             currentKey[i].setBounds(10, (screenHeight - 100) + addH, 100, 30);
-            currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
+            currentKey[i].setFont(new Font("Sans Serif", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
             currentKey[i].setText(textSequence[i]+" : "+keyLoadStringValue[i]);
             int num= Integer.parseInt(var[i].toString());
             switch (num){
                 case 37: // left
-                    currentKey[i].setText(textSequence[i]+" : Left");
+                    currentKey[i].setText(textSequence[i]+" : \u2190");
                     break;
                 case 39: // Right
-                    currentKey[i].setText(textSequence[i]+" : Right");
+                    currentKey[i].setText(textSequence[i]+" : \u2192");
                     break;
                 case 38: // Up
-                    currentKey[i].setText(textSequence[i]+" : Up");
+                    currentKey[i].setText(textSequence[i]+" : \u2191");
                     break;
                 case 40: // Down
-                    currentKey[i].setText(textSequence[i]+" : Down");
+                    currentKey[i].setText(textSequence[i]+" : \u2193");
                     break;
                 case 27: // Esc
-                    currentKey[i].setText(textSequence[i]+" : Esc");
+                    currentKey[i].setText(textSequence[i]+" : \u238B");
                     break;
                 case 32: // Space
-                    currentKey[i].setText(textSequence[i]+" : Space");
+                    currentKey[i].setText(textSequence[i]+" : \u2423");
                     break;
                 default:
                     char value = (char)num;
@@ -175,27 +175,27 @@ public class StartMenu extends JFrame {
         for (int i = 3; i < 6; i++) {
             currentKey[i] = new JLabel();
             currentKey[i].setBounds(110, (screenHeight - 100) + addH, 100, 30);
-            currentKey[i].setFont(new Font("Bahnschrift", Font.BOLD, 15));
+            currentKey[i].setFont(new Font("Sans Serif", Font.BOLD, 15));
             currentKey[i].setForeground(Color.RED);
-            int num= Integer.parseInt(var[i].toString());
+            int num = Integer.parseInt(var[i].toString());
             switch (num){
                 case 37: // left
-                    currentKey[i].setText(textSequence[i]+" : Left");
+                    currentKey[i].setText(textSequence[i]+" : \u2190");
                     break;
                 case 39: // Right
-                    currentKey[i].setText(textSequence[i]+" : Right");
+                    currentKey[i].setText(textSequence[i]+" : \u2192");
                     break;
                 case 38: // Up
-                    currentKey[i].setText(textSequence[i]+" : Up");
+                    currentKey[i].setText(textSequence[i]+" : \u2191");
                     break;
                 case 40: // Down
-                    currentKey[i].setText(textSequence[i]+" : Down");
+                    currentKey[i].setText(textSequence[i]+" : \u2193");
                     break;
                 case 27: // Esc
-                    currentKey[i].setText(textSequence[i]+" : Esc");
+                    currentKey[i].setText(textSequence[i]+" : \u238B");
                     break;
                 case 32: // Space
-                    currentKey[i].setText(textSequence[i]+" : Space");
+                    currentKey[i].setText(textSequence[i]+" : \u2423");
                     break;
                 default:
                     char value = (char)num;
