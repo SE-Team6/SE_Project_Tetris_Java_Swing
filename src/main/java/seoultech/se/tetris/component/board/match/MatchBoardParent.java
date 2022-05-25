@@ -8,9 +8,12 @@ import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchBoardParent extends JFrame {
     protected MatchInnerBoard left;
@@ -35,6 +38,8 @@ public class MatchBoardParent extends JFrame {
                 pressedKeys.clear();
             }
         });
+        HashMap<String, Integer> map = loaderResolution();
+        this.setSize(map.get("width")*2, map.get("height"));
     }
 
     protected void pause() {

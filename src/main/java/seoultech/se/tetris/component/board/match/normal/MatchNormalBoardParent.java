@@ -56,12 +56,14 @@ public class MatchNormalBoardParent extends MatchBoardParent {
 
 
 //        this.setLayout(new GridLayout(1, 2));
+
         JPanel out = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         out.setLayout(new GridLayout(1, 2));
         out.add(left);
         out.add(right);
+        this.setLayout(new FlowLayout());
         this.add(out);
 //        this.setLayout(new GridBagLayout());
 //        this.add(left, c);
@@ -69,7 +71,6 @@ public class MatchNormalBoardParent extends MatchBoardParent {
         this.addKeyListener(new PlayerLeftKeyListener());
         this.setFocusable(true);
 
-        setSize(1000, 500);
         setVisible(true);
         setLocationRelativeTo(null);
     }

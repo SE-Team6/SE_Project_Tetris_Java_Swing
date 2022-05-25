@@ -86,7 +86,6 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         this.addKeyListener(new PlayerLeftKeyListener());
         this.setFocusable(true);
 
-        setSize(1000, 500);
         setVisible(true);
         setLocationRelativeTo(null);
 
