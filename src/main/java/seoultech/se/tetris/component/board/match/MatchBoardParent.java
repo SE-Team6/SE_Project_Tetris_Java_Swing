@@ -4,7 +4,6 @@ import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.MatchPauseView;
 import seoultech.se.tetris.main.BattleModeGameOver;
-import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -134,55 +133,6 @@ public class MatchBoardParent extends JFrame {
         new BattleModeGameOver(getX(), getY(), leftScore.getScore(), rightScore.getScore());
     }
 
-//    public class PlayerLeftKeyListener extends Keyboard {
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            int keyCode = e.getKeyCode();
-//
-//            if (keyCode == KeyEvent.VK_S) {
-//                left.moveDown();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_D) {
-//                left.moveRight();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_A) {
-//                left.moveLeft();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_W) {
-//                left.moveRotate();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_F) {
-//                left.moveFall();
-//                left.drawBoard();
-//            }
-//        }
-//    }
-//
-//    public class PlayerRightKeyListener extends Keyboard {
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            int keyCode = e.getKeyCode();
-//
-//            if (keyCode == Keyboard.DOWN) {
-//                right.moveDown();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.RIGHT) {
-//                right.moveRight();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.LEFT) {
-//                right.moveLeft();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.UP) {
-//                right.moveRotate();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.SPACE) {
-//                right.moveFall();
-//                right.drawBoard();
-//            }else if (keyCode == Keyboard.ESC) {
-//                pause();
-//            }
-//        }
-//    }
 
     public class PlayerMouseListener implements MouseListener {
         @Override

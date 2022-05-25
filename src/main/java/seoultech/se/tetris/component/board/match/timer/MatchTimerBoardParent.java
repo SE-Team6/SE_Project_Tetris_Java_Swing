@@ -67,7 +67,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         JPanel out = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        out.setLayout(new GridLayout(1, 2));
+//        out.setLayout(new GridLayout(1, 2));
         out.add(left);
         out.add(right);
 
@@ -78,7 +78,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         c.gridy = 1;
         this.add(out, c);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridy = 2;       //third row
+        c.gridy = 0;       //third row
         this.add(timeView, c);
 
 //        this.add(left, c);
@@ -110,5 +110,19 @@ public class MatchTimerBoardParent extends MatchBoardParent {
     public void matchGameOver() {
         gameTimer.stop();
         super.matchGameOver();
+    }
+
+    @Override
+    public void stopTimer() {
+        super.stopTimer();
+        this.timeViewController.stop();
+        this.gameTimer.stop();
+    }
+
+    @Override
+    public void startTimer() {
+        super.startTimer();
+        this.timeViewController.start();
+        this.gameTimer.start();
     }
 }

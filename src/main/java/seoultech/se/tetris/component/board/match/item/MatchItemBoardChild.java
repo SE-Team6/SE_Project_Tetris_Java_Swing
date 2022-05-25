@@ -99,7 +99,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
 
-        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
+        StyleConstants.setFontSize(parentStyle, fontSize);
         StyleConstants.setFontFamily(parentStyle, ConfigBlock.font);
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
@@ -108,7 +108,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
         defaultStyle = pane.addStyle("defaultStyle", parentStyle);
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
-        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize / 2);
+        StyleConstants.setFontSize(parentStyle, fontSize);
         stackStyle = nextPanel.addStyle("stackStyle", parentStyle);
 
         //Create the first block and draw.

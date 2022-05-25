@@ -83,7 +83,7 @@ public class SetResolutionMenu extends JFrame {
                         new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                     case 2:
-                        writeResolution(800,1000,64);
+                        writeResolution(800,1000,60);
                         ver.getThirdResolution();
                         bs.setVisible(false);
                         new SetResolutionMenu(bs.getX(),bs.getY());
