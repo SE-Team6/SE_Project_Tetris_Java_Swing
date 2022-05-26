@@ -20,7 +20,6 @@ import java.util.Date;
 
 
 import static seoultech.se.tetris.menu.GetSetting.*;
-import static seoultech.se.tetris.menu.SetDefault.*;
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
 import static seoultech.se.tetris.component.JSONWriter.JSONArrayToArrayList;
 import static seoultech.se.tetris.component.JSONWriter.appendScore;
@@ -129,7 +128,7 @@ public class GameOver extends JFrame {
             scoreBoardLabel[i] = new JLabel(sbList[i]);
             scoreBoardLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
             scoreBoardLabel[i].setBorder(new LineBorder(Color.RED,1,true));
-            scoreBoardLabel[i].setBounds(sbListX[i],0,sbListSize[i],30);
+            scoreBoardLabel[i].setBounds   (sbListX[i],0,sbListSize[i],30);
             scoreBoardLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             scoreBoardLabel[i].setForeground(Color.BLACK);
             scoreBoardSummary.add(scoreBoardLabel[i]);
@@ -153,10 +152,9 @@ public class GameOver extends JFrame {
             scoreBoardSummary.add(nameLabel[i]);
 
             scoreLabel[i] =new JLabel();
-            scoreLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            scoreLabel[i].setFont(new Font("Bahns    chrift",Font.BOLD,10));
             scoreLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             scoreLabel[i].setBounds(sbListX[2],LabelY,sbListSize[2],32);
-
             scoreLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             scoreLabel[i].setForeground(Color.BLACK);
             scoreBoardSummary.add(scoreLabel[i]);
@@ -191,7 +189,7 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver();
+                    GameOver gm =new GameOver(bs.getX(),bs.getY(),0  );
                     gm.updateButton.setVisible(false);
                     ScoreBoard sb =new ScoreBoard(higLightNum);
                 }

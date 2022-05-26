@@ -64,7 +64,7 @@ public class SetKey2P {
             }
             else if(keyVal== KeyEvent.VK_ENTER){
                 if(positionPoint<6) {
-                    new GetKeyPanel(bs.getX(), bs.getY());
+                    new GetKeyPanel2P(bs.getX(), bs.getY());
                     bs.setVisible(false);
                 }
             }
@@ -99,7 +99,7 @@ public class SetKey2P {
             getLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,textFieldFontSize));
             getLabel[i].setOpaque(true);
             getLabel[i].setBackground(Color.BLACK);
-            getLabel[i].setForeground(Color.RED);
+            getLabel[i].setForeground(Color.BLUE);
             getLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             int num= Integer.parseInt(var[i].toString());
             switch (num){
