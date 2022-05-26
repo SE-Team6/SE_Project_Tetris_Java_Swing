@@ -2,6 +2,7 @@ package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.main.BattleModeGameOver;
+import seoultech.se.tetris.main.GameOver;
 
 import javax.swing.*;
 import java.awt.*;
@@ -224,7 +225,6 @@ public class StartMenu extends JFrame {
                 break;
             case 3: // 게임종료
                 bs.setVisible(false);
-//                new BattleModeGameOver(bs.getX(),bs.getY());
                 System.exit(0);
                 break;
         }

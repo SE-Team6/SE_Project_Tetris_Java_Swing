@@ -96,9 +96,9 @@ public class GetKeyPanel2P extends JFrame {
                 keyWriteValue[positionPoint]=(int)tmp;
         }
         writeKey(keyWriteValue,2);
-    }
+    }    
     public void keyLoad(){// 중복을 검사하기 위한 기존 키 정보 불러오기
-        JSONObject obj = loaderKey();
+        JSONObject obj = loaderKey(2   );
         Object [] var = new Object[6];
         var[0]= obj.get("LEFT");
         var[1]= obj.get("RIGHT");

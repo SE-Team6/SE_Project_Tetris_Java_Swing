@@ -18,6 +18,7 @@ public class GetKeyPanel extends JFrame {
     private Image backGround = new ImageIcon(getClass().getResource("/image/backGround/testBackground.jpg")).getImage();
     private JButton updateKey = new JButton("UPDATE");
     private JLabel getKeyLabel = new JLabel();
+//    private JTextField getKeyLabel = new JTextField();
 
     String [] keyGetValue = new String[6];
     int [] keyWriteValue = new int[6];
