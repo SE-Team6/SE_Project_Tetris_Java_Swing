@@ -32,7 +32,7 @@ public class SetKey2P {
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
     String [] keyLoadStringValue = new String[6];
-    JSONObject obj = loaderKey();
+    JSONObject obj = loaderKey(2);
     Object [] var = new Object[6];
     public SetKey2P(){}
 
@@ -65,7 +65,7 @@ public class SetKey2P {
             }
             else if(keyVal== KeyEvent.VK_ENTER){
                 if(positionPoint<6) {
-                    new GetKeyPanel(bs.getX(), bs.getY());
+                    new GetKeyPanel2P(bs.getX(), bs.getY());
                     bs.setVisible(false);
                 }
             }
@@ -86,7 +86,7 @@ public class SetKey2P {
     public void setLabel(){ // 라벨 세팅
         for (int i=0;i<6;i++){
             setLabel[i]=new JLabel(textSequence[i]);
-            setLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,labelFontSize));
+            setLabel[i].setFont(new Font("Sans Serif",Font.BOLD,labelFontSize));
             setLabel[i].setBounds(labelX,labelY[i],labelWidth,labelHeight);
             setLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             setLabel[i].setForeground(Color.YELLOW);
@@ -97,30 +97,30 @@ public class SetKey2P {
         for (int i=0;i<6;i++){
             getLabel[i]= new JLabel();
             getLabel[i].setBounds(textFieldX,labelY[i],textFieldWidth,textFieldHeight);
-            getLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,textFieldFontSize));
+            getLabel[i].setFont(new Font("Sans Serif",Font.BOLD,textFieldFontSize));
             getLabel[i].setOpaque(true);
             getLabel[i].setBackground(Color.BLACK);
-            getLabel[i].setForeground(Color.RED);
+            getLabel[i].setForeground(Color.BLUE);
             getLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
             int num= Integer.parseInt(var[i].toString());
             switch (num){
                 case 37: // left
-                    getLabel[i].setText("Left");
+                    getLabel[i].setText("\u2190");
                     break;
                 case 39: // Right
-                    getLabel[i].setText("Right");
+                    getLabel[i].setText("\u2192");
                     break;
                 case 38: // Up
-                    getLabel[i].setText("Up");
+                    getLabel[i].setText("\u2191");
                     break;
                 case 40: // Down
-                    getLabel[i].setText("Down");
+                    getLabel[i].setText("\u2193");
                     break;
                 case 27: // Esc
-                    getLabel[i].setText("Esc");
+                    getLabel[i].setText("\u238B");
                     break;
                 case 32: // Space
-                    getLabel[i].setText("Space");
+                    getLabel[i].setText("\u2423");
                     break;
                 default:
                     char value = (char)num;

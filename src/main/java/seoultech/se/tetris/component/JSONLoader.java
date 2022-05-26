@@ -69,8 +69,13 @@ public class JSONLoader {
         ESC 값 얻기  : obj.get("ESC");
         SPACE 값 얻기  : obj.get("SPACE");
      */
-    public static JSONObject loaderKey(){
-        JSONObject obj = (JSONObject) getJSONObject("settings","key1p");
+    public static JSONObject loaderKey(int player){
+        JSONObject obj;
+        if (player == 1){
+            obj = (JSONObject) getJSONObject("settings","key1p");
+        }else {
+            obj = (JSONObject) getJSONObject("settings","key2p");
+        }
         return obj;
     }
 

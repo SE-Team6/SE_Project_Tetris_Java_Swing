@@ -78,7 +78,9 @@ public class BattleModeMenu extends JFrame {
                 else if(positionPoint==2){
                     bs.setVisible(false);
                     // 타이머 배틀 모드
-                    new MatchTimerBoardParent(100000);
+                    new TimerMenu(bs.getX(),bs.getY());
+//                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
+//                new MatchTimerBoardParent(10000000);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
@@ -127,8 +129,9 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 타이머 배틀 모드
-                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
-                new MatchTimerBoardParent(10000000);
+                new TimerMenu(bs.getX(),bs.getY());
+//                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
+//                new MatchTimerBoardParent(10000000);
             }
         });
         setBtnImage();

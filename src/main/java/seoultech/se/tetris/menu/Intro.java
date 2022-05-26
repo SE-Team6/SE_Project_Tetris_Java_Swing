@@ -22,7 +22,7 @@ public class Intro extends Frame{
         }
         System.out.println(getClass().getResource("/image/Test/step0.jpg"));
         addWindowListener(new WindowHandler());
-        setSize(400, 600);
+        setSize(400, 500);
         setVisible(true);
         setLocationRelativeTo(null);
         num=0;
@@ -38,10 +38,6 @@ public class Intro extends Frame{
         }
         setVisible(false);
         new StartMenu(getX(), getY());
-
-
-
-//        getFrame().setIconImage(img);
     }
     public void paint(Graphics g){
         if(num > 7)num = 0;

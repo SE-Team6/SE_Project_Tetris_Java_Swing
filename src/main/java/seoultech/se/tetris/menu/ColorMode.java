@@ -37,6 +37,7 @@ public class ColorMode extends JFrame {
         notice.setBounds(0,0,400,30);
         notice.setHorizontalAlignment(SwingConstants.CENTER);
         add(notice);
+        notice.setFont(new Font("Sans Serif",Font.BOLD,12));
         notice.setText("현재 "+currentMode+"를 사용중이십니다 변경을 원하시는 모드를 선택하세요");
     }
 
@@ -44,6 +45,7 @@ public class ColorMode extends JFrame {
         int addX = 0;
         for (int i=0;i<3;i++){
             colorMode[i] = new JButton(colorModeText[i]);
+            colorMode[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             colorMode[i].setBounds(40+addX,30,80,30);
             addX +=120;
             add(colorMode[i]);
