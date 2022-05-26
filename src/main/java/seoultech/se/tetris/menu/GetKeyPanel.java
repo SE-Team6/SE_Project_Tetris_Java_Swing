@@ -173,29 +173,35 @@ public class GetKeyPanel extends JFrame {
         updateKey.addActionListener(new ActionListener() {  
             @Override
             public void actionPerformed(ActionEvent e) {
-                switch (positionPoint){
-                    case 0:
-                        keyGetValue[0]=getKeyLabel.getText();
-                        break;
-                    case 1:
-                        keyGetValue[1]=getKeyLabel.getText();
-                        break;
-                    case 2:
-                        keyGetValue[2]=getKeyLabel.getText();
-                        break;
-                    case 3:
-                        keyGetValue[3]=getKeyLabel.getText();
-                        break;
-                    case 4:
-                        keyGetValue[4]=getKeyLabel.getText();
-                        break;
-                    case 5:
-                        keyGetValue[5]=getKeyLabel.getText();
-                        break;
+                if(checkValue==0) JOptionPane.showMessageDialog(null,"변경하실 키를 입력해주세요");
+                else {
+                    int count = 0;
+                    for (int i = 0; i < 6; i++) {
+                        if (positionPoint == i) {
+                        } else if (checkValue == keyLoadCharValue[i]) count += 1;
+                    }
+                    if (count > 0) JOptionPane.showMessageDialog(null, "중복된 키가 존재합니다 다시 세팅해주세요");
+                    else {
+                        switch (positionPoint) {
+                            case 0:
+                                keyGetValue[0] = getKeyLabel.getText();
+                            case 1:
+                                keyGetValue[1] = getKeyLabel.getText();
+                            case 2:
+                                keyGetValue[2] = getKeyLabel.getText();
+                            case 3:
+                                keyGetValue[3] = getKeyLabel.getText();
+                            case 4:
+                                keyGetValue[4] = getKeyLabel.getText();
+                            case 5:
+                                keyGetValue[5] = getKeyLabel.getText();
+                        }
+                        keyWrite();
+                        JOptionPane.showMessageDialog(null, "키 변경이 완료되었습니다.");
+                        setVisible(false);
+                        new SetKey1P(prevX, prevY);
+                    }
                 }
-                keyWrite();
-                JOptionPane.showMessageDialog(null,"키 설정이 변경되었습니다.");
-                setVisible(false);
 
             }
         });

@@ -32,7 +32,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
+                matchGameOver(2);
             }
         });
         left.addPropertyChangeListener("attProp", new PropertyChangeListener() {
@@ -47,7 +47,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
+                matchGameOver(1);
             }
         });
         right.addPropertyChangeListener("attProp", new PropertyChangeListener() {
@@ -102,7 +102,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
 
 
         gameTimer = new Timer(time, e -> {
-           matchGameOver();
+           matchGameOver(0);
         });
         currentTime = time;
         timeView.setText(Long.toString(currentTime / 1000 / 60) + ":"+ Long.toString(currentTime / 1000 % 60));
@@ -112,7 +112,7 @@ public class MatchTimerBoardParent extends MatchBoardParent {
             long hour = currentTime / 1000 / 60;
             long minute = currentTime / 1000 % 60;
             if (currentTime < 0) {
-                matchGameOver();
+                matchGameOver(0);
             }
             timeView.setText(Long.toString(hour) + ":"+ Long.toString(minute));
         });
@@ -121,10 +121,10 @@ public class MatchTimerBoardParent extends MatchBoardParent {
     }
 
     @Override
-    public void matchGameOver() {
+    public void matchGameOver(int winType) {
         gameTimer.stop();
         timeViewController.stop();
-        super.matchGameOver();
+        super.matchGameOver(winType);
     }
 
     @Override

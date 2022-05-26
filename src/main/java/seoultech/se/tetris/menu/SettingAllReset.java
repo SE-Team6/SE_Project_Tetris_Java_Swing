@@ -13,7 +13,6 @@ public class SettingAllReset extends JFrame {
     private JLabel ask = new JLabel("정말로 설정을 초기화 하시겠습니까?");
     public JButton yesReset = new JButton("Yes");
     private JButton noReset = new JButton("No");
-    private int [] keyValue = {32,83,65,27,68,87};
 
     public SettingAllReset(){
         URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
