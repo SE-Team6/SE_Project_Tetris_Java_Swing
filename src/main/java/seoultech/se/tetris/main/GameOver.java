@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -51,9 +52,9 @@ public class GameOver extends JFrame {
     private JLabel[] scoreBoardLabel = new JLabel[3];
     private JTextField setMyName = new JTextField();;
     private JLabel myScore;
-    private final JButton updateButton = new JButton(updateBtnBasicImage);
-    private final JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
-    private final JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
+    private JButton updateButton = new JButton(updateBtnBasicImage);
+    private JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
+    private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     public static int [] sbListX;
     public static int [] sbListSize;
@@ -70,6 +71,10 @@ public class GameOver extends JFrame {
     public GameOver(){}
 
     public GameOver(int x, int y, int score){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         bs.setVisible(true);
         this.score = score;

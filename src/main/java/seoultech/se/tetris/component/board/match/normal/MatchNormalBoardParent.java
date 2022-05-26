@@ -9,6 +9,9 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchNormalBoardParent extends MatchBoardParent {
     public MatchNormalBoardParent() {
@@ -55,21 +58,21 @@ public class MatchNormalBoardParent extends MatchBoardParent {
 
 
 
-//        this.setLayout(new GridLayout(1, 2));
+
         JPanel out = new JPanel();
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
+//        c.fill = GridBagConstraints.BOTH;
+        HashMap<String, Integer> map = loaderResolution();
         out.setLayout(new GridLayout(1, 2));
+
         out.add(left);
         out.add(right);
+        left.setSize(map.get("width"), map.get("height"));
+        right.setSize(map.get("width"), map.get("height"));
+        out.setSize(map.get("width")*2, map.get("height"));
+        this.setSize(map.get("width")*2, map.get("height"));
         this.add(out);
-//        this.setLayout(new GridBagLayout());
-//        this.add(left, c);
-//        this.add(right, c);
         this.addKeyListener(new PlayerLeftKeyListener());
         this.setFocusable(true);
-
-        setSize(1000, 500);
         setVisible(true);
         setLocationRelativeTo(null);
     }

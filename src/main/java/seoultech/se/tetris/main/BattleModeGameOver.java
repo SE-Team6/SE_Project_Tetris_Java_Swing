@@ -9,6 +9,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import static seoultech.se.tetris.menu.GetSetting.*;
 import static seoultech.se.tetris.menu.SetDefault.*;
@@ -42,6 +43,10 @@ public class BattleModeGameOver extends JFrame {
     public BattleModeGameOver(){}
 
     public BattleModeGameOver(int x, int y, int leftScore, int rightScore){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         this.leftScore = leftScore;
         this.rightScore = rightScore;
         bs = new SetDefault(x, y);

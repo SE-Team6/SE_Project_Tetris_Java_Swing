@@ -10,6 +10,9 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchTimerBoardParent extends MatchBoardParent {
     public Timer gameTimer;
@@ -67,18 +70,26 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         JPanel out = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
+        HashMap<String, Integer> map = loaderResolution();
         out.setLayout(new GridLayout(1, 2));
+
+
+        left.setSize(map.get("width"), map.get("height"));
+        right.setSize(map.get("width"), map.get("height"));
+        out.setSize(map.get("width")*2, map.get("height"));
         out.add(left);
         out.add(right);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.0;
+        c.weightx = 1;
+        c.weighty = 0.9;
         c.gridwidth = 3;
         c.gridx = 0;
         c.gridy = 1;
         this.add(out, c);
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridy = 2;       //third row
+        c.weighty = 0.1;
+        c.gridy = 0;       //third row
         this.add(timeView, c);
 
 //        this.add(left, c);
@@ -86,7 +97,6 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         this.addKeyListener(new PlayerLeftKeyListener());
         this.setFocusable(true);
 
-        setSize(1000, 500);
         setVisible(true);
         setLocationRelativeTo(null);
 
@@ -101,15 +111,33 @@ public class MatchTimerBoardParent extends MatchBoardParent {
             currentTime -= 1000;
             long hour = currentTime / 1000 / 60;
             long minute = currentTime / 1000 % 60;
+            if (currentTime < 0) {
+                matchGameOver();
+            }
             timeView.setText(Long.toString(hour) + ":"+ Long.toString(minute));
         });
         timeViewController.start();
-        gameTimer.start();
+//        gameTimer.start();
     }
 
     @Override
     public void matchGameOver() {
         gameTimer.stop();
+        timeViewController.stop();
         super.matchGameOver();
+    }
+
+    @Override
+    public void stopTimer() {
+        super.stopTimer();
+        this.timeViewController.stop();
+        this.gameTimer.stop();
+    }
+
+    @Override
+    public void startTimer() {
+        super.startTimer();
+        this.timeViewController.start();
+        this.gameTimer.start();
     }
 }

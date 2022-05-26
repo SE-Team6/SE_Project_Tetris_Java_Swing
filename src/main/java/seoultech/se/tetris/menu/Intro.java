@@ -1,17 +1,21 @@
 package seoultech.se.tetris.menu;
 
-import javax.swing.*;
+import seoultech.se.tetris.main.Tetris;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 
 public class Intro extends Frame{
     Image img[] = new Image[8];
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
     public Intro(){
-        Image icon = Toolkit.getDefaultToolkit().getImage("icon.ico");
-        setIconImage(icon);
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         for(int i = 0; i < 7; i++){
             img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }

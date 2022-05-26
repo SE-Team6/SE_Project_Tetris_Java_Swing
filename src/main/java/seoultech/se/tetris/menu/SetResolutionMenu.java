@@ -1,9 +1,12 @@
 package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.component.Keyboard;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 
 import static seoultech.se.tetris.component.JSONWriter.writeResolution;
 import static seoultech.se.tetris.menu.SetDefault.*;
@@ -34,6 +37,10 @@ public class SetResolutionMenu extends JFrame {
     public SetResolutionMenu(){}
 
     public SetResolutionMenu(int x, int y){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         positionPoint =0;
         bs.setVisible(true);
@@ -66,20 +73,20 @@ public class SetResolutionMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 writeResolution(600,800,48);
-                ver.getFirstResolution();
+                ver.getSecondResolution();
                 bs.setVisible(false);
                 new SetResolutionMenu(bs.getX(),bs.getY());
             }
         });
-        menuButton[2].addMouseListener(new MouseAdapter() {
+        menuButton[2].addMouseListener((new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 writeResolution(800,1000,64);
-                ver.getFirstResolution();
+                ver.getThirdResolution();
                 bs.setVisible(false);
                 new SetResolutionMenu(bs.getX(),bs.getY());
             }
-        });
+        }));
         setBtnImage();
     }
     public class menuKeyListener extends KeyAdapter {

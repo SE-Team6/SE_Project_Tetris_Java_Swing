@@ -5,12 +5,15 @@ import seoultech.se.tetris.component.board.match.item.MatchItemBoardParent;
 import seoultech.se.tetris.component.board.match.normal.MatchNormalBoardParent;
 import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardChild;
 import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardParent;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.SetDefault.*;
@@ -35,6 +38,10 @@ public class BattleModeMenu extends JFrame {
     public BattleModeMenu(){}
 
     public BattleModeMenu(int x, int y) {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);

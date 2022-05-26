@@ -1,12 +1,15 @@
 package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.component.ScoreBoard;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
 
@@ -29,6 +32,10 @@ public class SelectScoreMenu extends JFrame {
     public SelectScoreMenu(){}
 
     public SelectScoreMenu(int x, int y) {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);

@@ -4,13 +4,18 @@ import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.MatchPauseView;
 import seoultech.se.tetris.main.BattleModeGameOver;
-import seoultech.se.tetris.main.GameOver;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchBoardParent extends JFrame {
     protected MatchInnerBoard left;
@@ -23,6 +28,10 @@ public class MatchBoardParent extends JFrame {
 
 
     public MatchBoardParent() {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         // focus out
         this.addFocusListener(new FocusListener() {
             @Override
@@ -35,6 +44,8 @@ public class MatchBoardParent extends JFrame {
                 pressedKeys.clear();
             }
         });
+        HashMap<String, Integer> map = loaderResolution();
+        this.setSize(map.get("width")*2, map.get("height"));
     }
 
     protected void pause() {
@@ -129,55 +140,6 @@ public class MatchBoardParent extends JFrame {
         new BattleModeGameOver(getX(), getY(), leftScore.getScore(), rightScore.getScore());
     }
 
-//    public class PlayerLeftKeyListener extends Keyboard {
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            int keyCode = e.getKeyCode();
-//
-//            if (keyCode == KeyEvent.VK_S) {
-//                left.moveDown();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_D) {
-//                left.moveRight();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_A) {
-//                left.moveLeft();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_W) {
-//                left.moveRotate();
-//                left.drawBoard();
-//            } else if (keyCode == KeyEvent.VK_F) {
-//                left.moveFall();
-//                left.drawBoard();
-//            }
-//        }
-//    }
-//
-//    public class PlayerRightKeyListener extends Keyboard {
-//        @Override
-//        public void keyPressed(KeyEvent e) {
-//            int keyCode = e.getKeyCode();
-//
-//            if (keyCode == Keyboard.DOWN) {
-//                right.moveDown();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.RIGHT) {
-//                right.moveRight();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.LEFT) {
-//                right.moveLeft();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.UP) {
-//                right.moveRotate();
-//                right.drawBoard();
-//            } else if (keyCode == Keyboard.SPACE) {
-//                right.moveFall();
-//                right.drawBoard();
-//            }else if (keyCode == Keyboard.ESC) {
-//                pause();
-//            }
-//        }
-//    }
 
     public class PlayerMouseListener implements MouseListener {
         @Override

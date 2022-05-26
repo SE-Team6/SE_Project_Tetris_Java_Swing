@@ -3,12 +3,15 @@ package seoultech.se.tetris.menu;
 import seoultech.se.tetris.component.board.Board;
 import seoultech.se.tetris.component.board.ItemBoard;
 import seoultech.se.tetris.component.board.NormalBoard;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 
 import static seoultech.se.tetris.menu.GameDifficultyMenu.gameDifficultyNum;
 import static seoultech.se.tetris.menu.SetDefault.*;
@@ -31,6 +34,10 @@ public class OnePlayModeMenu extends JFrame {
     public OnePlayModeMenu(){}
 
     public OnePlayModeMenu(int x, int y) {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);

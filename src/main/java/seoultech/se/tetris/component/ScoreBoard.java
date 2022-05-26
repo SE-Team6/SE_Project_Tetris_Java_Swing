@@ -2,6 +2,7 @@ package seoultech.se.tetris.component;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -10,6 +11,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 
 import static seoultech.se.tetris.component.JSONLoader.getJSONObject;
@@ -42,6 +44,10 @@ public class ScoreBoard extends JFrame {
     private JSONArray res;
     private JSONArray loadedScores;
     public ScoreBoard(int num){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         setting();
         pageButton();
         pageNumLabel();

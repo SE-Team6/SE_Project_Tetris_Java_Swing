@@ -70,6 +70,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
 
         outLayout.fill = GridBagConstraints.BOTH;
         outLayout.weightx = 0.3;
+        outLayout.weighty = 1;
         this.add(pane, outLayout);
         outLayout.weightx = 0.1;
         this.add(rightPanel, outLayout);
@@ -99,7 +100,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
         // parent Style
         parentStyle = pane.addStyle("parentStyle", null);
 
-        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize);
+        StyleConstants.setFontSize(parentStyle, fontSize);
         StyleConstants.setFontFamily(parentStyle, ConfigBlock.font);
         StyleConstants.setBold(parentStyle, true);
         StyleConstants.setForeground(parentStyle, Color.WHITE);
@@ -108,7 +109,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
         defaultStyle = pane.addStyle("defaultStyle", parentStyle);
         blockStyle = pane.addStyle("blockStyle", parentStyle);
 
-        StyleConstants.setFontSize(parentStyle, ConfigBlock.fontSize / 2);
+        StyleConstants.setFontSize(parentStyle, fontSize);
         stackStyle = nextPanel.addStyle("stackStyle", parentStyle);
 
         //Create the first block and draw.
@@ -357,7 +358,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
             lineCount -= stageUpStandard;
             next = getRandomItemBlock();
         } else {
-            next = getRandomItemBlock();
+            next = getRandomBlock();
         }
         drawNextBlock();
         x = 3;

@@ -6,8 +6,8 @@ import seoultech.se.tetris.component.JSONLoader;
 public class ConfigBlock {
     public static final String font = "courier new";
     public static final float lineSpacing = -0.5f;
-    public static final String BORDER_CHAR_WIN = "X";
-    public static final String BLOCK_CHAR_WIN = "O";
+    public static final String BORDER_CHAR_WIN = "□";
+    public static final String BLOCK_CHAR_WIN = "■";
     public static final String NON_BLOCK_CHAR_WIN = " ";
 //    public static final String NON_BLOCK_CHAR_WIN = "    ";
 

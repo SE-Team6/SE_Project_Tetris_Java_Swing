@@ -15,7 +15,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchInnerBoard extends JPanel {
     public static final long serialVersionUID = 2434035659171694595L;
@@ -79,13 +82,23 @@ public class MatchInnerBoard extends JPanel {
     protected Block[][] prevBoard;
     public int stackLine = 0;
 
+    public int fontSize;
+
     protected boolean isAction = false;
     public boolean gameDone = false;
 
     public ArrayList<Block[]> attProp;
 
     public MatchInnerBoard() {
-
+        if(ConfigBlock.fontSize == 28) {
+            fontSize = 20;
+        } else if (ConfigBlock.fontSize == 48) {
+            fontSize = 32;
+        } else {
+            fontSize = 48;
+        }
+        HashMap<String, Integer> map = loaderResolution();
+        this.setSize(map.get("width"), map.get("height"));
     }
 
     protected void focusFrame() {

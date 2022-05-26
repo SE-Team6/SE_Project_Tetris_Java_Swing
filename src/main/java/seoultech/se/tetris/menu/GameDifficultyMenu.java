@@ -100,6 +100,7 @@ public class GameDifficultyMenu {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=0;
+                bs.setVisible(false);
                 new PlayModeMenu(bs.getX(), bs.getY());
                 bs.setVisible(false);
 //                if(gameModeNum2 == 0) normalMode(positionPoint);
@@ -110,6 +111,7 @@ public class GameDifficultyMenu {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=1;
+                bs.setVisible(false);
                 new PlayModeMenu(bs.getX(), bs.getY());
                 bs.setVisible(false);
 //                if(gameModeNum2 == 0) normalMode(positionPoint);
@@ -120,6 +122,7 @@ public class GameDifficultyMenu {
             @Override
             public void mousePressed(MouseEvent e) {
                 gameDifficultyNum=2;
+                bs.setVisible(false);
                 new PlayModeMenu(bs.getX(), bs.getY());
                 bs.setVisible(false);
 //                if(gameModeNum2 == 0) normalMode(positionPoint);

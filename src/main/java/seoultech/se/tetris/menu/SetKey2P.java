@@ -37,6 +37,7 @@ public class SetKey2P {
     public SetKey2P(){}
 
     public SetKey2P(int x, int y){
+
         bs = new SetDefault(x, y);
         bs.setVisible(true);
         keyLoad();

@@ -1,8 +1,12 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.main.Tetris;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 public class SettingAllReset extends JFrame {
 
@@ -12,6 +16,10 @@ public class SettingAllReset extends JFrame {
     private int [] keyValue = {32,83,65,27,68,87};
 
     public SettingAllReset(){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         setVisible(true);
         setSize(400,100);
         setFocusable(true);

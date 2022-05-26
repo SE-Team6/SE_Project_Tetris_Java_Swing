@@ -6,6 +6,7 @@ import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.PauseView;
 import seoultech.se.tetris.config.ConfigBlock;
 import seoultech.se.tetris.main.GameOver;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import javax.swing.text.Style;
@@ -16,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -84,6 +86,10 @@ public abstract class Board extends JFrame {
 
     public Board() {
         super("SW TEAM 6");
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 

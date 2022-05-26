@@ -1,10 +1,13 @@
 package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.blocks.ParentBlock;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderColor;
 import static seoultech.se.tetris.component.JSONWriter.writeColorMode;
@@ -19,6 +22,10 @@ public class ColorMode extends JFrame {
     private int colorNum= loaderColor();
     private String currentMode="";
     public ColorMode(){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         setVisible(true);
         setSize(400,100);
         setFocusable(true);
@@ -30,6 +37,7 @@ public class ColorMode extends JFrame {
         notice.setBounds(0,0,400,30);
         notice.setHorizontalAlignment(SwingConstants.CENTER);
         add(notice);
+        notice.setFont(new Font("Sans Serif",Font.BOLD,12));
         notice.setText("현재 "+currentMode+"를 사용중이십니다 변경을 원하시는 모드를 선택하세요");
     }
 
@@ -37,6 +45,7 @@ public class ColorMode extends JFrame {
         int addX = 0;
         for (int i=0;i<3;i++){
             colorMode[i] = new JButton(colorModeText[i]);
+            colorMode[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             colorMode[i].setBounds(40+addX,30,80,30);
             addX +=120;
             add(colorMode[i]);

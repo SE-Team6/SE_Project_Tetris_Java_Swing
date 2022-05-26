@@ -124,10 +124,14 @@ public class PauseView extends JDialog {
     private void showSelectedButton() {
         if (idx == 0) {
             resumeBtn.setSelected(true);
+            resumeBtn.setBorder(BorderFactory.createLineBorder(Color.red, 1));
             exitBtn.setSelected(false);
+            exitBtn.setBorder(BorderFactory.createEmptyBorder());
         } else {
             resumeBtn.setSelected(false);
+            resumeBtn.setBorder(BorderFactory.createEmptyBorder());
             exitBtn.setSelected(true);
+            exitBtn.setBorder(BorderFactory.createLineBorder(Color.red, 1));
         }
     }
 }

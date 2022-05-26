@@ -1,11 +1,13 @@
 package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.menu.SetDefault.screenWidth;
@@ -39,6 +41,10 @@ public class SetKey1P extends JFrame{
     public SetKey1P(){}
 
     public SetKey1P(int x, int y){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         bs.setVisible(true);
         keyLoad();

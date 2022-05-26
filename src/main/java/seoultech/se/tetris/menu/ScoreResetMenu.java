@@ -1,10 +1,11 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.main.Tetris;
+
 import javax.swing.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.net.URL;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
 
@@ -28,6 +29,10 @@ public class ScoreResetMenu extends JFrame {
 
     }
     public ScoreResetMenu(int x , int y) {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x,y);
         positionPoint=0;
         bs.setVisible(true);
@@ -35,11 +40,43 @@ public class ScoreResetMenu extends JFrame {
         bs.addKeyListener(new menuKeyListener());
         bs.add(bm.backMenuBtn);
         backToMenu();
+        bs.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                requestFocusBS();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+    }
+
+    public void requestFocusBS() {
+        bs.requestFocus();
+        bs.setFocusable(true);
     }
     public class menuKeyListener extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             int keyValue = e.getKeyCode();
+            System.out.println(keyValue);
             if (keyValue == key.DOWN) {
                 positionPoint += 1;
                 if (positionPoint == 2) positionPoint = 0;
