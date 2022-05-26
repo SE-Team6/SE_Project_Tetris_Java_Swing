@@ -53,6 +53,33 @@ public class SetResolutionMenu extends JFrame {
             bs.add(menuButton[i]);
             addY+=70;
         }
+        menuButton[0].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                writeResolution(400,600,28);
+                ver.getFirstResolution();
+                bs.setVisible(false);
+                new SetResolutionMenu(bs.getX(),bs.getY());
+            }
+        });
+        menuButton[1].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                writeResolution(600,800,48);
+                ver.getFirstResolution();
+                bs.setVisible(false);
+                new SetResolutionMenu(bs.getX(),bs.getY());
+            }
+        });
+        menuButton[2].addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                writeResolution(800,1000,64);
+                ver.getFirstResolution();
+                bs.setVisible(false);
+                new SetResolutionMenu(bs.getX(),bs.getY());
+            }
+        });
         setBtnImage();
     }
     public class menuKeyListener extends KeyAdapter {
@@ -72,23 +99,17 @@ public class SetResolutionMenu extends JFrame {
                 switch (positionPoint){
                     case 0:
                         writeResolution(400,600,28);
-                        ver.getFirstResolution();
-                        bs.setVisible(false);
-                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                     case 1:
                         writeResolution(600,800,48);
-                        ver.getSecondResolution();
-                        bs.setVisible(false);
-                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                     case 2:
                         writeResolution(800,1000,64);
-                        ver.getThirdResolution();
-                        bs.setVisible(false);
-                        new SetResolutionMenu(bs.getX(),bs.getY());
                         break;
                 }
+                ver.getFirstResolution();
+                bs.setVisible(false);
+                new SetResolutionMenu(bs.getX(),bs.getY());
             }
             else if(keyValue == KeyEvent.VK_BACK_SPACE){
                     bs.setVisible(false);

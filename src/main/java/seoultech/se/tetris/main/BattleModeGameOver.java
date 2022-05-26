@@ -1,6 +1,5 @@
 package seoultech.se.tetris.main;
 
-import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.menu.GetSetting;
 import seoultech.se.tetris.menu.SetDefault;
 import seoultech.se.tetris.menu.StartMenu;
@@ -28,6 +27,7 @@ public class BattleModeGameOver extends JFrame {
     public Image winnerImage;
     public static Image winner1pImage;
     public static Image winner2pImage;
+    public static Image drawImage;
     public int leftScore,rightScore; // left:1p right : 2p
 
     private JLabel Score2P;
@@ -136,6 +136,7 @@ public class BattleModeGameOver extends JFrame {
     public void getWinnerImage(){
         if(leftScore>rightScore)  winnerImage = winner1pImage;
         else if(leftScore<rightScore)  winnerImage = winner2pImage;
+        else if(leftScore == rightScore) winnerImage = drawImage;
     }
     public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
         GetSetting ver =new GetSetting();

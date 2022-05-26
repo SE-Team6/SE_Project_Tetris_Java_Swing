@@ -8,24 +8,22 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import static seoultech.se.tetris.menu.SetDefault.*;
-import static seoultech.se.tetris.menu.SetDefault.buttonHeight;
 import static seoultech.se.tetris.menu.SetKey1P.positionPoint;
 
-public class SetKeyMenu extends JFrame {
-
+public class TimerMenu extends JFrame {
     private SetDefault bs;
     private BackMenuBtn bm = new BackMenuBtn();
-    private ImageIcon onePlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1P_Set_B.jpg"));
-    private ImageIcon twoPlayBtnImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2P_Set_B.jpg"));
-    private ImageIcon onePlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/1P_Set_E.jpg"));
-    private ImageIcon twoPlayBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/setting_Menu_btn/key_set_btn/2P_Set_E.jpg"));
-    private ImageIcon[] BasicImage = {onePlayBtnImage, twoPlayBtnImage};
-    private ImageIcon[] EnterImage = {onePlayBtnEnterImage, twoPlayBtnEnterImage};
+    private ImageIcon threeTimeModeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/timer03_B.jpg"));
+    private ImageIcon fiveTimeBtnImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/timer05_B.jpg"));
+    private ImageIcon threeTimBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/timer03_E.jpg"));
+    private ImageIcon fiveTimeBtnEnterImage = new ImageIcon(getClass().getResource("/image/Button/gameMode_btn/timer05_E.jpg"));
+    private ImageIcon[] BasicImage = {threeTimeModeBtnImage, fiveTimeBtnImage};
+    private ImageIcon[] EnterImage = {threeTimBtnEnterImage, fiveTimeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
-    public SetKeyMenu(){}
+    public TimerMenu(){}
 
-    public SetKeyMenu(int x, int y) {
+    public TimerMenu(int x, int y) {
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
@@ -50,16 +48,16 @@ public class SetKeyMenu extends JFrame {
             else if(keyValue==KeyEvent.VK_ENTER){
                 if (positionPoint==0){
                     bs.setVisible(false);
-                    new SetKey1P(bs.getX(), bs.getY());
+                    //3분 타이머 게임 시작
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
-                    new SetKey2P(bs.getX(), bs.getY());
+                    //5분 타이머 게임시작
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
                 bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                new BattleModeMenu(bs.getX(),bs.getY());
             }
         }
     }
@@ -69,7 +67,7 @@ public class SetKeyMenu extends JFrame {
             else menuButton[i].setIcon(BasicImage[i]);
         }
     }
-    public void setButton() { //
+    public void setButton() { // 일반,아이템
         int addY = 0;
         for (int i = 0; i < 2; i++) {
             menuButton[i] = new JButton(BasicImage[i]);
@@ -84,26 +82,23 @@ public class SetKeyMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SetKey1P(bs.getX(), bs.getY());
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SetKey2P(bs.getX(), bs.getY());
             }
         });
 
         setBtnImage();
     }
-
     public void backToMenu(){
         bm.backMenuBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new SettingMenu(bs.getX(), bs.getY());
+                new BattleModeMenu(bs.getX(),bs.getY());
             }
         });
     }

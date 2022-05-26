@@ -29,6 +29,7 @@ public class SetKey1P extends JFrame{
     SetDefault bs;
     BackMenuBtn bm = new BackMenuBtn();
 
+
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
     String [] keyLoadStringValue = new String[6];

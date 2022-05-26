@@ -55,6 +55,7 @@ public class GetSetting {
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary.jpg")).getImage();
         winner1pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/1PWin_400.jpg")).getImage();
         winner2pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/2PWin_400.jpg")).getImage();
+        drawImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/DRAW_400.jpg")).getImage();
         gameOverTitleX=0;
         scoreBoardWidth=170;
         scoreBoardHeight=430;
@@ -72,6 +73,7 @@ public class GetSetting {
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_600.jpg")).getImage();
         winner1pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/1PWin_600.jpg")).getImage();
         winner2pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/2PWin_600.jpg")).getImage();
+        drawImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/DRAW_600.jpg")).getImage();
         gameOverTitleX=100;
         scoreBoardWidth=300;
         scoreBoardHeight=630;
@@ -89,6 +91,7 @@ public class GetSetting {
         gameOverBackGround = new ImageIcon(getClass().getResource("/image/backGround/GameOver/scoreBoardsummary_800.jpg")).getImage();
         winner1pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/1PWin_800.jpg")).getImage();
         winner2pImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/2PWin_800.jpg")).getImage();
+        drawImage = new ImageIcon(getClass().getResource("/image/backGround/GameOver/DRAW_800.jpg")).getImage();
         gameOverTitleX = 200;
         scoreBoardWidth = 500;
         scoreBoardHeight = 800;
