@@ -59,6 +59,7 @@ public class MatchBoardChild extends MatchInnerBoard {
 
         outLayout.fill = GridBagConstraints.BOTH;
         outLayout.weightx = 0.3;
+        outLayout.weighty = 1;
         this.add(pane, outLayout);
         outLayout.weightx = 0.1;
         this.add(rightPanel, outLayout);

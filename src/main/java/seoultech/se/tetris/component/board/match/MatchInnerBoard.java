@@ -93,9 +93,9 @@ public class MatchInnerBoard extends JPanel {
         if(ConfigBlock.fontSize == 28) {
             fontSize = 20;
         } else if (ConfigBlock.fontSize == 48) {
-            fontSize = 24;
+            fontSize = 32;
         } else {
-            fontSize = 24;
+            fontSize = 48;
         }
         HashMap<String, Integer> map = loaderResolution();
         this.setSize(map.get("width"), map.get("height"));

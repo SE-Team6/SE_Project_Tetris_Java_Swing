@@ -14,6 +14,7 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -71,6 +72,10 @@ public class GameOver extends JFrame {
     public GameOver(){}
 
     public GameOver(int x, int y, int score){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x, y);
         bs.setVisible(true);
         this.score = score;

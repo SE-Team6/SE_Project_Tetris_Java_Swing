@@ -58,9 +58,10 @@ public class MatchTimerBoardChild extends MatchInnerBoard {
         rightPanel.setBorder(rightBorder);
 
         outLayout.fill = GridBagConstraints.BOTH;
-        outLayout.weightx = 0.3;
+        outLayout.weightx = 0.5;
+        outLayout.weighty = 1;
         this.add(pane, outLayout);
-        outLayout.weightx = 0.1;
+        outLayout.weightx = 0.5;
         this.add(rightPanel, outLayout);
 
         //Set timer for block drops.

@@ -2,12 +2,14 @@ package seoultech.se.tetris.menu;
 
 import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.config.ConfigBlock;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.net.URL;
 import java.util.HashMap;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
@@ -41,6 +43,10 @@ public class SetDefault extends JFrame {
     public SetDefault(){}
 
     public SetDefault(int x, int y) {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         getResolution();
         ver.setBackGround(screenWidth);
         key.setKey();

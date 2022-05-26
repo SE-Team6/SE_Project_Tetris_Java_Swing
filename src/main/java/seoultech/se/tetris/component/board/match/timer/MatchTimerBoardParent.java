@@ -81,12 +81,14 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         out.add(right);
 
         c.fill = GridBagConstraints.HORIZONTAL;
-        c.weightx = 0.0;
+        c.weightx = 1;
+        c.weighty = 0.9;
         c.gridwidth = 3;
         c.gridx = 0;
         c.gridy = 1;
         this.add(out, c);
         c.fill = GridBagConstraints.HORIZONTAL;
+        c.weighty = 0.1;
         c.gridy = 0;       //third row
         this.add(timeView, c);
 
@@ -109,15 +111,19 @@ public class MatchTimerBoardParent extends MatchBoardParent {
             currentTime -= 1000;
             long hour = currentTime / 1000 / 60;
             long minute = currentTime / 1000 % 60;
+            if (currentTime < 0) {
+                matchGameOver();
+            }
             timeView.setText(Long.toString(hour) + ":"+ Long.toString(minute));
         });
         timeViewController.start();
-        gameTimer.start();
+//        gameTimer.start();
     }
 
     @Override
     public void matchGameOver() {
         gameTimer.stop();
+        timeViewController.stop();
         super.matchGameOver();
     }
 

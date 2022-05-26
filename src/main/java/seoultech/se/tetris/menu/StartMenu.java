@@ -2,6 +2,7 @@ package seoultech.se.tetris.menu;
 
 import org.json.simple.JSONObject;
 import seoultech.se.tetris.main.BattleModeGameOver;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
@@ -45,6 +47,10 @@ public class StartMenu extends JFrame {
 
     //시작 메뉴
     public StartMenu(int x, int y){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         bs = new SetDefault(x,y);
         setStartMenuBtn();
         bs.setVisible(true);

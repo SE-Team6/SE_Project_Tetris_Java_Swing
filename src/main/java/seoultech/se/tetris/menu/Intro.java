@@ -1,20 +1,28 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.main.Tetris;
+
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URL;
 
 public class Intro extends Frame{
     Image img[] = new Image[8];
     /*8개의 이미지 객체를 선언함.*/
     static int num = 0;
     public Intro(){
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
+
         for(int i = 0; i < 7; i++){
             img[i] = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/image/Test/step" + i + ".jpg"));
         }
         System.out.println(getClass().getResource("/image/Test/step0.jpg"));
         addWindowListener(new WindowHandler());
-        setSize(400, 500);
+        setSize(400, 600);
         setVisible(true);
         setLocationRelativeTo(null);
         num=0;
@@ -30,6 +38,10 @@ public class Intro extends Frame{
         }
         setVisible(false);
         new StartMenu(getX(), getY());
+
+
+
+//        getFrame().setIconImage(img);
     }
     public void paint(Graphics g){
         if(num > 7)num = 0;

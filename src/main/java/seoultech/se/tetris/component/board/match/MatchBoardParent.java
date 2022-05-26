@@ -4,9 +4,12 @@ import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.Score;
 import seoultech.se.tetris.component.pause.MatchPauseView;
 import seoultech.se.tetris.main.BattleModeGameOver;
+import seoultech.se.tetris.main.Tetris;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,6 +28,10 @@ public class MatchBoardParent extends JFrame {
 
 
     public MatchBoardParent() {
+        URL urlIcon = Tetris.class.getResource("/image/icon/icon.png");
+        Toolkit kit = Toolkit.getDefaultToolkit();
+        Image imgIcon = kit.createImage(urlIcon);
+        setIconImage(imgIcon);
         // focus out
         this.addFocusListener(new FocusListener() {
             @Override
