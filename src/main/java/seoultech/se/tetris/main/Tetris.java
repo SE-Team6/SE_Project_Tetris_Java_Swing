@@ -3,9 +3,11 @@ package seoultech.se.tetris.main;
 import seoultech.se.tetris.component.JSONLoader;
 import seoultech.se.tetris.menu.Intro;
 
+import java.awt.*;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.net.URL;
 
 public class Tetris {
 	public static void initialization(){

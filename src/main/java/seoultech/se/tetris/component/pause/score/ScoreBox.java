@@ -12,13 +12,13 @@ public class ScoreBox extends JPanel {
 
         JLabel left = new JLabel("score");
         JLabel right = new JLabel(String.valueOf(score));
-        left.setFont(new Font("Bahnschrift",Font.BOLD,25));
+        left.setFont(new Font("Sans Serif",Font.BOLD,25));
         left.setBounds(labelX,120,100,40);
         left.setHorizontalAlignment(SwingConstants.CENTER);
         left.setForeground(Color.YELLOW);
 //        left.setBorder(new LineBorder(Color.RED,1,true));
 
-        right.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        right.setFont(new Font("Sans Serif",Font.BOLD,20));
         right.setBounds(textFiledX,120,100,40);
         right.setHorizontalAlignment(SwingConstants.CENTER);
         right.setOpaque(true);

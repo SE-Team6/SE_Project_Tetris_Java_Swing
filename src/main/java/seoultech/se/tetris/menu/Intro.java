@@ -1,5 +1,6 @@
 package seoultech.se.tetris.menu;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

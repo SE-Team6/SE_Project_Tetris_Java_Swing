@@ -18,7 +18,7 @@ public class Score extends JLabel {
         this.setForeground(Color.BLACK);
         this.setBackground(Color.WHITE);
         this.setOpaque(true);
-        this.setFont(new Font("Courier", Font.PLAIN, 14));
+        this.setFont(new Font("Sans Serif", Font.PLAIN, 14));
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.setVerticalAlignment(SwingConstants.CENTER);
         updateScore();

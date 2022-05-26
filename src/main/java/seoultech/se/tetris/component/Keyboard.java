@@ -18,7 +18,7 @@ public class Keyboard implements KeyListener {
 
     //Set Key For Control Using TextFile and return keymap
     public static void setKey(){
-        JSONObject obj = JSONLoader.loaderKey();
+        JSONObject obj = JSONLoader.loaderKey(1);
         LEFT = Integer.parseInt(obj.get("LEFT").toString());
         RIGHT = Integer.parseInt(obj.get("RIGHT").toString());
         UP = Integer.parseInt(obj.get("UP").toString());

@@ -51,9 +51,9 @@ public class GameOver extends JFrame {
     private JLabel[] scoreBoardLabel = new JLabel[3];
     private JTextField setMyName = new JTextField();
     private JLabel myScore;
-    private JButton updateButton = new JButton(updateBtnBasicImage);
-    private JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
-    private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
+    private final JButton updateButton = new JButton(updateBtnBasicImage);
+    private final JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
+    private final JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     public static int [] sbListX;
     public static  int [] sbListSize;
@@ -81,7 +81,7 @@ public class GameOver extends JFrame {
     }
     public void dateGet(){
         Date now = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("MM월dd일HH시mm분ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         nowDate = formatter.format(now);
     }
     public void scoreBoardPanel(){
@@ -126,7 +126,7 @@ public class GameOver extends JFrame {
         String [] sbList = {"Rank","Name","Score"};
         for(int i=0;i<3;i++){
             scoreBoardLabel[i] = new JLabel(sbList[i]);
-            scoreBoardLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            scoreBoardLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             scoreBoardLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             scoreBoardLabel[i].setBounds   (sbListX[i],0,sbListSize[i],30);
             scoreBoardLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -136,7 +136,7 @@ public class GameOver extends JFrame {
         int LabelY=30;
         for (int i=0;i<20;i++) {
             rankLabel[i] = new JLabel(String.valueOf(i + 1));
-            rankLabel[i].setFont(new Font("Bahnschrift", Font.BOLD, 10));
+            rankLabel[i].setFont(new Font("Sans Serif", Font.BOLD, 10));
             rankLabel[i].setBorder(new LineBorder(Color.RED, 1, true));
             rankLabel[i].setBounds(sbListX[0], LabelY, sbListSize[0], 32);
             rankLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -144,7 +144,7 @@ public class GameOver extends JFrame {
             scoreBoardSummary.add(rankLabel[i]);
 
             nameLabel[i] =new JLabel();
-            nameLabel[i].setFont(new Font("Bahnschrift",Font.BOLD,10));
+            nameLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             nameLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             nameLabel[i].setBounds(sbListX[1],LabelY,sbListSize[1],32);
             nameLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -152,7 +152,7 @@ public class GameOver extends JFrame {
             scoreBoardSummary.add(nameLabel[i]);
 
             scoreLabel[i] =new JLabel();
-            scoreLabel[i].setFont(new Font("Bahns    chrift",Font.BOLD,10));
+            scoreLabel[i].setFont(new Font("Sans Serif",Font.BOLD,10));
             scoreLabel[i].setBorder(new LineBorder(Color.RED,1,true));
             scoreLabel[i].setBounds(sbListX[2],LabelY,sbListSize[2],32);
             scoreLabel[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -225,7 +225,7 @@ public class GameOver extends JFrame {
         bs.add(ExitGameButton);
     }
     public void labelSet(){
-        myScoreLabel.setFont(new Font("Bahnschrift",Font.BOLD,25));
+        myScoreLabel.setFont(new Font("Sans Serif",Font.BOLD,25));
         myScoreLabel.setBounds(scoreAndNameLabelX,120,100,40);
         myScoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         myScoreLabel.setForeground(Color.YELLOW);
@@ -233,7 +233,7 @@ public class GameOver extends JFrame {
         bs.add(myScoreLabel);
 
         myScore = new JLabel(String.valueOf(score));
-        myScore.setFont(new Font("Bahnschrift",Font.BOLD,20));
+        myScore.setFont(new Font("Sans Serif",Font.BOLD,20));
         myScore.setBounds(textFiledX,120,100,40);
         myScore.setHorizontalAlignment(SwingConstants.CENTER);
         myScore.setOpaque(true);
@@ -242,7 +242,7 @@ public class GameOver extends JFrame {
         myScore.setBorder(new LineBorder(Color.RED,1,true));
         bs.add(myScore);
 
-        NameLabel.setFont(new Font("Bahnschrift",Font.BOLD,25));
+        NameLabel.setFont(new Font("Sans Serif",Font.BOLD,25));
         NameLabel.setBounds(scoreAndNameLabelX,180,100,40);
         NameLabel.setHorizontalAlignment(SwingConstants.CENTER);
         NameLabel.setForeground(Color.YELLOW);
@@ -251,7 +251,7 @@ public class GameOver extends JFrame {
         setMyName.setBounds(textFiledX,180,100,40);
         setMyName.setBackground(Color.BLACK);
         setMyName.setForeground(Color.RED);
-        setMyName.setFont(new Font("Bahnschrift",Font.BOLD,15));
+        setMyName.setFont(new Font("Sans Serif",Font.BOLD,15));
         setMyName.setBorder(new LineBorder(Color.RED,1,true));
 //        myName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         bs.add(setMyName);
@@ -262,7 +262,7 @@ public class GameOver extends JFrame {
     }
 
     public void setXY(int num){ // 해상도 바뀔때 각 라벨 및 버튼 위치 설정.
-        GetSetting ver =new GetSetting();
+        GetSetting ver = new GetSetting();
         switch (num){
             case 400:
                 ver.gameOverFirstSet();

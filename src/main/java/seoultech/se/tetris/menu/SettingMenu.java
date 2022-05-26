@@ -110,13 +110,13 @@ public class SettingMenu extends JFrame {
                 new ColorMode();
                 break;
             case 4://설정 초기화.
-                int [] keyValueArr = {37,39,38,40,27,32};
+                int [] keyValueArr = {65, 68, 87, 83, 27, 32};
                 SettingAllReset ar = new SettingAllReset();
                 ar.yesReset.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         bs.setVisible(false);
-                        writeResolution(400,600,32);
+                        writeResolution(400,600,28);
                         writeKey(keyValueArr, 1);
                         writeColorMode(0);
                         JOptionPane.showMessageDialog(null,"설정이 초기화 되었습니다");
