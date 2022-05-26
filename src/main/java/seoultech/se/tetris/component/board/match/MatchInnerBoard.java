@@ -40,9 +40,9 @@ public class MatchInnerBoard extends JPanel {
     public static final int STACK_MAX = 10;
 
     // Erased Line Count
-    protected static int lineCount = 0;
-    protected static int stage = 1;
-    protected static int seq = 0;
+    protected int lineCount = 0;
+    protected int stage = 1;
+    protected int seq = 0;
 
 
     protected ConfigBlock config = ConfigBlock.getInstance();
@@ -69,7 +69,7 @@ public class MatchInnerBoard extends JPanel {
 
     protected boolean isErased = false;
     protected static int diff = 0;
-    protected static int stageUpStandard = 5;
+    protected static int stageUpStandard = 10;
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.
@@ -107,7 +107,7 @@ public class MatchInnerBoard extends JPanel {
     }
 
     // set difficulty -> probability and interval
-    public static void setDifficulty(int difficulty){
+    public void setDifficulty(int difficulty){
         lineCount = 0;
         initInterval = 1000;
         double sum = Arrays.stream(blockFitness[difficulty]).sum();

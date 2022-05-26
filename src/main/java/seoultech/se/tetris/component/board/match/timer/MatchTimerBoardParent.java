@@ -21,13 +21,13 @@ public class MatchTimerBoardParent extends MatchBoardParent {
     public Timer timeViewController;
     public long currentTime = 0;
 
-    public MatchTimerBoardParent(int time) {
+    public MatchTimerBoardParent(int time, int diff) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         leftScore = new Score();
         rightScore = new Score();
-        left = new MatchBoardChild(leftScore);
-        right = new MatchBoardChild(rightScore);
+        left = new MatchBoardChild(leftScore, diff);
+        right = new MatchBoardChild(rightScore, diff);
         left.addPropertyChangeListener("gameDone", new PropertyChangeListener() {
 
             @Override

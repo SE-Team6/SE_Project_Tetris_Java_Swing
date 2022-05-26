@@ -23,9 +23,12 @@ public class TimerMenu extends JFrame {
     private ImageIcon[] EnterImage = {threeTimBtnEnterImage, fiveTimeBtnEnterImage};
     private JButton[] menuButton = new JButton[2];
 
+    private int diff;
+
     public TimerMenu(){}
 
-    public TimerMenu(int x, int y) {
+    public TimerMenu(int x, int y, int diff) {
+        this.diff = diff;
         bs = new SetDefault(x, y);
         positionPoint=0;
         bs.setVisible(true);
@@ -51,12 +54,12 @@ public class TimerMenu extends JFrame {
                 if (positionPoint==0){
                     bs.setVisible(false);
                     //3분 타이머 게임 시작
-                    new MatchTimerBoardParent(1000 * 180);
+                    new MatchTimerBoardParent(1000 * 180, diff);
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
                     //5분 타이머 게임시작
-                    new MatchTimerBoardParent(1000 * 300);
+                    new MatchTimerBoardParent(1000 * 300, diff);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){

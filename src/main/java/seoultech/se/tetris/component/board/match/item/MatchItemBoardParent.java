@@ -13,13 +13,14 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 
 public class MatchItemBoardParent extends MatchBoardParent {
-    public MatchItemBoardParent() {
+    public MatchItemBoardParent(int diff) {
+
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         leftScore = new Score();
         rightScore = new Score();
-        left = new MatchItemBoardChild(leftScore);
-        right = new MatchItemBoardChild(rightScore);
+        left = new MatchItemBoardChild(leftScore, diff);
+        right = new MatchItemBoardChild(rightScore, diff);
         left.addPropertyChangeListener("gameDone", new PropertyChangeListener() {
 
             @Override

@@ -5,6 +5,6 @@ import org.junit.jupiter.api.Test;
 public class MatchNormalBoardParentTest {
     @Test
     public void doTest() {
-        MatchNormalBoardParent t = new MatchNormalBoardParent();
+        MatchNormalBoardParent t = new MatchNormalBoardParent(1);
     }
 }

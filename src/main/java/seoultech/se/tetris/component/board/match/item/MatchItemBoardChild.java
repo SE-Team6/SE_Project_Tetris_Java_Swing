@@ -24,7 +24,8 @@ public class MatchItemBoardChild extends MatchInnerBoard {
     private int eventX; int eventY;
     private boolean event = false;
 
-    public MatchItemBoardChild(Score score) {
+    public MatchItemBoardChild(Score score, int diff) {
+        setDifficulty(diff);
         GridBagConstraints outLayout = new GridBagConstraints();
         GridBagConstraints layout = new GridBagConstraints();
         this.setLayout(new GridBagLayout());

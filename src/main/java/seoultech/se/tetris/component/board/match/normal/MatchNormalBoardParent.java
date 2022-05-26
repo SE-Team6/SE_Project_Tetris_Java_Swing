@@ -14,13 +14,13 @@ import java.util.HashMap;
 import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchNormalBoardParent extends MatchBoardParent {
-    public MatchNormalBoardParent() {
+    public MatchNormalBoardParent(int diff) {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         leftScore = new Score();
         rightScore = new Score();
-        left = new MatchBoardChild(leftScore);
-        right = new MatchBoardChild(rightScore);
+        left = new MatchBoardChild(leftScore, diff);
+        right = new MatchBoardChild(rightScore, diff);
         left.addPropertyChangeListener("gameDone", new PropertyChangeListener() {
 
             @Override

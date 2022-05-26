@@ -88,48 +88,49 @@ public class MatchBoardParent extends JFrame {
     public class PlayerLeftKeyListener extends Keyboard {
         @Override
         public void keyPressed(KeyEvent e) {
-            pressedKeys.add(e.getKeyCode());
-            if (!pressedKeys.isEmpty()) {
-                for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext();) {
-                    int keyCode = it.next();
+//            pressedKeys.add(e.getKeyCode());
+//            if (!pressedKeys.isEmpty()) {
+//                for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext();) {
+//                    int keyCode = it.next();
+                    int keyCode = e.getKeyCode();
                     // 1p
                     if (keyCode == Keyboard.DOWN) {
                         left.moveDown();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.RIGHT) {
+                    } if (keyCode == Keyboard.RIGHT) {
                         left.moveRight();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.LEFT) {
+                    } if (keyCode == Keyboard.LEFT) {
                         left.moveLeft();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.UP) {
+                    } if (keyCode == Keyboard.UP) {
                         left.moveRotate();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.SPACE) {
+                    } if (keyCode == Keyboard.SPACE) {
                         left.moveFall();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.ESC) {
+                    } if (keyCode == Keyboard.ESC) {
                         pause();
                     }
                     // 2p
-                    else if (keyCode == Keyboard.DOWN2) {
+                    if (keyCode == Keyboard.DOWN2) {
                         right.moveDown();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.RIGHT2) {
+                    } if (keyCode == Keyboard.RIGHT2) {
                         right.moveRight();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.LEFT2) {
+                    } if (keyCode == Keyboard.LEFT2) {
                         right.moveLeft();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.UP2) {
+                    } if (keyCode == Keyboard.UP2) {
                         right.moveRotate();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.SPACE2) {
+                    } if (keyCode == Keyboard.SPACE2) {
                         right.moveFall();
                         right.drawBoard();
                     }
-                }
-            }
+//                }
+//            }
         }
         @Override
         public synchronized void keyReleased(KeyEvent e) {

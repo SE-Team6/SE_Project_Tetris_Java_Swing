@@ -67,18 +67,18 @@ public class BattleModeMenu extends JFrame {
                 if (positionPoint==0){
                     bs.setVisible(false);
                     // 노말 배틀 모드
-                    new MatchNormalBoardParent();
+                    new MatchNormalBoardParent(gameDifficultyNum);
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
                     // 아이템 배틀 모드
-                    MatchItemBoardChild.setDifficulty(gameDifficultyNum);
-                    new MatchItemBoardParent();
+//                    MatchItemBoardChild.setDifficulty();
+                    new MatchItemBoardParent(gameDifficultyNum);
                 }
                 else if(positionPoint==2){
                     bs.setVisible(false);
                     // 타이머 배틀 모드
-                    new TimerMenu(bs.getX(),bs.getY());
+                    new TimerMenu(bs.getX(),bs.getY(), gameDifficultyNum);
 //                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
 //                new MatchTimerBoardParent(10000000);
                 }
@@ -111,8 +111,8 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 //노말 배틀 모드
-                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
-                new MatchNormalBoardParent();
+//                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
+                new MatchNormalBoardParent(gameDifficultyNum);
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
@@ -120,8 +120,8 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 아이템 배틀 모드
-                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
-                new MatchItemBoardParent();
+//                MatchItemBoardChild.setDifficulty(gameDifficultyNum);
+                new MatchItemBoardParent(gameDifficultyNum);
             }
         });
         menuButton[2].addMouseListener(new MouseAdapter() {
@@ -129,7 +129,7 @@ public class BattleModeMenu extends JFrame {
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
                 // 타이머 배틀 모드
-                new TimerMenu(bs.getX(),bs.getY());
+                new TimerMenu(bs.getX(),bs.getY(), gameDifficultyNum);
 //                MatchTimerBoardChild.setDifficulty(gameDifficultyNum);
 //                new MatchTimerBoardParent(10000000);
             }

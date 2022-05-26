@@ -13,7 +13,8 @@ import javax.swing.text.StyleConstants;
 import java.awt.*;
 
 public class MatchBoardChild extends MatchInnerBoard {
-    public MatchBoardChild(Score score) {
+    public MatchBoardChild(Score score, int diff) {
+        setDifficulty(diff);
         GridBagConstraints outLayout = new GridBagConstraints();
         GridBagConstraints layout = new GridBagConstraints();
         this.setLayout(new GridBagLayout());
