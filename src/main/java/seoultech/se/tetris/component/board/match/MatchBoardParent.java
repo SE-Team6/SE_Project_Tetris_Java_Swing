@@ -92,36 +92,39 @@ public class MatchBoardParent extends JFrame {
             if (!pressedKeys.isEmpty()) {
                 for (Iterator<Integer> it = pressedKeys.iterator(); it.hasNext();) {
                     int keyCode = it.next();
-                    if (keyCode == KeyEvent.VK_S) {
+                    // 1p
+                    if (keyCode == Keyboard.DOWN) {
                         left.moveDown();
                         left.drawBoard();
-                    } else if (keyCode == KeyEvent.VK_D) {
+                    } else if (keyCode == Keyboard.RIGHT) {
                         left.moveRight();
                         left.drawBoard();
-                    } else if (keyCode == KeyEvent.VK_A) {
+                    } else if (keyCode == Keyboard.LEFT) {
                         left.moveLeft();
                         left.drawBoard();
-                    } else if (keyCode == KeyEvent.VK_W) {
+                    } else if (keyCode == Keyboard.UP) {
                         left.moveRotate();
                         left.drawBoard();
-                    } else if (keyCode == KeyEvent.VK_F) {
+                    } else if (keyCode == Keyboard.SPACE) {
                         left.moveFall();
                         left.drawBoard();
-                    } else if (keyCode == Keyboard.ESC || keyCode == 27) {
+                    } else if (keyCode == Keyboard.ESC) {
                         pause();
-                    } else if (keyCode == Keyboard.DOWN) {
+                    }
+                    // 2p
+                    else if (keyCode == Keyboard.DOWN2) {
                         right.moveDown();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.RIGHT) {
+                    } else if (keyCode == Keyboard.RIGHT2) {
                         right.moveRight();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.LEFT) {
+                    } else if (keyCode == Keyboard.LEFT2) {
                         right.moveLeft();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.UP) {
+                    } else if (keyCode == Keyboard.UP2) {
                         right.moveRotate();
                         right.drawBoard();
-                    } else if (keyCode == Keyboard.SPACE) {
+                    } else if (keyCode == Keyboard.SPACE2) {
                         right.moveFall();
                         right.drawBoard();
                     }
@@ -134,10 +137,20 @@ public class MatchBoardParent extends JFrame {
         }
     }
 
-    public void matchGameOver() {
+    public void matchGameOver(int winType) {
         stopTimer();
         this.dispose();
-        new BattleModeGameOver(getX(), getY(), leftScore.getScore(), rightScore.getScore());
+        int leftScoreValue = leftScore.getScore();
+        int rightScoreValue = rightScore.getScore();
+
+        if (winType == 1) {
+//            leftScoreValue += 100000;
+            rightScoreValue = 0;
+        } else if (winType == 2) {
+//            rightScoreValue += 100000;
+            leftScoreValue = 0;
+        }
+        new BattleModeGameOver(getX(), getY(), leftScoreValue, rightScoreValue);
     }
 
 

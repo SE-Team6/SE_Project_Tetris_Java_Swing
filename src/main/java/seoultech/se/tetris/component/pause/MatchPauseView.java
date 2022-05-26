@@ -1,5 +1,6 @@
 package seoultech.se.tetris.component.pause;
 
+import seoultech.se.tetris.component.Keyboard;
 import seoultech.se.tetris.component.board.match.MatchBoardParent;
 import seoultech.se.tetris.component.pause.score.ScoreBox;
 
@@ -53,7 +54,7 @@ public class MatchPauseView extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 disposeExit();
-                parent.matchGameOver();
+                parent.matchGameOver(0);
             }
         });
 
@@ -70,31 +71,27 @@ public class MatchPauseView extends JDialog{
 
             @Override
             public void keyPressed(KeyEvent e) {
-                switch(e.getKeyCode()) {
-                    case KeyEvent.VK_ENTER:
-                        if (idx == 0) {
-                            disposeComponent();
-                        } else {
-                            disposeExit();
-                            parent.matchGameOver();
-                        }
-                        break;
-                    case KeyEvent.VK_ESCAPE:
+                int keyValue = e.getKeyCode();
+                if (keyValue == KeyEvent.VK_ENTER) {
+                    if (idx == 0) {
                         disposeComponent();
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        if (idx < IDX_LENGTH - 1) {
-                            idx += 1;
-                            showSelectedButton();
+                    } else {
+                        disposeExit();
+                        parent.matchGameOver(0);
+                    }
+                } else if (keyValue == KeyEvent.VK_ESCAPE) {
+                    disposeComponent();
+                } else if (keyValue == Keyboard.DOWN) {
+                    if (idx < IDX_LENGTH - 1) {
+                        idx += 1;
+                        showSelectedButton();
 
-                        }
-                        break;
-                    case KeyEvent.VK_UP:
-                        if (idx > 0) {
-                            idx -= 1;
-                            showSelectedButton();
-                        }
-                        break;
+                    }
+                } else if (keyValue == Keyboard.UP) {
+                    if (idx > 0) {
+                        idx -= 1;
+                        showSelectedButton();
+                    }
                 }
             }
 

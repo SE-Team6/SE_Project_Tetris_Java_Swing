@@ -7,6 +7,7 @@ import java.awt.event.KeyListener;
 
 public class Keyboard implements KeyListener {
     public static int LEFT, RIGHT, UP, DOWN, ESC, SPACE;
+    public static int LEFT2, RIGHT2, UP2, DOWN2, ESC2, SPACE2;
 
     public Keyboard(){}
 
@@ -26,6 +27,13 @@ public class Keyboard implements KeyListener {
         DOWN = Integer.parseInt(obj.get("DOWN").toString());
         ESC = Integer.parseInt(obj.get("ESC").toString());
         SPACE = Integer.parseInt(obj.get("SPACE").toString());
+        obj = JSONLoader.loaderKey(2);
+        LEFT2 = Integer.parseInt(obj.get("LEFT").toString());
+        RIGHT2 = Integer.parseInt(obj.get("RIGHT").toString());
+        UP2 = Integer.parseInt(obj.get("UP").toString());
+        DOWN2 = Integer.parseInt(obj.get("DOWN").toString());
+        ESC2 = Integer.parseInt(obj.get("ESC").toString());
+        SPACE2 = Integer.parseInt(obj.get("SPACE").toString());
     }
 
     @Override

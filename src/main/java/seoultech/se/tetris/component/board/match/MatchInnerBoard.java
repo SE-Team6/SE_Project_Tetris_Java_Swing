@@ -69,7 +69,7 @@ public class MatchInnerBoard extends JPanel {
 
     protected boolean isErased = false;
     protected static int diff = 0;
-    protected static int stageUpStandard = 5;
+    protected static int stageUpStandard = 10;
     protected static float rateInterval = 0.95F;
 
     protected int x = 3; //Default Position.

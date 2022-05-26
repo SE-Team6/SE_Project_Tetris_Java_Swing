@@ -25,7 +25,7 @@ public class MatchNormalBoardParent extends MatchBoardParent {
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
+                matchGameOver(2);
             }
         });
         left.addPropertyChangeListener("attProp", new PropertyChangeListener() {
@@ -40,7 +40,7 @@ public class MatchNormalBoardParent extends MatchBoardParent {
 
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                matchGameOver();
+                matchGameOver(1);
             }
         });
         right.addPropertyChangeListener("attProp", new PropertyChangeListener() {

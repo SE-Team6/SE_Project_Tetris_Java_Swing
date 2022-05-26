@@ -1,5 +1,7 @@
 package seoultech.se.tetris.menu;
 
+import seoultech.se.tetris.component.board.match.timer.MatchTimerBoardParent;
+
 import javax.swing.*;
 
 import java.awt.event.KeyAdapter;
@@ -49,10 +51,12 @@ public class TimerMenu extends JFrame {
                 if (positionPoint==0){
                     bs.setVisible(false);
                     //3분 타이머 게임 시작
+                    new MatchTimerBoardParent(1000 * 180);
                 }
                 else if(positionPoint==1){
                     bs.setVisible(false);
                     //5분 타이머 게임시작
+                    new MatchTimerBoardParent(1000 * 300);
                 }
             }
             else if(keyValue==KeyEvent.VK_BACK_SPACE){
