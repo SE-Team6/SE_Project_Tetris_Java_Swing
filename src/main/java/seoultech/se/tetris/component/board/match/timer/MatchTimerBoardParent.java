@@ -10,6 +10,9 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static seoultech.se.tetris.component.JSONLoader.loaderResolution;
 
 public class MatchTimerBoardParent extends MatchBoardParent {
     public Timer gameTimer;
@@ -67,7 +70,13 @@ public class MatchTimerBoardParent extends MatchBoardParent {
         JPanel out = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-//        out.setLayout(new GridLayout(1, 2));
+        HashMap<String, Integer> map = loaderResolution();
+        out.setLayout(new GridLayout(1, 2));
+
+
+        left.setSize(map.get("width"), map.get("height"));
+        right.setSize(map.get("width"), map.get("height"));
+        out.setSize(map.get("width")*2, map.get("height"));
         out.add(left);
         out.add(right);
 

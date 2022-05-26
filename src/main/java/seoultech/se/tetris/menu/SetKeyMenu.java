@@ -84,14 +84,14 @@ public class SetKeyMenu extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                new SetKey1P(bs.getX(), bs.getY());
             }
         });
         menuButton[1].addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 bs.setVisible(false);
-                new GameDifficultyMenu(bs.getX(), bs.getY());
+                new SetKey2P(bs.getX(), bs.getY());
             }
         });
 
