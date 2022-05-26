@@ -130,7 +130,7 @@ public class GetKeyPanel extends JFrame {
         writeKey(keyWriteValue,1);
     }
     public void keyLoad(){// 중복을 검사하기 위한 기존 키 정보 불러오기
-        JSONObject obj = loaderKey();
+        JSONObject obj = loaderKey(1);
         Object [] var = new Object[6];
         var[0]= obj.get("LEFT");
         var[1]= obj.get("RIGHT");

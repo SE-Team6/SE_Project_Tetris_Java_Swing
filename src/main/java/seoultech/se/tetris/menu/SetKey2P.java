@@ -32,7 +32,7 @@ public class SetKey2P {
     public static int positionPoint =0;
     char [] keyLoadCharValue = new char[6];
     String [] keyLoadStringValue = new String[6];
-    JSONObject obj = loaderKey();
+    JSONObject obj = loaderKey(2);
     Object [] var = new Object[6];
     public SetKey2P(){}
 

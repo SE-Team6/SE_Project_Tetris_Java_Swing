@@ -16,7 +16,7 @@ public class JSONClassTest {
         String[] key = {"LEFT", "RIGHT", "UP", "DOWN","ESC", "SPACE"};
         int[] expected = {37,39,38,40,27,32};
         JSONWriter.writeKey(expected, 1);
-        JSONObject obj = JSONLoader.loaderKey();
+        JSONObject obj = JSONLoader.loaderKey(1);
         for(int i=0; i<6; ++i){
             assertEquals(expected[i], (int)(long)obj.get(key[i]));
         }

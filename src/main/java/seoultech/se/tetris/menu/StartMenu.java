@@ -9,6 +9,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.Arrays;
 
 import static seoultech.se.tetris.component.JSONLoader.loaderKey;
@@ -38,7 +39,7 @@ public class StartMenu extends JFrame {
     private JLabel[] currentKey = new JLabel[6];
     char[] keyLoadCharValue = new char[6];
     String [] keyLoadStringValue = new String[6];
-    JSONObject obj = loaderKey();
+    JSONObject obj = loaderKey(1);
     Object[] var = new Object[6];
     private int positionPoint = 0;
     public SetDefault bs;

@@ -52,9 +52,9 @@ public class GameOver extends JFrame {
     private JLabel[] scoreBoardLabel = new JLabel[3];
     private JTextField setMyName = new JTextField();
     private JLabel myScore;
-    private JButton updateButton = new JButton(updateBtnBasicImage);
-    private JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
-    private JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
+    private final JButton updateButton = new JButton(updateBtnBasicImage);
+    private final JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
+    private final JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     public static int [] sbListX;
     public static  int [] sbListSize;
