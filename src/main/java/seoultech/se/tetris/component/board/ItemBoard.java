@@ -336,7 +336,7 @@ public class ItemBoard extends Board {
         focus = next;
         if (lineCount >= stageUpStandard) {
             lineCount -= stageUpStandard;
-            next = getRandomItemBlock();
+            next = getRandomBlock();
         } else {
             next = getRandomItemBlock();
         }

@@ -358,7 +358,7 @@ public class MatchItemBoardChild extends MatchInnerBoard {
             lineCount -= stageUpStandard;
             next = getRandomItemBlock();
         } else {
-            next = getRandomItemBlock();
+            next = getRandomBlock();
         }
         drawNextBlock();
         x = 3;

@@ -258,7 +258,7 @@ public class GameOver extends JFrame {
         setMyName.setBounds(textFiledX,180,100,40);
         setMyName.setBackground(Color.BLACK);
         setMyName.setForeground(Color.RED);
-        setMyName.setFont(new Font("Bahnschrift",Font.BOLD,15));
+        setMyName.setFont(new Font("courier new",Font.BOLD,15));
         setMyName.setBorder(new LineBorder(Color.RED,1,true));
 //        myName.setBorder(javax.swing.BorderFactory.createEmptyBorder());
         bs.add(setMyName);
