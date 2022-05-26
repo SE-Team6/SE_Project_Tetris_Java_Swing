@@ -49,15 +49,15 @@ public class GameOver extends JFrame {
     private JLabel[]  scoreLabel = new JLabel[20];
 
     private JLabel[] scoreBoardLabel = new JLabel[3];
-    private JTextField setMyName = new JTextField();
+    private JTextField setMyName = new JTextField();;
     private JLabel myScore;
     private final JButton updateButton = new JButton(updateBtnBasicImage);
     private final JButton StartMenuButton = new JButton(StartMenuBtnBasicImage);
     private final JButton ExitGameButton = new JButton(ExitGameBtnBasicImage);
 
     public static int [] sbListX;
-    public static  int [] sbListSize;
-    public static  int scoreBoardPanelWidth;
+    public static int [] sbListSize;
+    public static int scoreBoardPanelWidth;
     public static int scoreBoardPanelHeight;
 
     public static int higLightNum = 0;
@@ -189,9 +189,9 @@ public class GameOver extends JFrame {
                         gameModeNum = 1;
                     }
                     bs.setVisible(false);
-                    GameOver gm =new GameOver(bs.getX(),bs.getY(),0  );
+                    GameOver gm = new GameOver(bs.getX(),bs.getY(),0);
                     gm.updateButton.setVisible(false);
-                    ScoreBoard sb =new ScoreBoard(higLightNum);
+                    ScoreBoard sb = new ScoreBoard(higLightNum);
                 }
             }
         });

@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -83,7 +84,6 @@ public abstract class Board extends JFrame {
 
     public Board() {
         super("SW TEAM 6");
-
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
